@@ -1,13 +1,3 @@
-# fstab.yaml - Configuration for local AEM Sync
-# Maps JCR paths to local filesystem paths
-
 mountpoints:
-  /: 
+  /:
     url: https://author-p24056-e1593080.adobeaemcloud.com
-    
-# For EDS/Universal Editor, you typically mount these paths:
-  /content:
-    url: https://author-p24056-e1593080.adobeaemcloud.com/content
-    
-  /conf:
-    url: https://author-p24056-e1593080.adobeaemcloud.com/conf
