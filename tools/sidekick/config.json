@@ -1,5 +1,8 @@
 {
-  "project": "AEM XWalk Boilerplate",
+  "project": "DXP AI UE EDS",
   "editUrlLabel": "AEM Editor",
-  "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open"
+  "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open",
+  "host": "main--dxp-ai-ue-eds--satishsapate.aem.page",
+  "previewHost": "main--dxp-ai-ue-eds--satishsapate.aem.page",
+  "liveHost": "main--dxp-ai-ue-eds--satishsapate.aem.live"
 }
