@@ -1,0 +1,17 @@
+{
+  "title": "Light Section",
+  "description": "Light section block with feature cards and values.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "overline", "type": "string", "title": "Overline", "default": "Our Values" },
+      { "name": "heading", "type": "string", "title": "Heading", "default": "What We Stand For" },
+      { "name": "card0Title", "type": "string", "title": "Card 1 Title", "default": "Intelligence First" },
+      { "name": "card0Text", "type": "string", "title": "Card 1 Text", "default": "We believe AI should be foundational, not optional. Every decision we make in product development starts with: \"How does intelligence make this better?\"" },
+      { "name": "card1Title", "type": "string", "title": "Card 2 Title", "default": "Customer Obsessed" },
+      { "name": "card1Text", "type": "string", "title": "Card 2 Text", "default": "We measure our success by the outcomes our customers achieve. Every feature, every support interaction, every roadmap decision is guided by real customer needs." },
+      { "name": "card2Title", "type": "string", "title": "Card 3 Title", "default": "Open & Transparent" },
+      { "name": "card2Text", "type": "string", "title": "Card 3 Text", "default": "We publish our security posture, our pricing, our SLAs, and our roadmap. No vendor lock-in. No hidden fees. No surprises." }
+    ]
+  }
+}

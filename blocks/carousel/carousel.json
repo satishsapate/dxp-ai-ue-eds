@@ -1,0 +1,81 @@
+{
+  "title": "Carousel",
+  "description": "Interactive carousel block for capabilities and feature highlights.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Overline",
+        "default": "Platform Pillars"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Heading",
+        "default": "Everything You Need to Deliver Exceptional Experiences"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Description",
+        "default": "Seven powerful capabilities that make DXP AI the most complete AI-first digital experience platform available."
+      },
+      {
+        "name": "slides",
+        "type": "array",
+        "title": "Slides",
+        "item": {
+          "type": "object",
+          "properties": [
+            { "name": "category", "type": "string", "title": "Category", "default": "Content Management" },
+            { "name": "icon", "type": "string", "title": "Icon", "default": "📄" },
+            { "name": "title", "type": "string", "title": "Slide Title", "default": "AI-Powered Content Management" },
+            { "name": "text", "type": "string", "title": "Slide Text", "default": "Create, manage, and deliver digital content across all channels with intelligent automation and role-based workflows." },
+            { "name": "point1", "type": "string", "title": "Point 1", "default": "Multi-channel content reuse" },
+            { "name": "point2", "type": "string", "title": "Point 2", "default": "AI-assisted authoring & summarization" },
+            { "name": "point3", "type": "string", "title": "Point 3", "default": "Role-based approval workflows" },
+            { "name": "ctaUrl", "type": "string", "title": "CTA URL", "default": "#" },
+            { "name": "ctaText", "type": "string", "title": "CTA Text", "default": "Explore →" }
+          ]
+        },
+        "default": [
+          {
+            "category": "Content Management",
+            "icon": "📄",
+            "title": "AI-Powered Content Management",
+            "text": "Create, manage, and deliver digital content across all channels with intelligent automation and role-based workflows.",
+            "point1": "Multi-channel content reuse",
+            "point2": "AI-assisted authoring & summarization",
+            "point3": "Role-based approval workflows",
+            "ctaUrl": "#",
+            "ctaText": "Explore →"
+          },
+          {
+            "category": "Personalization",
+            "icon": "🤖",
+            "title": "Hyper-Personalized Experiences",
+            "text": "Deliver the right content to the right person at the right moment using behavioral intelligence and ML-driven segmentation.",
+            "point1": "Real-time behavioral targeting",
+            "point2": "A/B & multivariate testing",
+            "point3": "Intelligent recommendations",
+            "ctaUrl": "#",
+            "ctaText": "Explore →"
+          },
+          {
+            "category": "Integrations",
+            "icon": "🔗",
+            "title": "Enterprise Integration Hub",
+            "text": "Connect seamlessly to Salesforce, SAP, Marketo, and 50+ enterprise systems through our open API framework.",
+            "point1": "Salesforce, SAP, HubSpot, Marketo",
+            "point2": "RESTful APIs & webhooks",
+            "point3": "50+ pre-built connectors",
+            "ctaUrl": "#",
+            "ctaText": "Explore →"
+          }
+        ]
+      }
+    ]
+  }
+}

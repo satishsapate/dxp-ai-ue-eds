@@ -1,0 +1,82 @@
+:root {
+  --cta-bg: #eef2ff;
+  --cta-radius: 26px;
+  --cta-border: rgb(124 58 237 / 15%);
+  --cta-heading: #0f172a;
+  --cta-copy: #4b5563;
+  --cta-button-bg: #7c3aed;
+}
+
+.cta-block {
+  background: var(--cta-bg);
+  padding: 100px 0;
+}
+
+.cta-block .cta-content {
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 32px;
+  background: #fff;
+  border: 1px solid var(--cta-border);
+  border-radius: var(--cta-radius);
+}
+
+.cta-block .cta-overline {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--cta-button-bg);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.cta-block h2 {
+  margin: 0 0 18px;
+  color: var(--cta-heading);
+  font-size: clamp(2rem, 2.6vw, 2.7rem);
+  line-height: 1.05;
+}
+
+.cta-block p {
+  color: var(--cta-copy);
+  margin: 0 0 28px;
+  line-height: 1.8;
+}
+
+.cta-block .cta-buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.cta-block .btn {
+  padding: 14px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.cta-block .btn--primary {
+  background: var(--cta-button-bg);
+  color: #fff;
+}
+
+.cta-block .btn--secondary {
+  background: transparent;
+  border: 1px solid var(--cta-button-bg);
+  color: var(--cta-button-bg);
+}
+
+.cta-block .cta-meta {
+  color: var(--cta-copy);
+  font-size: 0.95rem;
+}
+
+@media (width <= 640px) {
+  .cta-block .cta-buttons {
+    flex-direction: column;
+  }
+}

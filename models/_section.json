@@ -50,7 +50,24 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "accordion",
+        "articles",
+        "breadcrumb",
+        "carousel",
+        "cms-compat",
+        "cta",
+        "features",
+        "page-hero",
+        "pricing",
+        "richtext",
+        "section-dark",
+        "section-generic",
+        "section-light",
+        "stats-band",
+        "team",
+        "timeline",
+        "who-uses"
       ]
     }
   ]

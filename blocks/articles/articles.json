@@ -1,0 +1,89 @@
+{
+  "title": "Articles Section",
+  "description": "Latest articles and newsletter call-to-action block for AEM Universal Editor.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Section Overline",
+        "default": "Insights & Resources"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Section Heading",
+        "default": "Latest from the DXP AI Blog"
+      },
+      {
+        "name": "viewAllLinkText",
+        "type": "string",
+        "title": "View All Link Text",
+        "default": "View All Articles →"
+      },
+      {
+        "name": "viewAllLinkUrl",
+        "type": "string",
+        "title": "View All Link URL",
+        "default": "#"
+      },
+      {
+        "name": "articles",
+        "type": "array",
+        "title": "Articles",
+        "item": {
+          "type": "object",
+          "properties": [
+            { "name": "tag", "type": "string", "title": "Tag", "default": "AI" },
+            { "name": "authorInitials", "type": "string", "title": "Author Initials", "default": "RK" },
+            { "name": "authorName", "type": "string", "title": "Author Name", "default": "Rahul Kumar" },
+            { "name": "readTime", "type": "string", "title": "Read Time", "default": "8 min read" },
+            { "name": "title", "type": "string", "title": "Article Title", "default": "How ZensAI is Redefining the DXP for the AI Era" },
+            { "name": "description", "type": "string", "title": "Summary", "default": "Traditional DXPs were built for the web era. ZensAI-powered DXP AI is built for the intelligence era." },
+            { "name": "linkUrl", "type": "string", "title": "Read Link URL", "default": "#" },
+            { "name": "linkText", "type": "string", "title": "Read Link Text", "default": "Read Article →" },
+            { "name": "date", "type": "string", "title": "Publish Date", "default": "Jan 15, 2025" }
+          ]
+        },
+        "default": [
+          {
+            "tag": "AI",
+            "authorInitials": "RK",
+            "authorName": "Rahul Kumar",
+            "readTime": "8 min read",
+            "title": "How ZensAI is Redefining the DXP for the AI Era",
+            "description": "Traditional DXPs were built for the web era. ZensAI-powered DXP AI is built for the intelligence era.",
+            "linkUrl": "#",
+            "linkText": "Read Article →",
+            "date": "Jan 15, 2025"
+          }
+        ]
+      },
+      {
+        "name": "ctaHeading",
+        "type": "string",
+        "title": "CTA Heading",
+        "default": "Get DXP AI insights in your inbox"
+      },
+      {
+        "name": "ctaDescription",
+        "type": "string",
+        "title": "CTA Description",
+        "default": "Join 8,000+ digital experience leaders receiving our monthly newsletter on AI, personalization, and CX strategy."
+      },
+      {
+        "name": "newsletterPlaceholder",
+        "type": "string",
+        "title": "Email Placeholder",
+        "default": "Your work email address"
+      },
+      {
+        "name": "newsletterButtonText",
+        "type": "string",
+        "title": "Newsletter Button Text",
+        "default": "Subscribe Free"
+      }
+    ]
+  }
+}

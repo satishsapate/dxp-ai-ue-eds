@@ -1,8 +1,45 @@
 {
+  "server": "http://admin:admin@localhost:4502",
+  "jcrRoot": "./src/main/content/jcr_root",
+  "contentPackageFile": "./target/dxp-ai-ue-eds.zip",
+  "remoteUrl": "http://localhost:4502",
+  "includeFilter": [
+    "/apps/dxp-ai-ue-eds/**",
+    "/conf/dxp-ai-ue-eds/**",
+    "/content/sites/dxp-ai-ue-eds/**"
+  ],
+  "files": [
+    {
+      "src": "./dxp-ai-ue-eds/**",
+      "dest": "/content/dam/dxp-ai-ue-eds/"
+    },
+    {
+      "src": "./components/**",
+      "dest": "/apps/dxp-ai-ue-eds/components/"
+    },
+    {
+      "src": "./scripts/**",
+      "dest": "/apps/dxp-ai-ue-eds/scripts/"
+    },
+    {
+      "src": "./styles/**",
+      "dest": "/apps/dxp-ai-ue-eds/styles/"
+    }
+  ],
+  "exclude": [
+    "**/.git/**",
+    "**/.DS_Store",
+    "**/node_modules/**",
+    "**/.gitignore",
+    "**/dist/**"
+  ],
+  "interval": 1000,
+  "deleteRemote": false,
+  "packetSize": 1024,
   "mappings": [
-    "/content/aem-boilerplate/:/"
+    "/content/dxp-ai-ue-eds/:/"
   ],
   "includes": [
-    "/content/aem-boilerplate/"
+    "/content/dxp-ai-ue-eds/"
   ]
 }

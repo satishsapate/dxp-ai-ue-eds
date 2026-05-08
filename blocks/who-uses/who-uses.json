@@ -1,0 +1,21 @@
+{
+  "title": "Who Uses",
+  "description": "Block for highlighting who uses the platform across different teams.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "overline", "type": "string", "title": "Overline", "default": "Built For Every Team" },
+      { "name": "heading", "type": "string", "title": "Heading", "default": "One Platform, Three Power Users" },
+      { "name": "description", "type": "string", "title": "Description", "default": "DXP AI is engineered to serve the distinct needs of marketing, business, and IT teams working in harmony." },
+      { "name": "card0Title", "type": "string", "title": "Card 1 Title", "default": "Marketing Teams" },
+      { "name": "card0Text", "type": "string", "title": "Card 1 Text", "default": "Create campaigns, personalize content at scale, run A/B tests, and measure performance — without writing a single line of code." },
+      { "name": "card0Url", "type": "string", "title": "Card 1 URL", "default": "#" },
+      { "name": "card1Title", "type": "string", "title": "Card 2 Title", "default": "Business Teams" },
+      { "name": "card1Text", "type": "string", "title": "Card 2 Text", "default": "Enable self-service portals, improve customer journeys, and integrate AI assistants that resolve issues before they escalate." },
+      { "name": "card1Url", "type": "string", "title": "Card 2 URL", "default": "#" },
+      { "name": "card2Title", "type": "string", "title": "Card 3 Title", "default": "IT & Dev Teams" },
+      { "name": "card2Text", "type": "string", "title": "Card 3 Text", "default": "Deploy headless or hybrid, connect to your existing stack, and scale globally with enterprise-grade security and 99.9% uptime." },
+      { "name": "card2Url", "type": "string", "title": "Card 3 URL", "default": "#" }
+    ]
+  }
+}

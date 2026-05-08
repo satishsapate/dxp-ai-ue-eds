@@ -1,0 +1,16 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Features Section
+// ============================================================
+.features-section {
+  padding: 100px 0;
+  background: var(--c-off-white);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,transparent,rgba(124,58,237,.3),rgba(6,182,212,.3),transparent);
+  }
+}

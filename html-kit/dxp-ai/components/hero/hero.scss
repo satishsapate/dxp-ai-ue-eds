@@ -1,0 +1,525 @@
+@import '../../assets/css/variables';
+
+// Hero-specific alpha tokens — extends the project palette defined in variables.
+// Per Rule 2: no hardcoded values in component rules; all colours come from tokens.
+:root {
+  --hero-bg:              var(--gradient-hero);
+  --hero-orb-purple:      rgba(124, 58, 237, 0.35);
+  --hero-orb-cyan:        rgba(6, 182, 212, 0.25);
+  --hero-orb-blue:        rgba(37, 99, 235, 0.30);
+  --hero-mesh-purple:     rgba(124, 58, 237, 0.28);
+  --hero-mesh-cyan:       rgba(6, 182, 212, 0.18);
+  --hero-mesh-blue:       rgba(37, 99, 235, 0.20);
+  --hero-card-bg:         rgba(255, 255, 255, 0.04);
+  --hero-card-border:     rgba(255, 255, 255, 0.08);
+  --hero-eyebrow-bg:      rgba(124, 58, 237, 0.15);
+  --hero-eyebrow-bdr:     rgba(124, 58, 237, 0.30);
+  --hero-text-sub:        rgba(255, 255, 255, 0.65);
+  --hero-text-muted:      rgba(255, 255, 255, 0.40);
+  --hero-trust-text:      rgba(255, 255, 255, 0.60);
+  --hero-btn-border:      rgba(255, 255, 255, 0.15);
+  --hero-btn-bg:          rgba(255, 255, 255, 0.05);
+  --hero-grid-line:       rgba(255, 255, 255, 0.03);
+  --hero-metric-bg:       rgba(255, 255, 255, 0.04);
+  --hero-metric-bdr:      rgba(255, 255, 255, 0.07);
+  --hero-pf-bg:           rgba(255, 255, 255, 0.03);
+  --hero-pf-bdr:          rgba(255, 255, 255, 0.05);
+  --hero-pf-hover-bg:     rgba(255, 255, 255, 0.06);
+  --hero-pf-hover-bdr:    rgba(124, 58, 237, 0.20);
+  --hero-status-glow:     rgba(6, 182, 212, 0.60);
+  --hero-badge-bg:        rgba(6, 182, 212, 0.15);
+  --hero-badge-bdr:       rgba(6, 182, 212, 0.30);
+  --hero-btn-shadow:      rgba(124, 58, 237, 0.50);
+  --hero-btn-shadow-h:    rgba(124, 58, 237, 0.65);
+  --hero-card-shadow:     rgba(0, 0, 0, 0.40);
+  --hero-card-glow:       rgba(124, 58, 237, 0.20);
+  --hero-btn-hover-bdr:   rgba(255, 255, 255, 0.35);
+  --hero-btn-hover-bg:    rgba(255, 255, 255, 0.10);
+}
+
+// ── Main section ──────────────────────────────────────────────
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--hero-bg);
+  overflow: hidden;
+  padding-top: 90px; // offset for fixed site header
+
+  // Radial mesh overlay
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, var(--hero-mesh-purple) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 20% 70%, var(--hero-mesh-cyan)   0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, var(--hero-mesh-blue)   0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  // Subtle grid overlay
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--hero-grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hero-grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  // ── Container (two-column grid on desktop) ────────────────
+  &__container {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 80px var(--container-px);
+    display: grid;
+    grid-template-columns: 1fr; // mobile-first: single column
+    align-items: center;
+    gap: 40px;
+
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+  }
+
+  // ── Left content column ───────────────────────────────────
+  &__content {
+    max-width: 600px;
+  }
+
+  // ── Eyebrow pill ──────────────────────────────────────────
+  &__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    background: var(--hero-eyebrow-bg);
+    border: 1px solid var(--hero-eyebrow-bdr);
+    color: var(--c-magenta);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--c-cyan);
+      animation: heroPulse 2s infinite;
+    }
+  }
+
+  // ── Heading ───────────────────────────────────────────────
+  &__heading {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 800;
+    color: var(--c-white);
+    line-height: 1.05;
+    margin-bottom: 24px;
+
+    .accent {
+      background: var(--gradient-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  // ── Subheading ────────────────────────────────────────────
+  &__subheading {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--hero-text-sub);
+    line-height: 1.75;
+    margin-bottom: 40px;
+    max-width: 520px;
+  }
+
+  // ── CTA row ───────────────────────────────────────────────
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  // ── Trust row ─────────────────────────────────────────────
+  &__trust {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .trust-label {
+      font-size: 0.75rem;
+      color: var(--hero-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .trust-items {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--hero-trust-text);
+
+      .check {
+        color: var(--c-cyan);
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  // ── CTA Buttons ───────────────────────────────────────────
+  .btn-primary-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    min-height: 44px;
+    background: var(--gradient-dxp);
+    color: var(--c-white);
+    text-decoration: none;
+    box-shadow: 0 8px 30px var(--hero-btn-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px var(--hero-btn-shadow-h);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--c-cyan);
+      outline-offset: 2px;
+    }
+
+    .arrow {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover .arrow {
+      transform: translateX(4px);
+    }
+  }
+
+  .btn-secondary-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 28px;
+    border-radius: var(--radius-md);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    min-height: 44px;
+    color: var(--hero-text-sub);
+    border: 1px solid var(--hero-btn-border);
+    background: var(--hero-btn-bg);
+    backdrop-filter: blur(8px);
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--c-white);
+      border-color: var(--hero-btn-hover-bdr);
+      background: var(--hero-btn-hover-bg);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--c-cyan);
+      outline-offset: 2px;
+    }
+  }
+
+  // ── Visual column (desktop only) ──────────────────────────
+  &__visual {
+    position: relative;
+    display: none;
+
+    @media (min-width: 1024px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // ── Dashboard card ────────────────────────────────────────
+  &__platform-card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    background: var(--hero-card-bg);
+    border: 1px solid var(--hero-card-border);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    backdrop-filter: blur(16px);
+    box-shadow:
+      0 30px 80px var(--hero-card-shadow),
+      0 0 60px var(--hero-card-glow);
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+
+      .ph-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        color: var(--c-white);
+        font-size: 1rem;
+      }
+
+      .ph-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: var(--hero-badge-bg);
+        color: var(--c-cyan);
+        border: 1px solid var(--hero-badge-bdr);
+      }
+    }
+
+    .platform-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+
+      .metric {
+        background: var(--hero-metric-bg);
+        border: 1px solid var(--hero-metric-bdr);
+        border-radius: var(--radius-md);
+        padding: 16px 12px;
+        text-align: center;
+
+        .m-value {
+          font-family: var(--font-display);
+          font-size: 1.6rem;
+          font-weight: 800;
+          background: var(--gradient-text);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .m-label {
+          font-size: 0.72rem;
+          color: var(--hero-text-muted);
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .platform-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .pf-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        background: var(--hero-pf-bg);
+        border: 1px solid var(--hero-pf-bdr);
+        transition: var(--transition);
+
+        &:hover {
+          background: var(--hero-pf-hover-bg);
+          border-color: var(--hero-pf-hover-bdr);
+        }
+
+        .pf-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1rem;
+          flex-shrink: 0;
+        }
+
+        .pf-text {
+          font-size: 0.85rem;
+          font-weight: 500;
+          color: var(--hero-trust-text);
+        }
+
+        .pf-status {
+          margin-left: auto;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--c-cyan);
+          box-shadow: 0 0 8px var(--hero-status-glow);
+        }
+      }
+    }
+  }
+
+  // ── Badge pulse dot ───────────────────────────────────────
+  &__badge-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-cyan);
+    animation: heroPulse 2s infinite;
+  }
+
+  // ── Floating decorative orbs ──────────────────────────────
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    opacity: 0.5;
+
+    &--1 {
+      width: 400px;
+      height: 400px;
+      background: var(--hero-orb-purple);
+      top: -100px;
+      right: -100px;
+      animation: heroFloat1 8s ease-in-out infinite;
+    }
+
+    &--2 {
+      width: 300px;
+      height: 300px;
+      background: var(--hero-orb-cyan);
+      bottom: 0;
+      left: -80px;
+      animation: heroFloat2 10s ease-in-out infinite;
+    }
+
+    &--3 {
+      width: 200px;
+      height: 200px;
+      background: var(--hero-orb-blue);
+      top: 50%;
+      right: 10%;
+      animation: heroFloat3 7s ease-in-out infinite;
+    }
+  }
+
+  // ── Scroll indicator ──────────────────────────────────────
+  &__scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--hero-text-muted);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    z-index: 2;
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--hero-trust-text), transparent);
+      animation: heroScrollBounce 2s ease-in-out infinite;
+    }
+  }
+}
+
+// ── Tablet: single-column adjustments ─────────────────────────
+@media (min-width: 768px) {
+  .hero {
+    &__heading {
+      font-size: clamp(3rem, 5vw, 5rem);
+    }
+  }
+}
+
+// ── Keyframe animations ────────────────────────────────────────
+@keyframes heroPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.4); }
+}
+
+@keyframes heroFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-20px, 20px) scale(1.05); }
+}
+
+@keyframes heroFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(15px, -20px); }
+}
+
+@keyframes heroFloat3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-10px, 15px); }
+}
+
+@keyframes heroScrollBounce {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50%       { transform: scaleY(0.6); opacity: 0.4; }
+}
+
+// ── Reduced motion ─────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    .orb,
+    &__eyebrow .dot,
+    &__badge-dot,
+    &__scroll .scroll-line {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    .btn-primary-hero,
+    .btn-secondary-hero,
+    .hero__platform-card .pf-item {
+      transition: none !important;
+    }
+
+    .btn-primary-hero:hover,
+    .btn-secondary-hero:hover {
+      transform: none !important;
+    }
+
+    .btn-primary-hero .arrow {
+      transition: none !important;
+    }
+  }
+}

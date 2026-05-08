@@ -1,0 +1,30 @@
+.breadcrumb-block {
+  padding: 12px 0;
+}
+
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.breadcrumb-list a {
+  color: #0f172a;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.breadcrumb-list li span {
+  color: #9ca3af;
+}
+
+.breadcrumb-list li[aria-current="page"] {
+  font-weight: 700;
+  color: #111827;
+}

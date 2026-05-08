@@ -1,0 +1,61 @@
+{
+  "title": "Features",
+  "description": "Feature cards section for DXP AI capabilities.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Overline",
+        "default": "Core Capabilities"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Heading",
+        "default": "One Platform. Every Digital Experience."
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Description",
+        "default": "DXP AI brings together seven essential capabilities that marketing, IT, and business teams need to deliver unified digital experiences."
+      },
+      {
+        "name": "features",
+        "type": "array",
+        "title": "Feature Cards",
+        "item": {
+          "type": "object",
+          "properties": [
+            { "name": "icon", "type": "string", "title": "Icon", "default": "📌" },
+            { "name": "tag", "type": "string", "title": "Tag", "default": "CMS" },
+            { "name": "title", "type": "string", "title": "Title", "default": "AI Content Management" },
+            { "name": "text", "type": "string", "title": "Text", "default": "Create, manage, and reuse digital content across every channel with role-based workflows, AI-assisted authoring, and intelligent asset management." }
+          ]
+        },
+        "default": [
+          {
+            "icon": "📌",
+            "tag": "CMS",
+            "title": "AI Content Management",
+            "text": "Create, manage, and reuse digital content across every channel with role-based workflows, AI-assisted authoring, and intelligent asset management."
+          },
+          {
+            "icon": "🤖",
+            "tag": "Personalization",
+            "title": "Hyper-Personalization Engine",
+            "text": "Deliver the right content to every visitor at the right moment using ML-driven behavioral segmentation, A/B testing, and real-time recommendations."
+          },
+          {
+            "icon": "🌐",
+            "tag": "Multi-Channel",
+            "title": "Omnichannel Experience Hub",
+            "text": "Serve consistent, engaging experiences across websites, mobile apps, portals, and headless APIs from one unified platform."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "title": "Footer",
+  "description": "Footer block with newsletter signup, navigation links, and certifications.",
+  "componentGroup": "Layout",
+  "authoring": {
+    "fields": [
+      {
+        "name": "newsletterHeading",
+        "type": "string",
+        "title": "Newsletter Heading",
+        "default": "Stay ahead with DXP AI insights"
+      },
+      {
+        "name": "newsletterText",
+        "type": "string",
+        "title": "Newsletter Text",
+        "default": "Get the latest on AI-powered digital experiences, product updates, and industry trends."
+      },
+      {
+        "name": "newsletterPlaceholder",
+        "type": "string",
+        "title": "Newsletter Placeholder",
+        "default": "Enter your work email"
+      },
+      {
+        "name": "newsletterButtonText",
+        "type": "string",
+        "title": "Newsletter Button Text",
+        "default": "Subscribe →"
+      },
+      {
+        "name": "logoSrc",
+        "type": "string",
+        "title": "Logo Source",
+        "default": "assets/images/dxp-ai-logo.svg"
+      },
+      {
+        "name": "logoAlt",
+        "type": "string",
+        "title": "Logo Alt Text",
+        "default": "DXP AI"
+      },
+      {
+        "name": "brandName",
+        "type": "string",
+        "title": "Brand Name",
+        "default": "DXP AI"
+      },
+      {
+        "name": "brandTagline",
+        "type": "string",
+        "title": "Brand Tagline",
+        "default": "Powered by ZensAI"
+      },
+      {
+        "name": "brandDescription",
+        "type": "string",
+        "title": "Brand Description",
+        "default": "The AI-first Digital Experience Platform that helps organizations create, manage, and deliver personalized experiences across every customer touchpoint."
+      },
+      {
+        "name": "platformLink1",
+        "type": "string",
+        "title": "Platform Link 1",
+        "default": "Platform Overview"
+      },
+      {
+        "name": "platformLink2",
+        "type": "string",
+        "title": "Platform Link 2",
+        "default": "AI Capabilities"
+      },
+      {
+        "name": "platformLink3",
+        "type": "string",
+        "title": "Platform Link 3",
+        "default": "Content Management"
+      },
+      {
+        "name": "platformLink4",
+        "type": "string",
+        "title": "Platform Link 4",
+        "default": "Personalization"
+      },
+      {
+        "name": "solutionsLink1",
+        "type": "string",
+        "title": "Solutions Link 1",
+        "default": "For Marketing"
+      },
+      {
+        "name": "solutionsLink2",
+        "type": "string",
+        "title": "Solutions Link 2",
+        "default": "For IT Teams"
+      },
+      {
+        "name": "solutionsLink3",
+        "type": "string",
+        "title": "Solutions Link 3",
+        "default": "Enterprise"
+      },
+      {
+        "name": "resourcesLink1",
+        "type": "string",
+        "title": "Resources Link 1",
+        "default": "Blog & Articles"
+      },
+      {
+        "name": "resourcesLink2",
+        "type": "string",
+        "title": "Resources Link 2",
+        "default": "Case Studies"
+      },
+      {
+        "name": "resourcesLink3",
+        "type": "string",
+        "title": "Resources Link 3",
+        "default": "Documentation"
+      },
+      {
+        "name": "companyLink1",
+        "type": "string",
+        "title": "Company Link 1",
+        "default": "About DXP AI"
+      },
+      {
+        "name": "companyLink2",
+        "type": "string",
+        "title": "Company Link 2",
+        "default": "Pricing"
+      },
+      {
+        "name": "companyLink3",
+        "type": "string",
+        "title": "Company Link 3",
+        "default": "Contact Us"
+      },
+      {
+        "name": "copyright",
+        "type": "string",
+        "title": "Copyright Text",
+        "default": "© 2025 DXP AI · Zensar Technologies Ltd."
+      },
+      {
+        "name": "cert1",
+        "type": "string",
+        "title": "Certification 1",
+        "default": "SOC 2"
+      },
+      {
+        "name": "cert2",
+        "type": "string",
+        "title": "Certification 2",
+        "default": "ISO 27001"
+      },
+      {
+        "name": "cert3",
+        "type": "string",
+        "title": "Certification 3",
+        "default": "GDPR"
+      }
+    ]
+  }
+}

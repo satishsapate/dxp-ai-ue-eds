@@ -1,0 +1,45 @@
+{
+  "title": "Page Hero",
+  "description": "Page hero section for inner pages with breadcrumb, heading, and supporting text.",
+  "componentGroup": "Hero",
+  "authoring": {
+    "fields": [
+      {
+        "name": "breadcrumbUrl",
+        "type": "string",
+        "title": "Breadcrumb Home URL",
+        "default": "#"
+      },
+      {
+        "name": "breadcrumbCurrent",
+        "type": "string",
+        "title": "Current Page Label",
+        "default": "About"
+      },
+      {
+        "name": "badgeText",
+        "type": "string",
+        "title": "Badge Text",
+        "default": "About Us"
+      },
+      {
+        "name": "headingPrefix",
+        "type": "string",
+        "title": "Heading Prefix",
+        "default": "Building the Future of"
+      },
+      {
+        "name": "headingAccent",
+        "type": "string",
+        "title": "Heading Accent",
+        "default": "Digital Experience"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Description",
+        "default": "DXP AI is a flagship product of ZensAI, the AI innovation arm of Zensar Technologies — a global digital solutions company with over 30 years of enterprise technology leadership."
+      }
+    ]
+  }
+}

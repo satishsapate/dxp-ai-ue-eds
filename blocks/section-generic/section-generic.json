@@ -1,0 +1,19 @@
+{
+  "title": "Generic Section",
+  "description": "Generic section block with a heading and card grid.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "overline", "type": "string", "title": "Overline", "default": "Leadership" },
+      { "name": "heading", "type": "string", "title": "Heading", "default": "Meet the Team Behind DXP AI" },
+      { "name": "card0Title", "type": "string", "title": "Card 1 Title", "default": "Ajay Bhatt" },
+      { "name": "card0Text", "type": "string", "title": "Card 1 Text", "default": "Chief Product Officer, ZensAI. 15 years in enterprise software product strategy. Previously VP Product at Infosys and Adobe." },
+      { "name": "card1Title", "type": "string", "title": "Card 2 Title", "default": "Priya Sharma" },
+      { "name": "card1Text", "type": "string", "title": "Card 2 Text", "default": "VP Engineering, DXP AI. AI systems architect with expertise in large-scale distributed platforms and ML infrastructure." },
+      { "name": "card2Title", "type": "string", "title": "Card 3 Title", "default": "Rahul Mehta" },
+      { "name": "card2Text", "type": "string", "title": "Card 3 Text", "default": "Head of AI Research, ZensAI. PhD in Machine Learning. Leads ZensAI's NLP and recommendation systems research team." },
+      { "name": "card3Title", "type": "string", "title": "Card 4 Title", "default": "Ananya Iyer" },
+      { "name": "card3Text", "type": "string", "title": "Card 4 Text", "default": "VP Customer Success. Leads global customer onboarding, support, and strategic success programs for 500+ enterprise clients." }
+    ]
+  }
+}

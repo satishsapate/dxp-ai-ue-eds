@@ -1,0 +1,65 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Pricing Cards
+// ============================================================
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 28px;
+  @include lg { grid-template-columns: 1fr 1fr; }
+  @include md { grid-template-columns: 1fr; }
+}
+
+.pricing-card {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,.12);
+  border-radius: 24px;
+  padding: 36px 32px;
+  position: relative;
+  transition: all .3s ease;
+  display: flex;
+  flex-direction: column;
+
+  &:hover:not(.featured) {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(124,58,237,.12);
+  }
+
+  &.featured {
+    background: linear-gradient(135deg, #1A1B4B, #2D1B69);
+    border-color: rgba(124,58,237,.4);
+    box-shadow: 0 20px 60px rgba(124,58,237,.25);
+    transform: scale(1.02);
+
+    .plan-name, .price-amount { color: #fff; }
+    .plan-desc, .price-period  { color: rgba(255,255,255,.65); }
+    .pricing-features li       { color: rgba(255,255,255,.78); }
+    .pricing-divider           { background: rgba(255,255,255,.1); }
+    .check-no                  { color: rgba(255,255,255,.3); }
+  }
+}
+
+.pricing-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  padding: 5px 16px; border-radius: 999px; font-size: .72rem; font-weight: 700;
+  background: linear-gradient(135deg, var(--c-purple), var(--c-cyan));
+  color: #fff; white-space: nowrap;
+}
+
+.plan-name {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 700;
+  color: var(--c-navy); margin-bottom: 8px;
+}
+.plan-desc    { font-size: .88rem; color: var(--c-mid-gray); margin-bottom: 24px; }
+.price-amount { font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; color: var(--c-navy); }
+.price-currency { font-size: 1.2rem; font-weight: 600; vertical-align: super; }
+.price-period   { font-size: .85rem; color: var(--c-mid-gray); }
+.pricing-divider{ height: 1px; background: rgba(124,58,237,.1); margin: 24px 0; }
+
+.pricing-features {
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; flex: 1;
+  li { display: flex; align-items: center; gap: 10px; font-size: .88rem; color: var(--c-dark-gray); }
+  .check-yes { color: #10B981; font-weight: 700; flex-shrink: 0; }
+  .check-no  { color: #D1D5DB; flex-shrink: 0; }
+}

@@ -1,3 +1,4 @@
+.env
 .hlx/*
 coverage/*
 logs/*
@@ -7,3 +8,11 @@ helix-importer-ui
 .DS_Store
 *.bak
 .idea
+
+# AEM packages (binary, install via Package Manager)
+*.zip
+aem-package/
+
+# AEM structure scripts (contain credentials)
+create-aem-structure.js
+create-cors-config.js

@@ -1,0 +1,27 @@
+{
+  "title": "Team",
+  "description": "Team member profile cards section.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "overline", "type": "string", "title": "Overline", "default": "Leadership" },
+      { "name": "heading", "type": "string", "title": "Heading", "default": "Meet the Team Behind DXP AI" },
+      { "name": "card0Avatar", "type": "string", "title": "Card 1 Avatar", "default": "👨‍💼" },
+      { "name": "card0Name", "type": "string", "title": "Card 1 Name", "default": "Ajay Bhatt" },
+      { "name": "card0Role", "type": "string", "title": "Card 1 Role", "default": "Chief Product Officer, ZensAI" },
+      { "name": "card0Bio", "type": "string", "title": "Card 1 Bio", "default": "15 years in enterprise software product strategy. Previously VP Product at Infosys and Adobe." },
+      { "name": "card1Avatar", "type": "string", "title": "Card 2 Avatar", "default": "👩‍💻" },
+      { "name": "card1Name", "type": "string", "title": "Card 2 Name", "default": "Priya Sharma" },
+      { "name": "card1Role", "type": "string", "title": "Card 2 Role", "default": "VP Engineering, DXP AI" },
+      { "name": "card1Bio", "type": "string", "title": "Card 2 Bio", "default": "AI systems architect with expertise in large-scale distributed platforms and ML infrastructure." },
+      { "name": "card2Avatar", "type": "string", "title": "Card 3 Avatar", "default": "👨‍🔬" },
+      { "name": "card2Name", "type": "string", "title": "Card 3 Name", "default": "Rahul Mehta" },
+      { "name": "card2Role", "type": "string", "title": "Card 3 Role", "default": "Head of AI Research, ZensAI" },
+      { "name": "card2Bio", "type": "string", "title": "Card 3 Bio", "default": "PhD in Machine Learning. Leads ZensAI's NLP and recommendation systems research team." },
+      { "name": "card3Avatar", "type": "string", "title": "Card 4 Avatar", "default": "👩‍💼" },
+      { "name": "card3Name", "type": "string", "title": "Card 4 Name", "default": "Ananya Iyer" },
+      { "name": "card3Role", "type": "string", "title": "Card 4 Role", "default": "VP Customer Success" },
+      { "name": "card3Bio", "type": "string", "title": "Card 4 Bio", "default": "Leads global customer onboarding, support, and strategic success programs for 500+ enterprise clients." }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "title": "Rich Text",
+  "description": "Rich text editorial section with sidebar and supporting links.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Overline",
+        "default": "Platform Knowledge Base"
+      },
+      {
+        "name": "accentText",
+        "type": "string",
+        "title": "Accent Text",
+        "default": "Digital Experience Platform"
+      },
+      {
+        "name": "lead",
+        "type": "string",
+        "title": "Lead Paragraph",
+        "default": "A DXP is a platform that enables organizations to deliver personalized, consistent, and engaging digital experiences across all customer touchpoints."
+      },
+      {
+        "name": "bodyHtml",
+        "type": "string",
+        "title": "Body HTML",
+        "default": "<p>A <strong>Digital Experience Platform (DXP)</strong> is a unified technology platform used by organizations to create, manage, deliver, and optimize digital experiences across multiple channels — such as websites, mobile apps, portals, chatbots, and email.</p><p>Think of it as the <em>central hub</em> that connects content, data, personalization, analytics, and integrations to deliver a consistent and engaging user experience at every touchpoint.</p>"
+      },
+      {
+        "name": "sidebarTitle",
+        "type": "string",
+        "title": "Sidebar Title",
+        "default": "See DXP AI in Action"
+      },
+      {
+        "name": "sidebarDescription",
+        "type": "string",
+        "title": "Sidebar Description",
+        "default": "Get a personalized walkthrough of ZensAI's capabilities with one of our platform experts."
+      },
+      {
+        "name": "ctaUrl",
+        "type": "string",
+        "title": "CTA URL",
+        "default": "#"
+      },
+      {
+        "name": "ctaText",
+        "type": "string",
+        "title": "CTA Text",
+        "default": "Request a Demo →"
+      }
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+.pricing-block {
+  padding: 100px 0;
+  background: var(--c-off-white, #f8fafc);
+}
+
+.pricing-block .section-heading {
+  margin-bottom: 40px;
+}
+
+.pricing-block .overline {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #7c3aed;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.pricing-block h2 {
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+
+.pricing-block .accent {
+  background: linear-gradient(135deg,#A78BFA,#67E8F9);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pricing-block p {
+  max-width: 720px;
+  margin: 0;
+  color: #475569;
+  line-height: 1.75;
+}
+
+.pricing-block .pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.pricing-block .pricing-card {
+  background: #fff;
+  border: 1px solid rgb(124 58 237 / 12%);
+  border-radius: 24px;
+  padding: 36px 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.pricing-block .pricing-card:hover:not(.featured) {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgb(124 58 237 / 12%);
+}
+
+.pricing-block .plan-name {
+  font-family: var(--font-display, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.pricing-block .plan-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+.pricing-block .price-amount {
+  font-family: var(--font-display, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.pricing-block .price-period {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.pricing-block .pricing-note {
+  text-align: center;
+  margin-top: 12px;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.pricing-block .pricing-card.featured {
+  background: linear-gradient(135deg, #1A1B4B, #2D1B69);
+  border-color: rgb(124 58 237 / 40%);
+  box-shadow: 0 20px 60px rgb(124 58 237 / 25%);
+  transform: scale(1.02);
+}
+
+.pricing-block .pricing-card.featured .plan-name,
+.pricing-block .pricing-card.featured .price-amount {
+  color: #fff;
+}
+
+.pricing-block .pricing-card.featured .plan-desc,
+.pricing-block .pricing-card.featured .price-period,
+.pricing-block .pricing-card.featured .pricing-note {
+  color: rgb(255 255 255 / 75%);
+}
+
+.pricing-block .pricing-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 16px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.pricing-block .plan-price {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.pricing-block .price-currency {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.pricing-block .plan-price-custom {
+  font-family: var(--font-display, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-size: 2.4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+}
+
+.pricing-block .pricing-divider {
+  height: 1px;
+  background: rgb(124 58 237 / 10%);
+  margin: 24px 0;
+}
+
+.pricing-block .pricing-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex: 1;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-block .pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: #475569;
+}
+
+.pricing-block .price-currency,
+.pricing-block .check-yes,
+.pricing-block .check-no {
+  flex-shrink: 0;
+}
+
+.pricing-block .check-yes {
+  color: #10B981;
+  font-weight: 700;
+}
+
+.pricing-block .check-no {
+  color: #D1D5DB;
+}
+
+.pricing-block .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (width <= 1024px) {
+  .pricing-block .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 640px) {
+  .pricing-block .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+}

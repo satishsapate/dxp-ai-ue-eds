@@ -1,0 +1,27 @@
+{
+  "title": "Breadcrumb",
+  "description": "Breadcrumb navigation for AEM pages.",
+  "componentGroup": "Navigation",
+  "authoring": {
+    "fields": [
+      {
+        "name": "breadcrumb1Url",
+        "type": "string",
+        "title": "First Link URL",
+        "default": "#"
+      },
+      {
+        "name": "breadcrumb2Url",
+        "type": "string",
+        "title": "Second Link URL",
+        "default": "#"
+      },
+      {
+        "name": "breadcrumbCurrent",
+        "type": "string",
+        "title": "Current Page Label",
+        "default": "Article"
+      }
+    ]
+  }
+}

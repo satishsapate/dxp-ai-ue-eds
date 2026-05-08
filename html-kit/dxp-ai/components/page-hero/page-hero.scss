@@ -1,0 +1,57 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Page Hero (inner pages)
+// ============================================================
+.page-hero {
+  padding: 140px 0 80px;
+  /* Accessible: #1A1B4B bg gives 7:1 contrast on white text */
+  background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 60%, #1E3A8A 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 80%, rgba(124,58,237,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .container { position: relative; z-index: 2; }
+
+  &__content {
+    max-width: 800px;
+    margin: 0 auto;
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      .accent {
+        background: linear-gradient(135deg,#A78BFA,#67E8F9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
+    p {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 32px;
+    }
+  }
+}

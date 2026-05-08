@@ -1,0 +1,16 @@
+// DXP AI — Site SCSS Entry Point
+// Imports in dependency order: foundation → layout utilities → components
+
+// Foundation (Sass vars + CSS custom properties, reset, utilities)
+@import 'assets/css/variables';
+@import 'assets/css/base';
+@import 'assets/css/icons';
+@import 'assets/css/a11y';
+
+// Layer 4 Structure: Header + Footer
+@import 'components/header/header';
+@import 'components/footer/footer';
+
+// Layer 2 Content components
+@import 'components/stats-band/stats-band';
+@import 'components/hero/hero';

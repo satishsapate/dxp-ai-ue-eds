@@ -1,0 +1,125 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Carousel — 3-Card sliding carousel
+// ============================================================
+
+.carousel-section {
+  padding: 100px 0;
+  background: linear-gradient(135deg,#0D0E2A 0%,#1A1B4B 50%,#2D1B69 100%);
+  position: relative; overflow: hidden;
+
+  &::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(124,58,237,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.carousel {
+  position: relative;
+  &__track-wrapper {
+    overflow: hidden; border-radius: 0;
+    padding: 20px 0 40px; // space for shadows + dots
+  }
+
+  &__track {
+    display: flex; gap: 24px;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
+  }
+
+  &__slide {
+    flex: 0 0 calc(33.333% - 16px); min-width: 0;
+    @media (max-width:1024px) { flex: 0 0 calc(50% - 12px); }
+    @media (max-width:640px)  { flex: 0 0 100%; }
+  }
+
+  // --- Carousel Card Style ---
+  &__card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px; padding: 32px 28px; height: 100%;
+    backdrop-filter: blur(12px); position: relative; overflow: hidden;
+    transition: all 0.35s ease;
+
+    &::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--c-purple), var(--c-cyan));
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+
+    &:hover {
+      transform: translateY(-8px); border-color: rgba(124,58,237,0.35);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 40px rgba(124,58,237,0.2);
+      &::before { opacity: 1; }
+    }
+
+    .card-category {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 20px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      &--capability { background: rgba(124,58,237,0.2); color: #C4B5FD; border: 1px solid rgba(124,58,237,0.3); }
+      &--feature    { background: rgba(6,182,212,0.2);  color: #67E8F9; border: 1px solid rgba(6,182,212,0.3); }
+      &--solution   { background: rgba(37,99,235,0.2);  color: #93C5FD; border: 1px solid rgba(37,99,235,0.3); }
+    }
+
+    .card-icon {
+      width: 60px; height: 60px; border-radius: 16px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
+      color: #fff; margin-bottom: 12px; line-height: 1.3;
+    }
+
+    .card-description {
+      font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 20px;
+    }
+
+    .card-points {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;
+      .cp-item { display: flex; align-items: flex-start; gap: 8px;
+        font-size: 0.83rem; color: rgba(255,255,255,0.65);
+        .cp-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c-cyan); flex-shrink:0; margin-top:6px; }
+      }
+    }
+
+    .card-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      color: #A78BFA; transition: gap 0.2s ease;
+      &:hover { gap: 10px; }
+    }
+  }
+
+  // --- Controls ---
+  &__controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; margin-top: 40px;
+  }
+
+  &__btn {
+    width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; font-size: 1rem; transition: all 0.25s ease;
+    &:hover { background: rgba(124,58,237,0.4); border-color: rgba(124,58,237,0.6); }
+    &:disabled { opacity: 0.3; cursor: not-allowed; }
+  }
+
+  &__dots {
+    display: flex; gap: 8px; align-items: center;
+    .dot { width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.25); cursor: pointer;
+      transition: all 0.25s ease;
+      &.active { background: var(--c-cyan); width: 24px; border-radius: 4px;
+        box-shadow: 0 0 10px rgba(6,182,212,0.5); }
+    }
+  }
+
+  &__counter {
+    font-size: 0.82rem; color: rgba(255,255,255,0.4);
+    font-family: var(--font-display); letter-spacing: 0.05em;
+  }
+}

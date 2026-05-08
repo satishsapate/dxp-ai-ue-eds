@@ -1,0 +1,63 @@
+{
+  "title": "Call to Action",
+  "description": "Attention-grabbing call-to-action section with two buttons and supporting text.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Overline",
+        "default": "Get Started Today"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Heading",
+        "default": "Ready to Build Experiences that Actually Convert?"
+      },
+      {
+        "name": "accentText",
+        "type": "string",
+        "title": "Accent Text",
+        "default": "Actually Convert"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Description",
+        "default": "Join 500+ enterprise teams using DXP AI to deliver intelligent, personalized digital experiences at scale — powered by ZensAI."
+      },
+      {
+        "name": "primaryUrl",
+        "type": "string",
+        "title": "Primary Button URL",
+        "default": "#"
+      },
+      {
+        "name": "primaryText",
+        "type": "string",
+        "title": "Primary Button Text",
+        "default": "Request a Demo →"
+      },
+      {
+        "name": "secondaryUrl",
+        "type": "string",
+        "title": "Secondary Button URL",
+        "default": "#"
+      },
+      {
+        "name": "secondaryText",
+        "type": "string",
+        "title": "Secondary Button Text",
+        "default": "View Pricing"
+      },
+      {
+        "name": "metaText",
+        "type": "string",
+        "title": "Meta Text",
+        "default": "No credit card required · Free 30-day trial · Setup in under 1 hour"
+      }
+    ]
+  }
+}

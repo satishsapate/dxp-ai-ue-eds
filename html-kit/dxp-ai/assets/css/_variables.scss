@@ -1,0 +1,65 @@
+// ============================================================
+// DXP AI — ZensAI Brand Design Tokens
+// ============================================================
+$brand-navy:       #0D0E2A;
+$brand-dark-blue:  #1A1B4B;
+$brand-royal-blue: #1E3A8A;
+$brand-vivid-blue: #2563EB;
+$brand-purple:     #7C3AED;
+$brand-violet:     #9333EA;
+$brand-magenta:    #A855F7;
+$brand-cyan:       #06B6D4;
+$brand-sky:        #38BDF8;
+$brand-white:      #FFFFFF;
+$brand-off-white:  #F0F2FF;
+$brand-light-gray: #E2E8FF;
+$brand-mid-gray:   #6B7AAB;
+$brand-dark-gray:  #1E2240;
+
+$gradient-dxp:       linear-gradient(135deg, #2563EB 0%, #7C3AED 50%, #9333EA 100%);
+$gradient-dxp-vivid: linear-gradient(135deg, #1E3A8A 0%, #7C3AED 60%, #06B6D4 100%);
+$gradient-zensai:    linear-gradient(135deg, #7C3AED 0%, #9333EA 50%, #06B6D4 100%);
+$gradient-hero:      linear-gradient(135deg, #0D0E2A 0%, #1A1B4B 40%, #2D1B69 100%);
+$gradient-text:      linear-gradient(135deg, #60A5FA, #A78BFA, #67E8F9);
+$gradient-cta:       linear-gradient(135deg, #F59E0B, #EF4444);
+
+$color-primary:    $brand-purple;
+$color-secondary:  $brand-vivid-blue;
+$color-accent:     $brand-cyan;
+$color-bg-dark:    $brand-navy;
+$color-bg-light:   $brand-off-white;
+$color-text-light: rgba($brand-white, 0.75);
+$color-border-dark: rgba($brand-white, 0.08);
+
+$font-display: 'Sora', 'Segoe UI', sans-serif;
+$font-body:    'DM Sans', 'Inter', sans-serif;
+$font-mono:    'JetBrains Mono', monospace;
+
+$fs-sm: 0.875rem; $fs-base: 1rem; $fs-md: 1.125rem; $fs-lg: 1.25rem;
+$fs-xl: 1.5rem; $fs-2xl: 2rem; $fs-3xl: 2.75rem; $fs-4xl: 3.5rem; $fs-5xl: 5rem;
+
+$fw-medium: 500; $fw-semibold: 600; $fw-bold: 700; $fw-extrabold: 800;
+
+$sp-1:.25rem; $sp-2:.5rem; $sp-3:.75rem; $sp-4:1rem; $sp-5:1.25rem;
+$sp-6:1.5rem; $sp-8:2rem; $sp-10:2.5rem; $sp-12:3rem; $sp-16:4rem;
+$sp-20:5rem; $sp-24:6rem; $sp-32:8rem;
+
+$max-width: 1280px; $max-width-narrow: 880px; $container-px: 1.5rem;
+
+$radius-sm:8px; $radius-md:14px; $radius-lg:20px; $radius-xl:28px; $radius-full:9999px;
+
+$shadow-md:  0 4px 20px rgba($brand-navy,0.12);
+$shadow-lg:  0 12px 40px rgba($brand-navy,0.16);
+$shadow-xl:  0 24px 64px rgba($brand-navy,0.22);
+$shadow-glow-purple: 0 0 40px rgba($brand-purple,0.45), 0 0 80px rgba($brand-purple,0.2);
+$shadow-glow-cyan:   0 0 30px rgba($brand-cyan,0.4);
+
+$transition-base:   all 0.25s ease;
+$transition-spring: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+
+$bp-sm:576px; $bp-md:768px; $bp-lg:1024px; $bp-xl:1280px;
+
+@mixin md  { @media (max-width:#{$bp-md}) { @content; } }
+@mixin lg  { @media (max-width:#{$bp-lg}) { @content; } }
+@mixin xl  { @media (max-width:#{$bp-xl}) { @content; } }
+@mixin min-lg { @media (min-width:#{$bp-lg}) { @content; } }

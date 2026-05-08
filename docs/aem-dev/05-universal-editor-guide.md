@@ -1,0 +1,468 @@
+# Universal Editor Integration Guide
+
+## What is Universal Editor?
+
+Universal Editor (UE) is Adobe's WYSIWYG authoring tool for AEM that allows content authors to edit components directly on the rendered page. For this XWalk project, UE connects AEM's JCR content repository with the EDS rendering layer.
+
+## Three Configuration Files
+
+Universal Editor reads three JSON files to understand what components are available and how they work:
+
+### 1. component-definition.json
+**What it does:** Tells UE what components exist and how to create them in JCR.
+
+**Location in AEM:** `/conf/dxp-ai-ue-eds/settings/dam/adminui-extension/component-definition.json`
+
+**Structure:**
+```json
+{
+  "groups": [
+    {
+      "title": "Default Content",
+      "id": "default",
+      "components": [
+        {
+          "title": "Text",
+          "id": "text",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/text/v1/text",
+                "template": {}
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Blocks",
+      "id": "blocks",
+      "components": [
+        {
+          "title": "Cards",
+          "id": "cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Cards",
+                  "model": "cards",
+                  "heading": "Default Heading"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Key fields:**
+- `title` - Display name in UE component picker
+- `id` - Unique identifier (matches model id)
+- `resourceType` - JCR node type (use `block/v1/block` for all EDS blocks)
+- `template` - Default values when component is created
+
+### 2. component-models.json
+**What it does:** Defines the editable fields shown in UE's properties panel when a component is selected.
+
+**Location in AEM:** `/conf/dxp-ai-ue-eds/settings/dam/adminui-extension/component-models.json`
+
+**Structure:**
+```json
+[
+  {
+    "id": "cards",
+    "fields": [
+      {
+        "component": "text",
+        "name": "heading",
+        "label": "Heading",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string"
+      },
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          { "name": "Default", "value": "" },
+          { "name": "Featured", "value": "featured" }
+        ]
+      }
+    ]
+  }
+]
+```
+
+**Field Component Types:**
+
+| `component` | Description | Additional Properties |
+|---|---|---|
+| `text` | Single-line text input | `valueType: "string"` |
+| `richtext` | WYSIWYG rich text editor | - |
+| `reference` | DAM asset picker (image/video) | `valueType: "string"` |
+| `aem-content` | AEM page/content picker | - |
+| `select` | Dropdown with options | `options: [{name, value}]` |
+| `multiselect` | Multi-select checkboxes | `options: [{name, value}]` |
+| `boolean` | Toggle switch | `valueType: "boolean"` |
+| `number` | Number spinner | `valueType: "number"` |
+| `date-time` | Date/time picker | `valueType: "string"` |
+| `tab` | UI grouping tab | `value: "Tab Name"` |
+
+**Using Tabs to Group Fields:**
+```json
+{
+  "id": "hero",
+  "fields": [
+    {
+      "component": "tab",
+      "name": "tab-content",
+      "label": "Content",
+      "value": "Content"
+    },
+    {
+      "component": "text",
+      "name": "heading",
+      "label": "Heading"
+    },
+    {
+      "component": "tab",
+      "name": "tab-media",
+      "label": "Media",
+      "value": "Media"
+    },
+    {
+      "component": "reference",
+      "name": "image",
+      "label": "Image"
+    }
+  ]
+}
+```
+
+### 3. component-filters.json
+**What it does:** Defines composition rules - what components can be children of other components.
+
+**Location in AEM:** `/conf/dxp-ai-ue-eds/settings/dam/adminui-extension/component-filters.json`
+
+**Current configuration:**
+```json
+[
+  {
+    "id": "main",
+    "components": ["section"]
+  },
+  {
+    "id": "section",
+    "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
+  },
+  {
+    "id": "cards",
+    "components": ["card"]
+  },
+  {
+    "id": "columns",
+    "components": ["column"]
+  },
+  {
+    "id": "column",
+    "components": ["text", "image", "button", "title"]
+  }
+]
+```
+
+**Adding a new block to sections:**
+```json
+{
+  "id": "section",
+  "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment", "myblock"]
+}
+```
+
+## Source JSON Files (Build System)
+
+Developers edit **source files** in `models/` and `blocks/*/`. The built files are generated by `npm run build:json`.
+
+### Source file locations:
+```
+models/
+├── _component-definition.json   # Aggregator - uses $ref to include all
+├── _component-filters.json      # Aggregator - uses $ref to include all
+├── _text.json                   # Text component model
+├── _title.json                  # Title component model
+├── _image.json                  # Image component model
+├── _button.json                 # Button component model
+└── _section.json                # Section model + filter
+
+blocks/
+└── blockname/
+    └── _blockname.json          # Block-specific model + definition + filter
+```
+
+### Build command:
+```bash
+npm run build:json          # Build all three JSON files
+npm run build:json:models   # Build only component-models.json
+```
+
+**Never edit `component-definition.json`, `component-models.json`, or `component-filters.json` directly** - they are overwritten by the build.
+
+## Existing Components in Universal Editor
+
+### Default Content Group (always available)
+| Component | ID | Model ID | Description |
+|---|---|---|---|
+| Text | text | - | Plain/rich text block |
+| Title | title | title | Heading (h1-h6 selectable) |
+| Image | image | image | DAM image reference |
+| Button | button | button | Link button (default/primary/secondary) |
+
+### Sections Group
+| Component | ID | Model ID | Description |
+|---|---|---|---|
+| Section | section | section | Layout section wrapper |
+
+### Blocks Group (20+ blocks)
+| Component | ID | Model ID | Description |
+|---|---|---|---|
+| Accordion | accordion | accordion | FAQ expandable items |
+| Articles | articles | articles | Article listing |
+| Breadcrumb | breadcrumb | breadcrumb | Navigation trail |
+| Cards | cards | cards | Card grid + Card items |
+| Carousel | carousel | carousel | Content slider |
+| CMS Compat | cms-compat | - | CMS compatibility |
+| Columns | columns | columns | Multi-column layout |
+| CTA | cta | cta | Call-to-action section |
+| Features | features | features | Feature list |
+| Footer | footer | footer | Site footer |
+| Fragment | fragment | fragment | Reusable content |
+| Header | header | header | Navigation header |
+| Hero | hero | hero | Hero banner |
+| Page Hero | page-hero | page-hero | Page-specific hero |
+| Pricing | pricing | pricing | Pricing plans |
+| Richtext | richtext | richtext | Rich text area |
+| Section Dark | section-dark | - | Dark section |
+| Section Generic | section-generic | - | Generic section |
+| Section Light | section-light | - | Light section |
+| Stats Band | stats-band | stats-band | Statistics strip |
+| Team | team | team | Team members |
+| Timeline | timeline | timeline | Timeline display |
+| Who Uses | who-uses | who-uses | Client logos |
+
+---
+
+## Actual `component-models.json` Content
+
+This is the built file read by Universal Editor (source is in `models/` and `blocks/*/_*.json`):
+
+```json
+[
+  {
+    "id": "page-metadata",
+    "fields": [
+      { "component": "text", "valueType": "string", "name": "jcr:title",      "label": "Title"       },
+      { "component": "text", "valueType": "string", "name": "jcr:description","label": "Description" },
+      { "component": "text", "valueType": "string", "name": "keywords",        "label": "Keywords", "multi": true }
+    ]
+  },
+  {
+    "id": "image",
+    "fields": [
+      { "component": "reference", "name": "image",    "label": "Image",    "multi": false },
+      { "component": "text",      "name": "imageAlt", "label": "Alt Text" }
+    ]
+  },
+  {
+    "id": "title",
+    "fields": [
+      { "component": "text",   "name": "title",     "label": "Title" },
+      { "component": "select", "name": "titleType", "label": "Title Type",
+        "options": [
+          {"name":"h1","value":"h1"},{"name":"h2","value":"h2"},{"name":"h3","value":"h3"},
+          {"name":"h4","value":"h4"},{"name":"h5","value":"h5"},{"name":"h6","value":"h6"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "button",
+    "fields": [
+      { "component": "aem-content", "name": "link",      "label": "Link"  },
+      { "component": "text",        "name": "linkText",  "label": "Text"  },
+      { "component": "text",        "name": "linkTitle", "label": "Title" },
+      { "component": "select",      "name": "linkType",  "label": "Type",
+        "options": [
+          {"name":"default","value":""},{"name":"primary","value":"primary"},{"name":"secondary","value":"secondary"}
+        ]
+      }
+    ]
+  },
+  {
+    "id": "section",
+    "fields": [
+      { "component": "text",        "name": "name",  "label": "Section Name",
+        "description": "The label shown for this section in the Content Tree" },
+      { "component": "multiselect", "name": "style", "label": "Style",
+        "options": [{"name":"Highlight","value":"highlight"}] }
+    ]
+  },
+  {
+    "id": "card",
+    "fields": [
+      { "component": "reference", "valueType": "string", "name": "image", "label": "Image", "multi": false },
+      { "component": "richtext",  "name": "text",  "value": "", "label": "Text", "valueType": "string" }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      { "component": "text", "valueType": "number", "name": "columns", "label": "Columns" },
+      { "component": "text", "valueType": "number", "name": "rows",    "label": "Rows"    }
+    ]
+  },
+  {
+    "id": "fragment",
+    "fields": [
+      { "component": "aem-content", "name": "reference", "label": "Reference" }
+    ]
+  },
+  {
+    "id": "hero",
+    "fields": [
+      { "component": "reference", "valueType": "string", "name": "image",    "label": "Image", "multi": false },
+      { "component": "text",      "valueType": "string", "name": "imageAlt", "label": "Alt",   "value": "" },
+      { "component": "richtext",  "name": "text", "value": "", "label": "Text", "valueType": "string" }
+    ]
+  }
+]
+```
+
+---
+
+## Actual `component-filters.json` Content
+
+```json
+[
+  { "id": "main",    "components": ["section"] },
+  { "id": "section", "components": ["text","image","button","title","hero","cards","columns","fragment"] },
+  { "id": "cards",   "components": ["card"] },
+  { "id": "columns", "components": ["column"] },
+  { "id": "column",  "components": ["text","image","button","title"] }
+]
+```
+
+## Authoring Workflow
+
+### Creating a New Page
+1. Open AEM Sites at `http://localhost:4502/sites.html`
+2. Navigate to `/content/sites/dxp-ai-ue-eds/`
+3. Create a new page using a template
+4. Click "Edit" to open Universal Editor
+5. Use the "+" button to add components
+
+### Editing with Universal Editor
+1. Click any component on the page to select it
+2. Properties panel appears on the right with editable fields
+3. Edit fields inline or in the properties panel
+4. Changes save automatically to JCR
+5. Click "Preview" to see the EDS-rendered result
+
+### Publishing Content
+1. In Universal Editor, click "Publish"
+2. Or use AEM Sidekick (Chrome extension):
+   - Click "Preview" to push to `{branch}.hlx.page`
+   - Click "Publish" to push to `{branch}.hlx.live`
+
+## Page Metadata Model
+
+The `page-metadata` model controls page-level SEO fields:
+
+```json
+{
+  "id": "page-metadata",
+  "fields": [
+    {
+      "component": "text",
+      "name": "jcr:title",
+      "label": "Title",
+      "valueType": "string"
+    },
+    {
+      "component": "text",
+      "name": "jcr:description",
+      "label": "Description",
+      "valueType": "string"
+    },
+    {
+      "component": "multiselect",
+      "name": "keywords",
+      "label": "Keywords",
+      "valueType": "string"
+    }
+  ]
+}
+```
+
+## AEM Sidekick Configuration
+
+`tools/sidekick/config.json`:
+```json
+{
+  "project": "AEM XWalk Boilerplate",
+  "editUrlLabel": "AEM Editor",
+  "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open"
+}
+```
+
+This enables the "Edit" button in the Sidekick to open the page directly in Universal Editor.
+
+## Common Issues and Solutions
+
+### Component not appearing in UE picker
+1. Run `npm run build:json`
+2. Deploy updated `component-definition.json` to AEM
+3. Hard refresh the Universal Editor browser tab (Ctrl+Shift+R)
+
+### Fields not showing in properties panel
+1. Check the model `id` matches the definition's `"model"` in the template
+2. Run `npm run build:json` and redeploy `component-models.json`
+3. Check for JSON syntax errors: `npm run lint:js`
+
+### Content not appearing on EDS preview
+1. Verify the block JS file exports `default function decorate(block)`
+2. Check browser console for JavaScript errors
+3. Verify block directory name matches the component's class name in HTML
+4. Check `fstab.yaml` points to the correct AEM instance
+
+### Image not rendering
+1. Verify image was added to AEM DAM
+2. Check the field type is `"component": "reference"`
+3. Ensure the AEM instance serving the image allows cross-origin requests
+
+## resourceType Reference
+
+| resourceType | Use Case |
+|---|---|
+| `core/franklin/components/text/v1/text` | Simple text |
+| `core/franklin/components/title/v1/title` | Heading |
+| `core/franklin/components/image/v1/image` | Image |
+| `core/franklin/components/button/v1/button` | Button/link |
+| `core/franklin/components/section/v1/section` | Section wrapper |
+| `core/franklin/components/block/v1/block` | All custom blocks |
+| `core/franklin/components/block/v1/block/item` | Block child items |

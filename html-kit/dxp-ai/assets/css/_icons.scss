@@ -1,0 +1,149 @@
+/* ============================================================
+   DXP AI — Icon System
+   All icons via CSS classes using inline SVG data URIs
+   or font-based icon approach for accessibility.
+   Class pattern: .icon .icon--[name] .icon--[size] .icon--[color]
+   ============================================================ */
+
+/* Base icon wrapper */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Icon sizes */
+.icon--xs  { width: 14px; height: 14px; font-size: 14px; }
+.icon--sm  { width: 18px; height: 18px; font-size: 18px; }
+.icon--md  { width: 24px; height: 24px; font-size: 24px; }
+.icon--lg  { width: 32px; height: 32px; font-size: 32px; }
+.icon--xl  { width: 48px; height: 48px; font-size: 48px; }
+.icon--2xl { width: 64px; height: 64px; font-size: 64px; }
+
+/* Icon color variants */
+.icon--purple { color: var(--c-purple); }
+.icon--cyan   { color: var(--c-cyan); }
+.icon--blue   { color: var(--c-vivid-blue); }
+.icon--white  { color: #fff; }
+.icon--muted  { color: var(--c-mid-gray); }
+.icon--navy   { color: var(--c-navy); }
+
+/* Icon in a boxed container */
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.icon-box--sm  { width: 36px; height: 36px; border-radius: 8px; }
+.icon-box--md  { width: 48px; height: 48px; border-radius: 12px; }
+.icon-box--lg  { width: 56px; height: 56px; border-radius: 14px; }
+.icon-box--xl  { width: 64px; height: 64px; border-radius: 16px; }
+
+.icon-box--purple { background: rgba(124,58,237,.12); }
+.icon-box--cyan   { background: rgba(6,182,212,.12);  }
+.icon-box--blue   { background: rgba(37,99,235,.12);  }
+.icon-box--violet { background: rgba(163,85,247,.12); }
+.icon-box--orange { background: rgba(245,158,11,.12); }
+.icon-box--green  { background: rgba(16,185,129,.12); }
+.icon-box--red    { background: rgba(239,68,68,.12);  }
+.icon-box--glass  { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1); }
+
+/* ── Named SVG Icons (using Unicode / SVG background) ──────── */
+
+/* Each icon is a CSS class that injects the svg as background image.
+   We use currentColor-aware SVGs encoded as data URIs. */
+
+/* Arrow / chevron */
+.icon--arrow-right::before { content: '→'; }
+.icon--arrow-left::before  { content: '←'; }
+.icon--chevron-down::before{ content: '⌄'; }
+
+/* Platform / product icons */
+.icon--platform::before     { content: '⚡'; }
+.icon--ai::before           { content: '🤖'; }
+.icon--content::before      { content: '📄'; }
+.icon--personalize::before  { content: '🎯'; }
+.icon--multichannel::before { content: '📡'; }
+.icon--analytics::before    { content: '📊'; }
+.icon--chat::before         { content: '💬'; }
+.icon--search::before       { content: '🔍'; }
+.icon--integrations::before { content: '🔗'; }
+.icon--security::before     { content: '🛡️'; }
+.icon--lock::before         { content: '🔒'; }
+.icon--identity::before     { content: '👤'; }
+.icon--audit::before        { content: '📋'; }
+.icon--shield::before       { content: '🛡️'; }
+.icon--cloud::before        { content: '☁️'; }
+.icon--code::before         { content: '💻'; }
+.icon--api::before          { content: '⌨'; }
+.icon--key::before          { content: '🔑'; }
+.icon--package::before      { content: '📦'; }
+.icon--docs::before         { content: '📚'; }
+.icon--blog::before         { content: '📝'; }
+.icon--case-study::before   { content: '📊'; }
+.icon--guide::before        { content: '📖'; }
+.icon--webinar::before      { content: '▶'; }
+.icon--tag::before          { content: '🏷️'; }
+.icon--globe::before        { content: '🌐'; }
+.icon--building::before     { content: '🏢'; }
+.icon--marketing::before    { content: '📢'; }
+.icon--check::before        { content: '✓'; }
+.icon--plus::before         { content: '+'; }
+.icon--star::before         { content: '✦'; }
+.icon--spark::before        { content: '✨'; }
+.icon--rocket::before       { content: '🚀'; }
+.icon--growth::before       { content: '📈'; }
+.icon--team::before         { content: '👥'; }
+.icon--location::before     { content: '📍'; }
+.icon--mail::before         { content: '📧'; }
+.icon--phone::before        { content: '📞'; }
+.icon--clock::before        { content: '🕐'; }
+.icon--calendar::before     { content: '📅'; }
+.icon--linkedin::before     { content: 'in'; font-family: var(--font-display); font-weight: 800; }
+.icon--x::before            { content: '𝕏'; }
+.icon--youtube::before      { content: '▶'; }
+.icon--github::before       { content: '⌨'; }
+
+/* Headless / Architecture icons */
+.icon--headless::before     { content: '⬡'; }
+.icon--headful::before      { content: '⬢'; }
+.icon--hybrid::before       { content: '◈'; }
+.icon--composable::before   { content: '⊞'; }
+
+/* CMS Platform Logos — SVG inline via ::before content
+   For brand logos we use text + custom data-uri or well-known symbol */
+.icon--aem::before          { content: 'Ae'; font-weight: 800; font-size: .65em; letter-spacing: -.05em; }
+.icon--liferay::before      { content: 'Lf'; font-weight: 800; font-size: .65em; }
+.icon--sitecore::before     { content: 'Sc'; font-weight: 800; font-size: .65em; }
+.icon--contentstack::before { content: 'Cs'; font-weight: 800; font-size: .65em; }
+.icon--contentful::before   { content: 'Cf'; font-weight: 800; font-size: .65em; }
+.icon--storyblok::before    { content: 'Sb'; font-weight: 800; font-size: .65em; }
+.icon--drupal::before       { content: '⊕'; font-size: .9em; }
+.icon--wordpress::before    { content: 'W'; font-weight: 800; font-size: .9em; }
+.icon--webflow::before      { content: 'Wf'; font-weight: 800; font-size: .65em; }
+.icon--optimizely::before   { content: 'Op'; font-weight: 800; font-size: .65em; }
+.icon--strapi::before       { content: 'Sp'; font-weight: 800; font-size: .65em; }
+.icon--salesforce::before   { content: '⛅'; }
+.icon--sap::before          { content: 'SA'; font-weight: 800; font-size: .65em; }
+.icon--hubspot::before      { content: 'Hs'; font-weight: 800; font-size: .65em; }
+.icon--marketo::before      { content: 'Mk'; font-weight: 800; font-size: .65em; }
+.icon--dynamics::before     { content: 'Dy'; font-weight: 800; font-size: .65em; }
+
+/* Accessibility: icons used decoratively get aria-hidden in HTML */
+
+/* ── CMS Platform brand colors ───────────────────────────── */
+.icon-box--aem         { background: #FF0000; color: #fff; }
+.icon-box--liferay     { background: #1F5291; color: #fff; }
+.icon-box--sitecore    { background: #EB1F1F; color: #fff; }
+.icon-box--contentstack{ background: #5236FF; color: #fff; }
+.icon-box--contentful  { background: #2478CC; color: #fff; }
+.icon-box--storyblok   { background: #09B3AF; color: #fff; }
+.icon-box--drupal      { background: #0678BE; color: #fff; }
+.icon-box--wordpress   { background: #21759B; color: #fff; }
+.icon-box--webflow     { background: #4353FF; color: #fff; }
+.icon-box--optimizely  { background: #005B97; color: #fff; }
+.icon-box--strapi      { background: #4945FF; color: #fff; }

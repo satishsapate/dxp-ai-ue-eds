@@ -1,0 +1,81 @@
+{
+  "title": "CMS Compatibility",
+  "description": "CMS compatibility block that highlights headless and headful architecture support.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Overline",
+        "default": "Architecture Freedom"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Heading",
+        "default": "Headful or Headless — Your Architecture, Your Rules"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "title": "Description",
+        "default": "DXP AI is fully composable by design. It works as the intelligence and personalization layer regardless of how you choose to build and deliver experiences."
+      },
+      {
+        "name": "card1Badge",
+        "type": "string",
+        "title": "Card 1 Badge",
+        "default": "Headless / API-First"
+      },
+      {
+        "name": "card1Title",
+        "type": "string",
+        "title": "Card 1 Title",
+        "default": "Headless / API-First Delivery"
+      },
+      {
+        "name": "card1Text",
+        "type": "string",
+        "title": "Card 1 Text",
+        "default": "Decouple your front-end from content and experience back-end. Power any modern framework via ZensAI's GraphQL and REST APIs."
+      },
+      {
+        "name": "card2Badge",
+        "type": "string",
+        "title": "Card 2 Badge",
+        "default": "Headful / Full-Stack"
+      },
+      {
+        "name": "card2Title",
+        "type": "string",
+        "title": "Card 2 Title",
+        "default": "Headful / Full-Stack Delivery"
+      },
+      {
+        "name": "card2Text",
+        "type": "string",
+        "title": "Card 2 Text",
+        "default": "Use DXP AI's built-in rendering engine to manage the full experience — from authoring to delivery — without a separate front-end application."
+      },
+      {
+        "name": "logo1Name",
+        "type": "string",
+        "title": "Logo 1 Name",
+        "default": "Adobe AEM"
+      },
+      {
+        "name": "logo2Name",
+        "type": "string",
+        "title": "Logo 2 Name",
+        "default": "Liferay DXP"
+      },
+      {
+        "name": "logo3Name",
+        "type": "string",
+        "title": "Logo 3 Name",
+        "default": "Sitecore"
+      }
+    ]
+  }
+}

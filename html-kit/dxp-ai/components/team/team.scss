@@ -1,0 +1,69 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Team Cards
+// ============================================================
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 28px;
+  @include lg { grid-template-columns: repeat(2,1fr); }
+  @include md { grid-template-columns: 1fr; }
+}
+
+.team-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(124,58,237,.08);
+  transition: all .3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(124,58,237,.12);
+    border-color: rgba(124,58,237,.2);
+  }
+
+  &__avatar {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+
+    .team-initials {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: #fff;
+      border: 3px solid rgba(255,255,255,.2);
+    }
+  }
+
+  &__body { padding: 20px; }
+
+  &__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem; font-weight: 700; color: var(--c-navy); margin-bottom: 4px;
+  }
+  &__role {
+    font-size: .82rem; color: var(--c-purple); font-weight: 600; margin-bottom: 8px;
+  }
+  &__bio {
+    font-size: .82rem; color: var(--c-mid-gray); line-height: 1.6;
+  }
+
+  &__social {
+    display: flex; gap: 8px; margin-top: 14px;
+    a {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--c-off-white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 800; color: var(--c-mid-gray);
+      transition: all .2s ease;
+      &:hover { background: rgba(124,58,237,.1); color: var(--c-purple); }
+    }
+  }
+}

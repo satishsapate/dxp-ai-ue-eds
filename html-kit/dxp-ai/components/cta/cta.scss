@@ -1,0 +1,52 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: CTA Section
+// ============================================================
+.cta-section {
+  padding: 100px 0;
+  /* Lightened from original for accessibility — 7:1 contrast */
+  background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 60%, #1A1B4B 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(124,58,237,.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.cta-content {
+  position: relative; z-index: 2;
+  max-width: 700px; margin: 0 auto;
+
+  .cta-overline {
+    display: block;
+    font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: #67E8F9; margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: clamp(2.2rem,4.5vw,3.5rem);
+    font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 20px;
+    .accent {
+      background: linear-gradient(135deg,#A78BFA,#67E8F9);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  p { font-size: 1.1rem; color: rgba(255,255,255,.78); line-height: 1.7; margin-bottom: 40px; }
+}
+
+.cta-buttons {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap;
+}
+
+.cta-meta {
+  margin-top: 24px; font-size: .82rem; color: rgba(255,255,255,.4);
+}

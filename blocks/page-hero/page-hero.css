@@ -1,0 +1,89 @@
+.page-hero-block {
+  position: relative;
+  padding: 140px 0 80px;
+  background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 60%, #1E3A8A 100%);
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.page-hero-block::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 80%, rgb(124 58 237 / 18%) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero-block::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 2.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.page-hero-block .container {
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero-block .breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(255 255 255 / 75%);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+}
+
+.page-hero-block .breadcrumb a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.page-hero-block .page-hero__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-hero-block .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 8%);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.page-hero-block h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0 0 20px;
+}
+
+.page-hero-block .accent {
+  background: linear-gradient(135deg,#A78BFA,#67E8F9);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-hero-block p {
+  margin: 0 auto;
+  max-width: 640px;
+  color: rgb(255 255 255 / 78%);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+@media (width <= 640px) {
+  .page-hero-block {
+    padding: 100px 0 60px;
+  }
+}

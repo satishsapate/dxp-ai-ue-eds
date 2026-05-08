@@ -1,0 +1,86 @@
+:root {
+  --cms-compat-bg: #f7f8ff;
+  --cms-compat-accent: #7c3aed;
+  --cms-compat-text: #111827;
+  --cms-compat-copy: #4b5563;
+}
+
+.cms-compat-block {
+  background: var(--cms-compat-bg);
+  padding: 100px 0;
+}
+
+.cms-compat-block .section-heading {
+  margin-bottom: 40px;
+}
+
+.cms-compat-block .overline {
+  color: var(--cms-compat-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.cms-compat-block .approach-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 40px;
+}
+
+.cms-compat-block .approach-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid rgb(124 58 237 / 12%);
+}
+
+.cms-compat-block .approach-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgb(124 58 237 / 10%);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.cms-compat-block .approach-card__icon {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+.cms-compat-block .cms-logos-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cms-compat-block .cms-logo-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+  place-items: center start;
+  border: 1px solid rgb(124 58 237 / 8%);
+}
+
+.cms-compat-block .clc-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(124 58 237 / 12%);
+  font-weight: 700;
+}
+
+@media (width <= 1024px) {
+  .cms-compat-block .approach-grid,
+  .cms-compat-block .cms-logos-grid {
+    grid-template-columns: 1fr;
+  }
+}

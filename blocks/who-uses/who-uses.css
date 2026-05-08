@@ -1,0 +1,82 @@
+.who-uses-block {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.who-uses-block .section-heading {
+  margin-bottom: 40px;
+}
+
+.who-uses-block .overline {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: #7c3aed;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+
+.who-uses-block h2 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 2.5vw, 3rem);
+}
+
+.who-uses-block p {
+  margin: 0 0 32px;
+  color: #475569;
+  max-width: 660px;
+}
+
+.who-uses-block .cards-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.who-uses-block .feature-card {
+  background: #fff;
+  border: 1px solid rgb(148 163 184 / 18%);
+  border-radius: 24px;
+  padding: 32px;
+  display: grid;
+  gap: 20px;
+}
+
+.who-uses-block .fc-icon {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  background: rgb(124 58 237 / 10%);
+  font-size: 1.4rem;
+}
+
+.who-uses-block h3 {
+  margin: 0;
+}
+
+.who-uses-block .feature-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.7;
+}
+
+.who-uses-block .fc-link {
+  color: #4338ca;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+@media (width <= 1024px) {
+  .who-uses-block .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width <= 640px) {
+  .who-uses-block .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

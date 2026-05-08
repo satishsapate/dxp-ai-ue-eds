@@ -1,0 +1,17 @@
+{
+  "title": "Stats Band",
+  "description": "Statistics band block to display key platform metrics.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "stat0Value", "type": "string", "title": "Statistic 1 Value", "default": "500+" },
+      { "name": "stat0Label", "type": "string", "title": "Statistic 1 Label", "default": "Enterprise Clients Globally" },
+      { "name": "stat1Value", "type": "string", "title": "Statistic 2 Value", "default": "99.9%" },
+      { "name": "stat1Label", "type": "string", "title": "Statistic 2 Label", "default": "Platform Uptime SLA" },
+      { "name": "stat2Value", "type": "string", "title": "Statistic 3 Value", "default": "4.2×" },
+      { "name": "stat2Label", "type": "string", "title": "Statistic 3 Label", "default": "Faster Content Delivery" },
+      { "name": "stat3Value", "type": "string", "title": "Statistic 4 Value", "default": "68%" },
+      { "name": "stat3Label", "type": "string", "title": "Statistic 4 Label", "default": "Increase in Engagement" }
+    ]
+  }
+}

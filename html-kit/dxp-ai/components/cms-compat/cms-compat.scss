@@ -1,0 +1,169 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: CMS Compatibility — Headful / Headless + Platform Logos
+// ============================================================
+
+.cms-compat-section {
+  padding: 100px 0;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%,
+      rgba(124,58,237,.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+/* ── Headful / Headless approach cards ──────────────────── */
+.approach-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-bottom: 72px;
+  @include md { grid-template-columns: 1fr; }
+}
+
+.approach-card {
+  border-radius: 22px;
+  padding: 36px;
+  position: relative;
+  overflow: hidden;
+  transition: all .3s ease;
+  border: 2px solid transparent;
+
+  &:hover { transform: translateY(-4px); }
+
+  &--headless {
+    background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 100%);
+    border-color: rgba(124,58,237,.4);
+    &:hover { box-shadow: 0 20px 60px rgba(124,58,237,.25); }
+  }
+
+  &--headful {
+    background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 100%);
+    border-color: rgba(37,99,235,.2);
+    &:hover { box-shadow: 0 20px 60px rgba(37,99,235,.12); }
+  }
+
+  &__badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    margin-bottom: 20px; font-size: .72rem;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+    .approach-card--headless & { background: rgba(255,255,255,.1); color: #C4B5FD; border: 1px solid rgba(255,255,255,.15); }
+    .approach-card--headful  & { background: rgba(37,99,235,.1); color: var(--c-vivid-blue); border: 1px solid rgba(37,99,235,.2); }
+  }
+
+  &__icon {
+    width: 60px; height: 60px; border-radius: 16px;
+    margin-bottom: 20px; display: flex; align-items: center; justify-content: center;
+    .icon { font-size: 1.6rem; }
+    .approach-card--headless & { background: rgba(255,255,255,.1); }
+    .approach-card--headful  & { background: rgba(37,99,235,.1); }
+  }
+
+  h3 {
+    font-size: 1.3rem; font-weight: 700; margin-bottom: 12px;
+    .approach-card--headless & { color: #fff; }
+    .approach-card--headful  & { color: var(--c-navy); }
+  }
+
+  p {
+    font-size: .92rem; line-height: 1.7; margin-bottom: 20px;
+    .approach-card--headless & { color: rgba(255,255,255,.72); }
+    .approach-card--headful  & { color: var(--c-mid-gray); }
+  }
+}
+
+.approach-features {
+  display: flex; flex-direction: column; gap: 9px;
+
+  li {
+    display: flex; align-items: center; gap: 9px; font-size: .85rem;
+    .approach-card--headless & { color: rgba(255,255,255,.75); }
+    .approach-card--headful  & { color: var(--c-dark-gray); }
+  }
+
+  .af-check {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .6rem; font-weight: 900; flex-shrink: 0;
+    .approach-card--headless & { background: rgba(6,182,212,.25); color: #67E8F9; }
+    .approach-card--headful  & { background: rgba(37,99,235,.15); color: var(--c-vivid-blue); }
+  }
+}
+
+/* ── CMS Platform Logos ──────────────────────────────────── */
+.cms-logos-heading {
+  text-align: center; margin-bottom: 48px;
+  .overline { display: block; font-size: .78rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .1em; color: var(--c-cyan); margin-bottom: 10px; }
+  h3 { font-size: 1.8rem; font-weight: 700; color: var(--c-navy); margin-bottom: 10px; }
+  p  { font-size: .95rem; color: var(--c-mid-gray); max-width: 560px; margin: 0 auto; }
+}
+
+.cms-logos-grid {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  align-items: stretch; gap: 16px; margin-bottom: 32px;
+}
+
+.cms-logo-card {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 18px; border-radius: 16px;
+  border: 1px solid rgba(124,58,237,.1); background: #fff;
+  min-width: 108px; flex: 0 0 auto;
+  transition: all .3s ease; text-align: center;
+
+  &:hover {
+    transform: translateY(-6px); border-color: transparent;
+    box-shadow: 0 16px 40px rgba(124,58,237,.15);
+    .clc-icon { transform: scale(1.08); }
+  }
+}
+
+.clc-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: .82rem; letter-spacing: -.03em;
+  transition: transform .3s ease; flex-shrink: 0;
+  color: #fff; line-height: 1;
+  font-family: var(--font-display);
+
+  // Brand colors
+  &--aem          { background: #FF0000; }
+  &--liferay      { background: #1F5291; }
+  &--sitecore     { background: #EB1F1F; }
+  &--contentstack { background: #5236FF; }
+  &--contentful   { background: #2478CC; }
+  &--storyblok    { background: #09B3AF; }
+  &--drupal       { background: #0678BE; }
+  &--wordpress    { background: #21759B; }
+  &--webflow      { background: #4353FF; }
+  &--optimizely   { background: #005B97; }
+  &--strapi       { background: #4945FF; }
+}
+
+.clc-name { font-size: .78rem; font-weight: 600; color: var(--c-navy); line-height: 1.3; }
+.clc-type { font-size: .68rem; color: var(--c-mid-gray); margin-top: 2px; }
+
+.cms-more-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 999px;
+  background: linear-gradient(135deg,rgba(124,58,237,.08),rgba(6,182,212,.06));
+  border: 1px solid rgba(124,58,237,.15);
+  font-size: .85rem; font-weight: 600; color: var(--c-purple);
+}
+
+.cms-note {
+  text-align: center; margin-top: 36px; padding: 20px 28px;
+  background: linear-gradient(135deg,rgba(124,58,237,.06),rgba(6,182,212,.04));
+  border: 1px solid rgba(124,58,237,.1); border-radius: 14px;
+  max-width: 720px; margin-left: auto; margin-right: auto;
+  font-size: .9rem; color: var(--c-dark-gray); line-height: 1.7;
+  strong { color: var(--c-purple); }
+}

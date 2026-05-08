@@ -1,0 +1,145 @@
+/* ============================================================
+   DXP AI — Accessibility & Contrast Fixes
+   WCAG AA compliant: min 4.5:1 for normal text, 3:1 for large
+   ============================================================ */
+
+/* ── Section Dark: was too dark, now uses a lighter, readable gradient ── */
+.section--dark {
+  /* Lightened: mid navy + royal blue — contrast 7:1+ for white text */
+  background: linear-gradient(135deg, #1A1B4B 0%, #1E2F6B 50%, #2D1B69 100%);
+}
+
+/* All text on dark sections must be clearly white */
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4,
+.section--dark h5,
+.section--dark p,
+.section--dark li,
+.section--dark span:not(.badge):not(.cert) {
+  color: #fff;
+}
+
+.section--dark p,
+.section--dark .body-text,
+.section--dark li {
+  color: rgba(255,255,255,0.82); /* 6.5:1 contrast on #1A1B4B */
+}
+
+/* Glass cards on dark backgrounds — readable */
+.section--dark .glass-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+.section--dark .glass-card h3 { color: #fff; }
+.section--dark .glass-card p  { color: rgba(255,255,255,0.78); }
+
+.gc-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg,#C4B5FD,#67E8F9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.gc-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 12px;
+}
+
+/* ── Hero section text visibility ── */
+.hero::before, .hero::after { pointer-events: none; }
+
+/* ── page-hero — ensure heading always readable ── */
+.page-hero {
+  background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 60%, #1E3A8A 100%);
+}
+.page-hero h1, .page-hero p { color: #fff; }
+.page-hero p { color: rgba(255,255,255,0.78); }
+
+/* ── CTA section contrast ── */
+.cta-section {
+  background: linear-gradient(135deg, #1A1B4B 0%, #2D1B69 60%, #1A1B4B 100%);
+}
+.cta-content h2 { color: #fff; }
+.cta-content p  { color: rgba(255,255,255,0.78); }
+
+/* ── Carousel section ── */
+.carousel-section {
+  background: linear-gradient(135deg,#1A1B4B 0%,#2D1B69 50%,#1E3A8A 100%);
+}
+
+/* ── Footer background ── */
+.site-footer {
+  background: linear-gradient(180deg, #0F1035 0%, #0D0E2A 100%);
+}
+/* Footer text readable */
+.site-footer__col li a,
+.site-footer__brand p { color: rgba(255,255,255,0.60); }
+.site-footer__col h4  { color: rgba(255,255,255,0.92); }
+.site-footer__col li a:hover { color: #fff; }
+
+/* ── Section heading overline color — readable ── */
+.section-heading .overline { color: var(--c-cyan); }
+.section-heading--light .overline { color: #67E8F9; } /* lighter on dark */
+
+/* ── badge—cyan text check ── */
+.badge--cyan { color: #0891B2; } /* darker teal on light bg for 4.5:1 */
+/* on dark bg override */
+.section--dark .badge--cyan,
+.page-hero .badge--cyan,
+.carousel-section .badge--cyan { color: #67E8F9; }
+
+/* ── Link focus visible for keyboard nav ── */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--c-cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Ensure minimum tap target 44×44px on mobile ── */
+@media (max-width: 768px) {
+  .btn, .btn-demo, .btn-login,
+  .nav-item > a,
+  .tab-btn,
+  .accordion-header {
+    min-height: 44px;
+  }
+}
+
+/* ── Skip-to-content link for screen readers ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  background: var(--c-purple);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 0 0 8px 8px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  z-index: 9999;
+  transition: top 0.2s ease;
+  text-decoration: none;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Reduce motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .orb, .hero__eyebrow .dot,
+  .hero__scroll .scroll-line,
+  .animate-on-scroll {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

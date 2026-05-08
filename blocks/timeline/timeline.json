@@ -1,0 +1,26 @@
+{
+  "title": "Timeline",
+  "description": "Timeline section with milestone events.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      { "name": "overline", "type": "string", "title": "Overline", "default": "Our Journey" },
+      { "name": "heading", "type": "string", "title": "Heading", "default": "Key Milestones" },
+      { "name": "event0Year", "type": "string", "title": "Event 1 Year", "default": "1991" },
+      { "name": "event0Title", "type": "string", "title": "Event 1 Title", "default": "Zensar Technologies Founded" },
+      { "name": "event0Text", "type": "string", "title": "Event 1 Text", "default": "Zensar Technologies established in Pune, India as part of the RPG Group — beginning a 30-year journey in enterprise technology services." },
+      { "name": "event1Year", "type": "string", "title": "Event 2 Year", "default": "2022" },
+      { "name": "event1Title", "type": "string", "title": "Event 2 Title", "default": "ZensAI Lab Established" },
+      { "name": "event1Text", "type": "string", "title": "Event 2 Text", "default": "Zensar creates ZensAI as a dedicated AI innovation unit, with a mission to build AI-native enterprise products for the intelligence era." },
+      { "name": "event2Year", "type": "string", "title": "Event 3 Year", "default": "2023" },
+      { "name": "event2Title", "type": "string", "title": "Event 3 Title", "default": "DXP AI Beta Launch" },
+      { "name": "event2Text", "type": "string", "title": "Event 3 Text", "default": "DXP AI enters private beta with 20 design partners. Core platform including AI Content Management, Personalization Engine, and ZensAI Search shipped." },
+      { "name": "event3Year", "type": "string", "title": "Event 4 Year", "default": "2024" },
+      { "name": "event3Title", "type": "string", "title": "Event 4 Title", "default": "General Availability & 500+ Clients" },
+      { "name": "event3Text", "type": "string", "title": "Event 4 Text", "default": "DXP AI goes GA. Achieves 500+ enterprise client milestone within the first year. Conversational AI and Predictive Analytics shipped." },
+      { "name": "event4Year", "type": "string", "title": "Event 5 Year", "default": "2025" },
+      { "name": "event4Title", "type": "string", "title": "Event 5 Title", "default": "ZensAI v2 & Global Expansion" },
+      { "name": "event4Text", "type": "string", "title": "Event 5 Text", "default": "ZensAI v2 launches with next-generation content generation, multi-modal search, and agentic AI capabilities. Expanding to 50+ countries." }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+@import '../../assets/css/variables';
+
+// ============================================================
+// COMPONENT: Accordion / FAQ
+// ============================================================
+.faq-section {
+  padding: 100px 0;
+  background: var(--c-off-white);
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.accordion-item {
+  background: #fff;
+  border: 1px solid rgba(124,58,237,.1);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all .25s ease;
+
+  &.open {
+    border-color: rgba(124,58,237,.3);
+    box-shadow: 0 8px 24px rgba(124,58,237,.1);
+  }
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  gap: 16px;
+  // Accessibility: keyboard operable
+  &:focus-visible {
+    outline: 3px solid var(--c-cyan);
+    outline-offset: -3px;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--c-navy);
+    transition: color .2s ease;
+  }
+
+  .accordion-item.open & h4 { color: var(--c-purple); }
+}
+
+.accordion-icon {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--c-off-white);
+  display: flex; align-items: center; justify-content: center;
+  // Use class-based icon — no raw emoji
+  font-size: .9rem;
+  flex-shrink: 0;
+  transition: all .25s ease;
+  .accordion-item.open & {
+    background: rgba(124,58,237,.1);
+    color: var(--c-purple);
+    transform: rotate(45deg);
+  }
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 24px 20px;
+  font-size: .92rem;
+  color: var(--c-dark-gray);
+  line-height: 1.75;
+  .accordion-item.open & { display: block; }
+}

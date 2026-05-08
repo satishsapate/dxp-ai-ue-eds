@@ -1,0 +1,53 @@
+{
+  "title": "Accordion FAQ",
+  "description": "Expandable FAQ accordion block for AEM Universal Editor.",
+  "componentGroup": "Content",
+  "authoring": {
+    "fields": [
+      {
+        "name": "overline",
+        "type": "string",
+        "title": "Section Overline",
+        "default": "Pricing FAQ"
+      },
+      {
+        "name": "heading",
+        "type": "string",
+        "title": "Section Heading",
+        "default": "Common Questions"
+      },
+      {
+        "name": "items",
+        "type": "array",
+        "title": "Accordion Items",
+        "item": {
+          "type": "object",
+          "properties": [
+            {
+              "name": "question",
+              "type": "string",
+              "title": "Question",
+              "default": "Example question"
+            },
+            {
+              "name": "answer",
+              "type": "string",
+              "title": "Answer",
+              "default": "Example answer content."
+            }
+          ]
+        },
+        "default": [
+          {
+            "question": "Is there a free trial available?",
+            "answer": "Yes. The Starter and Professional plans both offer a 30-day free trial with full platform access and no credit card required."
+          },
+          {
+            "question": "Can I change plans as my needs grow?",
+            "answer": "Absolutely. You can upgrade at any time and only pay the prorated difference."
+          }
+        ]
+      }
+    ]
+  }
+}
