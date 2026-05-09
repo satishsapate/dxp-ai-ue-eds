@@ -1,8 +1,7 @@
 {
-  "name": "@adobe/aem-boilerplate",
-  "private": true,
+  "name": "dxp-ai-ue-eds",
   "version": "1.3.0",
-  "description": "Starter project for Adobe Helix",
+  "description": "DXP AI UE EDS — AEM + Universal Editor + Edge Delivery Services",
   "scripts": {
     "lint:js": "eslint . --ext .json,.js,.mjs",
     "lint:css": "stylelint \"blocks/**/*.css\" \"styles/*.css\"",
@@ -20,14 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adobe/aem-boilerplate.git"
+    "url": "git+https://github.com/satishsapate/dxp-ai-ue-eds.git"
   },
-  "author": "Adobe",
+  "author": "Satish Sapate",
   "license": "Apache License 2.0",
   "bugs": {
-    "url": "https://github.com/adobe/aem-boilerplate/issues"
+    "url": "https://github.com/satishsapate/dxp-ai-ue-eds/issues"
   },
-  "homepage": "https://github.com/adobe/aem-boilerplate#readme",
+  "homepage": "https://github.com/satishsapate/dxp-ai-ue-eds#readme",
   "devDependencies": {
     "@babel/eslint-parser": "7.28.6",
     "eslint": "8.57.1",
