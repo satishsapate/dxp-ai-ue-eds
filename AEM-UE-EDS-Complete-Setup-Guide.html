@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AEM + Universal Editor + Edge Delivery Services — Complete Setup Guide</title>
+<style>
+  :root {
+    --primary: #1473e6;
+    --primary-dark: #0d66d0;
+    --success: #12805c;
+    --warning: #e68619;
+    --danger: #d7373f;
+    --bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border: #dee2e6;
+    --text: #2c2c2c;
+    --text-muted: #6c757d;
+    --code-bg: #1e1e2e;
+    --code-text: #cdd6f4;
+    --sidebar-width: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    display: flex;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: #1a1a2e;
+    color: #e2e8f0;
+    position: fixed;
+    top: 0; left: 0;
+    overflow-y: auto;
+    z-index: 100;
+    padding-bottom: 40px;
+  }
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .sidebar-header h2 { font-size: 13px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .sidebar-header p { font-size: 15px; font-weight: 600; color: #fff; }
+  .sidebar nav { padding: 12px 0; }
+  .nav-section { padding: 12px 20px 4px; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: #64748b; font-weight: 600; }
+  .sidebar a { display: block; padding: 7px 20px; font-size: 13.5px; color: #cbd5e1; text-decoration: none; transition: all 0.15s; border-left: 3px solid transparent; }
+  .sidebar a:hover { background: rgba(255,255,255,0.07); color: #fff; border-left-color: var(--primary); }
+  .sidebar a.active { background: rgba(20,115,230,0.15); color: #93c5fd; border-left-color: var(--primary); }
+  .sidebar .badge { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 6px; font-weight: 600; vertical-align: middle; }
+  .badge-fixed { background: #064e3b; color: #6ee7b7; }
+  .badge-required { background: #7c2d12; color: #fdba74; }
+  .badge-verified { background: #1e3a5f; color: #93c5fd; }
+
+  /* MAIN CONTENT */
+  .main { margin-left: var(--sidebar-width); flex: 1; padding: 40px 48px; max-width: 1100px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 48px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(20,115,230,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag { display: inline-block; background: rgba(20,115,230,0.3); border: 1px solid rgba(20,115,230,0.5); color: #93c5fd; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 12px; line-height: 1.3; }
+  .hero p { font-size: 16px; color: #94a3b8; max-width: 680px; margin-bottom: 24px; }
+  .hero-stack { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stack-pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; font-size: 13px; color: #e2e8f0; }
+
+  /* SECTIONS */
+  .section { margin-bottom: 48px; scroll-margin-top: 24px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+  .section-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .icon-blue { background: #dbeafe; }
+  .icon-green { background: #dcfce7; }
+  .icon-orange { background: #fff7ed; }
+  .icon-red { background: #fee2e2; }
+  .icon-purple { background: #f3e8ff; }
+  .section-header h2 { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+  .section-header .step-num { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+  /* CARDS */
+  .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+  .card.highlight { border-left: 4px solid var(--primary); background: #eff6ff; }
+  .card.success { border-left: 4px solid var(--success); background: #f0fdf4; }
+  .card.warning { border-left: 4px solid var(--warning); background: #fffbeb; }
+  .card.danger { border-left: 4px solid var(--danger); background: #fff5f5; }
+
+  /* ALERTS */
+  .alert { border-radius: 10px; padding: 14px 18px; margin: 16px 0; font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .alert.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e3a5f; }
+  .alert.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #14532d; }
+  .alert.warning { background: #fffbeb; border: 1px solid #fde68a; color: #78350f; }
+  .alert.danger { background: #fff5f5; border: 1px solid #fecaca; color: #7f1d1d; }
+
+  /* CODE BLOCKS */
+  .code-block { background: var(--code-bg); border-radius: 10px; overflow: hidden; margin: 16px 0; font-size: 13.5px; }
+  .code-header { background: rgba(255,255,255,0.05); padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .code-lang { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .code-file { font-size: 11px; color: #64748b; font-family: monospace; }
+  .code-block pre { padding: 20px; overflow-x: auto; line-height: 1.7; }
+  .code-block code { color: var(--code-text); font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; }
+  .c-keyword { color: #cba6f7; }
+  .c-string { color: #a6e3a1; }
+  .c-comment { color: #6c7086; font-style: italic; }
+  .c-key { color: #89b4fa; }
+  .c-value { color: #fab387; }
+  .c-tag { color: #f38ba8; }
+  .c-attr { color: #89dceb; }
+  .c-num { color: #fab387; }
+  .c-url { color: #89dceb; text-decoration: underline; }
+
+  /* STEPS */
+  .steps { counter-reset: step; }
+  .step { display: flex; gap: 20px; margin-bottom: 28px; }
+  .step-number { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: white; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .step-content { flex: 1; padding-top: 6px; }
+  .step-content h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+
+  /* STATUS TABLE */
+  .status-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .status-table th { background: #f1f5f9; padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 2px solid var(--border); }
+  .status-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .status-table tr:last-child td { border-bottom: none; }
+  .status-table tr:hover td { background: #f8fafc; }
+  .status-ok { color: var(--success); font-weight: 700; }
+  .status-fixed { color: var(--warning); font-weight: 700; }
+  .status-manual { color: var(--primary); font-weight: 700; }
+
+  /* ISSUE CARDS */
+  .issue-card { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
+  .issue-header { padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+  .issue-header.bug { background: #fff5f5; border-bottom: 1px solid #fecaca; }
+  .issue-header.resolved { background: #f0fdf4; border-bottom: 1px solid #bbf7d0; }
+  .issue-tag { font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 700; }
+  .tag-bug { background: #fecaca; color: #7f1d1d; }
+  .tag-resolved { background: #bbf7d0; color: #14532d; }
+  .tag-expected { background: #dbeafe; color: #1e3a5f; }
+  .issue-body { padding: 16px 20px; }
+  .issue-body p { font-size: 14px; margin-bottom: 10px; color: var(--text-muted); }
+  .issue-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 4px; }
+
+  /* ARCH DIAGRAM */
+  .arch-diagram { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 32px; text-align: center; }
+  .arch-row { display: flex; justify-content: center; align-items: center; gap: 0; margin-bottom: 8px; flex-wrap: wrap; }
+  .arch-node { background: #1a1a2e; color: white; padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; min-width: 130px; text-align: center; }
+  .arch-node.aem { background: #e34f26; }
+  .arch-node.eds { background: #0d66d0; }
+  .arch-node.ue { background: #7c3aed; }
+  .arch-node.gh { background: #24292f; }
+  .arch-node.cm { background: #ff6b35; }
+  .arch-node.author { background: #059669; }
+  .arch-node sub { display: block; font-size: 10px; font-weight: 400; opacity: 0.8; margin-top: 2px; }
+  .arch-arrow { font-size: 24px; color: #94a3b8; padding: 0 8px; display: flex; align-items: center; }
+  .arch-label { font-size: 11px; color: #94a3b8; margin: 4px 0 12px; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+  .checklist li { padding: 8px 0; font-size: 14px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before { content: ''; width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+
+  /* FILE TREE */
+  .file-tree { background: #1e1e2e; border-radius: 10px; padding: 20px; font-family: monospace; font-size: 13px; color: #cdd6f4; line-height: 2; }
+  .ft-dir { color: #89dceb; }
+  .ft-file { color: #a6e3a1; }
+  .ft-comment { color: #6c7086; font-style: italic; }
+
+  /* COMPARISON */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 16px 0; }
+  .compare-col { padding: 0; }
+  .compare-header { padding: 10px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+  .compare-header.before { background: #fff5f5; color: #7f1d1d; border-bottom: 1px solid #fecaca; }
+  .compare-header.after { background: #f0fdf4; color: #14532d; border-bottom: 1px solid #bbf7d0; border-left: 1px solid var(--border); }
+  .compare-body { padding: 16px; font-size: 13px; background: var(--card-bg); }
+  .compare-body.right { border-left: 1px solid var(--border); }
+  .compare-body ul { list-style: none; }
+  .compare-body li { padding: 3px 0; }
+  .compare-body .del { color: var(--danger); }
+  .compare-body .add { color: var(--success); font-weight: 600; }
+
+  /* PRINT / MISC */
+  h3 { font-size: 17px; font-weight: 600; margin: 20px 0 10px; color: #1a1a2e; }
+  p { margin-bottom: 12px; font-size: 14px; }
+  ul, ol { padding-left: 20px; margin-bottom: 12px; font-size: 14px; }
+  li { margin-bottom: 4px; }
+  strong { font-weight: 600; }
+  code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #e11d48; }
+  a { color: var(--primary); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px; }
+    .card-grid, .compare { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>Team Setup Guide</h2>
+    <p>AEM + UE + EDS Project</p>
+  </div>
+  <nav>
+    <div class="nav-section">Overview</div>
+    <a href="#architecture">Architecture</a>
+    <a href="#prerequisites">Prerequisites</a>
+    <a href="#project-structure">Project Structure</a>
+
+    <div class="nav-section">Setup — AEM Backend</div>
+    <a href="#aem-backend">AEM Backend Project (zendxp)</a>
+    <a href="#osgi-configs">OSGi Configurations</a>
+    <a href="#cors-config">CORS Configuration <span class="badge badge-fixed">Fixed</span></a>
+    <a href="#cloud-manager">Cloud Manager Deployment</a>
+
+    <div class="nav-section">Setup — EDS Frontend</div>
+    <a href="#eds-project">EDS Project (dxp-ai-ue-eds)</a>
+    <a href="#fstab">fstab.yaml</a>
+    <a href="#head-html">head.html</a>
+    <a href="#sidekick">AEM Sidekick</a>
+
+    <div class="nav-section">Verification</div>
+    <a href="#verify-osgi">Verify OSGi Configs <span class="badge badge-verified">Cloud</span></a>
+    <a href="#verify-eds">Verify EDS Project</a>
+    <a href="#verify-ue">Verify Universal Editor</a>
+
+    <div class="nav-section">Troubleshooting</div>
+    <a href="#issues">Known Issues &amp; Fixes</a>
+    <a href="#checklist">Final Checklist</a>
+  </nav>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Internal Developer Guide</div>
+    <h1>AEM + Universal Editor +<br/>Edge Delivery Services</h1>
+    <p>Complete setup guide for new team members joining the <strong>dxp-ai-ue-eds</strong> project. Covers architecture, configuration, deployment, verification, and all issues discovered and resolved during initial setup.</p>
+    <div class="hero-stack">
+      <span class="stack-pill">AEM Cloud Service 2024.8+</span>
+      <span class="stack-pill">Universal Editor</span>
+      <span class="stack-pill">Edge Delivery Services</span>
+      <span class="stack-pill">XWalk Pattern</span>
+      <span class="stack-pill">Node.js 18.3+</span>
+    </div>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <section class="section" id="architecture">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🏗️</div>
+      <div>
+        <div class="step-num">Section 1</div>
+        <h2>Architecture Overview</h2>
+      </div>
+    </div>
+
+    <div class="arch-diagram">
+      <div class="arch-row">
+        <div class="arch-node author">AEM Author<sub>author-p24056-e1593080</sub></div>
+        <div class="arch-arrow">←→</div>
+        <div class="arch-node ue">Universal Editor<sub>experience.adobe.com</sub></div>
+      </div>
+      <div class="arch-label">Content authors use UE to edit JCR content on AEM Author. UE connects via <code>urn:auecon:aemconnection</code> meta tag.</div>
+
+      <div class="arch-row">
+        <div class="arch-node aem">AEM Cloud<sub>JCR Content Store</sub></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node eds">Edge Delivery Services<sub>*.aem.page / *.aem.live</sub></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node gh">Browser<sub>End User</sub></div>
+      </div>
+      <div class="arch-label">EDS fetches content from AEM via fstab.yaml mountpoint. Blocks (JS/CSS) decorate the HTML delivered to users.</div>
+
+      <div class="arch-row">
+        <div class="arch-node gh">GitHub Repo<sub>satishsapate/dxp-ai-ue-eds</sub></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node cm">Cloud Manager<sub>zentechincptrsd/zendxp</sub></div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node aem">AEM Cloud<sub>Deployed Bundles + Configs</sub></div>
+      </div>
+      <div class="arch-label">EDS JS/CSS blocks live in GitHub. AEM bundles + OSGi configs deploy via Cloud Manager pipeline.</div>
+    </div>
+
+    <div class="card-grid" style="margin-top:20px;">
+      <div class="card highlight">
+        <div class="card-title">Pattern: XWalk</div>
+        <p style="font-size:13px;margin:0">Authors write to <strong>JCR</strong> (AEM) via Universal Editor. EDS reads from JCR via <code>fstab.yaml</code> mount. Block JS on EDS decorates the HTML. Two repos, one experience.</p>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">Two Repositories</div>
+        <ul style="font-size:13px;margin:0;padding-left:16px;">
+          <li><strong>dxp-ai-ue-eds</strong> — EDS frontend (blocks, styles, scripts)</li>
+          <li><strong>zendxp</strong> — AEM backend (bundles, OSGi configs, content packages)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <div class="alert-icon">ℹ️</div>
+      <div><strong>Key Concept — Immutable vs Mutable Content:</strong><br/>
+      In AEM Cloud Service, <code>ui.apps</code> and <code>ui.config</code> packages are <strong>immutable</strong> — deployed as a Docker image layer via Cloud Manager build. <code>ui.content</code> is <strong>mutable</strong> — installed as a content package after AEM starts. This distinction is critical for understanding deployment logs and troubleshooting.</div>
+    </div>
+  </section>
+
+  <!-- PREREQUISITES -->
+  <section class="section" id="prerequisites">
+    <div class="section-header">
+      <div class="section-icon icon-purple">✅</div>
+      <div>
+        <div class="step-num">Section 2</div>
+        <h2>Prerequisites</h2>
+      </div>
+    </div>
+    <div class="card-grid three">
+      <div class="card">
+        <div class="card-title">Local Tools</div>
+        <ul style="font-size:13px;padding-left:16px;">
+          <li>Node.js ≥ 18.3</li>
+          <li>Java 11 / Maven 3.8+</li>
+          <li>Git</li>
+          <li>Chrome browser</li>
+          <li>AEM Sidekick extension</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Access Required</div>
+        <ul style="font-size:13px;padding-left:16px;">
+          <li>Adobe IMS account (Experience Cloud)</li>
+          <li>Cloud Manager access (Program: zentechincptrsd)</li>
+          <li>GitHub access: satishsapate/dxp-ai-ue-eds</li>
+          <li>Cloud Manager Git: zentechincptrsd/zendxp</li>
+          <li>AEM Author URL login credentials</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">AEM Cloud Environment</div>
+        <ul style="font-size:13px;padding-left:16px;">
+          <li>Program ID: <code>p24056</code></li>
+          <li>Environment ID: <code>e1593080</code></li>
+          <li>Author: <code>author-p24056-e1593080.adobeaemcloud.com</code></li>
+          <li>Branch: <code>main-without-solr-changes</code></li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert warning">
+      <div class="alert-icon">⚠️</div>
+      <div><strong>AEM Cloud Service is different from AEM 6.5!</strong> Felix Web Console (<code>/system/console</code>) is <strong>not accessible</strong> via browser. OSGi config verification must be done via Cloud Manager Developer Console. See <a href="#verify-osgi">Verify OSGi Configs</a> section.</div>
+    </div>
+  </section>
+
+  <!-- PROJECT STRUCTURE -->
+  <section class="section" id="project-structure">
+    <div class="section-header">
+      <div class="section-icon icon-blue">📁</div>
+      <div>
+        <div class="step-num">Section 3</div>
+        <h2>Project Structure</h2>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">EDS Frontend — dxp-ai-ue-eds (GitHub)</div>
+        <div class="file-tree">
+<span class="ft-dir">blocks/</span>         <span class="ft-comment"># 25 block components</span>
+<span class="ft-dir">models/</span>         <span class="ft-comment"># UE component model sources</span>
+<span class="ft-dir">scripts/</span>        <span class="ft-comment"># aem.js, scripts.js, editor-support.js</span>
+<span class="ft-dir">styles/</span>         <span class="ft-comment"># styles.css (design tokens)</span>
+<span class="ft-dir">tools/sidekick/</span> <span class="ft-comment"># Sidekick config</span>
+<span class="ft-file">fstab.yaml</span>      <span class="ft-comment"># AEM mount point — CRITICAL</span>
+<span class="ft-file">head.html</span>       <span class="ft-comment"># UE connection meta — CRITICAL</span>
+<span class="ft-file">component-definition.json</span>
+<span class="ft-file">component-models.json</span>
+<span class="ft-file">component-filters.json</span></div>
+      </div>
+      <div class="card">
+        <div class="card-title">AEM Backend — zendxp (Cloud Manager Git)</div>
+        <div class="file-tree">
+<span class="ft-dir">core/</span>                     <span class="ft-comment"># Java bundles (OSGi)</span>
+<span class="ft-dir">ui.apps/</span>                  <span class="ft-comment"># Components, templates</span>
+<span class="ft-dir">ui.content/</span>               <span class="ft-comment"># Content (mutable)</span>
+<span class="ft-dir">ui.config/</span>
+  <span class="ft-dir">src/.../apps/zendxp/osgiconfig/</span>
+    <span class="ft-dir">config/</span>           <span class="ft-comment"># Both tiers</span>
+    <span class="ft-dir">config.author/</span>    <span class="ft-comment"># Author only</span>
+    <span class="ft-dir">config.publish/</span>   <span class="ft-comment"># Publish only</span>
+<span class="ft-dir">all/</span>                      <span class="ft-comment"># Aggregator — builds all packages</span></div>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <div class="alert-icon">ℹ️</div>
+      <div><strong>Built files — never edit directly:</strong> <code>component-definition.json</code>, <code>component-models.json</code>, <code>component-filters.json</code>. Always edit the source files in <code>models/_*.json</code> and <code>blocks/*/_blockname.json</code>, then run <code>npm run build:json</code>.</div>
+    </div>
+  </section>
+
+  <!-- AEM BACKEND -->
+  <section class="section" id="aem-backend">
+    <div class="section-header">
+      <div class="section-icon icon-orange">⚙️</div>
+      <div>
+        <div class="step-num">Section 4</div>
+        <h2>AEM Backend Project Setup (zendxp)</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Clone the Cloud Manager Git repository</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code>git clone https://git.cloudmanager.adobe.com/zentechincptrsd/zendxp/
+cd zendxp
+git checkout main-without-solr-changes</code></pre>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted)">You will need Cloud Manager Git credentials. Get them from: Cloud Manager → Program → Repositories → Manage Access Tokens.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Build the project</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code>mvn clean install -PautoInstallSinglePackage</code></pre>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted)">For local AEM: add <code>-DaemHost=http://localhost:4502</code>. For Cloud: deploy via Cloud Manager pipeline only (see <a href="#cloud-manager">Section 7</a>).</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Understand the all/pom.xml — embedded packages</h4>
+          <p style="font-size:13px;">The <code>all</code> module bundles everything. Key embedded targets:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">xml</span><span class="code-file">all/pom.xml</span></div>
+            <pre><code><span class="c-comment">&lt;!-- Immutable — baked into Docker image --&gt;</span>
+zendxp.ui.apps    → /apps/zendxp-packages/application/install
+zendxp.core       → /apps/zendxp-packages/application/install
+zendxp.ui.config  → /apps/zendxp-packages/application/install
+
+<span class="c-comment">&lt;!-- Mutable — installed after AEM starts --&gt;</span>
+zendxp.ui.content → /apps/zendxp-packages/content/install</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OSGI CONFIGS -->
+  <section class="section" id="osgi-configs">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🔧</div>
+      <div>
+        <div class="step-num">Section 5</div>
+        <h2>Critical OSGi Configurations</h2>
+      </div>
+    </div>
+
+    <h3>5.1 — Franklin Repository Config (Links AEM to EDS GitHub repo)</h3>
+    <div class="alert success">
+      <div class="alert-icon">✅</div>
+      <div>This config is <strong>already deployed and active</strong> for this project. Verified in AEM Developer Console.</div>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">json</span>
+        <span class="code-file">ui.config/.../config/com.adobe.aem.wcm.franklin.impl.FranklinRepositoryImpl~dxp-ai-ue-eds.cfg.json</span>
+      </div>
+      <pre><code>{
+  <span class="c-key">"owner"</span>: <span class="c-string">"satishsapate"</span>,   <span class="c-comment">// GitHub org/user</span>
+  <span class="c-key">"repo"</span>:  <span class="c-string">"dxp-ai-ue-eds"</span>,   <span class="c-comment">// GitHub repo name</span>
+  <span class="c-key">"ref"</span>:   <span class="c-string">"main"</span>             <span class="c-comment">// branch</span>
+}</code></pre>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted)">The PID must match: <code>com.adobe.aem.wcm.franklin.impl.FranklinRepositoryImpl~{unique-name}</code>. The <code>~dxp-ai-ue-eds</code> suffix creates a factory instance, allowing multiple repos on one AEM instance.</p>
+
+    <h3>5.2 — CORS Configuration (Author tier)</h3>
+    <div class="alert danger">
+      <div class="alert-icon">🛠️</div>
+      <div><strong>This was broken in initial setup and has been fixed.</strong> The original <code>config.author</code> CORS had empty <code>alloworigin</code> and a wrong regex — Universal Editor could not connect to AEM Author. See <a href="#cors-config">Section 6</a> for details.</div>
+    </div>
+    <div class="code-block">
+      <div class="code-header">
+        <span class="code-lang">json</span>
+        <span class="code-file">ui.config/.../config.author/com.adobe.granite.cors.impl.CORSPolicyImpl~zendxp.cfg.json</span>
+      </div>
+      <pre><code>{
+  <span class="c-key">"supportscredentials"</span>: <span class="c-num">true</span>,                  <span class="c-comment">// UE uses IMS Bearer tokens</span>
+  <span class="c-key">"supportedmethods"</span>: [
+    <span class="c-string">"GET"</span>, <span class="c-string">"HEAD"</span>, <span class="c-string">"POST"</span>,
+    <span class="c-string">"PUT"</span>, <span class="c-string">"DELETE"</span>, <span class="c-string">"PATCH"</span>, <span class="c-string">"OPTIONS"</span>   <span class="c-comment">// PUT/DELETE needed for UE content edits</span>
+  ],
+  <span class="c-key">"alloworigin"</span>: [
+    <span class="c-string">"https://experience.adobe.com"</span>,               <span class="c-comment">// Universal Editor host</span>
+    <span class="c-string">"https://main--dxp-ai-ue-eds--satishsapate.aem.page"</span>,
+    <span class="c-string">"https://main--dxp-ai-ue-eds--satishsapate.aem.live"</span>
+  ],
+  <span class="c-key">"alloworiginregexp"</span>: [
+    <span class="c-string">"https://.*\\.aem\\.page"</span>,                     <span class="c-comment">// All EDS preview branches</span>
+    <span class="c-string">"https://.*\\.aem\\.live"</span>,                     <span class="c-comment">// All EDS live branches</span>
+    <span class="c-string">"https://.*\\.hlx\\.page"</span>,
+    <span class="c-string">"https://.*\\.hlx\\.live"</span>
+  ],
+  <span class="c-key">"supportedheaders"</span>: [
+    <span class="c-string">"Origin"</span>, <span class="c-string">"Accept"</span>, <span class="c-string">"X-Requested-With"</span>,
+    <span class="c-string">"Content-Type"</span>, <span class="c-string">"Access-Control-Request-Method"</span>,
+    <span class="c-string">"Access-Control-Request-Headers"</span>,
+    <span class="c-string">"Authorization"</span>,                             <span class="c-comment">// IMS Bearer token header</span>
+    <span class="c-string">"CSRF-Token"</span>
+  ],
+  <span class="c-key">"allowedpaths"</span>: [<span class="c-string">".*"</span>],
+  <span class="c-key">"maxage:Integer"</span>: <span class="c-num">1800</span>
+}</code></pre>
+    </div>
+
+    <div class="alert warning">
+      <div class="alert-icon">⚠️</div>
+      <div><strong>New project?</strong> When creating a new project, copy this CORS config exactly, replacing only the <code>alloworigin</code> EDS URLs with your project's URLs (<code>main--{repo}--{owner}.aem.page</code>).</div>
+    </div>
+  </section>
+
+  <!-- CORS DETAIL -->
+  <section class="section" id="cors-config">
+    <div class="section-header">
+      <div class="section-icon icon-red">🐛</div>
+      <div>
+        <div class="step-num">Section 6</div>
+        <h2>CORS Fix — Before &amp; After</h2>
+      </div>
+    </div>
+
+    <div class="compare">
+      <div class="compare-col">
+        <div class="compare-header before">❌ Before (Broken)</div>
+        <div class="compare-body">
+          <ul>
+            <li class="del">supportscredentials: false</li>
+            <li class="del">supportedmethods: [GET, HEAD, POST]</li>
+            <li class="del">alloworigin: [] (empty)</li>
+            <li class="del">alloworiginregexp: [wrong regex]</li>
+            <li class="del">supportedheaders: [basic only]</li>
+            <li class="del">No Authorization header</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare-col">
+        <div class="compare-header after">✅ After (Fixed)</div>
+        <div class="compare-body right">
+          <ul>
+            <li class="add">supportscredentials: true</li>
+            <li class="add">+ PUT, DELETE, PATCH, OPTIONS</li>
+            <li class="add">alloworigin: experience.adobe.com + EDS hosts</li>
+            <li class="add">alloworiginregexp: *.aem.page / *.aem.live</li>
+            <li class="add">+ Authorization header</li>
+            <li class="add">+ CSRF-Token header</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3>Why each change was needed</h3>
+    <table class="status-table" style="margin-top:0;">
+      <thead><tr><th>Property</th><th>Reason for change</th></tr></thead>
+      <tbody>
+        <tr><td><code>supportscredentials: true</code></td><td>Universal Editor uses IMS OAuth Bearer tokens. When Authorization header is included in a CORS request, the browser requires <code>Access-Control-Allow-Credentials: true</code>. With <code>false</code>, UE operations silently fail.</td></tr>
+        <tr><td><code>alloworigin: experience.adobe.com</code></td><td>Universal Editor runs at <code>experience.adobe.com</code>. It makes fetch requests to AEM Author. Without this origin, all UE → AEM API calls are blocked by CORS.</td></tr>
+        <tr><td><code>alloworiginregexp: *.aem.page</code></td><td>EDS previews use dynamic URLs like <code>branch--repo--owner.aem.page</code>. Regex covers all branches/PRs automatically.</td></tr>
+        <tr><td><code>PUT, DELETE, PATCH, OPTIONS</code></td><td>Universal Editor performs content CRUD. Edit = PUT, Delete component = DELETE. Without these methods, editing is read-only.</td></tr>
+        <tr><td><code>Authorization header</code></td><td>IMS tokens are sent in the <code>Authorization: Bearer ...</code> header. Must be in <code>supportedheaders</code> or the preflight OPTIONS request fails.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CLOUD MANAGER -->
+  <section class="section" id="cloud-manager">
+    <div class="section-header">
+      <div class="section-icon icon-orange">🚀</div>
+      <div>
+        <div class="step-num">Section 7</div>
+        <h2>Cloud Manager Deployment</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Stage and commit your changes in the zendxp repo</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code><span class="c-comment"># Navigate to the zendxp project</span>
+cd C:/Satish_Sapate_Data/AEM_Local/Latest_Zendxp/zendxp
+
+<span class="c-comment"># Stage specific file (never use git add -A — avoid accidental .env commits)</span>
+git add ui.config/src/main/content/jcr_root/apps/zendxp/osgiconfig/config.author/com.adobe.granite.cors.impl.CORSPolicyImpl~zendxp.cfg.json
+
+<span class="c-comment"># Confirm what's staged</span>
+git diff --staged --name-only
+
+<span class="c-comment"># Commit with descriptive message</span>
+git commit -m "Fix CORS config.author for Universal Editor - add UE origins, credentials, PUT/DELETE methods"
+
+<span class="c-comment"># Push to Cloud Manager remote</span>
+git push origin main-without-solr-changes</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Trigger Cloud Manager Pipeline</h4>
+          <ol style="font-size:14px;">
+            <li>Go to <strong>Cloud Manager</strong> at <code>experience.adobe.com/#/cloudmanager</code></li>
+            <li>Select Program: <strong>zensar-technologies-inc-apac-partner-sandbox-program-dev</strong></li>
+            <li>Click <strong>Pipelines</strong> in the left nav</li>
+            <li>Find the pipeline for branch <code>main-without-solr-changes</code></li>
+            <li>Click <strong>Run</strong> (or it auto-triggers on push)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Understand the pipeline stages (~15–25 min total)</h4>
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-title">Build Step</div>
+              <p style="font-size:13px;margin:0">Maven builds all modules. <code>all</code> package bundles ui.apps + ui.config + ui.content + core. <strong>OSGi configs are compiled here.</strong> Immutable content is baked into the container image.</p>
+            </div>
+            <div class="card">
+              <div class="card-title">Deploy Step</div>
+              <p style="font-size:13px;margin:0">Container image deployed. AEM starts with immutable content. Then mutable content (<code>ui.content</code>) is installed. You will see <code>aem-install-mutable-content</code> in deployment logs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h4>Download and review deployment logs</h4>
+          <p style="font-size:13px;">After pipeline runs: <strong>Pipeline → three-dot menu → Download logs</strong>. The <code>deploy_step*.log</code> contains two key sections:</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span><span class="code-file">Reading deploy log</span></div>
+            <pre><code><span class="c-comment"># Check mutable content was installed:</span>
+grep "metadata line" deploy_step*.log
+<span class="c-comment"># Expected: zendxp.ui.content-0.0.1-SNAPSHOT...</span>
+
+<span class="c-comment"># Check CORS config registered:</span>
+grep "CORSPolicyImpl~zendxp" deploy_step*.log
+<span class="c-comment"># Expected: ServiceEvent REGISTERED</span>
+
+<span class="c-comment"># Check for any ERRORs:</span>
+grep '"level":"ERROR"' deploy_step*.log</code></pre>
+          </div>
+          <div class="alert warning">
+            <div class="alert-icon">⚠️</div>
+            <div><strong>Important:</strong> The deploy step log only shows <strong>mutable content installation</strong>. <code>ui.config</code> and <code>ui.apps</code> (OSGi configs, bundles) are deployed in the <strong>build/immutable step</strong> which is a separate log. Absence of OSGi config in the deploy log is normal.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDS PROJECT -->
+  <section class="section" id="eds-project">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🌐</div>
+      <div>
+        <div class="step-num">Section 8</div>
+        <h2>EDS Project Setup (dxp-ai-ue-eds)</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Clone the EDS repository</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code>git clone https://github.com/satishsapate/dxp-ai-ue-eds.git
+cd dxp-ai-ue-eds
+npm install</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Install AEM CLI for local development</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code>npm install -g @adobe/aem-cli
+
+<span class="c-comment"># Start local dev server (serves blocks + styles at localhost:3000)</span>
+aem up</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>npm Scripts reference</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">bash</span></div>
+            <pre><code>npm run start              <span class="c-comment"># HTML kit dev server at http://localhost:3000</span>
+npm run build:json         <span class="c-comment"># Rebuild ALL 3 component JSON configs</span>
+npm run build:json:models  <span class="c-comment"># Rebuild component-models.json only</span>
+npm run lint               <span class="c-comment"># ESLint + Stylelint check</span>
+npm run lint:fix           <span class="c-comment"># Auto-fix lint issues</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FSTAB -->
+  <section class="section" id="fstab">
+    <div class="section-header">
+      <div class="section-icon icon-green">📌</div>
+      <div>
+        <div class="step-num">Section 9</div>
+        <h2>fstab.yaml — AEM Mountpoint</h2>
+      </div>
+    </div>
+
+    <div class="alert success">
+      <div class="alert-icon">✅</div>
+      <div>Current <code>fstab.yaml</code> is correctly configured and verified.</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">yaml</span><span class="code-file">fstab.yaml (in EDS GitHub repo root)</span></div>
+      <pre><code>mountpoints:
+  /: <span class="c-comment"># Single root mount — all pages come from AEM</span>
+    url: https://author-p24056-e1593080.adobeaemcloud.com</code></pre>
+    </div>
+
+    <div class="card-grid">
+      <div class="card success">
+        <div class="card-title">✅ Correct Pattern (XWalk)</div>
+        <p style="font-size:13px;margin:0">Single <code>/</code> mountpoint pointing to AEM Author. EDS fetches all page content from AEM JCR via this URL.</p>
+      </div>
+      <div class="card danger">
+        <div class="card-title">❌ Wrong Pattern (avoid)</div>
+        <p style="font-size:13px;margin:0">Multiple mountpoints (<code>/content</code>, <code>/conf</code>) pointing to localhost — this was the original error, corrected in commit <code>a316d72</code>.</p>
+      </div>
+    </div>
+
+    <div class="alert warning">
+      <div class="alert-icon">⚠️</div>
+      <div><strong>For a new project:</strong> Replace the URL with your AEM Cloud author URL. Format: <code>https://author-p{programId}-e{environmentId}.adobeaemcloud.com</code>. Never use localhost here — EDS servers cannot reach your local machine.</div>
+    </div>
+  </section>
+
+  <!-- HEAD HTML -->
+  <section class="section" id="head-html">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🔗</div>
+      <div>
+        <div class="step-num">Section 10</div>
+        <h2>head.html — Universal Editor Connection</h2>
+      </div>
+    </div>
+
+    <div class="alert success">
+      <div class="alert-icon">✅</div>
+      <div>Current <code>head.html</code> is correctly configured with the UE connection meta tag.</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">html</span><span class="code-file">head.html (in EDS GitHub repo root)</span></div>
+      <pre><code><span class="c-tag">&lt;meta</span>
+  <span class="c-attr">http-equiv</span>=<span class="c-string">"Content-Security-Policy"</span>
+  <span class="c-attr">content</span>=<span class="c-string">"script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none';"</span>
+  <span class="c-attr">move-to-http-header</span>=<span class="c-string">"true"</span>
+<span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-string">"viewport"</span> <span class="c-attr">content</span>=<span class="c-string">"width=device-width, initial-scale=1"</span><span class="c-tag">/&gt;</span>
+
+<span class="c-comment">&lt;!-- CRITICAL: Tells Universal Editor which AEM instance to connect to --&gt;</span>
+<span class="c-tag">&lt;meta</span> <span class="c-attr">name</span>=<span class="c-string">"urn:auecon:aemconnection"</span>
+      <span class="c-attr">content</span>=<span class="c-string">"aem:https://author-p24056-e1593080.adobeaemcloud.com"</span><span class="c-tag">/&gt;</span>
+
+<span class="c-tag">&lt;script</span> <span class="c-attr">nonce</span>=<span class="c-string">"aem"</span> <span class="c-attr">src</span>=<span class="c-string">"/scripts/aem.js"</span> <span class="c-attr">type</span>=<span class="c-string">"module"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;script</span> <span class="c-attr">nonce</span>=<span class="c-string">"aem"</span> <span class="c-attr">src</span>=<span class="c-string">"/scripts/scripts.js"</span> <span class="c-attr">type</span>=<span class="c-string">"module"</span><span class="c-tag">&gt;&lt;/script&gt;</span>
+<span class="c-tag">&lt;link</span> <span class="c-attr">rel</span>=<span class="c-string">"stylesheet"</span> <span class="c-attr">href</span>=<span class="c-string">"/styles/styles.css"</span><span class="c-tag">/&gt;</span></code></pre>
+    </div>
+
+    <p style="font-size:13px;">The <code>urn:auecon:aemconnection</code> meta tag is the bridge between EDS pages and Universal Editor. Format: <code>aem:{authorUrl}</code>. Universal Editor reads this when opening a page to know which AEM instance to communicate with.</p>
+  </section>
+
+  <!-- SIDEKICK -->
+  <section class="section" id="sidekick">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🧩</div>
+      <div>
+        <div class="step-num">Section 11</div>
+        <h2>AEM Sidekick Setup</h2>
+      </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">json</span><span class="code-file">tools/sidekick/config.json</span></div>
+      <pre><code>{
+  <span class="c-key">"project"</span>: <span class="c-string">"DXP AI UE EDS"</span>,
+  <span class="c-key">"editUrlLabel"</span>: <span class="c-string">"AEM Editor"</span>,
+  <span class="c-key">"editUrlPattern"</span>: <span class="c-string">"{{contentSourceUrl}}{{pathname}}?cmd=open"</span>,
+  <span class="c-key">"host"</span>:        <span class="c-string">"main--dxp-ai-ue-eds--satishsapate.aem.page"</span>,
+  <span class="c-key">"previewHost"</span>: <span class="c-string">"main--dxp-ai-ue-eds--satishsapate.aem.page"</span>,
+  <span class="c-key">"liveHost"</span>:    <span class="c-string">"main--dxp-ai-ue-eds--satishsapate.aem.live"</span>
+}</code></pre>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Install Sidekick Chrome Extension</h4>
+          <p style="font-size:13px;">Search Chrome Web Store for <strong>"AEM Sidekick"</strong> by Adobe and install it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Add the project to Sidekick</h4>
+          <p style="font-size:13px;">Navigate to <code>https://main--dxp-ai-ue-eds--satishsapate.aem.page</code> in Chrome. The Sidekick extension will auto-detect <code>tools/sidekick/config.json</code> from the repo. Click <strong>Add Project</strong> in the Sidekick popup.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>URL Pattern for EDS pages</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span></div>
+            <pre><code>Preview URL: https://{ref}--{repo}--{owner}.aem.page/{path}
+Live URL:    https://{ref}--{repo}--{owner}.aem.live/{path}
+
+Example:
+  https://main--dxp-ai-ue-eds--satishsapate.aem.page/content/zendxp/us/en</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERIFY OSGI -->
+  <section class="section" id="verify-osgi">
+    <div class="section-header">
+      <div class="section-icon icon-green">🔍</div>
+      <div>
+        <div class="step-num">Section 12</div>
+        <h2>Verifying OSGi Configurations (AEM Cloud)</h2>
+      </div>
+    </div>
+
+    <div class="alert danger">
+      <div class="alert-icon">🚫</div>
+      <div>
+        <strong>Do NOT use these methods to verify OSGi configs in AEM Cloud Service:</strong>
+        <ul style="margin-top:8px;margin-bottom:0;">
+          <li><code>/system/console/configMgr</code> — Felix Web Console is <strong>blocked</strong> in AEM Cloud (returns 404)</li>
+          <li><code>/apps/zendxp/osgiconfig/config.tidy.json</code> — JCR path browsing of <code>/apps/*/osgiconfig</code> is <strong>blocked</strong> by AEM Cloud security filters</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Correct Method: AEM Developer Console</h3>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Access via Cloud Manager</h4>
+          <p style="font-size:13px;">Cloud Manager → Program → Environments → click <code>...</code> on your Dev environment → <strong>Developer Console</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Find OSGi Configuration</h4>
+          <p style="font-size:13px;">In Developer Console: <strong>OSGi → Configurations</strong> → search for the PID</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span><span class="code-file">What to search for</span></div>
+            <pre><code>FranklinRepositoryImpl  → should show instance "dxp-ai-ue-eds"
+                           with owner=satishsapate, repo=dxp-ai-ue-eds, ref=main
+
+CORSPolicyImpl~zendxp  → should show alloworigin including experience.adobe.com</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Alternative: AEM Operations UI</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span></div>
+            <pre><code>https://author-p24056-e1593080.adobeaemcloud.com/libs/granite/operations/content/osgiconfig.html</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card success" style="margin-top:16px;">
+      <div class="card-title">✅ Verified — FranklinRepositoryImpl~dxp-ai-ue-eds (Active)</div>
+      <table class="status-table">
+        <thead><tr><th>Property</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>PID</td><td><code>com.adobe.aem.wcm.franklin.impl.FranklinRepositoryImpl~dxp-ai-ue-eds</code></td></tr>
+          <tr><td>owner</td><td>satishsapate</td></tr>
+          <tr><td>repo</td><td>dxp-ai-ue-eds</td></tr>
+          <tr><td>ref</td><td>main</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- VERIFY EDS -->
+  <section class="section" id="verify-eds">
+    <div class="section-header">
+      <div class="section-icon icon-green">🌐</div>
+      <div>
+        <div class="step-num">Section 13</div>
+        <h2>Verify EDS Project is Live</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Check if EDS project is onboarded</h4>
+          <p style="font-size:13px;">Open in browser (must be logged into Adobe IMS):</p>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span></div>
+            <pre><code>https://main--dxp-ai-ue-eds--satishsapate.aem.page</code></pre>
+          </div>
+          <ul style="font-size:13px;">
+            <li>If it <strong>loads</strong> → EDS project is connected ✅</li>
+            <li>If <strong>404 / error</strong> → project needs to be onboarded (see step 2)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Onboard the GitHub repo to AEM Edge Delivery (if not done)</h4>
+          <ol style="font-size:13px;">
+            <li>Go to <strong><code>https://da.live</code></strong> (Adobe Document Authoring)</li>
+            <li>Or use the AEM Onboarding: <strong>AEM Home → Edge Delivery Services → Add Site</strong></li>
+            <li>Connect your GitHub repo: <code>satishsapate/dxp-ai-ue-eds</code></li>
+            <li>Install the <strong>AEM Code Sync GitHub App</strong> on the repo (required for EDS to sync code from GitHub)</li>
+          </ol>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Trigger first preview (syncs content from AEM to EDS)</h4>
+          <p style="font-size:13px;">Using Sidekick on a page: click <strong>Preview</strong>. This triggers EDS to fetch content from AEM Author via the <code>fstab.yaml</code> mountpoint and caches it on EDS CDN.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERIFY UE -->
+  <section class="section" id="verify-ue">
+    <div class="section-header">
+      <div class="section-icon icon-purple">✏️</div>
+      <div>
+        <div class="step-num">Section 14</div>
+        <h2>Verify Universal Editor</h2>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h4>Open Universal Editor</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span></div>
+            <pre><code>https://experience.adobe.com/#/aem/editor</code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h4>Enter a page URL to edit</h4>
+          <div class="code-block">
+            <div class="code-header"><span class="code-lang">text</span></div>
+            <pre><code>https://main--dxp-ai-ue-eds--satishsapate.aem.page/content/zendxp/us/en</code></pre>
+          </div>
+          <p style="font-size:13px;">UE reads the <code>urn:auecon:aemconnection</code> meta from the page, connects to AEM Author, and loads the editor panel.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h4>Confirm UE is connected to AEM</h4>
+          <p style="font-size:13px;">You should see:</p>
+          <ul style="font-size:13px;">
+            <li>Page loads in UE iframe</li>
+            <li>Edit panel on the right shows component properties</li>
+            <li>Clicking a component highlights it with blue outline</li>
+            <li>No CORS errors in browser DevTools console</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert info">
+      <div class="alert-icon">ℹ️</div>
+      <div><strong>If UE shows CORS errors:</strong> The <code>config.author</code> CORS fix may not be deployed yet. Ensure Cloud Manager pipeline has completed and verify via Developer Console that <code>CORSPolicyImpl~zendxp</code> shows <code>experience.adobe.com</code> in <code>alloworigin</code>.</div>
+    </div>
+  </section>
+
+  <!-- ISSUES -->
+  <section class="section" id="issues">
+    <div class="section-header">
+      <div class="section-icon icon-red">🐛</div>
+      <div>
+        <div class="step-num">Section 15</div>
+        <h2>Known Issues &amp; Resolutions</h2>
+      </div>
+    </div>
+    <p style="margin-bottom:20px;">All issues encountered and resolved during the initial project setup. Reference these before opening a support ticket.</p>
+
+    <!-- Issue 1 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-expected">Expected Behavior</span>
+        <strong>/apps/zendxp/osgiconfig path returns "Resource not found"</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>Browsing <code>https://author-p24056-e1593080.adobeaemcloud.com/apps/zendxp/osgiconfig/config.tidy.json</code> returns: <em>"Resource at '/apps/zendxp/osgiconfig/config.tidy.json' not found"</em></p>
+        <div class="issue-label">Root Cause</div>
+        <p>AEM Cloud Service has built-in security filters that <strong>block HTTP access to <code>/apps/*/osgiconfig/**</code> paths</strong>. The JCR nodes exist in the immutable repository but cannot be accessed via browser URL. This is intentional — OSGi configs may contain sensitive data.</p>
+        <div class="issue-label">Resolution</div>
+        <p>This is not a bug. Use <strong>Cloud Manager Developer Console → OSGi → Configurations</strong> to verify configs. Never try to browse <code>osgiconfig</code> paths via HTTP in AEM Cloud.</p>
+      </div>
+    </div>
+
+    <!-- Issue 2 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-expected">Expected Behavior</span>
+        <strong>/system/console/configMgr returns 404</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>Trying to access Felix Web Console at <code>/system/console</code> returns 404 or redirect.</p>
+        <div class="issue-label">Root Cause</div>
+        <p>Felix Web Console is <strong>completely disabled in AEM as a Cloud Service</strong> for security. This is by Adobe design — you cannot access it at all via the author URL, unlike AEM 6.5.</p>
+        <div class="issue-label">Resolution</div>
+        <p>Use the <strong>Cloud Manager Developer Console</strong> instead (accessible only via Cloud Manager UI after login). It provides OSGi config inspection, bundle status, Sling config, and more.</p>
+      </div>
+    </div>
+
+    <!-- Issue 3 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>Universal Editor cannot connect to AEM Author — CORS errors</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>Opening a page in Universal Editor fails. Browser console shows CORS errors. UE editor panel does not load component properties.</p>
+        <div class="issue-label">Root Cause</div>
+        <p>The <code>config.author/CORSPolicyImpl~zendxp.cfg.json</code> had: (1) empty <code>alloworigin</code>, (2) wrong <code>alloworiginregexp</code> pattern, (3) missing <code>supportscredentials: true</code>, (4) missing PUT/DELETE/PATCH methods, (5) missing Authorization header. The <code>config.author</code> run mode overrides the general <code>config</code> on author tier, so the general CORS with <code>alloworigin: ["*"]</code> never applied on author.</p>
+        <div class="issue-label">Fix Applied</div>
+        <p>Updated <code>config.author/CORSPolicyImpl~zendxp.cfg.json</code> with correct UE origins, methods, and headers. See <a href="#cors-config">Section 6</a> for full before/after comparison.</p>
+        <div class="issue-label">File Changed</div>
+        <p><code>zendxp/ui.config/src/main/content/jcr_root/apps/zendxp/osgiconfig/config.author/com.adobe.granite.cors.impl.CORSPolicyImpl~zendxp.cfg.json</code></p>
+      </div>
+    </div>
+
+    <!-- Issue 4 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>fstab.yaml had multiple incorrect mountpoints</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>EDS pages not loading content from AEM. Content appears empty or EDS cannot resolve AEM pages.</p>
+        <div class="issue-label">Root Cause</div>
+        <p>Original <code>fstab.yaml</code> had multiple mountpoints (<code>/</code>, <code>/content</code>, <code>/conf</code>) pointing to <code>localhost:4502</code>. EDS CDN servers cannot reach localhost. Also, multiple mountpoints cause routing confusion in XWalk pattern.</p>
+        <div class="issue-label">Fix Applied</div>
+        <p>Simplified to a single root mountpoint pointing to the AEM Cloud author URL. Committed as <code>a316d72</code>.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">yaml</span></div>
+          <pre><code><span class="c-comment"># Correct — single root, Cloud URL</span>
+mountpoints:
+  /:
+    url: https://author-p24056-e1593080.adobeaemcloud.com</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Issue 5 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-expected">Expected Behavior</span>
+        <strong>Deploy step log shows no ui.config installation</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>Reviewing Cloud Manager deploy step log shows only <code>zendxp.ui.content</code> being installed. No mention of <code>ui.config</code> or <code>ui.apps</code>.</p>
+        <div class="issue-label">Root Cause</div>
+        <p>The deploy step log only captures <strong>mutable content installation</strong> (job: <code>aem-install-mutable-content</code>). The <code>ui.config</code> and <code>ui.apps</code> packages are immutable — they're baked into the Docker container image during the <strong>build step</strong>. They do not appear in the deploy step log.</p>
+        <div class="issue-label">How to Confirm Immutable Content Deployed</div>
+        <p>Look in the deploy log for evidence of OSGi service registrations, e.g. <code>CORSPolicyImpl~zendxp ServiceEvent REGISTERED</code>. If the service registers, the config deployed successfully. Verify configs in Developer Console.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="section" id="checklist">
+    <div class="section-header">
+      <div class="section-icon icon-green">☑️</div>
+      <div>
+        <div class="step-num">Section 16</div>
+        <h2>Final Setup Checklist</h2>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title">AEM Backend (zendxp)</div>
+        <ul class="checklist">
+          <li>FranklinRepositoryImpl~dxp-ai-ue-eds.cfg.json exists in ui.config/config/</li>
+          <li>config.author CORS has experience.adobe.com in alloworigin</li>
+          <li>config.author CORS has supportscredentials: true</li>
+          <li>config.author CORS has PUT, DELETE, PATCH, OPTIONS</li>
+          <li>config.author CORS has Authorization in supportedheaders</li>
+          <li>Cloud Manager pipeline ran successfully on main-without-solr-changes</li>
+          <li>Developer Console shows FranklinRepositoryImpl active with correct owner/repo/ref</li>
+          <li>Developer Console shows CORSPolicyImpl~zendxp with correct alloworigin</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">EDS Frontend (dxp-ai-ue-eds)</div>
+        <ul class="checklist">
+          <li>fstab.yaml has single / mountpoint → AEM Cloud author URL</li>
+          <li>head.html has urn:auecon:aemconnection meta tag</li>
+          <li>tools/sidekick/config.json has correct host/previewHost/liveHost</li>
+          <li>AEM Code Sync GitHub App installed on satishsapate/dxp-ai-ue-eds</li>
+          <li>https://main--dxp-ai-ue-eds--satishsapate.aem.page loads</li>
+          <li>AEM Sidekick Chrome extension installed</li>
+          <li>Sidekick project added for dxp-ai-ue-eds</li>
+          <li>At least one page Previewed via Sidekick</li>
+          <li>Universal Editor opens a page without CORS errors</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr/>
+
+    <div class="card-grid three" style="margin-top:24px;">
+      <div class="card">
+        <div class="card-title">AEM Author URL</div>
+        <code style="word-break:break-all;font-size:12px;">https://author-p24056-e1593080.adobeaemcloud.com</code>
+      </div>
+      <div class="card">
+        <div class="card-title">EDS Preview URL</div>
+        <code style="word-break:break-all;font-size:12px;">https://main--dxp-ai-ue-eds--satishsapate.aem.page</code>
+      </div>
+      <div class="card">
+        <div class="card-title">Cloud Manager Git</div>
+        <code style="word-break:break-all;font-size:12px;">https://git.cloudmanager.adobe.com/zentechincptrsd/zendxp/</code>
+      </div>
+    </div>
+
+    <div class="alert success" style="margin-top:24px;">
+      <div class="alert-icon">🎉</div>
+      <div><strong>Setup complete!</strong> Once all items in the checklist above are ticked, the full AEM + Universal Editor + Edge Delivery Services pipeline is operational. Authors can edit pages in Universal Editor, content flows through AEM JCR, and EDS delivers the pages at CDN speed.</div>
+    </div>
+  </section>
+
+  <div style="text-align:center;padding:40px 0 20px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);">
+    Generated: May 2026 &nbsp;|&nbsp; Project: dxp-ai-ue-eds &nbsp;|&nbsp; Architecture: AEM XWalk Pattern<br/>
+    For issues, refer to <a href="docs/aem-dev/README.md">docs/aem-dev/</a> or the troubleshooting section above.
+  </div>
+
+</main>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.sidebar a[href^="#"]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`.sidebar a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

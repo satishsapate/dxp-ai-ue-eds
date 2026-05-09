@@ -1,4 +1,5 @@
 .env
+serve-local.js
 .hlx/*
 coverage/*
 logs/*
