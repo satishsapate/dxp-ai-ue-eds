@@ -1,3 +1,5 @@
 mountpoints:
   /:
     url: https://author-p24056-e1593080.adobeaemcloud.com/bin/franklin.delivery/satishsapate/dxp-ai-ue-eds/main
+    type: "markup"
+    suffix: ".html"
