@@ -771,24 +771,43 @@ npm run lint:fix           <span class="c-comment"># Auto-fix lint issues</span>
     <div class="code-block">
       <div class="code-header"><span class="code-lang">yaml</span><span class="code-file">fstab.yaml (in EDS GitHub repo root)</span></div>
       <pre><code>mountpoints:
-  /: <span class="c-comment"># Single root mount — all pages come from AEM</span>
-    url: https://author-p24056-e1593080.adobeaemcloud.com</code></pre>
+  /: <span class="c-comment"># Single root mount — all pages come from AEM via Franklin Delivery Servlet</span>
+    url: https://author-p24056-e1593080.adobeaemcloud.com/bin/franklin.delivery/satishsapate/dxp-ai-ue-eds/main</code></pre>
+    </div>
+
+    <div class="alert danger">
+      <div class="alert-icon">🚨</div>
+      <div><strong>CRITICAL:</strong> The URL must include the <code>/bin/franklin.delivery/{owner}/{repo}/{ref}</code> path. A bare AEM author URL (<code>https://author-xxx.adobeaemcloud.com</code>) will NOT work — EDS cannot fetch AEM content without the Franklin Delivery Servlet path. This is the most common setup mistake.</div>
     </div>
 
     <div class="card-grid">
       <div class="card success">
         <div class="card-title">✅ Correct Pattern (XWalk)</div>
-        <p style="font-size:13px;margin:0">Single <code>/</code> mountpoint pointing to AEM Author. EDS fetches all page content from AEM JCR via this URL.</p>
+        <p style="font-size:13px;margin:0">Single <code>/</code> mountpoint pointing to AEM Author via Franklin Delivery Servlet path <code>/bin/franklin.delivery/{owner}/{repo}/{ref}</code>. EDS fetches all page content from AEM JCR through this endpoint which converts JCR content to EDS format.</p>
       </div>
       <div class="card danger">
         <div class="card-title">❌ Wrong Pattern (avoid)</div>
-        <p style="font-size:13px;margin:0">Multiple mountpoints (<code>/content</code>, <code>/conf</code>) pointing to localhost — this was the original error, corrected in commit <code>a316d72</code>.</p>
+        <p style="font-size:13px;margin:0">Bare AEM URL without servlet path, or multiple mountpoints pointing to localhost. The Franklin Delivery Servlet path is mandatory for EDS to read AEM content.</p>
       </div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-lang">yaml</span><span class="code-file">Template for new projects</span></div>
+      <pre><code>mountpoints:
+  /:
+    url: https://author-p{programId}-e{environmentId}.adobeaemcloud.com/bin/franklin.delivery/{githubOwner}/{repoName}/{branch}
+
+<span class="c-comment"># Example:</span>
+<span class="c-comment"># url: https://author-p24056-e1593080.adobeaemcloud.com/bin/franklin.delivery/satishsapate/dxp-ai-ue-eds/main</span>
+
+<span class="c-comment"># NEVER use:</span>
+<span class="c-comment"># url: https://author-p24056-e1593080.adobeaemcloud.com        ← bare URL, missing servlet path</span>
+<span class="c-comment"># url: http://localhost:4502                                   ← localhost not reachable by EDS</span></code></pre>
     </div>
 
     <div class="alert warning">
       <div class="alert-icon">⚠️</div>
-      <div><strong>For a new project:</strong> Replace the URL with your AEM Cloud author URL. Format: <code>https://author-p{programId}-e{environmentId}.adobeaemcloud.com</code>. Never use localhost here — EDS servers cannot reach your local machine.</div>
+      <div><strong>Where does the Franklin Delivery Servlet come from?</strong> The servlet (<code>/bin/franklin.delivery</code>) is provided by the <code>FranklinRepositoryImpl</code> OSGi configuration deployed in your AEM Cloud instance via Cloud Manager. It translates AEM JCR pages into the format EDS expects. The <code>{owner}/{repo}/{ref}</code> segment must match your <code>FranklinRepositoryImpl</code> config (<code>owner</code>, <code>repo</code>, <code>ref</code> properties).</div>
     </div>
   </section>
 
@@ -1118,22 +1137,50 @@ CORSPolicyImpl~zendxp  → should show alloworigin including experience.adobe.co
     <div class="issue-card">
       <div class="issue-header bug">
         <span class="issue-tag tag-resolved">Resolved</span>
-        <strong>fstab.yaml had multiple incorrect mountpoints</strong>
+        <strong>fstab.yaml — two separate fixes required (commits a316d72 + ea8005d)</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Fix 1 — Multiple localhost mountpoints (commit a316d72)</div>
+        <p>Original file had 3 mountpoints (<code>/</code>, <code>/content</code>, <code>/conf</code>) all pointing to <code>localhost:4502</code>. EDS CDN cannot reach localhost. Simplified to single <code>/</code> root mount pointing to AEM Cloud URL.</p>
+        <div class="issue-label">Fix 2 — Missing Franklin Delivery Servlet path (commit ea8005d) — CRITICAL</div>
+        <p>After Fix 1, the URL was still a bare AEM author URL (<code>https://author-xxx.adobeaemcloud.com</code>) without the servlet path. EDS cannot read AEM JCR content without the Franklin Delivery Servlet endpoint. This was identified via Adobe Support as the root cause of the <code>code: 400</code> EDS error.</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">yaml</span></div>
+          <pre><code><span class="c-comment"># ❌ After Fix 1 — bare URL, still wrong</span>
+mountpoints:
+  /:
+    url: https://author-p24056-e1593080.adobeaemcloud.com
+
+<span class="c-comment"># ✅ After Fix 2 — correct with franklin.delivery servlet path</span>
+mountpoints:
+  /:
+    url: https://author-p24056-e1593080.adobeaemcloud.com/bin/franklin.delivery/satishsapate/dxp-ai-ue-eds/main</code></pre>
+        </div>
+        <div class="issue-label">Why the Servlet Path is Mandatory</div>
+        <p>The <code>/bin/franklin.delivery/{owner}/{repo}/{ref}</code> endpoint is the <strong>FranklinRepositoryImpl OSGi servlet</strong> deployed in AEM Cloud. It translates JCR content into the markdown/HTML format that EDS expects. Without it, the URL returns raw AEM HTML (or a login page), not the content EDS can index.</p>
+      </div>
+    </div>
+
+    <!-- Issue 6 -->
+    <div class="issue-card">
+      <div class="issue-header bug">
+        <span class="issue-tag tag-ongoing">Ongoing / Adobe Support</span>
+        <strong>EDS Admin API returns <code>"code": {"status": 400}</code> — code bus not activated</strong>
       </div>
       <div class="issue-body">
         <div class="issue-label">Symptom</div>
-        <p>EDS pages not loading content from AEM. Content appears empty or EDS cannot resolve AEM pages.</p>
+        <p>Checking <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code> returns <code>"code": {"status": 400}</code>. Files like <code>/scripts/aem.js</code> return 404 from <code>main--dxp-ai-ue-eds--satishsapate.aem.page</code>. No GitHub webhook appears in the repo settings after installing AEM Code Sync App.</p>
         <div class="issue-label">Root Cause</div>
-        <p>Original <code>fstab.yaml</code> had multiple mountpoints (<code>/</code>, <code>/content</code>, <code>/conf</code>) pointing to <code>localhost:4502</code>. EDS CDN servers cannot reach localhost. Also, multiple mountpoints cause routing confusion in XWalk pattern.</p>
-        <div class="issue-label">Fix Applied</div>
-        <p>Simplified to a single root mountpoint pointing to the AEM Cloud author URL. Committed as <code>a316d72</code>.</p>
-        <div class="code-block">
-          <div class="code-header"><span class="code-lang">yaml</span></div>
-          <pre><code><span class="c-comment"># Correct — single root, Cloud URL</span>
-mountpoints:
-  /:
-    url: https://author-p24056-e1593080.adobeaemcloud.com</code></pre>
-        </div>
+        <p>The EDS code bus has not been activated for this GitHub repository. Root causes may include: (1) wrong <code>fstab.yaml</code> URL failing EDS validation at install time, (2) AEM Code Sync GitHub App not creating a webhook (app installation issue on Adobe's side), (3) repository visibility or configuration issue.</p>
+        <div class="issue-label">Fixes Attempted</div>
+        <ul style="font-size:13px;margin:8px 0;padding-left:18px;">
+          <li>Re-installed AEM Code Sync GitHub App on repository</li>
+          <li>Triggered manual sync via <code>POST https://admin.hlx.page/code/satishsapate/dxp-ai-ue-eds/main</code></li>
+          <li>Fixed <code>fstab.yaml</code> to use Franklin Delivery Servlet URL (commit ea8005d)</li>
+          <li>Raised Adobe Support ticket</li>
+        </ul>
+        <div class="issue-label">Next Steps</div>
+        <p>After pushing the fstab.yaml fix, re-check <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code>. If <code>"code": {"status": 200}</code> appears, the fix resolved it. If still 400, wait for Adobe Support response. Once resolved, verify <code>https://main--dxp-ai-ue-eds--satishsapate.aem.page/scripts/aem.js</code> returns the file.</p>
       </div>
     </div>
 
@@ -1181,7 +1228,7 @@ mountpoints:
       <div class="card">
         <div class="card-title">EDS Frontend (dxp-ai-ue-eds)</div>
         <ul class="checklist">
-          <li>fstab.yaml has single / mountpoint → AEM Cloud author URL</li>
+          <li>fstab.yaml has single / mountpoint → AEM Cloud URL + <code>/bin/franklin.delivery/{owner}/{repo}/{ref}</code></li>
           <li>head.html has urn:auecon:aemconnection meta tag</li>
           <li>tools/sidekick/config.json has correct host/previewHost/liveHost</li>
           <li>AEM Code Sync GitHub App installed on satishsapate/dxp-ai-ue-eds</li>
