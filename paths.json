@@ -1,10 +1,10 @@
 {
   "mappings": [
-    "/content/dxp-ai-ue-eds/:/",
-    "/content/dxp-ai-ue-eds/configuration/:helix/config.json",
-    "/content/dxp-ai-ue-eds/metadata/:metadata.json"
+    "/content/sites/dxp-ai-ue-eds/:/",
+    "/content/sites/dxp-ai-ue-eds/configuration/:helix/config.json",
+    "/content/sites/dxp-ai-ue-eds/metadata/:metadata.json"
   ],
   "includes": [
-    "/content/dxp-ai-ue-eds/"
+    "/content/sites/dxp-ai-ue-eds/"
   ]
 }
