@@ -36,9 +36,27 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "carousel-item"
+    ]
+  },
+  {
+    "id": "cms-compat",
+    "components": [
+      "cms-compat-item"
     ]
   },
   {
@@ -54,6 +72,42 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "features",
+    "components": [
+      "feature-item"
+    ]
+  },
+  {
+    "id": "pricing",
+    "components": [
+      "pricing-plan"
+    ]
+  },
+  {
+    "id": "stats-band",
+    "components": [
+      "stat-item"
+    ]
+  },
+  {
+    "id": "team",
+    "components": [
+      "team-member"
+    ]
+  },
+  {
+    "id": "timeline",
+    "components": [
+      "timeline-event"
+    ]
+  },
+  {
+    "id": "who-uses",
+    "components": [
+      "who-uses-item"
     ]
   }
 ]

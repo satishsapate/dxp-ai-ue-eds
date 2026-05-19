@@ -142,6 +142,63 @@
     ]
   },
   {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "question",
+        "label": "Question"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "answer",
+        "label": "Answer"
+      }
+    ]
+  },
+  {
+    "id": "articles",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "breadcrumb",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "homeUrl",
+        "label": "Home URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "homeText",
+        "label": "Home Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "currentText",
+        "label": "Current Page"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -161,6 +218,64 @@
     ]
   },
   {
+    "id": "carousel-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Category"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaUrl",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "CTA Text"
+      }
+    ]
+  },
+  {
+    "id": "cms-compat-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon / Abbreviation"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Name"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -176,6 +291,82 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      }
+    ]
+  },
+  {
+    "id": "cta",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "overline",
+        "label": "Overline"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "primaryText",
+        "label": "Primary Button Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "primaryUrl",
+        "label": "Primary Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondaryText",
+        "label": "Secondary Button Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "secondaryUrl",
+        "label": "Secondary Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "metaText",
+        "label": "Meta / Note"
+      }
+    ]
+  },
+  {
+    "id": "feature-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tag",
+        "label": "Tag / Category"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description"
       }
     ]
   },
@@ -212,6 +403,315 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "page-hero",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "breadcrumbUrl",
+        "label": "Breadcrumb Home URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "breadcrumbCurrent",
+        "label": "Breadcrumb Current Page"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "badgeText",
+        "label": "Badge Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "headingPrefix",
+        "label": "Heading (first line)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "headingAccent",
+        "label": "Heading Accent (second line)"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "pricing-plan",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Plan Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "price",
+        "label": "Price (e.g. $2,499)"
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "featured",
+        "label": "Featured / Most Popular"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "features",
+        "label": "Features List"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "Button Text"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaUrl",
+        "label": "Button URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "note",
+        "label": "Note (below button)"
+      }
+    ]
+  },
+  {
+    "id": "richtext-block",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "overline",
+        "label": "Overline"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "lead",
+        "label": "Lead Text"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Body Content"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "sidebarTitle",
+        "label": "Sidebar Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "sidebarText",
+        "label": "Sidebar Content"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "ctaUrl",
+        "label": "Sidebar CTA URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "Sidebar CTA Text"
+      }
+    ]
+  },
+  {
+    "id": "section-dark",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content"
+      }
+    ]
+  },
+  {
+    "id": "section-generic",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content"
+      }
+    ]
+  },
+  {
+    "id": "section-light",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Content"
+      }
+    ]
+  },
+  {
+    "id": "stat-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "value",
+        "label": "Value (e.g. 500+)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label"
+      }
+    ]
+  },
+  {
+    "id": "team-member",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Photo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Photo Alt Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "role",
+        "label": "Role / Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "bio",
+        "label": "Bio"
+      }
+    ]
+  },
+  {
+    "id": "timeline-event",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "year",
+        "label": "Year"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      }
+    ]
+  },
+  {
+    "id": "who-uses-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon / Emoji"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Description"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link Text"
       }
     ]
   }
