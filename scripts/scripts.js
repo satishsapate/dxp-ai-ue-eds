@@ -96,6 +96,13 @@ async function loadEager(doc) {
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
+    // Instrument main for Universal Editor if server-side rendering didn't set it
+    if (!main.dataset.aueResource) {
+      const { pathname } = window.location;
+      const pagePath = pathname === '/' ? '/index' : pathname.replace(/\.html$/, '').replace(/\/$/, '');
+      main.setAttribute('data-aue-resource', `urn:aemconnection:/content/my-dxp-site${pagePath}/jcr:content/root`);
+      main.setAttribute('data-aue-type', 'reference');
+    }
     await loadSection(main.querySelector('.section'), waitForFirstImage);
   }
 
