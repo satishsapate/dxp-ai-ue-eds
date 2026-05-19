@@ -9,12 +9,12 @@
   --articles-radius: 22px;
 }
 
-.articles-block {
+.articles {
   background: var(--articles-bg);
   padding: 100px 0;
 }
 
-.articles-block .articles-header {
+.articles .articles-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -22,11 +22,11 @@
   margin-bottom: 48px;
 }
 
-.articles-block .section-heading {
+.articles .section-heading {
   max-width: 500px;
 }
 
-.articles-block .overline {
+.articles .overline {
   display: inline-block;
   margin-bottom: 10px;
   font-size: 0.82rem;
@@ -36,14 +36,14 @@
   color: var(--articles-accent);
 }
 
-.articles-block h2 {
+.articles h2 {
   margin: 0;
   font-size: clamp(2rem, 2.4vw, 2.5rem);
   line-height: 1.05;
   color: var(--articles-heading);
 }
 
-.articles-block .view-all {
+.articles .view-all {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -55,13 +55,13 @@
   text-decoration: none;
 }
 
-.articles-block .articles-grid {
+.articles .articles-grid {
   display: grid;
   gap: 28px;
   grid-template-columns: 1.6fr 1fr 1fr;
 }
 
-.articles-block .article-card {
+.articles .article-card {
   background: var(--articles-card-bg);
   border: 1px solid var(--articles-border);
   border-radius: var(--articles-radius);
@@ -71,12 +71,12 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.articles-block .article-card:hover {
+.articles .article-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 60px rgb(124 58 237 / 12%);
 }
 
-.articles-block .article-img-placeholder {
+.articles .article-img-placeholder {
   min-height: 220px;
   display: flex;
   align-items: center;
@@ -84,7 +84,7 @@
   position: relative;
 }
 
-.articles-block .article-tag {
+.articles .article-tag {
   position: absolute;
   top: 16px;
   left: 16px;
@@ -96,18 +96,18 @@
   text-transform: uppercase;
 }
 
-.articles-block .article-tag--ai { background: rgb(124 58 237 / 80%); }
-.articles-block .article-tag--platform { background: rgb(6 182 212 / 80%); }
-.articles-block .article-tag--case { background: rgb(245 158 11 / 80%); }
+.articles .article-tag--ai { background: rgb(124 58 237 / 80%); }
+.articles .article-tag--platform { background: rgb(6 182 212 / 80%); }
+.articles .article-tag--case { background: rgb(245 158 11 / 80%); }
 
-.articles-block .article-card__body {
+.articles .article-card__body {
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.articles-block .article-card__meta {
+.articles .article-card__meta {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -115,13 +115,13 @@
   color: var(--articles-muted);
 }
 
-.articles-block .meta-author {
+.articles .meta-author {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.articles-block .author-avatar {
+.articles .author-avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -134,18 +134,18 @@
   font-weight: 700;
 }
 
-.articles-block h3 {
+.articles h3 {
   margin: 0;
   font-size: 1.1rem;
 }
 
-.articles-block p {
+.articles p {
   margin: 0;
   color: var(--articles-copy);
   line-height: 1.75;
 }
 
-.articles-block .article-card__footer {
+.articles .article-card__footer {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
@@ -155,13 +155,13 @@
   color: var(--articles-muted);
 }
 
-.articles-block .article-card__read-more {
+.articles .article-card__read-more {
   color: var(--articles-accent);
   font-weight: 600;
   text-decoration: none;
 }
 
-.articles-block .articles-cta {
+.articles .articles-cta {
   margin-top: 48px;
   padding: 32px;
   background: #fff;
@@ -171,24 +171,24 @@
   gap: 24px;
 }
 
-.articles-block .cta-buttons input,
-.articles-block .cta-buttons button {
+.articles .cta-buttons input,
+.articles .cta-buttons button {
   width: 100%;
 }
 
-.articles-block .acta-form {
+.articles .acta-form {
   display: grid;
   gap: 12px;
 }
 
-.articles-block .acta-form input {
+.articles .acta-form input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
   border: 1px solid rgb(124 58 237 / 20%);
 }
 
-.articles-block .acta-form button {
+.articles .acta-form button {
   border: none;
   border-radius: 14px;
   padding: 14px 20px;
@@ -199,26 +199,26 @@
 }
 
 @media (width <= 1024px) {
-  .articles-block .articles-header {
+  .articles .articles-header {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .articles-block .articles-grid {
+  .articles .articles-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .articles-block .articles-cta {
+  .articles .articles-cta {
     grid-template-columns: 1fr;
   }
 }
 
 @media (width <= 640px) {
-  .articles-block {
+  .articles {
     padding: 64px 0;
   }
 
-  .articles-block .articles-grid {
+  .articles .articles-grid {
     grid-template-columns: 1fr;
   }
 }

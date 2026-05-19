@@ -13,16 +13,16 @@
   --accordion-spacing: 20px;
 }
 
-.accordion-block {
+.accordion {
   background: var(--accordion-bg);
   padding: 80px 0;
 }
 
-.accordion-block .section-heading {
+.accordion .section-heading {
   margin-bottom: 24px;
 }
 
-.accordion-block .section-heading .overline {
+.accordion .section-heading .overline {
   display: inline-block;
   margin-bottom: 12px;
   font-size: 0.85rem;
@@ -32,14 +32,14 @@
   color: var(--accordion-icon-color);
 }
 
-.accordion-block .section-heading h2 {
+.accordion .section-heading h2 {
   font-size: clamp(2rem, 2.5vw, 2.8rem);
   line-height: 1.05;
   margin: 0;
   color: var(--accordion-title);
 }
 
-.accordion-block .accordion {
+.accordion .accordion {
   display: flex;
   flex-direction: column;
   gap: var(--accordion-gap);
@@ -47,7 +47,7 @@
   margin: 0 auto;
 }
 
-.accordion-block .accordion-item {
+.accordion .accordion-item {
   background: #fff;
   border: 1px solid var(--accordion-border);
   border-radius: var(--accordion-radius);
@@ -55,12 +55,12 @@
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-.accordion-block .accordion-item.open {
+.accordion .accordion-item.open {
   border-color: var(--accordion-border-active);
   box-shadow: var(--accordion-shadow);
 }
 
-.accordion-block .accordion-header {
+.accordion .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -70,17 +70,17 @@
   transition: background 0.2s ease;
 }
 
-.accordion-block .accordion-header:hover,
-.accordion-block .accordion-header:focus-visible {
+.accordion .accordion-header:hover,
+.accordion .accordion-header:focus-visible {
   background: rgb(124 58 237 / 4%);
 }
 
-.accordion-block .accordion-header:focus-visible {
+.accordion .accordion-header:focus-visible {
   outline: 3px solid rgb(79 70 229 / 25%);
   outline-offset: -3px;
 }
 
-.accordion-block .accordion-header h4 {
+.accordion .accordion-header h4 {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
@@ -88,11 +88,11 @@
   transition: color 0.2s ease;
 }
 
-.accordion-block .accordion-item.open .accordion-header h4 {
+.accordion .accordion-item.open .accordion-header h4 {
   color: var(--accordion-title-active);
 }
 
-.accordion-block .accordion-icon {
+.accordion .accordion-icon {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -105,13 +105,13 @@
   transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 
-.accordion-block .accordion-item.open .accordion-icon {
+.accordion .accordion-item.open .accordion-icon {
   transform: rotate(45deg);
   color: var(--accordion-icon-color);
   background: rgb(124 58 237 / 12%);
 }
 
-.accordion-block .accordion-body {
+.accordion .accordion-body {
   padding: 0 24px var(--accordion-spacing);
   font-size: 0.95rem;
   line-height: 1.75;
@@ -119,35 +119,35 @@
 }
 
 @media (width <= 1024px) {
-  .accordion-block {
+  .accordion {
     padding: 64px 0;
   }
 
-  .accordion-block .accordion-header {
+  .accordion .accordion-header {
     padding: 18px 20px;
   }
 
-  .accordion-block .accordion-body {
+  .accordion .accordion-body {
     padding: 0 20px 18px;
   }
 }
 
 @media (width <= 640px) {
-  .accordion-block {
+  .accordion {
     padding: 48px 0;
   }
 
-  .accordion-block .accordion-header {
+  .accordion .accordion-header {
     padding: 16px 18px;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .accordion-block .accordion-icon {
+  .accordion .accordion-icon {
     margin-top: 12px;
   }
 
-  .accordion-block .accordion-body {
+  .accordion .accordion-body {
     padding: 0 18px 16px;
   }
 }

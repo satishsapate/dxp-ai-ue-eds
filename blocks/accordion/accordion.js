@@ -1,13 +1,46 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
-  const items = [...block.querySelectorAll('[data-accordion-item]')];
+  const rows = [...block.children];
+  if (rows.length === 0) return;
 
-  items.forEach((item) => {
-    const header = item.querySelector('[data-accordion-trigger]');
-    const body = item.querySelector('.accordion-body');
-    const icon = item.querySelector('.accordion-icon');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'accordion';
 
-    if (!header || !body) {
-      return;
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const questionCell = cells[0];
+    const answerCell = cells[1];
+
+    if (!questionCell) return;
+
+    const item = document.createElement('div');
+    item.className = 'accordion-item';
+    moveInstrumentation(row, item);
+
+    const header = document.createElement('div');
+    header.className = 'accordion-header';
+    header.setAttribute('tabindex', '0');
+    header.setAttribute('role', 'button');
+    header.setAttribute('aria-expanded', 'false');
+
+    const h4 = document.createElement('h4');
+    h4.textContent = questionCell.textContent.trim();
+    moveInstrumentation(questionCell, h4);
+
+    const icon = document.createElement('span');
+    icon.className = 'accordion-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '+';
+
+    header.append(h4, icon);
+
+    const body = document.createElement('div');
+    body.className = 'accordion-body';
+    body.hidden = true;
+    if (answerCell) {
+      body.innerHTML = answerCell.innerHTML;
+      moveInstrumentation(answerCell, body);
     }
 
     const toggleItem = () => {
@@ -18,20 +51,14 @@ export default function decorate(block) {
     };
 
     header.addEventListener('click', toggleItem);
-    header.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleItem();
-      }
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleItem(); }
     });
 
-    if (header.getAttribute('aria-expanded') === 'true') {
-      item.classList.add('open');
-      body.hidden = false;
-      icon.textContent = '−';
-    } else {
-      body.hidden = true;
-      icon.textContent = '+';
-    }
+    item.append(header, body);
+    row.remove();
+    wrapper.append(item);
   });
+
+  block.replaceChildren(wrapper);
 }
