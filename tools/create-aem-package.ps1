@@ -27,13 +27,22 @@ $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $zipStream = [System.IO.File]::Open($zipPath, [System.IO.FileMode]::Create)
 $archive   = New-Object System.IO.Compression.ZipArchive($zipStream, [System.IO.Compression.ZipArchiveMode]::Create)
 
-# Helper: add a string as a ZIP entry (UTF-8, no BOM)
+# Helper: add a string as a ZIP entry (UTF-8, no BOM, LF line endings)
 function Add-TextEntry($archive, $entryPath, $content) {
     $entry  = $archive.CreateEntry($entryPath, [System.IO.Compression.CompressionLevel]::Optimal)
     $stream = $entry.Open()
-    $bytes  = $utf8NoBom.GetBytes($content)
+    # Trim leading/trailing whitespace and normalize to LF (not CRLF)
+    $normalized = $content.Trim().Replace("`r`n", "`n").Replace("`r", "`n")
+    $bytes  = $utf8NoBom.GetBytes($normalized)
     $stream.Write($bytes, 0, $bytes.Length)
     $stream.Close()
+}
+
+# Helper: add an empty directory entry (required by AEM vault loader)
+function Add-DirEntry($archive, $entryPath) {
+    # Directory entries must end with /
+    $path = $entryPath.TrimEnd('/') + '/'
+    $archive.CreateEntry($path) | Out-Null
 }
 
 # Helper: add a file from disk as a ZIP entry
@@ -44,6 +53,14 @@ function Add-FileEntry($archive, $entryPath, $filePath) {
     $stream.Write($bytes, 0, $bytes.Length)
     $stream.Close()
 }
+
+# ---- Required directory entries (AEM vault loader needs these) ----
+Add-DirEntry $archive 'jcr_root'
+Add-DirEntry $archive 'jcr_root/conf'
+Add-DirEntry $archive "jcr_root/conf/$SiteName"
+Add-DirEntry $archive "jcr_root/conf/$SiteName/settings"
+Add-DirEntry $archive "jcr_root/conf/$SiteName/settings/dam"
+Add-DirEntry $archive "jcr_root/conf/$SiteName/settings/dam/adminui-extension"
 
 # ---- META-INF/vault/config.xml ----
 Add-TextEntry $archive 'META-INF/vault/config.xml' @'
@@ -70,9 +87,9 @@ $filterXml = @"
 Add-TextEntry $archive 'META-INF/vault/filter.xml' $filterXml
 
 # ---- META-INF/vault/properties.xml ----
+# NOTE: DOCTYPE removed — AEM Cloud Service XXE protection rejects external DTD references
 $propertiesXml = @"
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
   <entry key="name">$PackageName</entry>
   <entry key="version">$PackageVersion</entry>
