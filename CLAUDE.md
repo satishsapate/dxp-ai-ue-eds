@@ -81,47 +81,68 @@ npm run validate             # Custom project validation
 ## Design Tokens — `styles/styles.css` (actual values)
 
 ```css
+/* Google Fonts import at top */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:...');
+
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* DXP AI colour system */
+  --background-color: #0d0e2a;
+  --light-color: #1a1b4b;
+  --dark-color: #080a1e;
+  --text-color: #f0f2ff;
+  --link-color: #7c3aed;
+  --link-hover-color: #9333ea;
+
+  /* extended palette */
+  --c-navy: #0d0e2a;
+  --c-dark-blue: #1a1b4b;
+  --c-purple: #7c3aed;
+  --c-violet: #9333ea;
+  --c-cyan: #06b6d4;
+  --c-white: #ffffff;
+  --c-off-white: #f0f2ff;
+  --c-mid-gray: #6b7aab;
+  --gradient-dxp: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+  --gradient-hero: linear-gradient(135deg, #0d0e2a 0%, #1a1b4b 40%, #2d1b69 100%);
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'DM Sans', dm-sans-fallback, sans-serif;
+  --heading-font-family: 'Sora', sora-fallback, sans-serif;
 
-  /* body sizes (mobile) */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  /* body sizes (same mobile AND desktop) */
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes (mobile) */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl:  44px;
-  --heading-font-size-l:   34px;
-  --heading-font-size-m:   27px;
-  --heading-font-size-s:   24px;
-  --heading-font-size-xs:  22px;
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl:  38px;
+  --heading-font-size-l:   30px;
+  --heading-font-size-m:   24px;
+  --heading-font-size-s:   20px;
+  --heading-font-size-xs:  18px;
 
   /* layout */
-  --nav-height: 64px;
+  --nav-height: 72px;
+
+  /* radius/shadow tokens */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-md: 0 4px 20px rgba(13, 14, 42, 0.4);
+  --shadow-lg: 0 12px 40px rgba(13, 14, 42, 0.5);
+  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.35);
 }
 
-/* desktop ≥ 900px overrides */
+/* Desktop overrides (headings only) */
 @media (width >= 900px) {
   :root {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl:  36px;
-    --heading-font-size-l:   28px;
-    --heading-font-size-m:   22px;
-    --heading-font-size-s:   20px;
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl:  44px;
+    --heading-font-size-l:   34px;
+    --heading-font-size-m:   28px;
+    --heading-font-size-s:   22px;
     --heading-font-size-xs:  18px;
   }
 }
@@ -129,10 +150,11 @@ npm run validate             # Custom project validation
 
 Section layout:
 ```css
-main > .section { margin: 40px 0; }
-main > .section > div { max-width: 1200px; margin: auto; padding: 0 24px; }
+main > .section { margin: 0; }
+main > .section > div { max-width: 1280px; margin: auto; padding: 0 24px; }
 /* desktop */ padding: 0 32px;
-/* highlight variant */ background-color: var(--light-color); margin: 0; padding: 40px 0;
+/* light/highlight variant */ background-color: var(--light-color); margin: 0; padding: 40px 0;
+/* dark variant */ background-color: var(--dark-color); margin: 0; padding: 40px 0;
 ```
 
 ---
@@ -289,15 +311,17 @@ Child items (e.g. card) use `resourceType: "core/franklin/components/block/v1/bl
 
 ## fstab.yaml (actual content)
 
+For EDS routing, the AEM author Cloud Service URL is used — AEM connects to EDS via the Code Bus, not direct localhost. The format is:
+
 ```yaml
 mountpoints:
   /:
-    url: http://localhost:4502
+    url: https://author-p<programId>-e<environmentId>.adobeaemcloud.com
   /content:
-    url: http://localhost:4502/content
-  /conf:
-    url: http://localhost:4502/conf
+    url: https://author-p<programId>-e<environmentId>.adobeaemcloud.com/content
 ```
+
+For local development, `localhost:4502` is used directly instead of the Cloud Service URL.
 
 ---
 
@@ -381,6 +405,26 @@ EDS generates:
 </div>
 ```
 Access rows: `[...block.children]` — each row is a `div`, each cell is a nested `div`.
+
+---
+
+## Block Rendering Patterns
+
+### Direct-Render Blocks (render HTML statically)
+These blocks bypass the EDS row/cell data structure and render complete HTML directly:
+
+- `header.js` — Renders full DXP AI navigation (logo, desktop nav with dropdowns, hamburger, mobile menu) directly. Does NOT load `/nav` fragment.
+- `footer.js` — Renders full DXP AI footer (newsletter, 5-col links, socials, legal) directly. Does NOT load `/footer` fragment.
+- `hero.js` — Renders DXP AI hero section (orbs, heading, dashboard card, trust badges) directly.
+
+### Data-Driven Blocks (map EDS row/cell data from AEM)
+All other blocks receive AEM content as `div > div > div` structure and transform it:
+
+- **carousel:** cells[0]=category, [1]=title, [2]=richtext, [3]=ctaUrl, [4]=ctaText → `div.carousel__slide > article.carousel__card`
+- **cta:** cells[0]=overline, [1]=heading, [2]=description, [3]=primaryText, [4]=primaryUrl, [5]=secondaryText, [6]=secondaryUrl, [7]=metaText
+- **features / who-uses:** cells[0]=icon, [1]=title, [2]=description, [3]=link → `article.feature-card`
+- **stats-band:** cells[0]=value, [1]=label → `.stat-item` with `.sv` / `.sl`
+- **articles:** first row = heading (single cell), subsequent rows = article data
 
 ---
 

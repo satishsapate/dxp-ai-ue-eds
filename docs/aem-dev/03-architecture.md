@@ -17,9 +17,8 @@
 │   ┌───────────────────────▼─────────────────────────────┐      │
 │   │         AEM Cloud Service (Author Instance)          │      │
 │   │   - JCR content repository                          │      │
-│   │   - /content/sites/dxp-ai-ue-eds/                  │      │
+│   │   - /content/my-dxp-site/ (page content)            │      │
 │   │   - /conf/dxp-ai-ue-eds/ (models/configs)          │      │
-│   │   - /apps/dxp-ai-ue-eds/ (application code)        │      │
 │   └───────────────────────┬─────────────────────────────┘      │
 └───────────────────────────┼─────────────────────────────────────┘
                             │ Publish / Sync
@@ -145,6 +144,59 @@ export default function decorate(block) {
   "filters": []
 }
 ```
+
+## Block Rendering Strategies
+
+### Strategy 1: Direct HTML Render (Static Blocks)
+Used when the block's visual structure is fixed and doesn't depend on AEM-authored fields.
+The `decorate()` function sets `block.innerHTML` directly and ignores the EDS row/cell input.
+
+**Blocks using this pattern:**
+- `header.js` — Full DXP AI navigation with dropdowns and mobile menu
+- `footer.js` — Full DXP AI footer with newsletter, links, socials, legal
+- `hero.js` — DXP AI hero section with decorative orbs and dashboard card visual
+
+```javascript
+export default function decorate(block) {
+  block.textContent = ''; // clear EDS content
+  block.innerHTML = `<div class="hero-inner">...</div>`;
+  // wire up JS interactions
+}
+```
+
+### Strategy 2: Data-Driven Mapping (Dynamic Blocks)
+Used for content-editable blocks. EDS delivers AEM fields as `div > div > div` rows/cells.
+The `decorate()` function maps cells to semantic HTML.
+
+```
+AEM model fields → EDS row/cells → decorate() → Final HTML
+```
+
+**Cell mapping examples:**
+| Block | cells[0] | cells[1] | cells[2] | cells[3] |
+|---|---|---|---|---|
+| carousel-item | category | title | richtext content | ctaUrl link |
+| cta | overline | heading | description | primaryText |
+| features/who-uses | icon emoji | title | description | link |
+| stats-band | stat value | stat label | — | — |
+
+**Pattern:**
+```javascript
+export default function decorate(block) {
+  const rows = [...block.children];
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    const card = document.createElement('article');
+    if (cells[0]) { /* map cell 0 */ }
+    if (cells[1]) { /* map cell 1 */ }
+    row.remove();
+    block.append(card);
+  });
+}
+```
+
+### Key Rule: moveInstrumentation
+Always call `moveInstrumentation(sourceEl, targetEl)` when replacing EDS-generated elements to preserve Universal Editor `data-aue-*` attributes for in-context editing.
 
 ## Content Composition Rules
 
@@ -330,31 +382,18 @@ Defined in `:root` in `styles/styles.css`:
 
 ```css
 :root {
-  /* Color System */
-  --color-background: #fff;
-  --color-light: #f0f0f0;
-  --color-dark: #707070;
-  --color-text: #1a1a1a;
-  --color-link: #1f78c1;
-  --color-link-hover: #1a1a1a;
-
-  /* Typography */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-
-  /* Font Sizes - Mobile */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
-
-  /* Layout */
-  --nav-height: 64px;
+  /* DXP AI dark theme */
+  --background-color: #0d0e2a;  /* navy background */
+  --text-color: #f0f2ff;        /* off-white text */
+  --link-color: #7c3aed;        /* purple */
+  --c-navy: #0d0e2a;
+  --c-purple: #7c3aed;
+  --c-cyan: #06b6d4;
+  --c-off-white: #f0f2ff;
+  --gradient-dxp: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+  --body-font-family: 'DM Sans', dm-sans-fallback, sans-serif;
+  --heading-font-family: 'Sora', sora-fallback, sans-serif;
+  --nav-height: 72px;
 }
 
 /* Desktop breakpoint: 900px */

@@ -13,25 +13,25 @@ A block is the fundamental unit of content in AEM Edge Delivery Services. Each b
 | Block | Purpose | Has JS | Has CSS |
 |---|---|---|---|
 | accordion | Expandable FAQ sections | Yes | Yes |
-| articles | Article listing with query index | Yes | Yes |
+| articles | Article listing with query index (full rewrite - builds card grid from data) | Yes | Yes |
 | breadcrumb | Navigation breadcrumbs | Yes | Yes |
 | cards | Card grid layout (3-col default) | Yes | Yes |
 | carousel | Image/content slider | Yes | Yes |
-| cms-compat | CMS compatibility shim | Minimal | Yes |
+| cms-compat | CMS compatibility shim | Yes | Yes |
 | columns | Multi-column layout | Minimal | Yes |
-| cta | Call-to-action with button | Yes | Yes |
+| cta | Call-to-action with button (full field mapping: 8 fields → semantic CTA structure) | Yes | Yes |
 | features | Feature list display | Minimal | Yes |
 | footer | Site footer with newsletter | Yes | Yes |
 | fragment | Reusable content fragments | Minimal | Yes |
 | header | Site navigation + hamburger | Yes | Yes |
-| hero | Full-width hero banner | Minimal | Yes |
+| hero | Full-width hero banner (renders full DXP AI hero HTML directly) | Yes | Yes |
 | page-hero | Page-specific hero section | Minimal | Yes |
 | pricing | Pricing plans table | Yes | Yes |
 | richtext | Rich text content area | Minimal | Yes |
 | section-dark | Dark background section | Minimal | Yes |
 | section-generic | Generic section wrapper | Minimal | Yes |
 | section-light | Light background section | Minimal | Yes |
-| stats-band | Statistics display strip | Yes | Yes |
+| stats-band | Statistics display strip | No | Yes |
 | team | Team member showcase | Yes | Yes |
 | timeline | Timeline/history display | Yes | Yes |
 | who-uses | Client logos/references | Yes | Yes |
@@ -370,18 +370,33 @@ Fragments allow reusing content across pages. The `fragment` block loads content
 
 The fragment JS fetches the referenced page and injects its main section content.
 
-## Header and Footer (Special Blocks)
+## Header and Footer (Direct-Render Blocks)
 
-The header and footer blocks are loaded from fragment paths:
-- Header: `/nav` (fetches /nav page content)
-- Footer: `/footer` (fetches /footer page content)
+The header and footer blocks render their HTML directly from JavaScript,
+bypassing the EDS fragment/data-loading approach. This ensures the complex
+visual design (dropdown navs, newsletter forms, social links) can be fully
+controlled without AEM content constraints.
 
-These are loaded in `loadLazy()` phase via:
-```javascript
-const header = document.querySelector('header');
-header.innerHTML = '<div class="header block" data-block-name="header">';
-loadBlock(header.firstElementChild);
-```
+**header.js** — Renders complete DXP AI navigation:
+- Fixed nav bar with `rgba(13,14,42,0.88)` glass background + blur
+- Logo: "DXP AI" (gradient text) + "Powered by ZensAI" sub-label
+- Desktop nav: Platform (dropdown), Solutions, Why DXP AI, Resources (dropdown), Pricing, About
+- Actions: Login + Request Demo buttons
+- Hamburger menu → `.nav-mobile-menu` slide-down on mobile
+- Scroll effect: adds `.scrolled` class after 20px for stronger blur/shadow
+- Keyboard accessible: Enter/Space toggles dropdowns, Escape closes
+
+**footer.js** — Renders complete DXP AI footer:
+- Newsletter section with email input + subscribe button
+- 5-column grid: brand column (2fr) + Platform, Solutions, Resources, Company (1fr each)
+- Social links: LinkedIn, X, YouTube, GitHub
+- Divider + legal bar with certification badges
+
+**hero.js** — Renders complete DXP AI hero:
+- 3 decorative orbs (animated radial gradients)
+- Left: eyebrow, h1 with gradient accent, subtext, CTA buttons, trust badges
+- Right: simulated dashboard card with metrics and feature rows
+- Scroll indicator animation
 
 ## Linting Rules for Blocks
 
@@ -406,6 +421,7 @@ npm run lint:fix   # auto-fix where possible
 
 ## Block Development Workflow
 
+0. **Reference** - Check `html-kit/dxp-ai/index.html` for the target visual design of the block
 1. **Design** - Create HTML prototype in `html-kit/dxp-ai/components/myblock/`
 2. **Model** - Define fields in `blocks/myblock/_myblock.json`
 3. **Template** - Create authoring template in `blocks/myblock/myblock.html`
@@ -416,3 +432,22 @@ npm run lint:fix   # auto-fix where possible
 8. **Preview** - Preview on EDS via AEM Sidekick
 9. **Lint** - Run `npm run lint` and fix any issues
 10. **Commit** - Pre-commit hook runs linting automatically
+
+## CSS Naming Patterns (DXP AI blocks)
+
+Blocks use consistent CSS class naming conventions:
+
+| Pattern | Class examples | Purpose |
+|---|---|---|
+| Block root | `.features`, `.carousel`, `.cta-block` | Block wrapper |
+| Section heading | `.section-heading` | Overline + h2 + p intro |
+| Overline | `.overline`, `.cta-overline`, `.rt-overline` | Uppercase label above heading |
+| Icon box | `.fc-icon`, `.card-icon`, `.nav-dd-icon` | Square icon container |
+| Tag/Badge | `.fc-tag`, `.card-category` | Pill-shaped label |
+| List | `.fc-list`, `.card-points` | Bullet list with cyan dots |
+| Link | `.fc-link`, `.card-cta` | "Learn more →" style link |
+| Card | `.feature-card`, `.carousel__card` | Card container |
+| Grid | `.cards-grid` | 3-column card grid |
+| Value/Label | `.sv`/`.sl` (stats), `.hpc-val`/`.hpc-label` | Metric displays |
+| Button | `.btn--primary`, `.btn--secondary` | CTA buttons |
+| Meta | `.cta-meta`, `.hero-trust` | Fine print / trust text |

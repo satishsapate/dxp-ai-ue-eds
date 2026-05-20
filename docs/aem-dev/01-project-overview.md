@@ -77,7 +77,7 @@ dxp-ai-ue-eds/
 │   └── start.js                 # Local dev server (port 3000)
 ├── styles/                      # Global design system CSS
 │   ├── styles.css               # Design tokens + global styles
-│   ├── fonts.css                # Roboto font face declarations
+│   ├── fonts.css                # Sora + DM Sans fallback declarations
 │   └── lazy-styles.css          # Deferred CSS placeholder
 ├── html-kit/dxp-ai/            # Static HTML prototype kit
 │   ├── assets/css/              # SCSS design system files
@@ -104,7 +104,7 @@ dxp-ai-ue-eds/
 **Frontend:**
 - HTML5, CSS3 (custom properties / variables)
 - JavaScript ES Modules (no framework/bundler)
-- Roboto font family (WOFF2, unicode-range optimized)
+- Sora (headings) + DM Sans (body) via Google Fonts
 
 **AEM / Adobe:**
 - AEM Cloud Service (content repository)
@@ -120,6 +120,52 @@ dxp-ai-ue-eds/
 - Husky (pre-commit linting hooks)
 - merge-json-cli (JSON model aggregation)
 - Renovate (automated dependency updates)
+
+## Design System
+
+### Brand
+
+The DXP AI project uses a dark, AI-inspired visual language built around a navy/purple/cyan palette.
+
+### Color Foundation
+
+| Role | Value |
+|---|---|
+| Page background | `#0d0e2a` (navy) |
+| Elevated surface | `#1a1b4b` (dark blue) |
+| Primary brand | `#7c3aed` (purple) |
+| Hover / secondary brand | `#9333ea` (violet) |
+| Accent | `#06b6d4` (cyan) |
+| Primary text | `#f0f2ff` (off-white) |
+
+### Brand Gradient
+
+```css
+--gradient-dxp: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+```
+
+Used on primary buttons, gradient text headings, and highlight accents (blue → purple → violet).
+
+### Typography
+
+- **Headings:** Sora (Google Fonts, weights 400/600/700/800)
+- **Body:** DM Sans (Google Fonts, weights 300/400/500/600/700)
+- Both fonts are loaded via `@import` in `styles/styles.css`; fallback `@font-face` declarations are in `styles/fonts.css`
+
+### Glass-Morphism Cards
+
+All card-type components use a translucent dark glass treatment:
+
+```css
+background: rgba(255, 255, 255, 0.04);
+border: 1px solid rgba(124, 58, 237, 0.18);
+border-radius: 20px;  /* --radius-lg */
+backdrop-filter: blur(12px);
+```
+
+See [`06-css-design-system.md`](./06-css-design-system.md) for the complete token reference, responsive rules, and block CSS patterns.
+
+---
 
 ## Content Architecture
 
@@ -169,5 +215,5 @@ EDS uses three-phase loading for optimal Lighthouse scores:
 | AEM Author | http://localhost:4502 |
 | AEM Publish | http://localhost:4503 |
 | HTML Kit Dev Server | http://localhost:3000 |
-| EDS Preview | https://{branch}--{repo}--{org}.hlx.page |
-| EDS Live | https://{branch}--{repo}--{org}.hlx.live |
+| EDS Preview | https://main--dxp-ai-ue-eds--satishsapate.aem.page/ |
+| EDS Live | https://main--dxp-ai-ue-eds--satishsapate.aem.live/ |

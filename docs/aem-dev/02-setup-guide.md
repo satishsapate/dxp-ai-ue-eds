@@ -69,9 +69,9 @@ Universal Editor requires CORS configuration in AEM to allow the editor service 
 The project uses these content paths (defined in `paths.json`):
 
 ```
-/apps/dxp-ai-ue-eds/     # Application code
-/conf/dxp-ai-ue-eds/     # Configuration (component models)
-/content/sites/dxp-ai-ue-eds/  # Page content
+/content/my-dxp-site/        # Page content (site root)
+/content/my-dxp-site/nav     # Navigation fragment
+/conf/dxp-ai-ue-eds/         # Configuration and component models
 ```
 
 ### Upload Component Models to AEM
@@ -112,6 +112,8 @@ mountpoints:
   /:
     url: http://localhost:4502
 ```
+
+Note: The URL depends on environment — for local dev use `http://localhost:4502`, for production use the AEM Cloud author URL. The current `fstab.yaml` uses `http://localhost:4502` for the `/:` mountpoint.
 
 4. For production, replace with your AEM Cloud Service author URL
 
@@ -162,26 +164,21 @@ To bypass (not recommended):
 git commit --no-verify -m "message"
 ```
 
+> **Important fix applied:** The `.husky/pre-commit` file must have `#!/bin/sh` as the first line and Unix LF line endings. On Windows, if you see "Exec format error" on commit, run: `sed -i 's/\r//' .husky/pre-commit` or recreate the file with proper shebang.
+
 ## File Sync with AEM (paths.json)
 
-The `paths.json` configures AEM Sync behavior:
+The `paths.json` configures how EDS URL paths map to AEM content paths:
 
 ```json
 {
-  "server": "http://admin:admin@localhost:4502",
-  "jcrRoot": "./src/main/content/jcrRoot",
-  "packageFilter": "/apps/dxp-ai-ue-eds/...",
-  "interval": 1000
+  "mappings": [
+    { "path": "/**", "suffix": ".html", "type": "page" }
+  ]
 }
 ```
 
-File mappings:
-```
-./dxp-ai-ue-eds/** → /content/dam/dxp-ai-ue-eds/
-./components/**    → /apps/dxp-ai-ue-eds/components/
-./scripts/**       → /apps/dxp-ai-ue-eds/scripts/
-./styles/**        → /apps/dxp-ai-ue-eds/styles/
-```
+Note: paths.json maps EDS URL paths to AEM content paths. The actual site content is at `/content/my-dxp-site/` in AEM.
 
 ## Troubleshooting
 
@@ -209,3 +206,14 @@ File mappings:
 - Verify block folder name matches class name in HTML
 - Check `aem.js` block loading in browser Network tab
 - Ensure block JS exports a default function
+
+### Pre-commit hook "Exec format error" on Windows
+- The `.husky/pre-commit` file has wrong line endings or missing shebang
+- Fix: ensure first line is `#!/bin/sh` with LF line endings
+- Run: `git config core.autocrlf false` before cloning to prevent CRLF conversion
+
+### EDS page shows wrong content / blocks not matching design
+- The `html-kit/dxp-ai/` directory is the design reference (static HTML prototype)
+- Block JS files must map EDS row/cell data to match html-kit HTML structure
+- Header, Footer, and Hero blocks render HTML directly (not from AEM data)
+- Run `npm run start` to preview html-kit at http://localhost:3000

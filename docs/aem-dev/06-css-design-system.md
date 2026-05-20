@@ -1,352 +1,428 @@
 # CSS Design System
 
-## Design Tokens (CSS Custom Properties)
+The DXP AI project uses a **dark navy theme** with purple/cyan accents. All design values are expressed as CSS custom properties in `styles/styles.css`. Always consume tokens in block CSS — never hardcode colors, fonts, or sizes.
 
-All design values are defined as CSS custom properties in `styles/styles.css`. Always use these tokens in block CSS — never hardcode values.
-
-### Full `styles/styles.css` (source of truth)
-
-```css
-:root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
-
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-
-  /* body sizes (mobile) */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
-
-  /* heading sizes (mobile) */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
-
-  /* nav height */
-  --nav-height: 64px;
-}
-
-/* fallback fonts (reduce CLS) */
-@font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
-  src: local('Arial');
-}
-@font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
-}
-
-/* desktop overrides */
-@media (width >= 900px) {
-  :root {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
-  }
-}
-
-body { display: none; margin: 0; background-color: var(--background-color);
-  color: var(--text-color); font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m); line-height: 1.6; }
-body.appear { display: block; }
-
-header { height: var(--nav-height); }
-header .header, footer .footer { visibility: hidden; }
-header .header[data-block-status="loaded"], footer .footer[data-block-status="loaded"] { visibility: visible; }
-
-h1,h2,h3,h4,h5,h6 { margin-top: 0.8em; margin-bottom: 0.25em;
-  font-family: var(--heading-font-family); font-weight: 600;
-  line-height: 1.25; scroll-margin: 40px; }
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
-
-/* sections */
-main > .section { margin: 40px 0; }
-main > .section > div { max-width: 1200px; margin: auto; padding: 0 24px; }
-main > .section:first-of-type { margin-top: 0; }
-@media (width >= 900px) { main > .section > div { padding: 0 32px; } }
-main .section.light, main .section.highlight {
-  background-color: var(--light-color); margin: 0; padding: 40px 0; }
-
-/* links */
-a:any-link { color: var(--link-color); text-decoration: none; overflow-wrap: break-word; }
-a:hover { color: var(--link-hover-color); text-decoration: underline; }
-
-/* buttons */
-a.button:any-link, button {
-  box-sizing: border-box; display: inline-block; max-width: 100%;
-  margin: 12px 0; border: 2px solid transparent; border-radius: 2.4em;
-  padding: 0.5em 1.2em; font-family: var(--body-font-family);
-  font-style: normal; font-weight: 500; line-height: 1.25;
-  text-align: center; text-decoration: none;
-  background-color: var(--link-color); color: var(--background-color);
-  cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-a.button:hover, a.button:focus, button:hover, button:focus {
-  background-color: var(--link-hover-color); cursor: pointer; }
-button:disabled, button:disabled:hover { background-color: var(--light-color); cursor: unset; }
-a.button.secondary, button.secondary {
-  background-color: unset; border: 2px solid currentcolor; color: var(--text-color); }
-
-main img { max-width: 100%; width: auto; height: auto; }
-.icon { display: inline-block; height: 24px; width: 24px; }
-.icon img { height: 100%; width: 100%; }
-```
-
-### Token Quick Reference
-
-| Token | Mobile | Desktop | Use for |
-|---|---|---|---|
-| `--background-color` | white | — | Page/component backgrounds |
-| `--light-color` | #f8f8f8 | — | Subtle backgrounds, highlight sections |
-| `--dark-color` | #505050 | — | Secondary text |
-| `--text-color` | #131313 | — | Primary text |
-| `--link-color` | #3b63fb | — | Links, primary button bg |
-| `--link-hover-color` | #1d3ecf | — | Link/button hover |
-| `--body-font-family` | roboto... | — | Body text |
-| `--heading-font-family` | roboto-condensed... | — | All headings |
-| `--body-font-size-m` | 22px | 18px | Default body |
-| `--body-font-size-s` | 19px | 16px | Secondary |
-| `--body-font-size-xs` | 17px | 14px | Captions |
-| `--heading-font-size-xxl` | 55px | 45px | h1 |
-| `--heading-font-size-xl` | 44px | 36px | h2 |
-| `--heading-font-size-l` | 34px | 28px | h3 |
-| `--heading-font-size-m` | 27px | 22px | h4 |
-| `--heading-font-size-s` | 24px | 20px | h5 |
-| `--heading-font-size-xs` | 22px | 18px | h6 |
-| `--nav-height` | 64px | — | Header height |
+---
 
 ## Font Loading
 
-Fonts are declared in `styles/fonts.css` using `@font-face`:
+Google Fonts are loaded via `@import` at the top of `styles/styles.css`:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+```
+
+**Typefaces:**
+
+| Family | Weights | Role |
+|---|---|---|
+| `Sora` | 400, 600, 700, 800 | All headings (`--heading-font-family`) |
+| `DM Sans` | 300, 400, 500, 600, 700 | All body text (`--body-font-family`) |
+
+**Fallback fonts** are declared in `styles/fonts.css` using `@font-face` with `local('Arial')` and `size-adjust` to minimise Cumulative Layout Shift (CLS) while the Google Fonts stylesheet resolves:
 
 ```css
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 100.06%;
-  ascent-override: 95%;
-  src: local("Arial");
+  font-family: sora-fallback;
+  size-adjust: 105%;
+  src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 113%;
-  ascent-override: 90%;
-  src: local("Arial Narrow");
-}
-
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../fonts/roboto-400.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, ...;
+  font-family: dm-sans-fallback;
+  size-adjust: 100%;
+  src: local('Arial');
 }
 ```
 
-**Key optimizations:**
-- `font-display: swap` - prevents invisible text during font load
-- `unicode-range` subsetting - only loads character ranges needed for the language
-- Fallback fonts (`roboto-fallback`) use `size-adjust` to minimize CLS
-- WOFF2 format only - best compression, wide browser support
+Fonts are loaded in the **lazy phase** via `loadFonts()` in `scripts.js`. On desktop (>= 900px) or when the `fonts-loaded` sessionStorage key is present, they are promoted to the **eager phase** to avoid a visible swap on repeat visits.
 
-Fonts load in the **lazy phase** via `loadFonts()` in `scripts.js`:
-```javascript
-async function loadFonts() {
-  await loadCSS(`${window.hlx.codeBasePath}/styles/fonts.css`);
-  // Cache in sessionStorage to avoid re-request
-  document.body.classList.add('appear');
+---
+
+## Design Tokens — Full Reference
+
+### Core Palette
+
+| Token | Value | Description |
+|---|---|---|
+| `--background-color` | `#0d0e2a` | Navy — main page background |
+| `--light-color` | `#1a1b4b` | Dark blue — elevated surfaces |
+| `--dark-color` | `#080a1e` | Deep background (darkest) |
+| `--text-color` | `#f0f2ff` | Off-white — primary text |
+| `--link-color` | `#7c3aed` | Purple — links and primary actions |
+| `--link-hover-color` | `#9333ea` | Violet — link/button hover |
+
+### Extended Palette
+
+These are available globally and used directly in block CSS:
+
+| Token | Value | Description |
+|---|---|---|
+| `--c-navy` | `#0d0e2a` | Page background alias |
+| `--c-dark-blue` | `#1a1b4b` | Elevated surface alias |
+| `--c-purple` | `#7c3aed` | Primary brand purple |
+| `--c-violet` | `#9333ea` | Secondary brand violet |
+| `--c-cyan` | `#06b6d4` | Accent cyan (icons, dots, overlines) |
+| `--c-white` | `#ffffff` | Pure white |
+| `--c-off-white` | `#f0f2ff` | Soft white for body text on dark bg |
+| `--c-mid-gray` | `#6b7aab` | Muted text, secondary labels |
+
+### Gradients
+
+| Token | Value | Use |
+|---|---|---|
+| `--gradient-dxp` | `linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%)` | Primary brand gradient — buttons, highlights, gradient text |
+| `--gradient-hero` | `linear-gradient(135deg, #0d0e2a 0%, #1a1b4b 40%, #2d1b69 100%)` | Hero section background |
+
+### Typography
+
+| Token | Value | Description |
+|---|---|---|
+| `--body-font-family` | `'DM Sans', dm-sans-fallback, sans-serif` | All body text |
+| `--heading-font-family` | `'Sora', sora-fallback, sans-serif` | All headings |
+
+**Body sizes** — identical on mobile and desktop (no breakpoint override):
+
+| Token | Value | Use |
+|---|---|---|
+| `--body-font-size-m` | `18px` | Default body text |
+| `--body-font-size-s` | `16px` | Secondary / supporting text |
+| `--body-font-size-xs` | `14px` | Captions, labels |
+
+**Heading sizes — mobile (default):**
+
+| Token | Value | Heading |
+|---|---|---|
+| `--heading-font-size-xxl` | `48px` | h1 |
+| `--heading-font-size-xl` | `38px` | h2 |
+| `--heading-font-size-l` | `30px` | h3 |
+| `--heading-font-size-m` | `24px` | h4 |
+| `--heading-font-size-s` | `20px` | h5 |
+| `--heading-font-size-xs` | `18px` | h6 |
+
+**Heading sizes — desktop (>= 900px):**
+
+| Token | Value | Heading |
+|---|---|---|
+| `--heading-font-size-xxl` | `56px` | h1 |
+| `--heading-font-size-xl` | `44px` | h2 |
+| `--heading-font-size-l` | `34px` | h3 |
+| `--heading-font-size-m` | `28px` | h4 |
+| `--heading-font-size-s` | `22px` | h5 |
+| `--heading-font-size-xs` | `18px` | h6 |
+
+### Layout
+
+| Token | Value | Description |
+|---|---|---|
+| `--nav-height` | `72px` | Fixed header height |
+
+Section container rules:
+
+```css
+main > .section {
+  margin: 0;                    /* sections sit flush — no gap between them */
+}
+
+main > .section > div {
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 24px;              /* mobile */
+}
+
+@media (width >= 900px) {
+  main > .section > div {
+    padding: 0 32px;            /* desktop */
+  }
 }
 ```
 
-## Global Styles Reference
+### Shape and Shadow
+
+| Token | Value | Use |
+|---|---|---|
+| `--radius-sm` | `8px` | Small elements (tags, badges) |
+| `--radius-md` | `14px` | Inputs, small cards |
+| `--radius-lg` | `20px` | Cards, panels (most common) |
+| `--radius-xl` | `28px` | Large modals, hero cards |
+| `--shadow-md` | `0 4px 20px rgba(13, 14, 42, 0.4)` | Card resting elevation |
+| `--shadow-lg` | `0 12px 40px rgba(13, 14, 42, 0.5)` | Hover lift state |
+| `--shadow-glow` | `0 0 40px rgba(124, 58, 237, 0.35)` | Purple glow on focus/hover |
+
+---
+
+## Global Styles
 
 ### Headings
-```css
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
 
+```css
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading-font-family);
   font-weight: 600;
   line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: 0.5em;
-  scroll-margin: calc(var(--nav-height) + 1em);
+  margin-top: 0.8em;
+  margin-bottom: 0.25em;
+  scroll-margin: 40px;
+  color: var(--text-color);
 }
+
+h1 { font-size: var(--heading-font-size-xxl); }
+h2 { font-size: var(--heading-font-size-xl); }
+h3 { font-size: var(--heading-font-size-l); }
+h4 { font-size: var(--heading-font-size-m); }
+h5 { font-size: var(--heading-font-size-s); }
+h6 { font-size: var(--heading-font-size-xs); }
 ```
 
 ### Links
+
 ```css
 a:any-link {
-  color: var(--color-link);
+  color: var(--link-color);
   text-decoration: none;
+  overflow-wrap: break-word;
 }
 
 a:hover {
+  color: var(--link-hover-color);
   text-decoration: underline;
-  color: var(--color-link-hover);
 }
 ```
 
 ### Buttons
 
 **HTML structure expected by global button styles:**
+
 ```html
 <p class="button-container">
-  <a href="/path" title="CTA" class="button primary">Click Here</a>
+  <a href="/path" title="Get Started" class="button primary">Get Started</a>
 </p>
 ```
 
-**Button variants:**
-```css
-a.button:any-link {
-  font-family: var(--body-font-family);
-  font-size: var(--body-font-size-s);
-  background-color: var(--color-link);
-  color: var(--color-background);
-  border-radius: 30px;
-  padding: 5px 30px;
-}
+**Primary button (default):**
 
-a.button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--color-text);
+```css
+a.button:any-link, button {
+  border-radius: 999px;           /* pill shape */
+  padding: 0.6em 1.5em;
+  font-weight: 600;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);  /* --gradient-dxp short */
+  color: #fff;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
 }
 ```
 
-### Sections
+**Hover state:**
 
-**Standard section layout:**
 ```css
-.section {
-  margin: 40px 0;
-}
-
-.section > div {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 24px;
-}
-
-/* Full-width section variant */
-.section.full-width > div {
-  max-width: unset;
-  padding: 0;
-}
-
-/* Highlighted section */
-.section.highlight {
-  background-color: var(--color-light);
+a.button:hover, button:hover {
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-1px);
 }
 ```
+
+**Secondary variant:**
+
+```css
+a.button.secondary, button.secondary {
+  background: transparent;
+  border: 1.5px solid rgba(124, 58, 237, 0.5);
+  color: var(--c-off-white);
+}
+
+a.button.secondary:hover, button.secondary:hover {
+  border-color: var(--c-purple);
+  background: rgba(124, 58, 237, 0.1);
+}
+```
+
+---
+
+## Section Variants
+
+Apply these CSS classes to section blocks in Universal Editor to change the background:
+
+| Section class | Background | Token |
+|---|---|---|
+| *(default)* | `#0d0e2a` | `--background-color` |
+| `.light` or `.highlight` | `#1a1b4b` | `--light-color` |
+| `.dark` | `#080a1e` | `--dark-color` |
+
+```css
+main .section.light,
+main .section.highlight {
+  background-color: var(--light-color);   /* #1a1b4b */
+}
+
+main .section.dark {
+  background-color: var(--dark-color);    /* #080a1e */
+}
+```
+
+Dedicated section-variant blocks (`section-light`, `section-dark`, `section-generic`) wrap content so authors can apply visual backgrounds without needing CSS class knowledge.
+
+---
 
 ## Responsive Design Breakpoints
 
-This project uses a **mobile-first** approach with a single major breakpoint:
+This project uses a **mobile-first** approach with a **single breakpoint**:
 
 ```css
-/* Default: mobile styles */
+/* Default styles apply at all widths (mobile-first) */
 
-/* Desktop: >= 900px */
 @media (width >= 900px) {
   /* Desktop overrides */
 }
 ```
 
 The 900px breakpoint is used consistently across:
-- Global styles (font sizes)
-- Navigation (hamburger menu)
-- Block layouts (grid columns)
+- Global heading sizes (see token table above)
+- Navigation (hamburger menu vs. full nav)
+- Block grid layouts (single column → multi-column)
+
+Body font sizes do **not** change at the breakpoint — they are fixed at their desktop values for all viewports.
+
+---
 
 ## Block CSS Patterns
 
-### Standard Block Layout
+### Block-scoped CSS Variables
+
+Every block defines its own `--blockname-*` variables in `:root` so overrides are predictable:
+
 ```css
-.blockname {
-  /* Block wrapper - usually full width */
+:root {
+  --features-gap: 24px;
+  --features-radius: 20px;
+  --features-bg: rgba(255, 255, 255, 0.04);
+  --features-border: rgba(124, 58, 237, 0.18);
+  --features-heading: var(--c-off-white);
+  --features-copy: rgba(255, 255, 255, 0.65);
+}
+```
+
+### Glass-Morphism Card
+
+The dominant card pattern across the project:
+
+```css
+.blockname-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  border-radius: var(--radius-lg);          /* 20px */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
 }
 
-.blockname > div {
-  /* Content container with max-width */
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 24px;
+.blockname-card:hover {
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-4px);
 }
+```
 
-/* Responsive grid */
-.blockname .blockname-grid {
+### Gradient Text
+
+Used for section headings and hero text to render the DXP brand gradient:
+
+```css
+.blockname h2 {
+  background: var(--gradient-dxp);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+```
+
+### Overline Labels
+
+Small uppercase category labels above headings:
+
+```css
+.blockname-overline {
+  color: var(--c-purple);           /* or var(--c-cyan) for variety */
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+}
+```
+
+### Bullet Dots (Lists)
+
+Feature lists and card bullet points use a pseudo-element dot instead of list-style:
+
+```css
+.blockname-item::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-cyan);
+  flex-shrink: 0;
+  margin-top: 0.5em;
+}
+```
+
+### Standard Responsive Block Grid
+
+```css
+.blockname-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;           /* mobile: single column */
+  gap: var(--features-gap, 24px);
 }
 
-@media (width < 900px) {
-  .blockname .blockname-grid {
-    grid-template-columns: 1fr;
+@media (width >= 900px) {
+  .blockname-grid {
+    grid-template-columns: repeat(3, 1fr);  /* desktop: 3 columns */
   }
 }
 ```
 
-### Using Design Tokens in Blocks
+### Using Design Tokens in Block CSS
+
 ```css
+/* Do this — always reference tokens */
 .myblock h2 {
   font-family: var(--heading-font-family);
   font-size: var(--heading-font-size-l);
-  color: var(--color-text);
+  color: var(--text-color);
 }
 
 .myblock p {
   font-size: var(--body-font-size-m);
-  color: var(--color-dark);
+  color: var(--c-mid-gray);
 }
 
-.myblock a.button {
-  /* Inherits global button styles */
-  /* Add overrides only if needed */
+/* Never do this — hardcoded values */
+.myblock h2 {
+  font-family: 'Sora', sans-serif;  /* wrong */
+  font-size: 34px;                  /* wrong */
+  color: #f0f2ff;                   /* wrong */
 }
 ```
+
+---
 
 ## Icons
 
-Icons are SVG files in the `/icons/` directory. The EDS framework automatically resolves icon references:
+Icons are SVG files in the `/icons/` directory. The EDS runtime resolves `<span class="icon icon-*">` references and injects inline SVG automatically:
 
 ```html
-<!-- In HTML -->
-<span class="icon icon-chevron"></span>
+<!-- In authored HTML -->
+<span class="icon icon-arrow-right"></span>
 
-<!-- EDS loads /icons/chevron.svg and injects as inline SVG -->
+<!-- EDS loads /icons/arrow-right.svg and injects it inline -->
 ```
 
-Icon size is set globally:
+Global icon sizing:
+
 ```css
 .icon {
   display: inline-block;
@@ -354,50 +430,39 @@ Icon size is set globally:
   width: 24px;
 }
 
-.icon img, .icon svg {
+.icon img,
+.icon svg {
   height: 100%;
   width: 100%;
 }
 ```
 
-## Section Variants via Blocks
+For coloured icons on the dark background, use `fill: currentColor` in the SVG so the icon inherits the parent's `color` value.
 
-Instead of CSS classes on sections, this project uses dedicated section blocks:
-
-| Block | Background | Text |
-|---|---|---|
-| `section-light` | Light (`--color-light`) | Default |
-| `section-dark` | Dark (`#1a1a1a` or similar) | White |
-| `section-generic` | White / transparent | Default |
-
-These blocks wrap their content in the appropriate background, giving authors visual control without needing CSS class knowledge.
-
-## HTML Kit (SCSS Source)
-
-For complex designs, SCSS source files are in `html-kit/dxp-ai/assets/css/`:
-
-| File | Purpose |
-|---|---|
-| `_variables.scss` | SCSS variables (mirrors CSS custom properties) |
-| `_base.scss` | Base typography and body styles |
-| `_a11y.scss` | Accessibility-specific styles |
-| `_icons.scss` | Icon system styles |
-
-The compiled CSS from SCSS is in `html-kit/dxp-ai/assets/css/main.css`.
-
-**Workflow:** Design → SCSS prototype → Convert to CSS custom properties → Block CSS
+---
 
 ## Accessibility CSS Considerations
 
+### Focus Indicators
+
+Dark backgrounds reduce default focus ring visibility. Always apply a visible focus outline:
+
 ```css
-/* Focus visible for keyboard navigation */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-link);
-  outline-offset: 2px;
+  outline: 2px solid var(--c-purple);
+  outline-offset: 3px;
+  box-shadow: var(--shadow-glow);
 }
+```
 
-/* Screen reader only class */
+### Colour Contrast
+
+The dark theme provides strong contrast for the default text (`--text-color: #f0f2ff`) on `--background-color: #0d0e2a`. However, muted colours like `--c-mid-gray` (`#6b7aab`) must only be used for secondary/supporting text, not for primary readable content, to meet WCAG AA contrast ratios.
+
+### Screen Reader Utility
+
+```css
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -405,13 +470,35 @@ button:focus-visible {
   overflow: hidden;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
+  white-space: nowrap;
 }
 ```
 
-## Performance CSS Rules
+### Motion Reduction
 
-1. **Avoid `@import` in CSS** - use `<link>` tags instead (parallel loading)
-2. **Use `font-display: swap`** - always on `@font-face`
-3. **Minimize paint-triggering properties** - prefer `transform` over `top/left` for animations
-4. **Use `contain: layout`** on isolated sections
-5. **Lazy-load non-critical CSS** - use `loadCSS()` from `aem.js` for below-fold styles
+Wrap transitions and animations in a motion-safe guard:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .blockname-card {
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+}
+```
+
+---
+
+## HTML Kit (SCSS Source)
+
+For complex designs, SCSS source files live in `html-kit/dxp-ai/assets/css/`:
+
+| File | Purpose |
+|---|---|
+| `_variables.scss` | SCSS variables — mirrors the CSS custom properties above |
+| `_base.scss` | Base typography, body reset |
+| `_a11y.scss` | Accessibility-specific styles |
+| `_icons.scss` | Icon system styles |
+
+The compiled output is `html-kit/dxp-ai/assets/css/main.css`.
+
+**Workflow:** Design in SCSS prototype → convert variable values to CSS custom properties → implement in block CSS.
