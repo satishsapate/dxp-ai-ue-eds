@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 function animateCount(el, target, suffix) {
   const duration = 1800;
   const start = performance.now();
@@ -34,9 +36,10 @@ export default function decorate(block) {
     const cells = [...row.children];
     const item = document.createElement('div');
     item.className = 'stat-item';
+    moveInstrumentation(row, item);
 
     const valueText = cells[0]?.textContent.trim() || '';
-    const labelText = cells[1]?.textContent.trim() || cells[0]?.textContent.trim() || '';
+    const labelText = cells[1]?.textContent.trim() || '';
 
     const valueEl = document.createElement('div');
     valueEl.className = 'sv';
