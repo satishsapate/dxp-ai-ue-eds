@@ -13,12 +13,14 @@
 }
 
 .stats-band .stat-item {
-  border-right: 1px solid rgba(124, 58, 237, 0.12);
   padding: 0 1rem;
 }
 
-.stats-band .stat-item:last-child {
-  border-right: none;
+.stats-band .stat-divider {
+  width: 1px;
+  height: 60px;
+  background: rgba(124, 58, 237, 0.12);
+  margin: 0 auto;
 }
 
 .stats-band .sv {
@@ -39,17 +41,16 @@
   line-height: 1.4;
 }
 
-.stats-band .stat-divider {
-  display: none;
-}
-
 @media (width < 900px) {
   .stats-band .stats-band__grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .stats-band .stat-item {
-    border-right: none;
     padding: 0;
+  }
+
+  .stats-band .stat-divider {
+    display: none;
   }
 }

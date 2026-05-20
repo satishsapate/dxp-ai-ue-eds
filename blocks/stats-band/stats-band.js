@@ -58,6 +58,20 @@ export default function decorate(block) {
     row.remove();
   });
 
+  // Add visible dividers between stat items to match HTML kit 2-row layout.
+  // The dividers take up grid cells in the repeat(4,1fr) grid, placing stats at
+  // columns 1 and 3 of each row → 2 rows of 2 stats each.
+  const items = [...grid.querySelectorAll('.stat-item')];
+  items.forEach((item, i) => {
+    if (i < items.length - 1) {
+      const divider = document.createElement('div');
+      divider.className = 'stat-divider';
+      divider.setAttribute('role', 'separator');
+      divider.setAttribute('aria-hidden', 'true');
+      item.after(divider);
+    }
+  });
+
   block.append(grid);
 
   // UE loads the page inside an iframe — skip the animation there to prevent
