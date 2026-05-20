@@ -1,75 +1,90 @@
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
+ * you may not use this file except in compliance with the License.
  */
 
+/* ============================================================
+   Google Fonts — Sora (headings) + DM Sans (body)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@400;600;700;800&display=swap');
+
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* ─── DXP AI colour system ─── */
+  --background-color: #0d0e2a;
+  --light-color:  #1a1b4b;
+  --dark-color:   #080a1e;
+  --text-color:   #f0f2ff;
+  --link-color:   #7c3aed;
+  --link-hover-color: #9333ea;
 
-  /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  /* extended palette (used by blocks) */
+  --c-navy:       #0d0e2a;
+  --c-dark-blue:  #1a1b4b;
+  --c-purple:     #7c3aed;
+  --c-violet:     #9333ea;
+  --c-cyan:       #06b6d4;
+  --c-white:      #ffffff;
+  --c-off-white:  #f0f2ff;
+  --c-mid-gray:   #6b7aab;
+  --gradient-dxp: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
+  --gradient-hero: linear-gradient(135deg, #0d0e2a 0%, #1a1b4b 40%, #2d1b69 100%);
 
-  /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  /* ─── fonts ─── */
+  --body-font-family: 'DM Sans', dm-sans-fallback, sans-serif;
+  --heading-font-family: 'Sora', sora-fallback, sans-serif;
 
-  /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  /* ─── body sizes (mobile) ─── */
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
-  /* nav height */
-  --nav-height: 64px;
+  /* ─── heading sizes (mobile) ─── */
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl:  38px;
+  --heading-font-size-l:   30px;
+  --heading-font-size-m:   24px;
+  --heading-font-size-s:   20px;
+  --heading-font-size-xs:  18px;
+
+  /* ─── layout ─── */
+  --nav-height: 72px;
+
+  /* ─── radius / shadow ─── */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-md: 0 4px 20px rgba(13, 14, 42, 0.4);
+  --shadow-lg: 0 12px 40px rgba(13, 14, 42, 0.5);
+  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.35);
 }
 
-/* fallback fonts */
+/* ─── fallback fonts ─── */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: sora-fallback;
+  size-adjust: 96%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
+  font-family: dm-sans-fallback;
+  size-adjust: 100%;
   src: local('Arial');
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
-    /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl:  44px;
+    --heading-font-size-l:   34px;
+    --heading-font-size-m:   28px;
+    --heading-font-size-s:   22px;
+    --heading-font-size-xs:  18px;
   }
 }
 
+/* ─── base ─── */
 body {
   display: none;
   margin: 0;
@@ -77,7 +92,8 @@ body {
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  line-height: 1.6;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
@@ -93,11 +109,12 @@ footer .footer {
   visibility: hidden;
 }
 
-header .header[data-block-status="loaded"],
-footer .footer[data-block-status="loaded"] {
+header .header[data-block-status='loaded'],
+footer .footer[data-block-status='loaded'] {
   visibility: visible;
 }
 
+/* ─── headings ─── */
 h1,
 h2,
 h3,
@@ -107,9 +124,10 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
   scroll-margin: 40px;
+  color: var(--c-off-white);
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -119,41 +137,35 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
-p,
-dl,
-ol,
-ul,
-pre,
-blockquote {
+p, dl, ol, ul, pre, blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
 }
 
-code,
-pre {
+code, pre {
   font-size: var(--body-font-size-s);
+  font-family: 'JetBrains Mono', monospace;
 }
 
 pre {
   padding: 16px;
-  border-radius: 8px;
-  background-color: var(--light-color);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.15);
   overflow-x: auto;
   white-space: pre;
+  color: var(--c-off-white);
 }
 
 main > div {
   margin: 40px 16px;
 }
 
-input,
-textarea,
-select,
-button {
+input, textarea, select, button {
   font: inherit;
 }
 
-/* links */
+/* ─── links ─── */
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
@@ -165,7 +177,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* buttons */
+/* ─── buttons ─── */
 a.button:any-link,
 button {
   box-sizing: border-box;
@@ -173,41 +185,55 @@ button {
   max-width: 100%;
   margin: 12px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: 999px;
+  padding: 0.6em 1.5em;
   font-family: var(--body-font-family);
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: var(--body-font-size-s);
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  background-color: var(--link-color);
-  color: var(--background-color);
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  color: #fff;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: all 0.25s ease;
 }
 
 a.button:hover,
 a.button:focus,
 button:hover,
 button:focus {
-  background-color: var(--link-hover-color);
+  background: linear-gradient(135deg, #6d28d9, #7c3aed);
+  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+  transform: translateY(-1px);
   cursor: pointer;
 }
 
 button:disabled,
 button:disabled:hover {
-  background-color: var(--light-color);
+  background: rgba(255, 255, 255, 0.1);
   cursor: unset;
+  transform: none;
+  box-shadow: none;
 }
 
 a.button.secondary,
 button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color);
+  background: transparent;
+  border: 1.5px solid rgba(124, 58, 237, 0.5);
+  color: var(--c-off-white);
+}
+
+a.button.secondary:hover,
+button.secondary:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--c-purple);
+  box-shadow: none;
+  transform: none;
 }
 
 main img {
@@ -227,19 +253,15 @@ main img {
   width: 100%;
 }
 
-/* sections */
+/* ─── sections ─── */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: auto;
   padding: 0 24px;
-}
-
-main > .section:first-of-type {
-  margin-top: 0;
 }
 
 @media (width >= 900px) {
@@ -248,10 +270,16 @@ main > .section:first-of-type {
   }
 }
 
-/* section metadata */
+/* section metadata variants */
 main .section.light,
 main .section.highlight {
   background-color: var(--light-color);
+  margin: 0;
+  padding: 40px 0;
+}
+
+main .section.dark {
+  background-color: var(--dark-color);
   margin: 0;
   padding: 40px 0;
 }

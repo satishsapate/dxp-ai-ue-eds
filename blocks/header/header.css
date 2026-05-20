@@ -1,9 +1,20 @@
-/* header and nav layout */
+/* ============================================================
+   Header / Nav — DXP AI dark design
+   ============================================================ */
+
+/* nav wrapper — fixed dark bar */
 header .nav-wrapper {
-  background-color: var(--background-color);
+  background: rgba(13, 14, 42, 0.92);
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.15);
   width: 100%;
-  z-index: 2;
+  z-index: 300;
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 header nav {
@@ -15,7 +26,7 @@ header nav {
   align-items: center;
   gap: 0 24px;
   margin: auto;
-  max-width: 1248px;
+  max-width: 1280px;
   height: var(--nav-height);
   padding: 0 24px;
   font-family: var(--body-font-family);
@@ -25,27 +36,31 @@ header nav[aria-expanded='true'] {
   grid-template:
     'hamburger brand' var(--nav-height)
     'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
+    'tools tools' auto / auto 1fr;
   overflow-y: auto;
   min-height: 100dvh;
+  background: rgba(13, 14, 42, 0.97);
 }
 
 @media (width >= 900px) {
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
   }
 
   header nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0 32px;
-    max-width: 1264px;
+    max-width: 1280px;
     padding: 0 32px;
+    height: var(--nav-height);
   }
 
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
+    background: transparent;
   }
 }
 
@@ -56,9 +71,10 @@ header nav p {
 
 header nav a:any-link {
   color: currentcolor;
+  text-decoration: none;
 }
 
-/* hamburger */
+/* ── hamburger ─────────────────────────────────────────────── */
 header nav .nav-hamburger {
   grid-area: hamburger;
   height: 22px;
@@ -72,11 +88,20 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
+  background: transparent;
+  color: var(--c-off-white);
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+  box-shadow: none;
+  transform: none;
+}
+
+header nav .nav-hamburger button:hover,
+header nav .nav-hamburger button:focus {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
 }
 
 header nav .nav-hamburger-icon,
@@ -85,7 +110,7 @@ header nav .nav-hamburger-icon::after {
   box-sizing: border-box;
   display: block;
   position: relative;
-  width: 20px;
+  width: 22px;
 }
 
 header nav .nav-hamburger-icon::before,
@@ -100,15 +125,15 @@ header nav[aria-expanded='false'] .nav-hamburger-icon::before,
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
   height: 2px;
   border-radius: 2px;
-  background: currentcolor;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
+  top: -7px;
 }
 
 header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
+  top: 7px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon {
@@ -124,6 +149,7 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   width: 24px;
   height: 2px;
   border-radius: 2px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
@@ -139,21 +165,38 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   }
 }
 
-/* brand */
+/* ── brand ─────────────────────────────────────────────────── */
 header .nav-brand {
   grid-area: brand;
-  flex-basis: 128px;
+  flex-basis: auto;
+  flex-shrink: 0;
   font-size: var(--heading-font-size-s);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1;
+  font-family: var(--heading-font-family);
+}
+
+header .nav-brand a:any-link {
+  background: var(--gradient-dxp);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+header .nav-brand a:hover {
+  opacity: 0.85;
+  text-decoration: none;
 }
 
 header nav .nav-brand img {
-  width: 128px;
+  width: 120px;
   height: auto;
 }
 
-/* sections */
+/* ── nav sections ──────────────────────────────────────────── */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
@@ -165,24 +208,30 @@ header nav[aria-expanded='true'] .nav-sections {
   display: block;
   visibility: visible;
   align-self: start;
+  padding: 8px 0 16px;
 }
 
 header nav .nav-sections ul {
   list-style: none;
   padding-left: 0;
   font-size: var(--body-font-size-s);
+  margin: 0;
 }
 
 header nav .nav-sections ul > li {
   font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
 }
 
+/* mobile dropdown sub-items */
 header nav .nav-sections ul > li > ul {
-  margin-top: 0;
+  margin-top: 4px;
+  padding-left: 16px;
 }
 
 header nav .nav-sections ul > li > ul > li {
   font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @media (width >= 900px) {
@@ -190,42 +239,21 @@ header nav .nav-sections ul > li > ul > li {
     display: block;
     visibility: visible;
     white-space: nowrap;
+    flex: 1;
   }
 
   header nav[aria-expanded='true'] .nav-sections {
     align-self: unset;
+    padding: 0;
   }
 
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
+  /* desktop: horizontal nav list */
+  header nav .nav-sections .default-content-wrapper > ul {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    gap: 4px;
     margin: 0;
+    padding: 0;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li {
@@ -233,40 +261,219 @@ header nav .nav-sections ul > li > ul > li {
     position: relative;
   }
 
+  header nav .nav-sections .default-content-wrapper > ul > li > a,
+  header nav .nav-sections .default-content-wrapper > ul > li > span {
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > a:hover,
+  header nav .nav-sections .default-content-wrapper > ul > li:hover > a {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+  }
+
+  /* dropdown caret */
+  header nav .nav-sections .nav-drop {
+    position: relative;
+    padding-right: 0;
+    cursor: pointer;
+  }
+
+  header nav .nav-sections .nav-drop > a,
+  header nav .nav-sections .nav-drop > span {
+    padding-right: 24px;
+  }
+
+  header nav .nav-sections .nav-drop::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-60%) rotate(135deg);
+    width: 5px;
+    height: 5px;
+    border: 1.5px solid rgba(255, 255, 255, 0.6);
+    border-radius: 0 1px 0 0;
+    border-width: 1.5px 1.5px 0 0;
+    transition: transform 0.2s ease;
+    pointer-events: none;
+  }
+
+  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
+    transform: translateY(-40%) rotate(315deg);
+  }
+
+  /* dropdown panel */
   header nav .nav-sections .default-content-wrapper > ul > li > ul {
     display: none;
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    top: calc(100% + 6px);
+    min-width: 240px;
+    background: var(--c-dark-blue);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    white-space: initial;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 400;
   }
 
   header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
     display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
-    background-color: var(--light-color);
-    white-space: initial;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
   }
 
+  /* dropdown arrow */
   header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
     content: '';
     position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 10px;
+    background: var(--c-dark-blue);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    transform: translateX(-50%) rotate(45deg);
+    top: -5px;
   }
 
+  /* dropdown items */
   header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
+    padding: 0;
+    font-weight: 400;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:any-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.75);
+    transition: all 0.2s ease;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li a:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
   }
 }
 
-/* tools */
+/* ── tools ─────────────────────────────────────────────────── */
 header nav .nav-tools {
   grid-area: tools;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header nav .nav-tools p {
+  margin: 0;
+}
+
+/* Login button — ghost style */
+header nav .nav-tools .button.secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 0;
+  transition: all 0.25s ease;
+}
+
+header nav .nav-tools .button.secondary:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
+  transform: none;
+}
+
+/* Request Demo button — gradient primary */
+header nav .nav-tools .button:not(.secondary) {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-radius: 9px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--heading-font-family);
+  background: var(--gradient-dxp);
+  color: #fff;
+  border: none;
+  margin: 0;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+  transition: all 0.25s ease;
+}
+
+header nav .nav-tools .button:not(.secondary):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.55);
+}
+
+/* mobile: stack tools below sections */
+header nav[aria-expanded='true'] .nav-tools {
+  padding: 16px 0 24px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+header nav[aria-expanded='true'] .nav-tools .button,
+header nav[aria-expanded='true'] .nav-tools .button.secondary {
+  text-align: center;
+  padding: 12px 20px;
+  border-radius: 10px;
+}
+
+/* mobile nav items */
+header nav[aria-expanded='true'] .nav-sections ul > li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+header nav[aria-expanded='true'] .nav-sections ul > li > a:any-link {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+header nav[aria-expanded='true'] .nav-sections ul > li > ul {
+  padding-left: 12px;
+  padding-top: 8px;
+}
+
+header nav[aria-expanded='true'] .nav-sections ul > li > ul > li {
+  padding: 6px 0;
+  border-bottom: none;
+}
+
+header nav[aria-expanded='true'] .nav-sections ul > li > ul > li a:any-link {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
 }

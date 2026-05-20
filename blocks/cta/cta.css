@@ -1,15 +1,17 @@
 :root {
-  --cta-bg: #eef2ff;
+  --cta-bg: linear-gradient(135deg, #1a1b4b 0%, #2d1b69 60%, #1a1b4b 100%);
   --cta-radius: 26px;
-  --cta-border: rgb(124 58 237 / 15%);
-  --cta-heading: #0f172a;
-  --cta-copy: #4b5563;
+  --cta-border: rgba(124, 58, 237, 0.2);
+  --cta-heading: var(--c-off-white);
+  --cta-copy: rgba(255, 255, 255, 0.72);
   --cta-button-bg: #7c3aed;
 }
 
 .cta-block {
   background: var(--cta-bg);
   padding: 100px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .cta-block .cta-content {
@@ -17,9 +19,10 @@
   margin: 0 auto;
   text-align: center;
   padding: 48px 32px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--cta-border);
   border-radius: var(--cta-radius);
+  backdrop-filter: blur(8px);
 }
 
 .cta-block .cta-overline {
@@ -66,8 +69,8 @@
 
 .cta-block .btn--secondary {
   background: transparent;
-  border: 1px solid var(--cta-button-bg);
-  color: var(--cta-button-bg);
+  border: 1.5px solid rgba(124, 58, 237, 0.5);
+  color: var(--c-off-white);
 }
 
 .cta-block .cta-meta {
