@@ -44,10 +44,14 @@ export default function decorate(block) {
     const valueEl = document.createElement('div');
     valueEl.className = 'sv';
     valueEl.textContent = valueText;
+    // Move data-aue-prop so UE can identify and inline-edit the value field
+    if (cells[0]) moveInstrumentation(cells[0], valueEl);
 
     const labelEl = document.createElement('div');
     labelEl.className = 'sl';
     labelEl.textContent = labelText;
+    // Move data-aue-prop so UE can identify and inline-edit the label field
+    if (cells[1]) moveInstrumentation(cells[1], labelEl);
 
     item.append(valueEl, labelEl);
     grid.append(item);
@@ -55,6 +59,12 @@ export default function decorate(block) {
   });
 
   block.append(grid);
+
+  // UE loads the page inside an iframe — skip the animation there to prevent
+  // layout thrashing when editor-support.js re-decorates the block on every click.
+  let inEditor = false;
+  try { inEditor = window.self !== window.top; } catch { inEditor = true; }
+  if (inEditor) return;
 
   // Count-up animation on scroll into view
   const observer = new IntersectionObserver((entries) => {
