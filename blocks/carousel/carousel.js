@@ -4,48 +4,56 @@ export default function decorate(block) {
   const rows = [...block.children];
   if (rows.length === 0) return;
 
-  // Build slide elements from XWalk rows
-  // Row cells: 0=category, 1=title, 2=content, 3=ctaUrl/ctaText
-  const slides = rows.map((row) => {
+  // Build slide wrappers from XWalk rows
+  // Row cells: 0=category, 1=title, 2=content(richtext), 3=ctaUrl, 4=ctaText
+  const slideWrappers = rows.map((row) => {
     const cells = [...row.children];
 
-    const slide = document.createElement('article');
-    slide.className = 'carousel__slide';
-    moveInstrumentation(row, slide);
+    const slideWrapper = document.createElement('div');
+    slideWrapper.className = 'carousel__slide';
+
+    const card = document.createElement('article');
+    card.className = 'carousel__card';
+    moveInstrumentation(row, card);
+    slideWrapper.append(card);
 
     if (cells[0]) {
       const category = document.createElement('span');
       category.className = 'card-category';
       category.textContent = cells[0].textContent.trim();
-      moveInstrumentation(cells[0], category);
-      slide.append(category);
+      card.append(category);
     }
 
     if (cells[1]) {
       const title = document.createElement('h3');
+      title.className = 'card-title';
       title.textContent = cells[1].textContent.trim();
-      moveInstrumentation(cells[1], title);
-      slide.append(title);
+      card.append(title);
     }
 
     if (cells[2]) {
-      const text = document.createElement('div');
-      text.className = 'card-text';
-      text.innerHTML = cells[2].innerHTML;
-      moveInstrumentation(cells[2], text);
-      slide.append(text);
+      const textDiv = document.createElement('div');
+      textDiv.className = 'card-text';
+      textDiv.innerHTML = cells[2].innerHTML;
+      // Style any lists as card-points
+      textDiv.querySelectorAll('ul').forEach((ul) => ul.classList.add('card-points'));
+      textDiv.querySelectorAll('li').forEach((li) => li.classList.add('cp-item'));
+      card.append(textDiv);
     }
 
-    if (cells[3]) {
-      const link = cells[3].querySelector('a') || document.createElement('a');
+    // ctaUrl (cells[3]) + ctaText (cells[4])
+    const ctaLink = cells[3]?.querySelector('a');
+    const ctaText = cells[4]?.textContent.trim();
+    if (ctaText || ctaLink) {
+      const link = ctaLink || document.createElement('a');
       link.className = 'card-cta';
-      if (!link.href && cells[3].textContent.trim()) link.textContent = cells[3].textContent.trim();
-      moveInstrumentation(cells[3], link);
-      slide.append(link);
+      if (ctaText) link.textContent = `${ctaText} →`;
+      else if (!link.textContent.trim()) link.textContent = 'Explore →';
+      card.append(link);
     }
 
     row.remove();
-    return slide;
+    return slideWrapper;
   });
 
   // Build carousel DOM
@@ -54,7 +62,7 @@ export default function decorate(block) {
 
   const track = document.createElement('div');
   track.className = 'carousel__track';
-  slides.forEach((slide) => track.append(slide));
+  slideWrappers.forEach((sw) => track.append(sw));
   trackWrapper.append(track);
 
   const controls = document.createElement('div');
@@ -69,6 +77,11 @@ export default function decorate(block) {
   const dotsContainer = document.createElement('div');
   dotsContainer.className = 'carousel__dots';
   dotsContainer.setAttribute('role', 'tablist');
+  dotsContainer.setAttribute('aria-label', 'Slide indicators');
+
+  const counter = document.createElement('span');
+  counter.className = 'carousel__counter';
+  counter.setAttribute('aria-live', 'polite');
 
   const nextBtn = document.createElement('button');
   nextBtn.type = 'button';
@@ -76,27 +89,29 @@ export default function decorate(block) {
   nextBtn.setAttribute('aria-label', 'Next slide');
   nextBtn.textContent = '→';
 
-  controls.append(prevBtn, dotsContainer, nextBtn);
+  controls.append(prevBtn, dotsContainer, counter, nextBtn);
   block.replaceChildren(trackWrapper, controls);
 
   // Carousel logic
   let currentIndex = 0;
 
   function updateCarousel() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
+    const slideWidth = slideWrappers[0].getBoundingClientRect().width;
     track.style.transform = `translateX(-${currentIndex * (slideWidth + 24)}px)`;
     [...dotsContainer.children].forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+    counter.textContent = `${currentIndex + 1} / ${slideWrappers.length}`;
   }
 
   function goToSlide(index) {
-    currentIndex = (index + slides.length) % slides.length;
+    currentIndex = (index + slideWrappers.length) % slideWrappers.length;
     updateCarousel();
   }
 
-  slides.forEach((_, i) => {
+  slideWrappers.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'carousel__dot';
+    dot.setAttribute('role', 'tab');
     dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
     dot.addEventListener('click', () => goToSlide(i));
     dotsContainer.append(dot);
