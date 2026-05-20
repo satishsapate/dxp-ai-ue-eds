@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="AI Capabilities"
+        jcr:uuid="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="AI Capabilities"
+                    badgeText="ZensAI Intelligence"
+                    headingPrefix="Intelligence Built Into"
+                    headingAccent="Every Experience."
+                    description="&lt;p&gt;ZensAI isn&apos;t an add-on &#8212; it&apos;s the engine at the core of DXP AI. From semantic search to generative content and predictive analytics, every capability is powered by enterprise-grade AI.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <features
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="AI-Driven Semantic Search"
+                        text="&lt;p&gt;Go beyond keyword matching. ZensAI understands intent, context, and meaning &#8212; delivering results that are genuinely relevant to every user.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Natural language query understanding&lt;/li&gt;&lt;li&gt;Synonym &amp;amp; concept expansion&lt;/li&gt;&lt;li&gt;Federated search across all content repos&lt;/li&gt;&lt;li&gt;Faceted filtering &amp;amp; contextual ranking&lt;/li&gt;&lt;li&gt;Search analytics &amp;amp; zero-result alerts&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Content Generation &amp; Summarization"
+                        text="&lt;p&gt;Accelerate content production with AI that drafts, rewrites, translates, and summarizes &#8212; in your brand voice, at scale.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;AI-assisted page &amp;amp; article drafting&lt;/li&gt;&lt;li&gt;Brand tone &amp;amp; style guide enforcement&lt;/li&gt;&lt;li&gt;Auto-summarization for email &amp;amp; social snippets&lt;/li&gt;&lt;li&gt;Multi-language generation (40+ languages)&lt;/li&gt;&lt;li&gt;SEO metadata generation&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Conversational AI &amp; Virtual Agents"
+                        text="&lt;p&gt;Deploy intelligent virtual agents that understand your product, your policies, and your customers &#8212; and resolve issues without human escalation.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Retrieval-augmented generation (RAG)&lt;/li&gt;&lt;li&gt;CRM &amp;amp; knowledge base integration&lt;/li&gt;&lt;li&gt;Multi-turn conversation memory&lt;/li&gt;&lt;li&gt;Escalation to live agent workflows&lt;/li&gt;&lt;li&gt;Voice &amp;amp; chat channel support&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Intelligent Recommendations"
+                        text="&lt;p&gt;Surface the right content, products, and next actions to every user &#8212; based on behavior, profile, and predictive signals.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Collaborative &amp;amp; content-based filtering&lt;/li&gt;&lt;li&gt;Real-time behavioral signals&lt;/li&gt;&lt;li&gt;Cold-start handling for new users&lt;/li&gt;&lt;li&gt;A/B &amp;amp; bandit-tested recommendation slots&lt;/li&gt;&lt;li&gt;Business rule overrides &amp;amp; boosts&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_4
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Predictive Intelligence"
+                        text="&lt;p&gt;Anticipate user needs, flag churn risk, and score leads &#8212; before your team has to ask the question.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Churn probability scoring&lt;/li&gt;&lt;li&gt;Lead &amp;amp; account qualification models&lt;/li&gt;&lt;li&gt;Content propensity scores&lt;/li&gt;&lt;li&gt;Cohort-level trend forecasting&lt;/li&gt;&lt;li&gt;CRM &amp;amp; MAP push integrations&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_5
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Intelligent Content Operations"
+                        text="&lt;p&gt;Automate the operational burden of content governance &#8212; from tagging and classification to quality scoring and archival.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Auto-tagging with taxonomy enforcement&lt;/li&gt;&lt;li&gt;Duplicate &amp;amp; near-duplicate detection&lt;/li&gt;&lt;li&gt;Content quality &amp;amp; readability scoring&lt;/li&gt;&lt;li&gt;Staleness detection &amp;amp; auto-archival&lt;/li&gt;&lt;li&gt;Compliance flag detection (PII, brand risk)&lt;/li&gt;&lt;/ul&gt;"/>
+                </features>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <section_dark
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="section-dark"
+                    model="section-dark"
+                    modelFields="[heading@text,text@richtext]"
+                    name="Section Dark"
+                    heading="ZensAI by the Numbers"
+                    text="&lt;p&gt;Real outcomes from enterprise deployments across financial services, retail, healthcare, and manufacturing.&lt;/p&gt;"/>
+                <stats_band
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="stats-band"
+                    filter="stats-band"
+                    name="Stats Band">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="stats-item"
+                        name="Stats Item"
+                        value="68%"
+                        label="Higher Engagement"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="stats-item"
+                        name="Stats Item"
+                        value="3&#215;"
+                        label="Faster Content Creation"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="stats-item"
+                        name="Stats Item"
+                        value="92%"
+                        label="Search Relevance Score"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="stats-item"
+                        name="Stats Item"
+                        value="40%"
+                        label="Support Ticket Reduction"/>
+                </stats_band>
+            </section_3>
+            <section_4
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    overline="See ZensAI in Action"
+                    heading="Put ZensAI to Work for Your Brand"
+                    description="&lt;p&gt;Get a personalized AI capabilities demo tailored to your industry, your content, and your use cases.&lt;/p&gt;"
+                    primaryText="Request an AI Demo"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="View Platform"
+                    secondaryUrl="/content/my-dxp-site/platform"
+                    metaText="No commitment required · Tailored to your industry"/>
+            </section_4>
+        </root>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Platform"
+        jcr:uuid="e5f6a7b8-c9d0-1234-5678-9abcdef01234"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Platform"
+                    badgeText="Platform Overview"
+                    headingPrefix="One AI-Native Platform."
+                    headingAccent="Every Digital Experience."
+                    description="&lt;p&gt;DXP AI brings together content management, personalization, multi-channel delivery, analytics, and AI capabilities into a single, composable platform &#8212; powered by ZensAI.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <features
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="AI Content Management"
+                        text="&lt;p&gt;Create, manage, and reuse structured and unstructured content across every channel with AI-assisted authoring, smart tagging, and workflow automation.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;WYSIWYG and structured content editors&lt;/li&gt;&lt;li&gt;AI-assisted copywriting &amp;amp; summarization&lt;/li&gt;&lt;li&gt;Role-based authoring &amp;amp; multi-step approval&lt;/li&gt;&lt;li&gt;Digital Asset Management (DAM)&lt;/li&gt;&lt;li&gt;Headless content via GraphQL &amp;amp; REST APIs&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Personalization Engine"
+                        text="&lt;p&gt;Serve hyper-relevant content to every visitor in real time using ML-driven segmentation, behavioral targeting, and intelligent recommendations.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Real-time behavioral profiling&lt;/li&gt;&lt;li&gt;Rule-based &amp;amp; ML-driven segments&lt;/li&gt;&lt;li&gt;A/B, multivariate &amp;amp; bandit testing&lt;/li&gt;&lt;li&gt;Contextual recommendations engine&lt;/li&gt;&lt;li&gt;Progressive user profile enrichment&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Multi-Channel Delivery"
+                        text="&lt;p&gt;Deliver consistent, high-performance experiences to websites, mobile apps, portals, voice interfaces, and headless frontends &#8212; all from one source of truth.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Web, mobile &amp;amp; PWA delivery&lt;/li&gt;&lt;li&gt;Customer, employee &amp;amp; partner portals&lt;/li&gt;&lt;li&gt;Headless &amp;amp; composable APIs&lt;/li&gt;&lt;li&gt;Edge CDN with global distribution&lt;/li&gt;&lt;li&gt;Email, push &amp;amp; in-app notification delivery&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="ZensAI Intelligence"
+                        text="&lt;p&gt;The AI brain of the platform &#8212; powering intelligent search, conversational interfaces, predictive analytics, and automated content operations.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Semantic AI-driven search&lt;/li&gt;&lt;li&gt;Conversational AI &amp;amp; virtual agents&lt;/li&gt;&lt;li&gt;Content generation &amp;amp; summarization&lt;/li&gt;&lt;li&gt;Predictive lead &amp;amp; content scoring&lt;/li&gt;&lt;li&gt;Automated tagging &amp;amp; classification&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_4
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Analytics &amp; Insights"
+                        text="&lt;p&gt;Understand every interaction with real-time dashboards, funnel analysis, and AI-powered insights that help you continuously optimize experiences.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Real-time engagement dashboards&lt;/li&gt;&lt;li&gt;Content performance &amp;amp; conversion tracking&lt;/li&gt;&lt;li&gt;Audience segmentation reports&lt;/li&gt;&lt;li&gt;Custom KPI dashboards&lt;/li&gt;&lt;li&gt;Data export &amp;amp; BI integrations&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_5
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Integration Hub"
+                        text="&lt;p&gt;Connect DXP AI to your entire enterprise ecosystem &#8212; CRM, ERP, marketing automation, analytics tools, and more &#8212; via open APIs and pre-built connectors.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Salesforce, SAP, Microsoft Dynamics&lt;/li&gt;&lt;li&gt;Marketo, HubSpot, Pardot&lt;/li&gt;&lt;li&gt;50+ pre-built enterprise connectors&lt;/li&gt;&lt;li&gt;RESTful APIs &amp;amp; webhooks&lt;/li&gt;&lt;li&gt;Custom connector SDK&lt;/li&gt;&lt;/ul&gt;"/>
+                </features>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <section_dark
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="section-dark"
+                    model="section-dark"
+                    modelFields="[heading@text,text@richtext]"
+                    name="Section Dark"
+                    heading="Composable &amp; Cloud-Native by Design"
+                    text="&lt;p&gt;Deploy headless, hybrid, or traditional &#8212; DXP AI adapts to your architecture, not the other way around.&lt;/p&gt;"/>
+                <features_arch
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Headless &amp; Composable"
+                        text="&lt;p&gt;Decouple front-end from back-end. Serve content via GraphQL or REST to any framework &#8212; Next.js, React, Vue, or native mobile apps.&lt;/p&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Multi-Cloud Ready"
+                        text="&lt;p&gt;Deploy on AWS, Azure, or GCP. Auto-scaling, containerized microservices, and 99.9% uptime SLA backed by global CDN edge nodes.&lt;/p&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Enterprise-Grade Security"
+                        text="&lt;p&gt;SOC 2 Type II, ISO 27001, GDPR, HIPAA-ready. Role-based access control, encryption at rest and in transit, audit logging.&lt;/p&gt;"/>
+                </features_arch>
+            </section_3>
+            <section_4
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    heading="See the Full Platform in Action"
+                    description="&lt;p&gt;Get a personalized walkthrough of DXP AI with one of our platform architects.&lt;/p&gt;"
+                    primaryText="Request a Demo"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="Read the Docs"
+                    secondaryUrl="/content/my-dxp-site/documentation"/>
+            </section_4>
+        </root>
+    </jcr:content>
+</jcr:root>

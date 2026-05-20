@@ -107,7 +107,8 @@ header .nav-item {
   position: relative;
 }
 
-header .nav-item > a {
+header .nav-item > a,
+header .nav-item > button.nav-drop-toggle {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -115,14 +116,20 @@ header .nav-item > a {
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
+  font-family: var(--body-font-family);
   color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
   transition: color 0.2s ease, background 0.2s ease;
   white-space: nowrap;
 }
 
 header .nav-item > a:hover,
-header .nav-item.open > a {
+header .nav-item.open > a,
+header .nav-item > button.nav-drop-toggle:hover,
+header .nav-item.open > button.nav-drop-toggle {
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
 }

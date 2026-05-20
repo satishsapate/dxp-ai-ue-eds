@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Content-Package-Id: my_packages:My DXP site Content
+Content-Package-Roots: /content/my-dxp-site
+Content-Package-Type: content
+

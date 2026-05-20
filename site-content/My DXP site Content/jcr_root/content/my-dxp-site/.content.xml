@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:allowedTemplates="[/libs/core/franklin/templates/.*]"
+        cq:conf="/conf/my-dxp-site"
+        cq:isDelivered="{Boolean}false"
+        cq:lastReplicated="{Date}2026-05-19T16:07:24.376Z"
+        cq:lastReplicated_publish="{Date}2026-05-19T16:07:24.376Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
+        cq:template="[/libs/core/franklin/templates/page]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="My DXP Site"
+        jcr:uuid="731d92f2-d700-4cb3-b2e9-5e6c9dc1a121"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section"/>
+        </root>
+    </jcr:content>
+    <footer/>
+    <index/>
+    <nav/>
+    <about/>
+    <test/>
+    <pricing/>
+    <platform/>
+    <solutions/>
+    <contact/>
+    <ai-capabilities/>
+    <why-dxp/>
+    <security/>
+    <integrations/>
+    <blog/>
+    <case-studies/>
+    <resources/>
+    <documentation/>
+</jcr:root>

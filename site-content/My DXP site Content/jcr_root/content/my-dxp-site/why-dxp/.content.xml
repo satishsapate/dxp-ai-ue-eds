@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Why DXP AI"
+        jcr:uuid="b2c3d4e5-f6a7-8901-bcde-f12345678901"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Why DXP AI"
+                    badgeText="The Case for DXP AI"
+                    headingPrefix="The Case for an"
+                    headingAccent="AI-First DXP."
+                    description="&lt;p&gt;Traditional CMS platforms were built for a different era. DXP AI is purpose-built for the age of AI &#8212; where every experience must be personalized, intelligent, and continuously optimized.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <richtext
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="richtext"
+                    model="richtext-block"
+                    modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
+                    name="Richtext"
+                    overline="DXP vs CMS"
+                    heading="Why a CMS Is No Longer Enough"
+                    lead="A CMS manages content. A DXP orchestrates experiences. Here&apos;s what that difference means in practice."
+                    text="&lt;h3&gt;1. Scope: Pages vs. Journeys&lt;/h3&gt;&lt;p&gt;A CMS manages individual pages. DXP AI orchestrates end-to-end customer journeys across web, mobile, portal, email, and voice &#8212; with consistent personalization at every touchpoint.&lt;/p&gt;&lt;h3&gt;2. Intelligence: Static vs. Adaptive&lt;/h3&gt;&lt;p&gt;A CMS serves the same content to everyone. DXP AI uses ZensAI behavioral intelligence to adapt every experience in real time &#8212; based on who the user is, what they&apos;ve done, and what they&apos;re likely to do next.&lt;/p&gt;&lt;h3&gt;3. Integration: Siloed vs. Connected&lt;/h3&gt;&lt;p&gt;A CMS requires expensive custom integrations to connect to your CRM, ERP, or analytics stack. DXP AI ships with 50+ enterprise connectors and an open API framework that makes your entire tech stack work as one.&lt;/p&gt;&lt;h3&gt;4. Analytics: Vanity Metrics vs. Actionable Insights&lt;/h3&gt;&lt;p&gt;A CMS gives you page views and bounce rates. DXP AI gives you funnel analysis, predictive lead scoring, content attribution, and AI-generated recommendations &#8212; so you can act, not just report.&lt;/p&gt;&lt;h3&gt;5. AI Capability: Bolt-On vs. Built-In&lt;/h3&gt;&lt;p&gt;Adding AI to a legacy CMS means stitching together third-party tools with limited context and no unified data model. ZensAI is the engine at the core of DXP AI &#8212; not an afterthought.&lt;/p&gt;"
+                    sidebarTitle="Still Deciding?"
+                    sidebarText="&lt;p&gt;Not sure if DXP AI is right for your organization? Our solutions team can help you evaluate your current stack, identify gaps, and map out a migration path &#8212; no pressure, no sales tactics.&lt;/p&gt;"
+                    ctaUrl="/content/my-dxp-site/contact"
+                    ctaText="Talk to an Expert"/>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <section_light
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="section-light"
+                    model="section-light"
+                    modelFields="[heading@text,text@richtext]"
+                    name="Section Light"
+                    heading="How DXP AI Compares"
+                    text="&lt;p&gt;See how DXP AI stacks up against the leading enterprise platforms.&lt;/p&gt;"/>
+                <features
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="DXP AI"
+                        text="&lt;p&gt;AI-native from the ground up. ZensAI intelligence built into every module &#8212; content, personalization, search, analytics, and operations. Composable architecture with 50+ connectors. 30-day free trial. Fastest time-to-value in the market.&lt;/p&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Adobe Experience Manager"
+                        text="&lt;p&gt;Powerful and mature platform with deep Adobe ecosystem integration. Complex implementation, high licensing cost, and significant time-to-value. AI capabilities bolted on via Sensei &#8212; not native. Best suited for large enterprises with deep AEM expertise.&lt;/p&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Sitecore"
+                        text="&lt;p&gt;Strong personalization and experimentation capabilities. Fragmented product portfolio post-acquisition. High TCO and complex composable architecture requires significant dev investment. AI via third-party integrations.&lt;/p&gt;"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Liferay"
+                        text="&lt;p&gt;Excellent for employee and partner portals with strong Java ecosystem. Limited marketing capabilities and AI features. Better suited for internal experience platforms than customer-facing DXP deployments.&lt;/p&gt;"/>
+                </features>
+            </section_3>
+            <section_4
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    overline="Ready to Make the Switch?"
+                    heading="Join 50+ Organizations That Chose DXP AI"
+                    description="&lt;p&gt;Our migration team has helped organizations move from AEM, Sitecore, and Liferay to DXP AI &#8212; with zero content loss and faster time-to-value than expected.&lt;/p&gt;"
+                    primaryText="Talk to a Migration Expert"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="View Pricing"
+                    secondaryUrl="/content/my-dxp-site/pricing"
+                    metaText="Average migration completed in 8&#8211;12 weeks"/>
+            </section_4>
+        </root>
+    </jcr:content>
+</jcr:root>

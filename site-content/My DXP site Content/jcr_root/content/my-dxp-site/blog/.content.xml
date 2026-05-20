@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Blog"
+        jcr:uuid="e5f6a7b8-c9d0-1234-ef01-345678901234"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Blog"
+                    badgeText="DXP AI Blog"
+                    headingPrefix="Digital Experience"
+                    headingAccent="Intelligence &amp; Ideas."
+                    description="&lt;p&gt;Insights, strategies, and practical guides from the DXP AI team &#8212; helping enterprise teams build smarter, faster, and more personalized digital experiences.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <articles
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="articles"
+                    filter="articles"
+                    name="Articles">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="AI &amp; Personalization"
+                        title="How ZensAI Semantic Search Increases Conversion by 68%"
+                        text="&lt;p&gt;Traditional keyword search leaves money on the table. Discover how ZensAI&apos;s intent-based semantic search engine has helped enterprises increase content discovery, reduce zero-result rates, and drive measurable conversion improvements.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/blog"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="Content Operations"
+                        title="The AI Content Operations Playbook for Enterprise Teams"
+                        text="&lt;p&gt;Managing content at enterprise scale is no longer a human-only job. This practical guide walks through how leading brands are using AI to automate tagging, detect staleness, flag compliance risks, and cut content review time by 60%.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/blog"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="Platform"
+                        title="Headless vs. Hybrid vs. Traditional DXP: Which Architecture Is Right for You?"
+                        text="&lt;p&gt;The architecture debate has never been more nuanced. We break down the real trade-offs between headless, hybrid, and traditional DXP deployment models &#8212; with a practical decision framework for enterprise architects.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/blog"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="Case Study"
+                        title="How a Tier-1 Bank Replaced 12 Legacy Portals with One DXP AI Platform"
+                        text="&lt;p&gt;Discover how a leading financial institution consolidated fragmented digital properties, reduced portal maintenance costs by 76%, and launched their new unified customer portal in just 12 weeks.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/case-studies"/>
+                    <item_4
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="Security"
+                        title="What the DPDP Act Means for Your Digital Experience Platform"
+                        text="&lt;p&gt;India&apos;s Digital Personal Data Protection Act 2023 has significant implications for how enterprises collect, process, and store user data in their DXP platforms. Here&apos;s what you need to know &#8212; and how DXP AI helps you comply.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/security"/>
+                    <item_5
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="article-item"
+                        name="Article Item"
+                        category="Strategy"
+                        title="From CMS to DXP: A Practical Migration Guide for Enterprise Teams"
+                        text="&lt;p&gt;Migrating from a legacy CMS to a modern DXP is a significant undertaking &#8212; but it doesn&apos;t have to be painful. This guide covers the full migration lifecycle from stakeholder alignment to content audit, technical migration, and go-live.&lt;/p&gt;"
+                        ctaText="Read Article"
+                        ctaUrl="/content/my-dxp-site/why-dxp"/>
+                </articles>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    overline="Stay Ahead of the Curve"
+                    heading="Get DXP AI Insights in Your Inbox"
+                    description="&lt;p&gt;Join 5,000+ enterprise digital leaders who receive our weekly digest of DXP AI insights, case studies, and practical strategies.&lt;/p&gt;"
+                    primaryText="Subscribe to Newsletter"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="View Resources"
+                    secondaryUrl="/content/my-dxp-site/resources"
+                    metaText="Weekly digest · No spam · Unsubscribe anytime"/>
+            </section_3>
+        </root>
+    </jcr:content>
+</jcr:root>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>FileVault Package Properties</comment>
+<entry key="description"></entry>
+<entry key="generator">org.apache.jackrabbit.vault:4.2.0</entry>
+<entry key="packageType">content</entry>
+<entry key="lastWrappedBy">satish.sapate@zensar.com</entry>
+<entry key="packageFormatVersion">2</entry>
+<entry key="group">my_packages</entry>
+<entry key="created">2026-05-19T20:46:50.381Z</entry>
+<entry key="lastModifiedBy">satish.sapate@zensar.com</entry>
+<entry key="buildCount">3</entry>
+<entry key="lastWrapped">2026-05-19T21:00:00.000Z</entry>
+<entry key="version">3.0</entry>
+<entry key="dependencies"></entry>
+<entry key="createdBy">satish.sapate@zensar.com</entry>
+<entry key="name">My DXP site Content</entry>
+<entry key="lastModified">2026-05-19T21:00:00.000Z</entry>
+</properties>

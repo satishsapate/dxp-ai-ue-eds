@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Case Studies"
+        jcr:uuid="f6a7b8c9-d0e1-2345-f012-456789012345"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Case Studies"
+                    badgeText="Customer Stories"
+                    headingPrefix="Real Outcomes."
+                    headingAccent="Measurable Results."
+                    description="&lt;p&gt;See how global enterprises across financial services, retail, healthcare, and manufacturing are transforming their digital experiences with DXP AI.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <section_light
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="section-light"
+                    model="section-light"
+                    modelFields="[heading@text,text@richtext]"
+                    name="Section Light"
+                    heading="Featured Case Studies"
+                    text="&lt;p&gt;Explore real-world deployments across industries.&lt;/p&gt;"/>
+                <features
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Tier-1 Global Bank &#8212; Financial Services"
+                        text="&lt;p&gt;A leading pan-Asian bank consolidated 12 legacy customer portals into a single DXP AI platform &#8212; delivering a unified, personalized experience to 8 million retail and corporate customers.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;68% increase in digital channel engagement&lt;/li&gt;&lt;li&gt;40% reduction in branch visits for routine transactions&lt;/li&gt;&lt;li&gt;Launched full platform in 12 weeks&lt;/li&gt;&lt;li&gt;76% reduction in portal maintenance cost&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Pan-India Retailer &#8212; E-Commerce &amp; Retail"
+                        text="&lt;p&gt;India&apos;s third-largest omnichannel retailer replaced their fragmented CMS and e-commerce stack with DXP AI &#8212; enabling AI-driven personalization across 2,000+ store locations and their digital platform.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;4.2&#215; faster content production cycle&lt;/li&gt;&lt;li&gt;32% increase in average order value via ZensAI recommendations&lt;/li&gt;&lt;li&gt;76% reduction in technology stack cost&lt;/li&gt;&lt;li&gt;Single platform serving web, mobile, and in-store kiosk&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Regional Health System &#8212; Healthcare"
+                        text="&lt;p&gt;A network of 45 hospitals and clinics deployed DXP AI as their unified patient and employee portal platform &#8212; replacing 6 separate legacy portals and dramatically improving patient digital self-service.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;92% patient portal adoption within 6 months of launch&lt;/li&gt;&lt;li&gt;60% reduction in patient call center volume&lt;/li&gt;&lt;li&gt;HIPAA-compliant with full audit trail&lt;/li&gt;&lt;li&gt;Full deployment completed in 6 months&lt;/li&gt;&lt;/ul&gt;"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Global Manufacturer &#8212; Industrial &amp; B2B"
+                        text="&lt;p&gt;A Fortune 500 industrial manufacturer deployed DXP AI to replace 7 regional dealer and distributor portals with one global platform &#8212; integrating SAP, Salesforce, and ServiceNow in a single unified experience.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;7 regional portals replaced by 1 global platform&lt;/li&gt;&lt;li&gt;3&#215; increase in distributor self-service rate&lt;/li&gt;&lt;li&gt;Dealer onboarding time reduced from 2 weeks to 2 days&lt;/li&gt;&lt;li&gt;SAP + Salesforce + ServiceNow integration in 8 weeks&lt;/li&gt;&lt;/ul&gt;"/>
+                </features>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    overline="Your Story Starts Here"
+                    heading="Could Your Brand Be Our Next Success Story?"
+                    description="&lt;p&gt;Talk to one of our solutions specialists about your specific challenges. We&apos;ll help you envision what DXP AI can deliver for your organization.&lt;/p&gt;"
+                    primaryText="Request a Demo"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="View Pricing"
+                    secondaryUrl="/content/my-dxp-site/pricing"
+                    metaText="500+ enterprise deployments · 12 industries · Global coverage"/>
+            </section_3>
+        </root>
+    </jcr:content>
+</jcr:root>

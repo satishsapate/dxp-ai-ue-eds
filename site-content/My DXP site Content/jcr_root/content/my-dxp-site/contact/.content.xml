@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Contact"
+        jcr:uuid="c3d4e5f6-a7b8-9012-3456-789abcdef012"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Contact"
+                    badgeText="Get in Touch"
+                    headingPrefix="Let&apos;s Build Something"
+                    headingAccent="Extraordinary Together"
+                    description="&lt;p&gt;Whether you&apos;re ready to start a trial, want a product demo, or just have questions &#8212; our team is here to help.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <richtext
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="richtext"
+                    model="richtext-block"
+                    modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
+                    name="Richtext"
+                    overline="Contact DXP AI"
+                    heading="We&apos;d Love to Hear from You"
+                    lead="Our solutions team typically responds within 1 business day. All inquiries are handled with full confidentiality."
+                    text="&lt;h3&gt;Request a Product Demo&lt;/h3&gt;&lt;p&gt;See DXP AI in action with a personalized walkthrough from one of our platform architects. We&apos;ll tailor the demo to your industry and specific use cases.&lt;/p&gt;&lt;h3&gt;Start a Free Trial&lt;/h3&gt;&lt;p&gt;Get 30-day access to the full DXP AI Starter or Professional platform &#8212; no credit card required. Our onboarding team will guide you every step of the way.&lt;/p&gt;&lt;h3&gt;Talk to Sales&lt;/h3&gt;&lt;p&gt;Have questions about pricing, enterprise contracts, or custom implementation? Our sales team will work with you to find the right solution.&lt;/p&gt;&lt;h3&gt;Partnership Inquiries&lt;/h3&gt;&lt;p&gt;Interested in becoming a DXP AI technology or implementation partner? We&apos;d love to explore how we can work together.&lt;/p&gt;"
+                    sidebarTitle="Contact Details"
+                    sidebarText="&lt;p&gt;&lt;strong&gt;ZensAI / DXP AI&lt;/strong&gt;&lt;br/&gt;A Zensar Technologies Product&lt;br/&gt;Pune, India&lt;br/&gt;&lt;br/&gt;&lt;strong&gt;Sales:&lt;/strong&gt; sales@dxp-ai.com&lt;br/&gt;&lt;strong&gt;Support:&lt;/strong&gt; support@dxp-ai.com&lt;br/&gt;&lt;strong&gt;Partnerships:&lt;/strong&gt; partners@dxp-ai.com&lt;/p&gt;"
+                    ctaUrl="/content/my-dxp-site/pricing"
+                    ctaText="View Pricing"/>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <features
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="features"
+                    filter="features"
+                    name="Features">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="Fast Response"
+                        text="&lt;p&gt;Our team responds to all sales and support inquiries within 1 business day. Enterprise clients get dedicated account support.&lt;/p&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="No Pressure Approach"
+                        text="&lt;p&gt;We believe in helping you find the right solution, not the most expensive one. Our sales process is consultative and transparent.&lt;/p&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="features-item"
+                        name="Features Item"
+                        heading="30-Day Free Trial"
+                        text="&lt;p&gt;Start with a fully featured trial &#8212; no credit card, no commitments. Our onboarding team helps you get value from day one.&lt;/p&gt;"/>
+                </features>
+            </section_3>
+            <section_4
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    overline="Ready to Get Started?"
+                    heading="Join 500+ Enterprises Delivering AI-First Experiences"
+                    description="&lt;p&gt;Start your free 30-day trial today or book a personalized demo with one of our platform experts.&lt;/p&gt;"
+                    primaryText="Start Free Trial"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    secondaryText="View Pricing"
+                    secondaryUrl="/content/my-dxp-site/pricing"
+                    metaText="No credit card required · Full platform access · Dedicated onboarding"/>
+            </section_4>
+        </root>
+    </jcr:content>
+</jcr:root>

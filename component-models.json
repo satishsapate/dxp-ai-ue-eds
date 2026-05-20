@@ -384,25 +384,49 @@
     "id": "hero",
     "fields": [
       {
-        "component": "reference",
+        "component": "text",
         "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "name": "eyebrow",
+        "label": "Eyebrow Text",
+        "value": "Powered by ZensAI · Zensar Technologies"
+      },
+      {
+        "component": "richtext",
+        "name": "heading",
+        "label": "Heading (use <em> for gradient accent words)",
+        "value": "<h1>The Future of<br><em>Digital Experience</em><br>is AI&#8209;First</h1>"
+      },
+      {
+        "component": "richtext",
+        "name": "subheading",
+        "label": "Subheading",
+        "value": "<p>DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation — all powered by ZensAI.</p>"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
+        "name": "primaryCtaText",
+        "label": "Primary CTA Text",
+        "value": "Request a Demo"
       },
       {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "primaryCtaUrl",
+        "label": "Primary CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "secondaryCtaText",
+        "label": "Secondary CTA Text",
+        "value": "Explore Platform"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "secondaryCtaUrl",
+        "label": "Secondary CTA Link"
       }
     ]
   },

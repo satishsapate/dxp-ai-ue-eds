@@ -1,8 +1,42 @@
 /**
- * DXP AI Hero block — renders full hero HTML directly to match html-kit
+ * Hero block — content driven by AEM model fields.
+ * Model fields (cells within the single block row, in order):
+ *   0: eyebrow       — text
+ *   1: heading       — richtext (use <em> around accent words → styled as gradient)
+ *   2: subheading    — richtext
+ *   3: primaryCtaText  — text
+ *   4: primaryCtaUrl   — aem-content
+ *   5: secondaryCtaText — text
+ *   6: secondaryCtaUrl  — aem-content
+ *
+ * Decorative elements (orbs, dashboard card, trust badges) are design-system
+ * defaults rendered by JS — no AEM content required for these.
  */
 export default function decorate(block) {
-  block.closest('.section').classList.add('hero-section-full');
+  block.closest('.section')?.classList.add('hero-section-full');
+
+  // All model fields land in a single row; read cells before clearing block
+  const row = block.querySelector(':scope > div');
+  const cells = row ? [...row.children] : [];
+
+  const eyebrow = cells[0]?.textContent.trim()
+    || 'Powered by ZensAI · Zensar Technologies';
+
+  // heading: richtext — replace <em> with gradient accent span
+  let headingHTML = cells[1]?.innerHTML.trim()
+    || '<h1>The Future of<br><em>Digital Experience</em><br>is AI&#8209;First</h1>';
+  headingHTML = headingHTML.replace(/<em>([\s\S]*?)<\/em>/gi, '<span class="hero-accent">$1</span>');
+
+  const subHTML = cells[2]?.innerHTML.trim()
+    || '<p>DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation — all powered by ZensAI to create experiences your customers actually remember.</p>';
+
+  const primaryText = cells[3]?.textContent.trim() || 'Request a Demo';
+  const primaryHref = cells[4]?.querySelector('a')?.getAttribute('href')
+    || cells[4]?.textContent.trim() || '/contact';
+
+  const secondaryText = cells[5]?.textContent.trim() || 'Explore Platform';
+  const secondaryHref = cells[6]?.querySelector('a')?.getAttribute('href')
+    || cells[6]?.textContent.trim() || '/platform';
 
   block.innerHTML = `
     <div class="hero-orb hero-orb--1" aria-hidden="true"></div>
@@ -12,22 +46,16 @@ export default function decorate(block) {
       <div class="hero-content">
         <div class="hero-eyebrow">
           <span class="hero-dot" aria-hidden="true"></span>
-          Powered by ZensAI · Zensar Technologies
+          ${eyebrow}
         </div>
-        <h1 class="hero-heading">
-          The Future of<br>
-          <span class="hero-accent">Digital Experience</span><br>
-          is AI&#8209;First
-        </h1>
-        <p class="hero-sub">
-          DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation — all powered by ZensAI to create experiences your customers actually remember.
-        </p>
+        <div class="hero-heading">${headingHTML}</div>
+        <div class="hero-sub">${subHTML}</div>
         <div class="hero-actions">
-          <a href="/contact" class="hero-btn-primary">
-            Request a Demo <span aria-hidden="true">→</span>
+          <a href="${primaryHref}" class="hero-btn-primary">
+            ${primaryText} <span aria-hidden="true">→</span>
           </a>
-          <a href="/platform" class="hero-btn-secondary">
-            <span aria-hidden="true">▶</span>&nbsp; Explore Platform
+          <a href="${secondaryHref}" class="hero-btn-secondary">
+            <span aria-hidden="true">▶</span>&nbsp; ${secondaryText}
           </a>
         </div>
         <div class="hero-trust">
@@ -67,7 +95,6 @@ export default function decorate(block) {
     </div>
   `;
 
-  // Scroll-reveal animation for trust items
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });

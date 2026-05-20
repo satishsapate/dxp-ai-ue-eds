@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T21:00:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:versionable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Header"
+        jcr:uuid="1838320d-edc6-4fb3-b6e7-e01af58a97fb"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <text
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/text/v1/text"
+                    text="&lt;p&gt;&lt;a href=&quot;/&quot;&gt;DXP AI&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Powered by ZensAI&lt;/p&gt;"/>
+            </section>
+            <section_0
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <text
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/text/v1/text"
+                    text="&lt;ul&gt;&lt;li&gt;Platform&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/platform&quot;&gt;Platform Overview&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/ai-capabilities&quot;&gt;AI Capabilities&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/integrations&quot;&gt;Integrations&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/solutions&quot;&gt;Solutions&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/why-dxp&quot;&gt;Why DXP AI&lt;/a&gt;&lt;/li&gt;&lt;li&gt;Resources&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/blog&quot;&gt;Blog &amp;amp; Articles&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/case-studies&quot;&gt;Case Studies&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/documentation&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;"/>
+            </section_0>
+            <section_1
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <text
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/text/v1/text"
+                    text="&lt;p&gt;&lt;em&gt;&lt;a href=&quot;/contact&quot;&gt;Login&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;/contact&quot;&gt;Request Demo&lt;/a&gt;&lt;/p&gt;"/>
+            </section_1>
+        </root>
+    </jcr:content>
+</jcr:root>

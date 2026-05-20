@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:mixinTypes="[mix:referenceable]"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Pricing"
+        jcr:uuid="f6a7b8c9-d0e1-2345-6789-abcdef012345"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <page_hero
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="page-hero"
+                    model="page-hero"
+                    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+                    name="Page Hero"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    breadcrumbCurrent="Pricing"
+                    badgeText="Pricing"
+                    headingPrefix="Transparent Pricing."
+                    headingAccent="No Surprises."
+                    description="&lt;p&gt;Choose the DXP AI plan that fits your scale. All plans include ZensAI intelligence, 99.9% SLA, and world-class support. Scale up as you grow.&lt;/p&gt;"/>
+            </section>
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <pricing
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="pricing"
+                    filter="pricing"
+                    name="Pricing">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="pricing-plan"
+                        name="Pricing Plan"
+                        planName="Starter"
+                        price="$2,499"
+                        period="/month"
+                        description="Perfect for growing digital teams and mid-market brands."
+                        features="&lt;ul&gt;&lt;li&gt;Up to 5 websites / portals&lt;/li&gt;&lt;li&gt;AI Content Management&lt;/li&gt;&lt;li&gt;Basic Personalization&lt;/li&gt;&lt;li&gt;10 Integration connectors&lt;/li&gt;&lt;li&gt;ZensAI Semantic Search&lt;/li&gt;&lt;li&gt;Analytics Dashboard&lt;/li&gt;&lt;/ul&gt;"
+                        ctaText="Start Free Trial"
+                        ctaUrl="/content/my-dxp-site/contact"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="pricing-plan"
+                        name="Pricing Plan"
+                        planName="Professional"
+                        price="$7,999"
+                        period="/month"
+                        description="The full DXP AI experience for ambitious enterprise brands."
+                        features="&lt;ul&gt;&lt;li&gt;Unlimited websites / portals&lt;/li&gt;&lt;li&gt;Full AI Content Suite&lt;/li&gt;&lt;li&gt;Advanced Personalization &amp;amp; A/B&lt;/li&gt;&lt;li&gt;30+ integration connectors&lt;/li&gt;&lt;li&gt;ZensAI Conversational AI&lt;/li&gt;&lt;li&gt;Predictive Analytics&lt;/li&gt;&lt;li&gt;Content generation &amp;amp; summarization&lt;/li&gt;&lt;li&gt;Priority support &amp;amp; CSM&lt;/li&gt;&lt;/ul&gt;"
+                        ctaText="Request a Demo"
+                        ctaUrl="/content/my-dxp-site/contact"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="pricing-plan"
+                        name="Pricing Plan"
+                        planName="Enterprise"
+                        price="Custom"
+                        period=""
+                        description="Unlimited scale, dedicated infrastructure, and global deployment."
+                        features="&lt;ul&gt;&lt;li&gt;Everything in Professional&lt;/li&gt;&lt;li&gt;Dedicated infrastructure&lt;/li&gt;&lt;li&gt;Custom SLA (up to 99.99%)&lt;/li&gt;&lt;li&gt;All 50+ integrations&lt;/li&gt;&lt;li&gt;Multi-region / data residency&lt;/li&gt;&lt;li&gt;CMEK encryption keys&lt;/li&gt;&lt;li&gt;Dedicated CSM &amp;amp; SA&lt;/li&gt;&lt;li&gt;24/7 premium support&lt;/li&gt;&lt;/ul&gt;"
+                        ctaText="Contact Sales"
+                        ctaUrl="/content/my-dxp-site/contact"/>
+                </pricing>
+            </section_2>
+            <section_3
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <accordion
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="accordion"
+                    filter="accordion"
+                    name="Accordion">
+                    <item_0
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="accordion-item"
+                        name="Accordion Item"
+                        question="Is there a free trial available?"
+                        answer="&lt;p&gt;Yes. The Starter and Professional plans both offer a 30-day free trial with full platform access and no credit card required. Our team will guide you through onboarding during the trial period.&lt;/p&gt;"/>
+                    <item_1
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="accordion-item"
+                        name="Accordion Item"
+                        question="Can I change plans as my needs grow?"
+                        answer="&lt;p&gt;Absolutely. You can upgrade at any time and only pay the prorated difference. Downgrading is available at the end of your billing cycle. Our team will help you manage transitions smoothly.&lt;/p&gt;"/>
+                    <item_2
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="accordion-item"
+                        name="Accordion Item"
+                        question="What counts as a website in the Starter plan?"
+                        answer="&lt;p&gt;A website is defined as a unique domain or subdomain managed through the DXP AI platform. Microsites, landing page collections, and portals each count as one. The Professional and Enterprise plans have no website limits.&lt;/p&gt;"/>
+                    <item_3
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        model="accordion-item"
+                        name="Accordion Item"
+                        question="Are ZensAI AI features included in all plans?"
+                        answer="&lt;p&gt;Core AI features (semantic search, content tagging, basic recommendations) are included in all plans. Advanced ZensAI capabilities (conversational AI, content generation, predictive analytics) are available in Professional and above.&lt;/p&gt;"/>
+                </accordion>
+            </section_3>
+            <section_4
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <cta
+                    jcr:created="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:createdBy="satish.sapate@zensar.com"
+                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModifiedBy="satish.sapate@zensar.com"
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/block/v1/block"
+                    aueComponentId="cta"
+                    model="cta"
+                    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+                    name="CTA"
+                    heading="Not Sure Which Plan? Let&apos;s Talk."
+                    description="&lt;p&gt;Our solutions team will analyze your requirements and recommend the right plan &#8212; no pressure, no pushy sales tactics.&lt;/p&gt;"
+                    primaryText="Talk to Sales"
+                    primaryUrl="/content/my-dxp-site/contact"
+                    metaText="Typically responds within 1 business day"/>
+            </section_4>
+        </root>
+    </jcr:content>
+</jcr:root>
