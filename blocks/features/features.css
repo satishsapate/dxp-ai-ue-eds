@@ -71,6 +71,48 @@
   line-height: 1.75;
 }
 
+.features .fc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.features .fc-list li {
+  color: var(--features-copy);
+  font-size: 0.88rem;
+  padding-left: 16px;
+  position: relative;
+}
+
+.features .fc-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-cyan);
+}
+
+.features .fc-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #a78bfa;
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.features .fc-link:hover {
+  color: var(--c-white);
+}
+
 @media (width <= 1024px) {
   .features .cards-grid {
     grid-template-columns: repeat(2, 1fr);

@@ -1,16 +1,28 @@
 :root {
-  --articles-bg: #f7f7fb;
-  --articles-card-bg: #fff;
-  --articles-border: rgb(124 58 237 / 8%);
-  --articles-heading: #0d1033;
-  --articles-copy: #515560;
-  --articles-muted: #7d7f95;
+  --articles-bg: transparent;
+  --articles-card-bg: rgba(255, 255, 255, 0.04);
+  --articles-border: rgba(124, 58, 237, 0.15);
+  --articles-heading: var(--c-off-white);
+  --articles-copy: rgba(255, 255, 255, 0.65);
+  --articles-muted: rgba(255, 255, 255, 0.45);
   --articles-accent: #7c3aed;
   --articles-radius: 22px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .articles {
-  background: var(--articles-bg);
+  background: transparent;
   padding: 100px 0;
 }
 
@@ -49,10 +61,11 @@
   gap: 8px;
   padding: 12px 20px;
   border-radius: 12px;
-  border: 1px solid rgb(124 58 237 / 25%);
+  border: 1px solid rgba(124, 58, 237, 0.25);
   color: var(--articles-accent);
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .articles .articles-grid {
@@ -73,7 +86,7 @@
 
 .articles .article-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgb(124 58 237 / 12%);
+  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.2);
 }
 
 .articles .article-img-placeholder {
@@ -96,15 +109,12 @@
   text-transform: uppercase;
 }
 
-.articles .article-tag--ai { background: rgb(124 58 237 / 80%); }
-.articles .article-tag--platform { background: rgb(6 182 212 / 80%); }
-.articles .article-tag--case { background: rgb(245 158 11 / 80%); }
-
 .articles .article-card__body {
   padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  flex: 1;
 }
 
 .articles .article-card__meta {
@@ -121,22 +131,41 @@
   gap: 8px;
 }
 
+.articles .meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--articles-muted);
+  flex-shrink: 0;
+}
+
 .articles .author-avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: linear-gradient(135deg,#7c3aed,#06b6d4);
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .articles h3 {
   margin: 0;
   font-size: 1.1rem;
+  color: var(--articles-heading);
+}
+
+.articles h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.articles h3 a:hover {
+  color: #a78bfa;
 }
 
 .articles p {
@@ -161,19 +190,31 @@
   text-decoration: none;
 }
 
+.articles .article-card__date {
+  color: var(--articles-muted);
+  font-size: 0.78rem;
+}
+
 .articles .articles-cta {
   margin-top: 48px;
   padding: 32px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(124, 58, 237, 0.18);
   border-radius: 24px;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: 24px;
+  align-items: center;
 }
 
-.articles .cta-buttons input,
-.articles .cta-buttons button {
-  width: 100%;
+.articles .acta-content h3 {
+  color: var(--articles-heading);
+  margin: 0 0 8px;
+}
+
+.articles .acta-content p {
+  color: var(--articles-copy);
+  margin: 0;
 }
 
 .articles .acta-form {
@@ -185,17 +226,36 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgb(124 58 237 / 20%);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.articles .acta-form input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.articles .acta-form input:focus {
+  border-color: rgba(124, 58, 237, 0.5);
 }
 
 .articles .acta-form button {
   border: none;
   border-radius: 14px;
   padding: 14px 20px;
-  background: var(--articles-accent);
+  background: linear-gradient(135deg, #7c3aed, #06b6d4);
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.articles .acta-form button:hover {
+  opacity: 0.9;
 }
 
 @media (width <= 1024px) {

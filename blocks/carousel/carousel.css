@@ -109,6 +109,29 @@
   cursor: pointer;
 }
 
+.carousel .carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.carousel .carousel__dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel .carousel__dots button.active,
+.carousel .carousel__dots button[aria-current="true"] {
+  background: #a78bfa;
+  transform: scale(1.35);
+}
+
 @media (width <= 1024px) {
   .carousel .carousel__slide { flex: 0 0 calc(50% - 12px); }
 }
