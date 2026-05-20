@@ -19,6 +19,23 @@ export default function decorate(block) {
   const row = block.querySelector(':scope > div');
   const cells = row ? [...row.children] : [];
 
+  // --- TEMPORARY DEBUG: remove after diagnosis ---
+  // eslint-disable-next-line no-console
+  console.group('[hero.js debug]');
+  // eslint-disable-next-line no-console
+  console.log('block children count:', block.children.length);
+  // eslint-disable-next-line no-console
+  console.log('row found:', !!row, '| row HTML:', row?.outerHTML.substring(0, 300));
+  // eslint-disable-next-line no-console
+  console.log('cells count:', cells.length);
+  cells.forEach((c, i) => {
+    // eslint-disable-next-line no-console
+    console.log(`cells[${i}] text: "${c.textContent.trim().substring(0, 80)}" | innerHTML: "${c.innerHTML.trim().substring(0, 80)}"`);
+  });
+  // eslint-disable-next-line no-console
+  console.groupEnd();
+  // --- END DEBUG ---
+
   const eyebrow = cells[0]?.textContent.trim()
     || 'Powered by ZensAI · Zensar Technologies';
 
