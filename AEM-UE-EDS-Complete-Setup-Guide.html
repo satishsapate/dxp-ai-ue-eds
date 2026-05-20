@@ -252,6 +252,7 @@
 
     <div class="nav-section">Troubleshooting</div>
     <a href="#issues">Known Issues &amp; Fixes</a>
+    <a href="#block-issues">Block &amp; Design Issues <span class="badge badge-fixed">Fixed</span></a>
     <a href="#checklist">Final Checklist</a>
   </nav>
 </aside>
@@ -1163,24 +1164,26 @@ mountpoints:
 
     <!-- Issue 6 -->
     <div class="issue-card">
-      <div class="issue-header bug">
-        <span class="issue-tag tag-ongoing">Ongoing / Adobe Support</span>
+      <div class="issue-header resolved">
+        <span class="issue-tag tag-resolved">Resolved</span>
         <strong>EDS Admin API returns <code>"code": {"status": 400}</code> — code bus not activated</strong>
       </div>
       <div class="issue-body">
         <div class="issue-label">Symptom</div>
-        <p>Checking <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code> returns <code>"code": {"status": 400}</code>. Files like <code>/scripts/aem.js</code> return 404 from <code>main--dxp-ai-ue-eds--satishsapate.aem.page</code>. No GitHub webhook appears in the repo settings after installing AEM Code Sync App.</p>
+        <p>Checking <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code> returned <code>"code": {"status": 400}</code>. Files like <code>/scripts/aem.js</code> returned 404 from <code>main--dxp-ai-ue-eds--satishsapate.aem.page</code>. No GitHub webhook appeared in the repo settings after installing AEM Code Sync App.</p>
         <div class="issue-label">Root Cause</div>
-        <p>The EDS code bus has not been activated for this GitHub repository. Root causes may include: (1) wrong <code>fstab.yaml</code> URL failing EDS validation at install time, (2) AEM Code Sync GitHub App not creating a webhook (app installation issue on Adobe's side), (3) repository visibility or configuration issue.</p>
-        <div class="issue-label">Fixes Attempted</div>
+        <p>The EDS code bus was not activated for this GitHub repository because the original <code>fstab.yaml</code> used a bare AEM author URL (without the Franklin Delivery Servlet path), causing EDS validation to fail at install time. Additionally, the AEM Code Sync GitHub App webhook was not auto-created.</p>
+        <div class="issue-label">Resolution (Adobe Support + Manual Fix)</div>
         <ul style="font-size:13px;margin:8px 0;padding-left:18px;">
-          <li>Re-installed AEM Code Sync GitHub App on repository</li>
-          <li>Triggered manual sync via <code>POST https://admin.hlx.page/code/satishsapate/dxp-ai-ue-eds/main</code></li>
-          <li>Fixed <code>fstab.yaml</code> to use Franklin Delivery Servlet URL (commit ea8005d)</li>
-          <li>Raised Adobe Support ticket</li>
+          <li>Raised Adobe Support ticket — Adobe engineering confirmed the code bus activation issue</li>
+          <li>Fixed <code>fstab.yaml</code> to use the Franklin Delivery Servlet URL (commit <code>ea8005d</code>) — this was the root cause</li>
+          <li>Re-installed AEM Code Sync GitHub App on the repository after the fstab fix</li>
+          <li>Triggered manual code bus activation via <code>POST https://admin.hlx.page/code/satishsapate/dxp-ai-ue-eds/main</code></li>
+          <li>Verified: <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code> now returns <code>"code": {"status": 200}</code></li>
+          <li>Verified: <code>https://main--dxp-ai-ue-eds--satishsapate.aem.page/scripts/aem.js</code> returns the file correctly</li>
         </ul>
-        <div class="issue-label">Next Steps</div>
-        <p>After pushing the fstab.yaml fix, re-check <code>https://admin.hlx.page/status/satishsapate/dxp-ai-ue-eds/main</code>. If <code>"code": {"status": 200}</code> appears, the fix resolved it. If still 400, wait for Adobe Support response. Once resolved, verify <code>https://main--dxp-ai-ue-eds--satishsapate.aem.page/scripts/aem.js</code> returns the file.</p>
+        <div class="issue-label">Key Lesson</div>
+        <p><strong>Always ensure <code>fstab.yaml</code> is correct with the Franklin Delivery Servlet URL <em>before</em> installing the AEM Code Sync App.</strong> If you install the app with a broken fstab, EDS may fail to activate the code bus. Fix the fstab first, then reinstall the app and trigger a manual sync.</p>
       </div>
     </div>
 
@@ -1201,12 +1204,145 @@ mountpoints:
     </div>
   </section>
 
+  <!-- BLOCK / DESIGN ISSUES -->
+  <section class="section" id="block-issues">
+    <div class="section-header">
+      <div class="section-icon icon-purple">🎨</div>
+      <div>
+        <div class="step-num">Section 16</div>
+        <h2>EDS Block &amp; Design Issues — All Resolved</h2>
+      </div>
+    </div>
+    <p style="margin-bottom:20px;">After the EDS code bus was activated and pages loaded, the rendered output did not match the <code>html-kit/dxp-ai/</code> design reference. The following issues were identified and resolved across multiple commits.</p>
+
+    <!-- Block Issue 1 -->
+    <div class="issue-card">
+      <div class="issue-header resolved">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>Entire site rendered with boilerplate white theme — DXP AI dark design not applied</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>The EDS-delivered pages showed a white background with Roboto fonts — matching the aem-boilerplate-xwalk defaults, not the DXP AI dark navy design.</p>
+        <div class="issue-label">Root Cause</div>
+        <p><code>styles/styles.css</code> still contained the boilerplate tokens (<code>--background-color: white</code>, <code>--body-font-family: roboto</code>) and had not been updated for the DXP AI dark theme.</p>
+        <div class="issue-label">Fix Applied</div>
+        <p>Complete rewrite of <code>styles/styles.css</code> (commit <code>b8ce660</code>) with the DXP AI design system:</p>
+        <ul style="font-size:13px;margin:8px 0;padding-left:18px;">
+          <li>Google Fonts: Sora (headings) + DM Sans (body) via <code>@import</code></li>
+          <li><code>--background-color: #0d0e2a</code> (navy), <code>--text-color: #f0f2ff</code> (off-white)</li>
+          <li>Extended palette: <code>--c-navy</code>, <code>--c-purple: #7c3aed</code>, <code>--c-cyan: #06b6d4</code>, <code>--gradient-dxp</code></li>
+          <li>Shape/shadow tokens: <code>--radius-sm/md/lg/xl</code>, <code>--shadow-glow</code></li>
+          <li>Buttons: pill-shaped (<code>border-radius: 999px</code>), purple gradient background</li>
+          <li><code>--nav-height: 72px</code>, section <code>max-width: 1280px</code>, <code>margin: 0</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Block Issue 2 -->
+    <div class="issue-card">
+      <div class="issue-header resolved">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>Header block did not match html-kit design — content structure mismatch</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>The header rendered as a plain nav using the EDS fragment approach (loading <code>/nav</code> page content). This could never produce the rich DXP AI header structure (gradient logo text, dropdown panels with icons and descriptions, styled CTA buttons).</p>
+        <div class="issue-label">Root Cause</div>
+        <p>The original <code>header.js</code> used EDS's default fragment-loading pattern, mapping sections from the <code>/nav</code> page (brand/sections/tools). This inherently limits the header to plain link lists.</p>
+        <div class="issue-label">Fix Applied (commit c88d41e)</div>
+        <p>Complete rewrite of <code>header.js</code> to render the full DXP AI navigation HTML directly (bypassing the fragment approach). Features:</p>
+        <ul style="font-size:13px;margin:8px 0;padding-left:18px;">
+          <li>Logo: "DXP AI" with gradient text + "Powered by ZensAI" sub-label</li>
+          <li>Desktop nav: Platform dropdown (4 items with icon+title+desc), Solutions, Why DXP AI, Resources dropdown (3 items), Pricing, About</li>
+          <li>Action buttons: ghost "Login" + gradient "Request Demo"</li>
+          <li>Hamburger → <code>.nav-mobile-menu</code> slide-down with full link list</li>
+          <li>Scroll effect: <code>.scrolled</code> class for stronger blur/shadow after 20px</li>
+          <li>Keyboard accessible: Enter/Space toggles dropdowns, Escape closes</li>
+        </ul>
+        <div class="alert warning" style="margin-top:8px;">
+          <div class="alert-icon">⚠️</div>
+          <div><strong>Pattern note:</strong> For complex blocks where the visual structure cannot be derived from simple AEM text/link fields, use the <strong>direct HTML render approach</strong> — <code>block.textContent = ''</code> then set <code>wrapper.innerHTML = `...full HTML...`</code>. This is also used by <code>footer.js</code> and <code>hero.js</code>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block Issue 3 -->
+    <div class="issue-card">
+      <div class="issue-header resolved">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>Hero, articles, who-uses, cms-compat, stats-band, features, carousel, cta blocks not matching html-kit</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>Multiple blocks on the index page rendered either empty, with wrong structure, or with a light/white background that clashed with the dark page design.</p>
+        <div class="issue-label">Fixes Applied (commits 07c626d + 284b961)</div>
+
+        <h3 style="font-size:14px;margin-top:12px;">Hero block</h3>
+        <p style="font-size:13px;">Completely rewritten to render DXP AI hero directly: 3 animated background orbs, two-column layout (content left + simulated dashboard card right), trust badges (SOC 2, GDPR, ISO 27001, 99.9% uptime), scroll indicator animation.</p>
+
+        <h3 style="font-size:14px;margin-top:12px;">Articles block</h3>
+        <p style="font-size:13px;">Rewritten from scratch — the original had only a click handler with no render logic. Now builds a card grid from AEM row data with gradient placeholder images, tag colors, author avatars, read time, and a newsletter CTA at the bottom.</p>
+
+        <h3 style="font-size:14px;margin-top:12px;">Carousel block</h3>
+        <p style="font-size:13px;">Fixed slide/card hierarchy bug: was creating <code>article.carousel__slide</code> but CSS targeted <code>.carousel__slide article</code> — card backgrounds/borders never applied. Fixed to <code>div.carousel__slide &gt; article.carousel__card</code>. Also added counter display (<code>1 / 7</code>) and bullet list styling for card-points from richtext fields.</p>
+
+        <h3 style="font-size:14px;margin-top:12px;">CTA block</h3>
+        <p style="font-size:13px;">Rewrote field mapping for all 8 model fields: <code>cells[0]</code>=overline → <code>span.cta-overline</code>, <code>cells[1]</code>=heading → <code>h2</code>, <code>cells[2]</code>=description → <code>p</code>, <code>cells[3/4]</code>=primary button, <code>cells[5/6]</code>=secondary button, <code>cells[7]</code>=meta text. The original just wrapped everything in a div.</p>
+
+        <h3 style="font-size:14px;margin-top:12px;">Dark theme CSS fixes</h3>
+        <p style="font-size:13px;">Updated CSS for: <code>who-uses</code> (transparent bg, glass cards), <code>cms-compat</code> (dark approach cards, logo cards), <code>stats-band</code> (fixed wrong font-family token → <code>var(--heading-font-family)</code>), <code>features</code> (added <code>.fc-list</code> bullet dots and <code>.fc-link</code> arrow styles), <code>cta</code> (dark gradient bg, glass content panel).</p>
+
+        <div class="code-block" style="margin-top:12px;">
+          <div class="code-header"><span class="code-lang">text</span><span class="code-file">Block rendering strategy summary</span></div>
+          <pre><code>DIRECT HTML RENDER (fixed structure):
+  header.js  → full nav with dropdowns, hamburger, mobile menu
+  footer.js  → newsletter, 5-col links, socials, legal bar
+  hero.js    → orbs, dashboard card, trust badges
+
+DATA-DRIVEN MAPPING (AEM content → cells → semantic HTML):
+  carousel   → cells: category | title | richtext | ctaUrl | ctaText
+  cta        → cells: overline | heading | desc | primaryText | primaryUrl | secText | secUrl | meta
+  features   → cells: icon | title | description | link
+  who-uses   → cells: icon | title | description | link
+  stats-band → cells: value | label
+  articles   → first row = heading, subsequent rows = article data</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block Issue 4 -->
+    <div class="issue-card">
+      <div class="issue-header resolved">
+        <span class="issue-tag tag-resolved">Resolved</span>
+        <strong>Windows: pre-commit hook "Exec format error" — Husky file encoding issue</strong>
+      </div>
+      <div class="issue-body">
+        <div class="issue-label">Symptom</div>
+        <p>On Windows, running <code>git commit</code> triggered a Husky pre-commit hook that failed with <code>hint: The '.husky/pre-commit' hook was ignored because it's not set as executable. Exec format error</code>.</p>
+        <div class="issue-label">Root Cause</div>
+        <p>The <code>.husky/pre-commit</code> file was missing the <code>#!/bin/sh</code> shebang line and had CRLF line endings (Windows default). Without the shebang, the shell could not determine how to execute the script.</p>
+        <div class="issue-label">Fix Applied</div>
+        <p>Added <code>#!/bin/sh</code> as the first line of <code>.husky/pre-commit</code> and ensured LF line endings (commit <code>07c626d</code>). For new Windows developers:</p>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">bash</span></div>
+          <pre><code><span class="c-comment"># Prevent CRLF conversion on clone</span>
+git config core.autocrlf false
+
+<span class="c-comment"># If already cloned and hook fails:</span>
+sed -i 's/\r//' .husky/pre-commit
+<span class="c-comment"># Ensure first line is: #!/bin/sh</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CHECKLIST -->
   <section class="section" id="checklist">
     <div class="section-header">
       <div class="section-icon icon-green">☑️</div>
       <div>
-        <div class="step-num">Section 16</div>
+        <div class="step-num">Section 17</div>
         <h2>Final Setup Checklist</h2>
       </div>
     </div>
@@ -1232,11 +1368,34 @@ mountpoints:
           <li>head.html has urn:auecon:aemconnection meta tag</li>
           <li>tools/sidekick/config.json has correct host/previewHost/liveHost</li>
           <li>AEM Code Sync GitHub App installed on satishsapate/dxp-ai-ue-eds</li>
+          <li>https://admin.hlx.page/status/... returns <code>"code": {"status": 200}</code></li>
           <li>https://main--dxp-ai-ue-eds--satishsapate.aem.page loads</li>
           <li>AEM Sidekick Chrome extension installed</li>
           <li>Sidekick project added for dxp-ai-ue-eds</li>
           <li>At least one page Previewed via Sidekick</li>
           <li>Universal Editor opens a page without CORS errors</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">EDS Block &amp; Design Verification</div>
+      <div class="card-grid" style="margin-top:12px;">
+        <ul class="checklist" style="font-size:13px;">
+          <li>styles/styles.css uses DXP AI dark theme tokens (navy bg, Sora+DM Sans)</li>
+          <li>Header renders DXP AI nav with dropdowns (not plain links)</li>
+          <li>Footer renders DXP AI footer with newsletter + 5-col grid</li>
+          <li>Hero renders with animated orbs + dashboard card visual</li>
+          <li>Stats-band shows gradient values with correct font</li>
+          <li>Features/who-uses cards have glass style + cyan bullet lists</li>
+        </ul>
+        <ul class="checklist" style="font-size:13px;">
+          <li>Carousel cards show with dark glass background (div&gt;article hierarchy)</li>
+          <li>CTA section shows overline + h2 + description + buttons + meta text</li>
+          <li>Articles block renders card grid (not empty)</li>
+          <li>CMS-compat section has dark approach cards</li>
+          <li>Richtext block has dark transparent background</li>
+          <li>All blocks match html-kit/dxp-ai/index.html visual design</li>
         </ul>
       </div>
     </div>
@@ -1265,8 +1424,8 @@ mountpoints:
   </section>
 
   <div style="text-align:center;padding:40px 0 20px;color:var(--text-muted);font-size:12px;border-top:1px solid var(--border);">
-    Generated: May 2026 &nbsp;|&nbsp; Project: dxp-ai-ue-eds &nbsp;|&nbsp; Architecture: AEM XWalk Pattern<br/>
-    For issues, refer to <a href="docs/aem-dev/README.md">docs/aem-dev/</a> or the troubleshooting section above.
+    Generated: May 2026 — Updated: May 2026 (all issues resolved incl. EDS code bus + block design) &nbsp;|&nbsp; Project: dxp-ai-ue-eds &nbsp;|&nbsp; Architecture: AEM XWalk Pattern<br/>
+    For issues, refer to <a href="docs/aem-dev/README.md">docs/aem-dev/</a> or the troubleshooting sections above. Adobe Support ticket resolved EDS code bus activation.
   </div>
 
 </main>
