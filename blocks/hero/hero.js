@@ -1,13 +1,14 @@
 /**
  * Hero block — content driven by AEM model fields.
- * Model fields (cells within the single block row, in order):
- *   0: eyebrow       — text
- *   1: heading       — richtext (use <em> around accent words → styled as gradient)
- *   2: subheading    — richtext
- *   3: primaryCtaText  — text
- *   4: primaryCtaUrl   — aem-content
- *   5: secondaryCtaText — text
- *   6: secondaryCtaUrl  — aem-content
+ * AEM xwalk renders each model field as a separate block row (one row per field).
+ * Row index maps directly to field order in the model:
+ *   row 0: eyebrow       — text
+ *   row 1: heading       — richtext (use <em> around accent words → styled as gradient)
+ *   row 2: subheading    — richtext
+ *   row 3: primaryCtaText  — text
+ *   row 4: primaryCtaUrl   — aem-content
+ *   row 5: secondaryCtaText — text
+ *   row 6: secondaryCtaUrl  — aem-content
  *
  * Decorative elements (orbs, dashboard card, trust badges) are design-system
  * defaults rendered by JS — no AEM content required for these.
@@ -15,45 +16,29 @@
 export default function decorate(block) {
   block.closest('.section')?.classList.add('hero-section-full');
 
-  // All model fields land in a single row; read cells before clearing block
-  const row = block.querySelector(':scope > div');
-  const cells = row ? [...row.children] : [];
+  // AEM renders each field as its own row with one cell child.
+  // cell(i) returns the content div for field at index i.
+  const rows = [...block.children];
+  const cell = (i) => rows[i]?.children[0];
 
-  // --- TEMPORARY DEBUG: remove after diagnosis ---
-  // eslint-disable-next-line no-console
-  console.group('[hero.js debug]');
-  // eslint-disable-next-line no-console
-  console.log('block children count:', block.children.length);
-  // eslint-disable-next-line no-console
-  console.log('row found:', !!row, '| row HTML:', row?.outerHTML.substring(0, 300));
-  // eslint-disable-next-line no-console
-  console.log('cells count:', cells.length);
-  cells.forEach((c, i) => {
-    // eslint-disable-next-line no-console
-    console.log(`cells[${i}] text: "${c.textContent.trim().substring(0, 80)}" | innerHTML: "${c.innerHTML.trim().substring(0, 80)}"`);
-  });
-  // eslint-disable-next-line no-console
-  console.groupEnd();
-  // --- END DEBUG ---
-
-  const eyebrow = cells[0]?.textContent.trim()
+  const eyebrow = cell(0)?.textContent.trim()
     || 'Powered by ZensAI · Zensar Technologies';
 
   // heading: richtext — replace <em> with gradient accent span
-  let headingHTML = cells[1]?.innerHTML.trim()
+  let headingHTML = cell(1)?.innerHTML.trim()
     || '<h1>The Future of<br><em>Digital Experience</em><br>is AI&#8209;First</h1>';
   headingHTML = headingHTML.replace(/<em>([\s\S]*?)<\/em>/gi, '<span class="hero-accent">$1</span>');
 
-  const subHTML = cells[2]?.innerHTML.trim()
+  const subHTML = cell(2)?.innerHTML.trim()
     || '<p>DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation — all powered by ZensAI to create experiences your customers actually remember.</p>';
 
-  const primaryText = cells[3]?.textContent.trim() || 'Request a Demo';
-  const primaryHref = cells[4]?.querySelector('a')?.getAttribute('href')
-    || cells[4]?.textContent.trim() || '/contact';
+  const primaryText = cell(3)?.textContent.trim() || 'Request a Demo';
+  const primaryHref = cell(4)?.querySelector('a')?.getAttribute('href')
+    || cell(4)?.textContent.trim() || '/contact';
 
-  const secondaryText = cells[5]?.textContent.trim() || 'Explore Platform';
-  const secondaryHref = cells[6]?.querySelector('a')?.getAttribute('href')
-    || cells[6]?.textContent.trim() || '/platform';
+  const secondaryText = cell(5)?.textContent.trim() || 'Explore Platform';
+  const secondaryHref = cell(6)?.querySelector('a')?.getAttribute('href')
+    || cell(6)?.textContent.trim() || '/platform';
 
   block.innerHTML = `
     <div class="hero-orb hero-orb--1" aria-hidden="true"></div>
