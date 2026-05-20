@@ -15,6 +15,7 @@ This directory contains technical documentation for the `dxp-ai-ue-eds` project 
 | [07-claude-project-instructions.md](./07-claude-project-instructions.md) | How CLAUDE.md works (points to `/CLAUDE.md`) |
 | [08-aem-package-creation.md](./08-aem-package-creation.md) | Creating and installing AEM content packages |
 | [09-eds-content-query-api.md](./09-eds-content-query-api.md) | EDS query index, sitemap, API endpoints |
+| [10-prompts-library.md](./10-prompts-library.md) | Reusable prompts for block creation, CSS fixes, UE models, and debugging |
 
 ## Quick Reference
 
