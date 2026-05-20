@@ -89,7 +89,7 @@
   {
     "id": "stats-band",
     "components": [
-      "stat-item"
+      "stats-item"
     ]
   },
   {

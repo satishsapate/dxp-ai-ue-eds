@@ -629,7 +629,7 @@
     ]
   },
   {
-    "id": "stat-item",
+    "id": "stats-item",
     "fields": [
       {
         "component": "text",

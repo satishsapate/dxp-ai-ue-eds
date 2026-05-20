@@ -472,14 +472,14 @@
         },
         {
           "title": "Stat Item",
-          "id": "stat-item",
+          "id": "stats-item",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
                   "name": "Stat Item",
-                  "model": "stat-item"
+                  "model": "stats-item"
                 }
               }
             }

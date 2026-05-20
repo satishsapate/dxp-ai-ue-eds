@@ -17,14 +17,14 @@
     },
     {
       "title": "Stat Item",
-      "id": "stat-item",
+      "id": "stats-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Stat Item",
-              "model": "stat-item"
+              "model": "stats-item"
             }
           }
         }
@@ -33,7 +33,7 @@
   ],
   "models": [
     {
-      "id": "stat-item",
+      "id": "stats-item",
       "fields": [
         {
           "component": "text",
@@ -53,7 +53,7 @@
   "filters": [
     {
       "id": "stats-band",
-      "components": ["stat-item"]
+      "components": ["stats-item"]
     }
   ]
 }
