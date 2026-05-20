@@ -1,76 +1,155 @@
+/* ============================================================
+   Features block — light theme matching HTML kit design
+   ============================================================ */
 :root {
-  --features-gap: 24px;
-  --features-radius: 20px;
-  --features-bg: rgba(255, 255, 255, 0.04);
-  --features-border: rgba(124, 58, 237, 0.18);
-  --features-heading: var(--c-off-white);
-  --features-copy: rgba(255, 255, 255, 0.65);
+  --features-bg:           var(--c-off-white, #f0f2ff);
+  --features-card-bg:      #ffffff;
+  --features-card-border:  rgba(0, 0, 0, 0.07);
+  --features-card-hover:   rgba(124, 58, 237, 0.18);
+  --features-heading-clr:  var(--c-navy, #0d0e2a);
+  --features-copy-clr:     #4a5568;
+  --features-overline-clr: var(--c-purple, #7c3aed);
 }
 
-.features {
-  padding: 100px 0;
+.features-section {
+  padding: 80px 0;
+  background: var(--features-bg);
+  position: relative;
 }
 
-.features .section-heading {
-  margin-bottom: 40px;
+.features-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), rgba(6, 182, 212, 0.3), transparent);
 }
 
+/* ── Section heading ─────────────────────────────────────────── */
+.features-section .section-heading {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.features-section .section-heading .overline {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--features-overline-clr);
+  margin-bottom: 8px;
+}
+
+.features-section .section-heading h2 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--features-heading-clr);
+  margin: 0 0 12px;
+}
+
+.features-section .section-heading p {
+  font-size: 1rem;
+  color: var(--features-copy-clr);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── Cards grid ──────────────────────────────────────────────── */
 .features .cards-grid {
   display: grid;
-  gap: var(--features-gap);
+  gap: 24px;
   grid-template-columns: repeat(3, 1fr);
 }
 
+@media (width <= 1024px) {
+  .features .cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (width <= 640px) {
+  .features .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Feature card ────────────────────────────────────────────── */
 .features .feature-card {
-  background: var(--features-bg);
-  border: 1px solid var(--features-border);
-  border-radius: var(--features-radius);
+  background: var(--features-card-bg);
+  border: 1px solid var(--features-card-border);
+  border-radius: 20px;
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
+  box-shadow: 0 4px 24px rgba(13, 14, 42, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .features .feature-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 45px rgba(124, 58, 237, 0.25);
-  border-color: rgba(124, 58, 237, 0.35);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(13, 14, 42, 0.12);
+  border-color: var(--features-card-hover);
 }
 
-.features .fc-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  display: inline-flex;
+@media (prefers-reduced-motion: reduce) {
+  .features .feature-card { transition: none; }
+  .features .feature-card:hover { transform: none; }
+}
+
+/* ── Icon box ────────────────────────────────────────────────── */
+.features .icon-box {
+  display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(124 58 237 / 10%);
-  font-size: 1.4rem;
+  border-radius: 14px;
+  flex-shrink: 0;
 }
 
+.features .icon-box--lg {
+  width: 56px;
+  height: 56px;
+}
+
+.features .icon-box svg { width: 24px; height: 24px; }
+
+/* Icon box colour variants */
+.features .icon-box--purple { background: rgba(124, 58,  237, 0.12); color: #7c3aed; }
+.features .icon-box--cyan   { background: rgba(6,   182, 212, 0.12); color: #06b6d4; }
+.features .icon-box--blue   { background: rgba(37,  99,  235, 0.12); color: #2563eb; }
+.features .icon-box--violet { background: rgba(163, 85,  247, 0.12); color: #a78bfa; }
+.features .icon-box--orange { background: rgba(245, 158, 11,  0.12); color: #f59e0b; }
+.features .icon-box--green  { background: rgba(16,  185, 129, 0.12); color: #10b981; }
+
+/* ── Tag / badge ─────────────────────────────────────────────── */
 .features .fc-tag {
   display: inline-block;
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: 999px;
-  background: rgb(124 58 237 / 10%);
-  color: var(--features-heading);
   font-size: 0.75rem;
-  text-transform: uppercase;
   font-weight: 700;
+  text-transform: uppercase;
+  width: fit-content;
+  background: rgba(124, 58, 237, 0.10);
+  color: var(--c-purple, #7c3aed);
 }
 
-.features h3 {
+/* ── Card text ───────────────────────────────────────────────── */
+.features .feature-card h3 {
   margin: 0;
-  color: var(--features-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--features-heading-clr);
 }
 
-.features p {
-  margin: 0;
-  color: var(--features-copy);
-  line-height: 1.75;
+.features .fc-desc {
+  color: var(--features-copy-clr);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  flex-grow: 1;
 }
 
+.features .fc-desc p { margin: 0; }
+
+/* ── Bullet list ─────────────────────────────────────────────── */
 .features .fc-list {
   list-style: none;
   padding: 0;
@@ -81,8 +160,8 @@
 }
 
 .features .fc-list li {
-  color: var(--features-copy);
-  font-size: 0.88rem;
+  color: var(--features-copy-clr);
+  font-size: 0.875rem;
   padding-left: 16px;
   position: relative;
 }
@@ -95,32 +174,21 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--c-cyan);
+  background: var(--c-purple, #7c3aed);
 }
 
+/* ── Learn-more link ─────────────────────────────────────────── */
 .features .fc-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: #a78bfa;
+  color: var(--c-purple, #7c3aed);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   text-decoration: none;
   margin-top: auto;
+  padding-top: 8px;
+  min-height: 44px;
 }
 
-.features .fc-link:hover {
-  color: var(--c-white);
-}
-
-@media (width <= 1024px) {
-  .features .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width <= 640px) {
-  .features .cards-grid {
-    grid-template-columns: 1fr;
-  }
-}
+.features .fc-link:hover { color: var(--c-violet, #9333ea); }
