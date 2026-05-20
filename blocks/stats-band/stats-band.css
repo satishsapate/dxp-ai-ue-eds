@@ -1,8 +1,7 @@
 .stats-band {
   padding: 4rem 0;
-  background: rgba(255, 255, 255, 0.03);
-  border-top: 1px solid rgba(124, 58, 237, 0.12);
-  border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+  background: var(--c-white);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
 }
 
 .stats-band .stats-band__grid {
@@ -35,7 +34,7 @@
 
 .stats-band .sl {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--c-mid-gray);
   margin-top: 0.375rem;
   line-height: 1.4;
 }
