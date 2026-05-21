@@ -2,10 +2,21 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
-        cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
+        cq:isDelivered="{Boolean}false"
+        cq:lastModified="{Date}2026-05-21T17:30:56.573Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-21T17:31:20.187Z"
+        cq:lastReplicated_preview="{Date}2026-05-21T17:31:07.836Z"
+        cq:lastReplicated_publish="{Date}2026-05-21T17:31:20.187Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_preview="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_preview="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="Home"
         jcr:uuid="84d2ca88-4713-45f9-8926-862d58e5cae8"
@@ -19,21 +30,21 @@
                 <hero
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
-                    jcr:lastModified="{Date}2026-05-20T10:00:00.000Z"
+                    jcr:lastModified="{Date}2026-05-21T15:07:24.972Z"
                     jcr:lastModifiedBy="satish.sapate@zensar.com"
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="hero"
+                    eyebrow="Powered by ZensAI · Zensar Technologies"
+                    heading="&lt;h1>Here Is The Future of&lt;br>&lt;em>Digital Experience&lt;/em>&lt;br>is AI‑First&lt;/h1>"
                     model="hero"
                     modelFields="[eyebrow@text,heading@richtext,subheading@richtext,primaryCtaText@text,primaryCtaUrl@aem-content,secondaryCtaText@text,secondaryCtaUrl@aem-content]"
                     name="Hero"
-                    eyebrow="Powered by ZensAI · Zensar Technologies"
-                    heading="&lt;h1&gt;The Future of&lt;br&gt;&lt;em&gt;Digital Experience&lt;/em&gt;&lt;br&gt;is AI&#8209;First&lt;/h1&gt;"
-                    subheading="&lt;p&gt;DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation &#8212; all powered by ZensAI to create experiences your customers actually remember.&lt;/p&gt;"
-                    primaryCtaText="Request a Demo"
+                    primaryCtaText="Request a DXP Demo"
                     primaryCtaUrl="/content/my-dxp-site/contact"
                     secondaryCtaText="Explore Platform"
-                    secondaryCtaUrl="/content/my-dxp-site/platform"/>
+                    secondaryCtaUrl="/content/my-dxp-site/platform"
+                    subheading="&lt;p>Zensar's DXP AI unifies content management, personalisation, multi-channel delivery, and intelligent automation — all powered by ZensAI to create experiences your customers actually remember.&lt;/p>"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -51,31 +62,31 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        label="Enterprise Clients Globally"
                         model="stats-item"
                         name="Stats Item"
-                        value="500+"
-                        label="Enterprise Clients Globally"/>
+                        value="500+"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        label="Platform Uptime SLA"
                         model="stats-item"
                         name="Stats Item"
-                        value="99.9%"
-                        label="Platform Uptime SLA"/>
+                        value="99.9%"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        label="Faster Content Delivery"
                         model="stats-item"
                         name="Stats Item"
-                        value="4.2x"
-                        label="Faster Content Delivery"/>
+                        value="4.2x"/>
                     <item_3
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        label="Increase in Engagement"
                         model="stats-item"
                         name="Stats Item"
-                        value="68%"
-                        label="Increase in Engagement"/>
+                        value="68%"/>
                 </stats_band>
             </section_2>
             <section_3
@@ -84,55 +95,108 @@
                 <features
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
-                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModified="{Date}2026-05-21T16:26:36.200Z"
                     jcr:lastModifiedBy="satish.sapate@zensar.com"
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="features"
+                    description="DXP AI brings together seven essential capabilities that marketing, IT, and business teams need to deliver unified digital experiences."
                     filter="features"
-                    name="Features">
-                    <item_0
-                        jcr:primaryType="nt:unstructured"
-                        sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
-                        heading="AI Content Management"
-                        text="&lt;p&gt;Create, manage, and reuse digital content across every channel with role-based workflows, AI-assisted authoring, and intelligent asset management.&lt;/p&gt;"/>
+                    heading="One Platform. Every Digital Experience."
+                    model="features"
+                    modelFields="[overline@text,heading@text,description@text]"
+                    name="Features"
+                    overline="Core Capabilities">
                     <item_1
+                        jcr:lastModified="{Date}2026-05-21T15:25:36.787Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
                         heading="Hyper-Personalization Engine"
-                        text="&lt;p&gt;Deliver the right content to every visitor at the right moment using ML-driven behavioral segmentation, A/B testing, and real-time recommendations.&lt;/p&gt;"/>
+                        iconKey="cms"
+                        iconVariant="purple"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="CMS"
+                        text="&lt;p>Deliver the right content to every visitor at the right moment using ML-driven behavioral segmentation, A/B testing, and real-time recommendations.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>Multi-channel content reuse&lt;/li>&#xa; &lt;li>AI-assisted authoring &amp;amp; tagging&lt;/li>&#xa; &lt;li>Role-based approvals&lt;/li>&#xa;&lt;/ul>"
+                        title="AI Content Management"/>
                     <item_2
+                        jcr:lastModified="{Date}2026-05-21T15:26:41.148Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
                         heading="Omnichannel Delivery Hub"
-                        text="&lt;p&gt;Serve consistent experiences across websites, mobile apps, employee portals, customer portals, headless APIs, and email &#8212; all from one platform.&lt;/p&gt;"/>
+                        iconKey="personalize"
+                        iconVariant="green"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="Personalization"
+                        text="&lt;p>Serve consistent experiences across websites, mobile apps, employee portals, customer portals, headless APIs, and email — all from one platform.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>Behavioral targeting &amp;amp; segments&lt;/li>&#xa; &lt;li>A/B &amp;amp; multivariate testing&lt;/li>&#xa; &lt;li>Real-time recommendations&lt;/li>&#xa;&lt;/ul>"
+                        title="Hyper-Personalization Engine"/>
                     <item_3
+                        jcr:lastModified="{Date}2026-05-21T15:27:34.516Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
                         heading="ZensAI Intelligence Engine"
-                        text="&lt;p&gt;The heart of DXP AI &#8212; ZensAI powers intelligent search, content generation, conversational bots, and predictive analytics across the entire platform.&lt;/p&gt;"/>
+                        iconKey="multichannel"
+                        iconVariant="blue"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="Multi-Channel"
+                        text="&lt;p>The heart of DXP AI — ZensAI powers intelligent search, content generation, conversational bots, and predictive analytics across the entire platform.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>Headless &amp;amp; composable APIs&lt;/li>&#xa; &lt;li>Web, mobile &amp;amp; portal delivery&lt;/li>&#xa; &lt;li>Omnichannel consistency&lt;/li>&#xa;&lt;/ul>"
+                        title="Omnichannel Delivery Hub"/>
                     <item_4
+                        jcr:lastModified="{Date}2026-05-21T15:28:29.603Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
                         heading="Enterprise Integration Hub"
-                        text="&lt;p&gt;Connect with Salesforce, SAP, Marketo, HubSpot, and 50+ enterprise systems through our open API framework and pre-built connectors.&lt;/p&gt;"/>
+                        iconKey="ai"
+                        iconVariant="purple"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="ZensAI"
+                        text="&lt;p>Connect with Salesforce, SAP, Marketo, HubSpot, and 50+ enterprise systems through our open API framework and pre-built connectors.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>Semantic AI-driven search&lt;/li>&#xa; &lt;li>Conversational AI &amp;amp; chatbots&lt;/li>&#xa; &lt;li>Content generation &amp;amp; scoring&lt;/li>&#xa;&lt;/ul>"
+                        title="ZensAI Intelligence Engine"/>
                     <item_5
+                        jcr:lastModified="{Date}2026-05-21T15:29:13.819Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="features-item"
-                        name="Features Item"
                         heading="Analytics &amp; Insights"
-                        text="&lt;p&gt;Track every interaction, measure content performance, and optimize experiences with real-time dashboards, funnel analysis, and AI-powered insights.&lt;/p&gt;"/>
+                        iconKey="integrations"
+                        iconVariant="orange"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="Integrations"
+                        text="&lt;p>Track every interaction, measure content performance, and optimize experiences with real-time dashboards, funnel analysis, and AI-powered insights.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>CRM, ERP &amp;amp; marketing platforms&lt;/li>&#xa; &lt;li>RESTful APIs &amp;amp; webhooks&lt;/li>&#xa; &lt;li>50+ pre-built connectors&lt;/li>&#xa;&lt;/ul>"
+                        title="Enterprise Integration Hub"/>
+                    <item_5_391664005
+                        jcr:lastModified="{Date}2026-05-21T15:31:04.977Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Analytics &amp; Insights"
+                        iconKey="analytics"
+                        iconVariant="green"
+                        linkText="Learn more"
+                        model="features-item"
+                        modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+                        name="Features Item"
+                        tag="Analytics"
+                        text="&lt;p>Track every interaction, measure content performance, and optimize experiences with real-time dashboards, funnel analysis, and AI-powered insights.&lt;/p>&#xa;&lt;ul>&#xa; &lt;li>Real-time engagement dashboards&lt;/li>&#xa; &lt;li>Content performance tracking&lt;/li>&#xa; &lt;li>Journey mapping &amp;amp; funnels&lt;/li>&#xa;&lt;/ul>"
+                        title="Analytics &amp; Insights"/>
                 </features>
             </section_3>
             <section_4
@@ -141,83 +205,93 @@
                 <carousel
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
-                    jcr:lastModified="{Date}2026-05-19T20:30:00.000Z"
+                    jcr:lastModified="{Date}2026-05-21T17:30:56.567Z"
                     jcr:lastModifiedBy="satish.sapate@zensar.com"
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="carousel"
+                    description="Seven powerful capabilities that make DXP AI the most complete AI-first digital experience platform available."
                     filter="carousel"
-                    name="Carousel">
+                    heading="Everything You Need to Deliver Exceptional Experiences"
+                    model="carousel"
+                    modelFields="[overline@text,heading@text,description@text]"
+                    name="Carousel"
+                    overline="Platform Pillars">
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Content Management"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/platform"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Content Management"
-                        title="AI-Powered Content Management"
-                        text="&lt;p&gt;Create, manage, and deliver digital content across all channels with intelligent automation and role-based workflows.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        text="&lt;p>Create, manage, and deliver digital content across all channels with intelligent automation and role-based workflows.&lt;/p>"
+                        title="AI-Powered Content Management"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Personalization"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/platform"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Personalization"
-                        title="Hyper-Personalized Experiences"
-                        text="&lt;p&gt;Deliver the right content to the right person at the right moment using behavioral intelligence and ML-driven segmentation.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        text="&lt;p>Deliver the right content to the right person at the right moment using behavioral intelligence and ML-driven segmentation.&lt;/p>"
+                        title="Hyper-Personalized Experiences"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Multi-Channel"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/platform"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Multi-Channel"
-                        title="Omnichannel Experience Hub"
-                        text="&lt;p&gt;Serve consistent, engaging experiences across websites, mobile apps, portals, and headless APIs from one unified platform.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        text="&lt;p>Serve consistent, engaging experiences across websites, mobile apps, portals, and headless APIs from one unified platform.&lt;/p>"
+                        title="Omnichannel Experience Hub"/>
                     <item_3
+                        jcr:lastModified="{Date}2026-05-21T17:29:20.627Z"
+                        jcr:lastModifiedBy="satish.sapate@zensar.com"
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        model="carousel-item"
-                        name="Carousel Item"
                         category="ZensAI"
-                        title="ZensAI Intelligence Engine"
-                        text="&lt;p&gt;Harness ZensAI models for conversational AI, intelligent search, and predictive analytics baked into every experience.&lt;/p&gt;"
                         ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        ctaUrl="/content/my-dxp-site/platform"
+                        iconKey="ai"
+                        iconVariant="violet"
+                        model="carousel-item"
+                        modelFields="[iconKey@select,iconVariant@select,category@text,title@text,text@richtext,ctaText@text,ctaUrl@aem-content]"
+                        name="Carousel Item"
+                        text="&lt;p>Harness ZensAI models for conversational AI, intelligent search, and predictive analytics baked into every experience.&lt;/p>"
+                        title="ZensAI Intelligence Engine"/>
                     <item_4
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Integrations"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/platform"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Integrations"
-                        title="Enterprise Integration Hub"
-                        text="&lt;p&gt;Connect seamlessly to Salesforce, SAP, Marketo, and 50+ enterprise systems through our open API framework.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        text="&lt;p>Connect seamlessly to Salesforce, SAP, Marketo, and 50+ enterprise systems through our open API framework.&lt;/p>"
+                        title="Enterprise Integration Hub"/>
                     <item_5
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Analytics"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/platform"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Analytics"
-                        title="Actionable Analytics &amp; Insights"
-                        text="&lt;p&gt;Turn every interaction into intelligence. Understand user behavior, measure performance, and optimize at scale.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/platform"/>
+                        text="&lt;p>Turn every interaction into intelligence. Understand user behavior, measure performance, and optimize at scale.&lt;/p>"
+                        title="Actionable Analytics &amp; Insights"/>
                     <item_6
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        category="Engagement"
+                        ctaText="Explore"
+                        ctaUrl="/content/my-dxp-site/solutions"
                         model="carousel-item"
                         name="Carousel Item"
-                        category="Engagement"
-                        title="Customer &amp; User Engagement"
-                        text="&lt;p&gt;Build lasting relationships through self-service portals, intelligent chatbots, and contextual journey optimization.&lt;/p&gt;"
-                        ctaText="Explore"
-                        ctaUrl="/content/my-dxp-site/solutions"/>
+                        text="&lt;p>Build lasting relationships through self-service portals, intelligent chatbots, and contextual journey optimization.&lt;/p>"
+                        title="Customer &amp; User Engagement"/>
                 </carousel>
             </section_4>
             <section_5
@@ -236,17 +310,17 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Headless / API-First Delivery"
                         model="cms-compat-approach"
                         name="CMS Compat Approach"
-                        heading="Headless / API-First Delivery"
-                        text="&lt;p&gt;Decouple your front-end from content and experience back-end. Power any modern framework &#8212; React, Next.js, Vue, mobile apps, or IoT &#8212; via ZensAI GraphQL and REST APIs.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;GraphQL &amp;amp; REST content delivery APIs&lt;/li&gt;&lt;li&gt;SDKs for React, Next.js, Vue, Angular&lt;/li&gt;&lt;li&gt;Edge CDN with instant cache invalidation&lt;/li&gt;&lt;li&gt;AI-enriched API responses&lt;/li&gt;&lt;li&gt;Preview API for any front-end framework&lt;/li&gt;&lt;/ul&gt;"/>
+                        text="&lt;p>Decouple your front-end from content and experience back-end. Power any modern framework — React, Next.js, Vue, mobile apps, or IoT — via ZensAI GraphQL and REST APIs.&lt;/p>&lt;ul>&lt;li>GraphQL &amp;amp; REST content delivery APIs&lt;/li>&lt;li>SDKs for React, Next.js, Vue, Angular&lt;/li>&lt;li>Edge CDN with instant cache invalidation&lt;/li>&lt;li>AI-enriched API responses&lt;/li>&lt;li>Preview API for any front-end framework&lt;/li>&lt;/ul>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Headful / Full-Stack Delivery"
                         model="cms-compat-approach"
                         name="CMS Compat Approach"
-                        heading="Headful / Full-Stack Delivery"
-                        text="&lt;p&gt;Use DXP AI built-in rendering engine to manage the full experience &#8212; from content authoring to page building to delivery &#8212; without a separate front-end application.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Drag-and-drop visual page builder&lt;/li&gt;&lt;li&gt;Built-in multi-site &amp;amp; multi-language support&lt;/li&gt;&lt;li&gt;Server-side rendering &amp;amp; static site generation&lt;/li&gt;&lt;li&gt;Live preview &amp;amp; in-context editing&lt;/li&gt;&lt;li&gt;One-click deployment to global CDN&lt;/li&gt;&lt;/ul&gt;"/>
+                        text="&lt;p>Use DXP AI built-in rendering engine to manage the full experience — from content authoring to page building to delivery — without a separate front-end application.&lt;/p>&lt;ul>&lt;li>Drag-and-drop visual page builder&lt;/li>&lt;li>Built-in multi-site &amp;amp; multi-language support&lt;/li>&lt;li>Server-side rendering &amp;amp; static site generation&lt;/li>&lt;li>Live preview &amp;amp; in-context editing&lt;/li>&lt;li>One-click deployment to global CDN&lt;/li>&lt;/ul>"/>
                 </cms_compat>
             </section_5>
             <section_6
@@ -265,30 +339,30 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="For Marketing"
+                        ctaUrl="/content/my-dxp-site/solutions"
+                        heading="Marketing Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="Marketing Teams"
-                        text="&lt;p&gt;Create campaigns, personalize content at scale, run A/B tests, and measure performance &#8212; without writing a single line of code.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Drag-and-drop page builder&lt;/li&gt;&lt;li&gt;Campaign &amp;amp; segmentation tools&lt;/li&gt;&lt;li&gt;Content performance analytics&lt;/li&gt;&lt;li&gt;AI-assisted copywriting&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="For Marketing"
-                        ctaUrl="/content/my-dxp-site/solutions"/>
+                        text="&lt;p>Create campaigns, personalize content at scale, run A/B tests, and measure performance — without writing a single line of code.&lt;/p>&lt;ul>&lt;li>Drag-and-drop page builder&lt;/li>&lt;li>Campaign &amp;amp; segmentation tools&lt;/li>&lt;li>Content performance analytics&lt;/li>&lt;li>AI-assisted copywriting&lt;/li>&lt;/ul>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="For Business"
+                        ctaUrl="/content/my-dxp-site/solutions"
+                        heading="Business Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="Business Teams"
-                        text="&lt;p&gt;Enable self-service portals, improve customer journeys, and integrate AI assistants that resolve issues before they escalate.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Customer &amp;amp; partner portals&lt;/li&gt;&lt;li&gt;Self-service workflows&lt;/li&gt;&lt;li&gt;AI chatbot integration&lt;/li&gt;&lt;li&gt;Journey orchestration&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="For Business"
-                        ctaUrl="/content/my-dxp-site/solutions"/>
+                        text="&lt;p>Enable self-service portals, improve customer journeys, and integrate AI assistants that resolve issues before they escalate.&lt;/p>&lt;ul>&lt;li>Customer &amp;amp; partner portals&lt;/li>&lt;li>Self-service workflows&lt;/li>&lt;li>AI chatbot integration&lt;/li>&lt;li>Journey orchestration&lt;/li>&lt;/ul>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="For IT Teams"
+                        ctaUrl="/content/my-dxp-site/solutions"
+                        heading="IT &amp; Dev Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="IT &amp; Dev Teams"
-                        text="&lt;p&gt;Deploy headless or hybrid, connect to your existing stack, and scale globally with enterprise-grade security and 99.9% uptime.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Headless CMS &amp;amp; composable APIs&lt;/li&gt;&lt;li&gt;50+ enterprise integrations&lt;/li&gt;&lt;li&gt;SOC 2, GDPR, ISO 27001&lt;/li&gt;&lt;li&gt;Cloud-native scalability&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="For IT Teams"
-                        ctaUrl="/content/my-dxp-site/solutions"/>
+                        text="&lt;p>Deploy headless or hybrid, connect to your existing stack, and scale globally with enterprise-grade security and 99.9% uptime.&lt;/p>&lt;ul>&lt;li>Headless CMS &amp;amp; composable APIs&lt;/li>&lt;li>50+ enterprise integrations&lt;/li>&lt;li>SOC 2, GDPR, ISO 27001&lt;/li>&lt;li>Cloud-native scalability&lt;/li>&lt;/ul>"/>
                 </who_uses>
             </section_6>
             <section_7
@@ -302,11 +376,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="articles"
+                    description="&lt;p>Insights and resources on AI-powered digital experiences, personalization, and CX strategy from the ZensAI team.&lt;/p>"
+                    heading="Latest from the DXP AI Blog"
                     model="articles"
                     modelFields="[heading@text,description@richtext]"
-                    name="Articles"
-                    heading="Latest from the DXP AI Blog"
-                    description="&lt;p&gt;Insights and resources on AI-powered digital experiences, personalization, and CX strategy from the ZensAI team.&lt;/p&gt;"/>
+                    name="Articles"/>
             </section_7>
             <section_8
                 jcr:primaryType="nt:unstructured"
@@ -319,17 +393,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="richtext"
+                    ctaText="Request a Demo"
+                    ctaUrl="/content/my-dxp-site/contact"
+                    heading="What is a Digital Experience Platform?"
+                    lead="A DXP is a platform that enables organizations to deliver personalized, consistent, and engaging digital experiences across all customer touchpoints."
                     model="richtext-block"
                     modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
                     name="Richtext"
                     overline="Platform Knowledge Base"
-                    heading="What is a Digital Experience Platform?"
-                    lead="A DXP is a platform that enables organizations to deliver personalized, consistent, and engaging digital experiences across all customer touchpoints."
-                    text="&lt;p&gt;A &lt;strong&gt;Digital Experience Platform (DXP)&lt;/strong&gt; is a unified technology platform used by organizations to create, manage, deliver, and optimize digital experiences across multiple channels &#8212; such as websites, mobile apps, portals, chatbots, and email.&lt;/p&gt;&lt;p&gt;Think of it as the central hub that connects content, data, personalization, analytics, and integrations to deliver a consistent and engaging user experience at every touchpoint.&lt;/p&gt;&lt;h3&gt;What Does a DXP Do?&lt;/h3&gt;&lt;ol&gt;&lt;li&gt;&lt;strong&gt;Content Management&lt;/strong&gt; &#8212; Create and manage digital content with role-based authoring and approvals.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Personalized Experiences&lt;/strong&gt; &#8212; Deliver personalized content based on user behavior, profile, or context.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Multi-Channel Delivery&lt;/strong&gt; &#8212; Serve content across websites, mobile apps, portals, and headless APIs.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Integration Hub&lt;/strong&gt; &#8212; Connect with Salesforce CRM, SAP ERP, and marketing automation platforms.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Analytics &amp;amp; Insights&lt;/strong&gt; &#8212; Track user behavior, measure content performance, and optimize based on data.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;AI-Powered Capabilities&lt;/strong&gt; &#8212; AI-driven search, content generation, intelligent recommendations, and conversational AI.&lt;/li&gt;&lt;/ol&gt;"
+                    sidebarText="&lt;p>Get a personalized walkthrough of ZensAI capabilities with one of our platform experts.&lt;/p>"
                     sidebarTitle="See DXP AI in Action"
-                    sidebarText="&lt;p&gt;Get a personalized walkthrough of ZensAI capabilities with one of our platform experts.&lt;/p&gt;"
-                    ctaUrl="/content/my-dxp-site/contact"
-                    ctaText="Request a Demo"/>
+                    text="&lt;p>A &lt;strong>Digital Experience Platform (DXP)&lt;/strong> is a unified technology platform used by organizations to create, manage, deliver, and optimize digital experiences across multiple channels — such as websites, mobile apps, portals, chatbots, and email.&lt;/p>&lt;p>Think of it as the central hub that connects content, data, personalization, analytics, and integrations to deliver a consistent and engaging user experience at every touchpoint.&lt;/p>&lt;h3>What Does a DXP Do?&lt;/h3>&lt;ol>&lt;li>&lt;strong>Content Management&lt;/strong> — Create and manage digital content with role-based authoring and approvals.&lt;/li>&lt;li>&lt;strong>Personalized Experiences&lt;/strong> — Deliver personalized content based on user behavior, profile, or context.&lt;/li>&lt;li>&lt;strong>Multi-Channel Delivery&lt;/strong> — Serve content across websites, mobile apps, portals, and headless APIs.&lt;/li>&lt;li>&lt;strong>Integration Hub&lt;/strong> — Connect with Salesforce CRM, SAP ERP, and marketing automation platforms.&lt;/li>&lt;li>&lt;strong>Analytics &amp;amp; Insights&lt;/strong> — Track user behavior, measure content performance, and optimize based on data.&lt;/li>&lt;li>&lt;strong>AI-Powered Capabilities&lt;/strong> — AI-driven search, content generation, intelligent recommendations, and conversational AI.&lt;/li>&lt;/ol>"/>
             </section_8>
             <section_9
                 jcr:primaryType="nt:unstructured"
@@ -342,17 +416,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Join 500+ enterprise teams using DXP AI to deliver intelligent, personalized digital experiences at scale — powered by ZensAI.&lt;/p>"
+                    heading="Ready to Build Experiences that Actually Convert?"
+                    metaText="No credit card required · Free 30-day trial · Setup in under 1 hour"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
                     overline="Get Started Today"
-                    heading="Ready to Build Experiences that Actually Convert?"
-                    description="&lt;p&gt;Join 500+ enterprise teams using DXP AI to deliver intelligent, personalized digital experiences at scale &#8212; powered by ZensAI.&lt;/p&gt;"
                     primaryText="Request a Demo"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="View Pricing"
-                    secondaryUrl="/content/my-dxp-site/pricing"
-                    metaText="No credit card required · Free 30-day trial · Setup in under 1 hour"/>
+                    secondaryUrl="/content/my-dxp-site/pricing"/>
             </section_9>
         </root>
     </jcr:content>

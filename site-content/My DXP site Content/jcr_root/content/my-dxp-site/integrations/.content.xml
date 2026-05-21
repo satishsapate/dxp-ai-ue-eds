@@ -2,10 +2,18 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="Integrations"
         jcr:uuid="d4e5f6a7-b8c9-0123-def0-234567890123"
@@ -20,15 +28,15 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="page-hero"
+                    badgeText="50+ Integrations"
+                    breadcrumbCurrent="Integrations"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    description="&lt;p>DXP AI connects to your entire enterprise ecosystem out of the box. 50+ pre-built connectors, open APIs, and a custom SDK mean you're never locked in — and never building from scratch.&lt;/p>"
+                    headingAccent="Unify Every Experience."
+                    headingPrefix="Connect Everything."
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
-                    name="Page Hero"
-                    breadcrumbUrl="/content/my-dxp-site/index"
-                    breadcrumbCurrent="Integrations"
-                    badgeText="50+ Integrations"
-                    headingPrefix="Connect Everything."
-                    headingAccent="Unify Every Experience."
-                    description="&lt;p&gt;DXP AI connects to your entire enterprise ecosystem out of the box. 50+ pre-built connectors, open APIs, and a custom SDK mean you&apos;re never locked in &#8212; and never building from scratch.&lt;/p&gt;"/>
+                    name="Page Hero"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -42,87 +50,87 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Salesforce CRM"
                         model="features-item"
                         name="Features Item"
-                        heading="Salesforce CRM"
-                        text="&lt;p&gt;Bi-directional sync of leads, contacts, accounts, and opportunities. Trigger personalized DXP AI experiences based on Salesforce lifecycle stage, lead score, or custom fields. Push ZensAI behavioral signals back to Salesforce for richer sales intelligence.&lt;/p&gt;"/>
+                        text="&lt;p>Bi-directional sync of leads, contacts, accounts, and opportunities. Trigger personalized DXP AI experiences based on Salesforce lifecycle stage, lead score, or custom fields. Push ZensAI behavioral signals back to Salesforce for richer sales intelligence.&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="SAP"
                         model="features-item"
                         name="Features Item"
-                        heading="SAP"
-                        text="&lt;p&gt;Connect DXP AI to SAP S/4HANA, SAP Commerce Cloud, and SAP Customer Experience. Real-time product catalog sync, order status integration, and customer account data for personalized B2B portal experiences.&lt;/p&gt;"/>
+                        text="&lt;p>Connect DXP AI to SAP S/4HANA, SAP Commerce Cloud, and SAP Customer Experience. Real-time product catalog sync, order status integration, and customer account data for personalized B2B portal experiences.&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="HubSpot"
                         model="features-item"
                         name="Features Item"
-                        heading="HubSpot"
-                        text="&lt;p&gt;Sync DXP AI visitor behavior and lead intelligence with HubSpot CRM and Marketing Hub. Trigger workflows based on content engagement, run ZensAI-powered A/B tests, and unify your marketing attribution.&lt;/p&gt;"/>
+                        text="&lt;p>Sync DXP AI visitor behavior and lead intelligence with HubSpot CRM and Marketing Hub. Trigger workflows based on content engagement, run ZensAI-powered A/B tests, and unify your marketing attribution.&lt;/p>"/>
                     <item_3
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Marketo"
                         model="features-item"
                         name="Features Item"
-                        heading="Marketo"
-                        text="&lt;p&gt;Full Marketo Engage integration for lead capture, nurture automation, and behavioral scoring. DXP AI page and content engagement events flow directly into Marketo programs and smart campaigns in real time.&lt;/p&gt;"/>
+                        text="&lt;p>Full Marketo Engage integration for lead capture, nurture automation, and behavioral scoring. DXP AI page and content engagement events flow directly into Marketo programs and smart campaigns in real time.&lt;/p>"/>
                     <item_4
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Microsoft Dynamics"
                         model="features-item"
                         name="Features Item"
-                        heading="Microsoft Dynamics"
-                        text="&lt;p&gt;Native Microsoft Dynamics 365 connector for CRM, Sales, and Customer Service. Unified customer profile across Dynamics and DXP AI enables consistent experiences in portals, web, and email &#8212; for both B2C and B2B scenarios.&lt;/p&gt;"/>
+                        text="&lt;p>Native Microsoft Dynamics 365 connector for CRM, Sales, and Customer Service. Unified customer profile across Dynamics and DXP AI enables consistent experiences in portals, web, and email — for both B2C and B2B scenarios.&lt;/p>"/>
                     <item_5
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Google Analytics"
                         model="features-item"
                         name="Features Item"
-                        heading="Google Analytics"
-                        text="&lt;p&gt;GA4 integration for unified analytics across DXP AI and Google properties. Server-side tagging for privacy compliance, custom event mapping, and combined ZensAI + GA4 audience segments for cross-channel targeting.&lt;/p&gt;"/>
+                        text="&lt;p>GA4 integration for unified analytics across DXP AI and Google properties. Server-side tagging for privacy compliance, custom event mapping, and combined ZensAI + GA4 audience segments for cross-channel targeting.&lt;/p>"/>
                     <item_6
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Adobe Analytics"
                         model="features-item"
                         name="Features Item"
-                        heading="Adobe Analytics"
-                        text="&lt;p&gt;Deep integration with Adobe Analytics for organizations running hybrid AEM/DXP AI stacks. Shared data layer, consistent event taxonomy, and cross-system reporting via Adobe Experience Platform.&lt;/p&gt;"/>
+                        text="&lt;p>Deep integration with Adobe Analytics for organizations running hybrid AEM/DXP AI stacks. Shared data layer, consistent event taxonomy, and cross-system reporting via Adobe Experience Platform.&lt;/p>"/>
                     <item_7
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Elasticsearch"
                         model="features-item"
                         name="Features Item"
-                        heading="Elasticsearch"
-                        text="&lt;p&gt;Extend ZensAI semantic search with your existing Elasticsearch indices. DXP AI can federate search results across your Elasticsearch clusters, combining keyword precision with ZensAI neural ranking for best-of-both-worlds search quality.&lt;/p&gt;"/>
+                        text="&lt;p>Extend ZensAI semantic search with your existing Elasticsearch indices. DXP AI can federate search results across your Elasticsearch clusters, combining keyword precision with ZensAI neural ranking for best-of-both-worlds search quality.&lt;/p>"/>
                     <item_8
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Slack"
                         model="features-item"
                         name="Features Item"
-                        heading="Slack"
-                        text="&lt;p&gt;Publish content approval notifications, workflow alerts, and performance digest reports directly to Slack channels. Authors get real-time publish status, editors get review requests, and teams stay aligned without leaving Slack.&lt;/p&gt;"/>
+                        text="&lt;p>Publish content approval notifications, workflow alerts, and performance digest reports directly to Slack channels. Authors get real-time publish status, editors get review requests, and teams stay aligned without leaving Slack.&lt;/p>"/>
                     <item_9
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Twilio"
                         model="features-item"
                         name="Features Item"
-                        heading="Twilio"
-                        text="&lt;p&gt;Trigger SMS and WhatsApp messages from DXP AI journeys via Twilio. Ideal for transactional alerts, OTP authentication in portals, and conversational AI handoffs from ZensAI virtual agents to human agents.&lt;/p&gt;"/>
+                        text="&lt;p>Trigger SMS and WhatsApp messages from DXP AI journeys via Twilio. Ideal for transactional alerts, OTP authentication in portals, and conversational AI handoffs from ZensAI virtual agents to human agents.&lt;/p>"/>
                     <item_10
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Stripe"
                         model="features-item"
                         name="Features Item"
-                        heading="Stripe"
-                        text="&lt;p&gt;Embed Stripe payment flows directly into DXP AI portal and commerce experiences. Subscription management, one-time payments, and invoice rendering &#8212; all styled to match your brand without leaving the DXP AI platform.&lt;/p&gt;"/>
+                        text="&lt;p>Embed Stripe payment flows directly into DXP AI portal and commerce experiences. Subscription management, one-time payments, and invoice rendering — all styled to match your brand without leaving the DXP AI platform.&lt;/p>"/>
                     <item_11
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="ServiceNow"
                         model="features-item"
                         name="Features Item"
-                        heading="ServiceNow"
-                        text="&lt;p&gt;Integrate ServiceNow IT Service Management and Customer Service Management with DXP AI portals. Employees and customers can raise tickets, check status, and receive resolution updates &#8212; all within the DXP AI portal experience.&lt;/p&gt;"/>
+                        text="&lt;p>Integrate ServiceNow IT Service Management and Customer Service Management with DXP AI portals. Employees and customers can raise tickets, check status, and receive resolution updates — all within the DXP AI portal experience.&lt;/p>"/>
                 </features>
             </section_2>
             <section_3
@@ -132,11 +140,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="section-dark"
+                    heading="Built for Developers"
                     model="section-dark"
                     modelFields="[heading@text,text@richtext]"
                     name="Section Dark"
-                    heading="Built for Developers"
-                    text="&lt;p&gt;Don&apos;t see your integration? Our open platform gives developers everything they need to build custom connectors in days, not months.&lt;/p&gt;"/>
+                    text="&lt;p>Don't see your integration? Our open platform gives developers everything they need to build custom connectors in days, not months.&lt;/p>"/>
                 <features
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
@@ -146,24 +154,24 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Open API Framework"
                         model="features-item"
                         name="Features Item"
-                        heading="Open API Framework"
-                        text="&lt;p&gt;Full REST and GraphQL APIs for every DXP AI capability. OpenAPI 3.0 spec, interactive Swagger docs, and Postman collections. OAuth 2.0 and API key authentication with rate limiting and usage analytics.&lt;/p&gt;"/>
+                        text="&lt;p>Full REST and GraphQL APIs for every DXP AI capability. OpenAPI 3.0 spec, interactive Swagger docs, and Postman collections. OAuth 2.0 and API key authentication with rate limiting and usage analytics.&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Custom Connector SDK"
                         model="features-item"
                         name="Features Item"
-                        heading="Custom Connector SDK"
-                        text="&lt;p&gt;Build custom connectors using our Node.js or Python SDK. A connector scaffold, testing framework, and marketplace publishing pipeline let your team ship integrations in days. Enterprise customers get private connector registry support.&lt;/p&gt;"/>
+                        text="&lt;p>Build custom connectors using our Node.js or Python SDK. A connector scaffold, testing framework, and marketplace publishing pipeline let your team ship integrations in days. Enterprise customers get private connector registry support.&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Webhooks &amp; Event Bus"
                         model="features-item"
                         name="Features Item"
-                        heading="Webhooks &amp; Event Bus"
-                        text="&lt;p&gt;Subscribe to DXP AI events &#8212; content published, user action, segment match, form submit &#8212; via webhooks or our managed event bus. Filter, transform, and route events to any downstream system in real time.&lt;/p&gt;"/>
+                        text="&lt;p>Subscribe to DXP AI events — content published, user action, segment match, form submit — via webhooks or our managed event bus. Filter, transform, and route events to any downstream system in real time.&lt;/p>"/>
                 </features>
             </section_3>
             <section_4
@@ -173,17 +181,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Talk to our integration team about connecting DXP AI to your specific technology ecosystem. We'll assess your stack and recommend the fastest integration path.&lt;/p>"
+                    heading="Already Have a Stack? DXP AI Connects to It."
+                    metaText="50+ pre-built connectors · Open API · Custom SDK"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
                     overline="Connect Your Stack"
-                    heading="Already Have a Stack? DXP AI Connects to It."
-                    description="&lt;p&gt;Talk to our integration team about connecting DXP AI to your specific technology ecosystem. We&apos;ll assess your stack and recommend the fastest integration path.&lt;/p&gt;"
                     primaryText="Talk to Integration Team"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="View Documentation"
-                    secondaryUrl="/content/my-dxp-site/documentation"
-                    metaText="50+ pre-built connectors · Open API · Custom SDK"/>
+                    secondaryUrl="/content/my-dxp-site/documentation"/>
             </section_4>
         </root>
     </jcr:content>

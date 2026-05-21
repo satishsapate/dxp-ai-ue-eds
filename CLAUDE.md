@@ -151,27 +151,37 @@ Do not wrap valid JS identifier property names in quotes in object literals (e.g
 - **Never edit** directly: `component-definition.json`, `component-models.json`, `component-filters.json`
 - **After any model change:** run `npm run build:json`
 
-### AEM Package Deployment — MANDATORY sequence
-Every time `tools/create-aem-package.ps1` is run to generate the ZIP, these steps MUST happen first in order:
+### ⛔ AEM Package ZIP — NEVER skip `npm run build:json` first
+
+> **This rule has been violated before. It must NEVER be skipped again.**
+
+`create-aem-package.ps1` bundles the three root-level JSON files **as they exist on disk at the moment it runs**. If `npm run build:json` has not been run first, the ZIP will contain **stale JSON** and Universal Editor will silently show wrong or missing fields after install — with no error message.
+
+**Claude MUST always run these steps in this exact order before suggesting or running the ZIP script:**
 
 ```bash
-# 1. Rebuild the three root-level JSON files from source
+# STEP 1 — always first, no exceptions
 npm run build:json
 
-# 2. Commit the updated JSON files so they are in sync with git
+# STEP 2 — commit the rebuilt files so git is in sync
 git add component-definition.json component-filters.json component-models.json
-# (commit with other changed files)
+# (commit together with other changed files)
 
-# 3. THEN generate the ZIP — it reads the root-level JSON files
+# STEP 3 — only now generate the ZIP
 powershell.exe -ExecutionPolicy Bypass -File ".\tools\create-aem-package.ps1"
 ```
 
-The ZIP (`dxp-ai-ue-eds-component-models-1.0.0.zip`) packages these three root-level files:
+**Files packaged into the ZIP:**
 - `component-definition.json`
 - `component-filters.json`
 - `component-models.json`
 
-If `npm run build:json` is skipped, the ZIP will contain stale JSON and UE will not pick up model changes after install.
+**Checklist before every ZIP creation:**
+- [ ] `npm run build:json` was run in this session
+- [ ] The three JSON files have been staged/committed
+- [ ] No uncommitted changes remain in `models/` or `blocks/*/`
+
+If any checklist item is false, run `npm run build:json` before proceeding.
 
 ---
 

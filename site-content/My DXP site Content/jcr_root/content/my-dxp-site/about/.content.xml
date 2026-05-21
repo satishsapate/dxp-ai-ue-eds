@@ -2,10 +2,18 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="About"
         jcr:uuid="0557ced5-f6d9-445d-96bd-70133ce175ec"
@@ -24,15 +32,15 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="page-hero"
+                    badgeText="About Us"
+                    breadcrumbCurrent="About"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    description="&lt;p>DXP AI is a flagship product of ZensAI, the AI innovation arm of Zensar Technologies — a global digital solutions company with over 30 years of enterprise technology leadership.&lt;/p>"
+                    headingAccent="Digital Experience"
+                    headingPrefix="Building the Future of"
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
-                    name="Page Hero"
-                    breadcrumbUrl="/content/my-dxp-site/index"
-                    breadcrumbCurrent="About"
-                    badgeText="About Us"
-                    headingPrefix="Building the Future of"
-                    headingAccent="Digital Experience"
-                    description="&lt;p&gt;DXP AI is a flagship product of ZensAI, the AI innovation arm of Zensar Technologies &#8212; a global digital solutions company with over 30 years of enterprise technology leadership.&lt;/p&gt;"/>
+                    name="Page Hero"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -45,17 +53,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="richtext"
+                    ctaText="View Open Roles"
+                    ctaUrl="/content/my-dxp-site/contact"
+                    heading="From Enterprise IT to AI-First Experiences"
+                    lead="We didn't set out to build another CMS. We set out to solve the most important challenge facing every organization: how to deliver experiences that actually matter to people, at scale."
                     model="richtext-block"
                     modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
                     name="Richtext"
                     overline="Our Story"
-                    heading="From Enterprise IT to AI-First Experiences"
-                    lead="We didn&apos;t set out to build another CMS. We set out to solve the most important challenge facing every organization: how to deliver experiences that actually matter to people, at scale."
-                    text="&lt;p&gt;Zensar Technologies has been at the forefront of enterprise digital transformation since 1991. Over three decades, we&apos;ve worked with Fortune 500 companies, global banks, healthcare systems, and government bodies &#8212; helping them navigate each wave of digital change.&lt;/p&gt;&lt;p&gt;When AI began reshaping every industry, we recognized a gap: existing digital experience platforms weren&apos;t built for the intelligence era. They were built for the web era &#8212; static, expensive to deploy, and bolted-on AI at best.&lt;/p&gt;&lt;h3&gt;The ZensAI Vision&lt;/h3&gt;&lt;p&gt;In 2022, Zensar established ZensAI as a dedicated AI innovation lab with a single mission: build the world&apos;s first truly AI-native Digital Experience Platform. Not a CMS with AI features sprinkled on top &#8212; but a platform where intelligence is the foundation, not an afterthought.&lt;/p&gt;&lt;p&gt;DXP AI launched in 2024, and in its first year it has been adopted by 500+ enterprise organizations across banking, retail, healthcare, manufacturing, and government sectors globally.&lt;/p&gt;&lt;h3&gt;About Zensar Technologies&lt;/h3&gt;&lt;p&gt;Zensar Technologies Ltd. (NSE: ZENSARTECH) is a leading digital solutions and technology services company, part of the RPG Group. Headquartered in Pune, India, Zensar has 10,000+ professionals across 30+ global offices and serves 200+ clients in 30+ countries.&lt;/p&gt;"
+                    sidebarText="&lt;p>We're building the future of AI-powered digital experiences. Come work on hard problems with a world-class team.&lt;/p>"
                     sidebarTitle="Join Our Team"
-                    sidebarText="&lt;p&gt;We&apos;re building the future of AI-powered digital experiences. Come work on hard problems with a world-class team.&lt;/p&gt;"
-                    ctaUrl="/content/my-dxp-site/contact"
-                    ctaText="View Open Roles"/>
+                    text="&lt;p>Zensar Technologies has been at the forefront of enterprise digital transformation since 1991. Over three decades, we've worked with Fortune 500 companies, global banks, healthcare systems, and government bodies — helping them navigate each wave of digital change.&lt;/p>&lt;p>When AI began reshaping every industry, we recognized a gap: existing digital experience platforms weren't built for the intelligence era. They were built for the web era — static, expensive to deploy, and bolted-on AI at best.&lt;/p>&lt;h3>The ZensAI Vision&lt;/h3>&lt;p>In 2022, Zensar established ZensAI as a dedicated AI innovation lab with a single mission: build the world's first truly AI-native Digital Experience Platform. Not a CMS with AI features sprinkled on top — but a platform where intelligence is the foundation, not an afterthought.&lt;/p>&lt;p>DXP AI launched in 2024, and in its first year it has been adopted by 500+ enterprise organizations across banking, retail, healthcare, manufacturing, and government sectors globally.&lt;/p>&lt;h3>About Zensar Technologies&lt;/h3>&lt;p>Zensar Technologies Ltd. (NSE: ZENSARTECH) is a leading digital solutions and technology services company, part of the RPG Group. Headquartered in Pune, India, Zensar has 10,000+ professionals across 30+ global offices and serves 200+ clients in 30+ countries.&lt;/p>"/>
             </section_2>
             <section_3
                 jcr:primaryType="nt:unstructured"
@@ -72,11 +80,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="section-light"
+                    heading="What We Stand For"
                     model="section-light"
                     modelFields="[heading@text,text@richtext]"
                     name="Section Light"
-                    heading="What We Stand For"
-                    text="&lt;p&gt;Our values guide every product decision, partnership, and customer interaction.&lt;/p&gt;"/>
+                    text="&lt;p>Our values guide every product decision, partnership, and customer interaction.&lt;/p>"/>
                 <features
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
@@ -90,24 +98,24 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Intelligence First"
                         model="features-item"
                         name="Features Item"
-                        heading="Intelligence First"
-                        text="&lt;p&gt;We believe AI should be foundational, not optional. Every decision we make in product development starts with: How does intelligence make this better?&lt;/p&gt;"/>
+                        text="&lt;p>We believe AI should be foundational, not optional. Every decision we make in product development starts with: How does intelligence make this better?&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Customer Obsessed"
                         model="features-item"
                         name="Features Item"
-                        heading="Customer Obsessed"
-                        text="&lt;p&gt;We measure our success by the outcomes our customers achieve. Every feature, every support interaction, every roadmap decision is guided by real customer needs.&lt;/p&gt;"/>
+                        text="&lt;p>We measure our success by the outcomes our customers achieve. Every feature, every support interaction, every roadmap decision is guided by real customer needs.&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Open &amp; Transparent"
                         model="features-item"
                         name="Features Item"
-                        heading="Open &amp; Transparent"
-                        text="&lt;p&gt;We publish our security posture, our pricing, our SLAs, and our roadmap. No vendor lock-in. No hidden fees. No surprises.&lt;/p&gt;"/>
+                        text="&lt;p>We publish our security posture, our pricing, our SLAs, and our roadmap. No vendor lock-in. No hidden fees. No surprises.&lt;/p>"/>
                 </features>
             </section_3>
             <section_4
@@ -126,35 +134,35 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        bio="15 years in enterprise software product strategy. Previously VP Product at Infosys and Adobe."
+                        memberName="Ajay Bhatt"
                         model="team-member"
                         name="Team Member"
-                        memberName="Ajay Bhatt"
-                        role="Chief Product Officer, ZensAI"
-                        bio="15 years in enterprise software product strategy. Previously VP Product at Infosys and Adobe."/>
+                        role="Chief Product Officer, ZensAI"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        bio="AI systems architect with expertise in large-scale distributed platforms and ML infrastructure."
+                        memberName="Priya Sharma"
                         model="team-member"
                         name="Team Member"
-                        memberName="Priya Sharma"
-                        role="VP Engineering, DXP AI"
-                        bio="AI systems architect with expertise in large-scale distributed platforms and ML infrastructure."/>
+                        role="VP Engineering, DXP AI"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        bio="PhD in Machine Learning. Leads ZensAI NLP and recommendation systems research team."
+                        memberName="Rahul Mehta"
                         model="team-member"
                         name="Team Member"
-                        memberName="Rahul Mehta"
-                        role="Head of AI Research, ZensAI"
-                        bio="PhD in Machine Learning. Leads ZensAI NLP and recommendation systems research team."/>
+                        role="Head of AI Research, ZensAI"/>
                     <item_3
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        bio="Leads global customer onboarding, support, and strategic success programs for 500+ enterprise clients."
+                        memberName="Ananya Iyer"
                         model="team-member"
                         name="Team Member"
-                        memberName="Ananya Iyer"
-                        role="VP Customer Success"
-                        bio="Leads global customer onboarding, support, and strategic success programs for 500+ enterprise clients."/>
+                        role="VP Customer Success"/>
                 </team>
             </section_4>
             <section_5
@@ -168,11 +176,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="section-dark"
+                    heading="Key Milestones"
                     model="section-dark"
                     modelFields="[heading@text,text@richtext]"
                     name="Section Dark"
-                    heading="Key Milestones"
-                    text="&lt;p&gt;Our journey from enterprise IT services to AI-first digital experience platform.&lt;/p&gt;"/>
+                    text="&lt;p>Our journey from enterprise IT services to AI-first digital experience platform.&lt;/p>"/>
                 <timeline
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
@@ -186,43 +194,43 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        description="Zensar Technologies established in Pune, India as part of the RPG Group — beginning a 30-year journey in enterprise technology services."
+                        heading="Zensar Technologies Founded"
                         model="timeline-event"
                         name="Timeline Event"
-                        year="1991"
-                        heading="Zensar Technologies Founded"
-                        description="Zensar Technologies established in Pune, India as part of the RPG Group &#8212; beginning a 30-year journey in enterprise technology services."/>
+                        year="1991"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        description="Zensar creates ZensAI as a dedicated AI innovation unit, with a mission to build AI-native enterprise products for the intelligence era."
+                        heading="ZensAI Lab Established"
                         model="timeline-event"
                         name="Timeline Event"
-                        year="2022"
-                        heading="ZensAI Lab Established"
-                        description="Zensar creates ZensAI as a dedicated AI innovation unit, with a mission to build AI-native enterprise products for the intelligence era."/>
+                        year="2022"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        description="DXP AI enters private beta with 20 design partners. Core platform including AI Content Management, Personalization Engine, and ZensAI Search shipped."
+                        heading="DXP AI Beta Launch"
                         model="timeline-event"
                         name="Timeline Event"
-                        year="2023"
-                        heading="DXP AI Beta Launch"
-                        description="DXP AI enters private beta with 20 design partners. Core platform including AI Content Management, Personalization Engine, and ZensAI Search shipped."/>
+                        year="2023"/>
                     <item_3
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        description="DXP AI goes GA. Achieves 500+ enterprise client milestone within the first year. Conversational AI and Predictive Analytics shipped."
+                        heading="General Availability &amp; 500+ Clients"
                         model="timeline-event"
                         name="Timeline Event"
-                        year="2024"
-                        heading="General Availability &amp; 500+ Clients"
-                        description="DXP AI goes GA. Achieves 500+ enterprise client milestone within the first year. Conversational AI and Predictive Analytics shipped."/>
+                        year="2024"/>
                     <item_4
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        description="ZensAI v2 launches with next-generation content generation, multi-modal search, and agentic AI capabilities. Expanding to 50+ countries."
+                        heading="ZensAI v2 &amp; Global Expansion"
                         model="timeline-event"
                         name="Timeline Event"
-                        year="2025"
-                        heading="ZensAI v2 &amp; Global Expansion"
-                        description="ZensAI v2 launches with next-generation content generation, multi-modal search, and agentic AI capabilities. Expanding to 50+ countries."/>
+                        year="2025"/>
                 </timeline>
             </section_5>
             <section_6
@@ -236,11 +244,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Join 500+ enterprise organizations transforming their digital experiences with DXP AI and ZensAI.&lt;/p>"
+                    heading="Ready to Work With the Best in DXP?"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
-                    heading="Ready to Work With the Best in DXP?"
-                    description="&lt;p&gt;Join 500+ enterprise organizations transforming their digital experiences with DXP AI and ZensAI.&lt;/p&gt;"
                     primaryText="Get Started"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="View Success Stories"

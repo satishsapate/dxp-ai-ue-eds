@@ -2,10 +2,18 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="Documentation"
         jcr:uuid="b8c9d0e1-f2a3-4567-1234-678901234567"
@@ -20,15 +28,15 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="page-hero"
+                    badgeText="Developer Docs"
+                    breadcrumbCurrent="Documentation"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    description="&lt;p>Everything you need to integrate, extend, and build on the DXP AI platform. From quick-start guides to full API reference — all in one place.&lt;/p>"
+                    headingAccent="Ship Faster."
+                    headingPrefix="Build On DXP AI."
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
-                    name="Page Hero"
-                    breadcrumbUrl="/content/my-dxp-site/index"
-                    breadcrumbCurrent="Documentation"
-                    badgeText="Developer Docs"
-                    headingPrefix="Build On DXP AI."
-                    headingAccent="Ship Faster."
-                    description="&lt;p&gt;Everything you need to integrate, extend, and build on the DXP AI platform. From quick-start guides to full API reference &#8212; all in one place.&lt;/p&gt;"/>
+                    name="Page Hero"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -37,17 +45,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="richtext"
+                    ctaText="Contact Developer Support"
+                    ctaUrl="/content/my-dxp-site/contact"
+                    heading="Up and Running in Minutes"
+                    lead="Install the DXP AI SDK, initialize your client, and fetch personalized content with just a few lines of code."
                     model="richtext-block"
                     modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
                     name="Richtext"
                     overline="Quick Start"
-                    heading="Up and Running in Minutes"
-                    lead="Install the DXP AI SDK, initialize your client, and fetch personalized content with just a few lines of code."
-                    text="&lt;h3&gt;1. Install the SDK&lt;/h3&gt;&lt;p&gt;Install the official DXP AI SDK via npm:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;npm install @dxpai/sdk&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;2. Initialize the Client&lt;/h3&gt;&lt;p&gt;Create a client instance with your API key and region:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;import DXPAIClient from &apos;@dxpai/sdk&apos;;&lt;br/&gt;const client = new DXPAIClient({ apiKey: &apos;YOUR_API_KEY&apos;, region: &apos;ap-south-1&apos; });&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;3. Fetch Personalized Content&lt;/h3&gt;&lt;p&gt;Retrieve content with ZensAI personalization applied:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;const content = await client.content.get({ path: &apos;/home&apos;, userId: currentUser.id, context: { device: &apos;mobile&apos;, segment: &apos;enterprise&apos; } });&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;4. Publish an Event&lt;/h3&gt;&lt;p&gt;Track user interactions to feed the ZensAI personalization engine:&lt;/p&gt;&lt;pre&gt;&lt;code&gt;await client.events.track({ type: &apos;content.viewed&apos;, contentId: content.id, userId: currentUser.id });&lt;/code&gt;&lt;/pre&gt;"
+                    sidebarText="&lt;p>Our developer support team is available Monday–Friday, 9am–6pm IST. Enterprise customers get 24/7 dedicated developer support.&lt;/p>&lt;p>Join our &lt;strong>Developer Community&lt;/strong> on Slack — 2,000+ active developers sharing tips, integrations, and custom connectors.&lt;/p>"
                     sidebarTitle="Need Help?"
-                    sidebarText="&lt;p&gt;Our developer support team is available Monday&#8211;Friday, 9am&#8211;6pm IST. Enterprise customers get 24/7 dedicated developer support.&lt;/p&gt;&lt;p&gt;Join our &lt;strong&gt;Developer Community&lt;/strong&gt; on Slack &#8212; 2,000+ active developers sharing tips, integrations, and custom connectors.&lt;/p&gt;"
-                    ctaUrl="/content/my-dxp-site/contact"
-                    ctaText="Contact Developer Support"/>
+                    text="&lt;h3>1. Install the SDK&lt;/h3>&lt;p>Install the official DXP AI SDK via npm:&lt;/p>&lt;pre>&lt;code>npm install @dxpai/sdk&lt;/code>&lt;/pre>&lt;h3>2. Initialize the Client&lt;/h3>&lt;p>Create a client instance with your API key and region:&lt;/p>&lt;pre>&lt;code>import DXPAIClient from '@dxpai/sdk';&lt;br/>const client = new DXPAIClient({ apiKey: 'YOUR_API_KEY', region: 'ap-south-1' });&lt;/code>&lt;/pre>&lt;h3>3. Fetch Personalized Content&lt;/h3>&lt;p>Retrieve content with ZensAI personalization applied:&lt;/p>&lt;pre>&lt;code>const content = await client.content.get({ path: '/home', userId: currentUser.id, context: { device: 'mobile', segment: 'enterprise' } });&lt;/code>&lt;/pre>&lt;h3>4. Publish an Event&lt;/h3>&lt;p>Track user interactions to feed the ZensAI personalization engine:&lt;/p>&lt;pre>&lt;code>await client.events.track({ type: 'content.viewed', contentId: content.id, userId: currentUser.id });&lt;/code>&lt;/pre>"/>
             </section_2>
             <section_3
                 jcr:primaryType="nt:unstructured"
@@ -61,39 +69,39 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="View API Reference"
+                        ctaUrl="/content/my-dxp-site/documentation"
+                        heading="API Reference"
                         model="features-item"
                         name="Features Item"
-                        heading="API Reference"
-                        text="&lt;p&gt;Complete reference documentation for all DXP AI REST and GraphQL APIs. Includes authentication, rate limits, request/response schemas, error codes, and interactive try-it consoles. Auto-generated from OpenAPI 3.0 spec.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Content API&lt;/li&gt;&lt;li&gt;Personalization API&lt;/li&gt;&lt;li&gt;Events &amp;amp; Analytics API&lt;/li&gt;&lt;li&gt;ZensAI Search API&lt;/li&gt;&lt;li&gt;Management API&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="View API Reference"
-                        ctaUrl="/content/my-dxp-site/documentation"/>
+                        text="&lt;p>Complete reference documentation for all DXP AI REST and GraphQL APIs. Includes authentication, rate limits, request/response schemas, error codes, and interactive try-it consoles. Auto-generated from OpenAPI 3.0 spec.&lt;/p>&lt;ul>&lt;li>Content API&lt;/li>&lt;li>Personalization API&lt;/li>&lt;li>Events &amp;amp; Analytics API&lt;/li>&lt;li>ZensAI Search API&lt;/li>&lt;li>Management API&lt;/li>&lt;/ul>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="View SDK Docs"
+                        ctaUrl="/content/my-dxp-site/documentation"
+                        heading="SDK Documentation"
                         model="features-item"
                         name="Features Item"
-                        heading="SDK Documentation"
-                        text="&lt;p&gt;Full documentation for the DXP AI SDK in JavaScript/TypeScript, Python, Java, and .NET. Includes getting started guides, API method references, type definitions, and code examples for common use cases.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;JavaScript / TypeScript SDK&lt;/li&gt;&lt;li&gt;Python SDK&lt;/li&gt;&lt;li&gt;Java SDK&lt;/li&gt;&lt;li&gt;.NET SDK&lt;/li&gt;&lt;li&gt;Mobile SDK (iOS &amp;amp; Android)&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="View SDK Docs"
-                        ctaUrl="/content/my-dxp-site/documentation"/>
+                        text="&lt;p>Full documentation for the DXP AI SDK in JavaScript/TypeScript, Python, Java, and .NET. Includes getting started guides, API method references, type definitions, and code examples for common use cases.&lt;/p>&lt;ul>&lt;li>JavaScript / TypeScript SDK&lt;/li>&lt;li>Python SDK&lt;/li>&lt;li>Java SDK&lt;/li>&lt;li>.NET SDK&lt;/li>&lt;li>Mobile SDK (iOS &amp;amp; Android)&lt;/li>&lt;/ul>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="View Integration Guides"
+                        ctaUrl="/content/my-dxp-site/integrations"
+                        heading="Integration Guides"
                         model="features-item"
                         name="Features Item"
-                        heading="Integration Guides"
-                        text="&lt;p&gt;Step-by-step integration guides for all 50+ pre-built connectors. Each guide covers authentication setup, data mapping, event configuration, and testing &#8212; with working code samples for Salesforce, SAP, HubSpot, Marketo, and more.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;CRM integrations&lt;/li&gt;&lt;li&gt;Marketing automation&lt;/li&gt;&lt;li&gt;Analytics platforms&lt;/li&gt;&lt;li&gt;Custom connector SDK guide&lt;/li&gt;&lt;li&gt;Webhook configuration&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="View Integration Guides"
-                        ctaUrl="/content/my-dxp-site/integrations"/>
+                        text="&lt;p>Step-by-step integration guides for all 50+ pre-built connectors. Each guide covers authentication setup, data mapping, event configuration, and testing — with working code samples for Salesforce, SAP, HubSpot, Marketo, and more.&lt;/p>&lt;ul>&lt;li>CRM integrations&lt;/li>&lt;li>Marketing automation&lt;/li>&lt;li>Analytics platforms&lt;/li>&lt;li>Custom connector SDK guide&lt;/li>&lt;li>Webhook configuration&lt;/li>&lt;/ul>"/>
                     <item_3
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="View ZensAI Guide"
+                        ctaUrl="/content/my-dxp-site/ai-capabilities"
+                        heading="ZensAI API Guide"
                         model="features-item"
                         name="Features Item"
-                        heading="ZensAI API Guide"
-                        text="&lt;p&gt;Developer guide for the ZensAI intelligence APIs &#8212; semantic search, recommendations, content generation, and conversational AI. Covers model configuration, prompt engineering, context injection, and fine-tuning for your domain.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Semantic Search API&lt;/li&gt;&lt;li&gt;Recommendations API&lt;/li&gt;&lt;li&gt;Content Generation API&lt;/li&gt;&lt;li&gt;Conversational AI (RAG) API&lt;/li&gt;&lt;li&gt;Predictive Scoring API&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="View ZensAI Guide"
-                        ctaUrl="/content/my-dxp-site/ai-capabilities"/>
+                        text="&lt;p>Developer guide for the ZensAI intelligence APIs — semantic search, recommendations, content generation, and conversational AI. Covers model configuration, prompt engineering, context injection, and fine-tuning for your domain.&lt;/p>&lt;ul>&lt;li>Semantic Search API&lt;/li>&lt;li>Recommendations API&lt;/li>&lt;li>Content Generation API&lt;/li>&lt;li>Conversational AI (RAG) API&lt;/li>&lt;li>Predictive Scoring API&lt;/li>&lt;/ul>"/>
                 </features>
             </section_3>
             <section_4
@@ -103,17 +111,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Join 2,000+ developers building on DXP AI. Get your API key, access the sandbox environment, and start building today.&lt;/p>"
+                    heading="Build Something Great on DXP AI"
+                    metaText="Free sandbox access · Full API coverage · Developer community on Slack"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
                     overline="Join the Developer Community"
-                    heading="Build Something Great on DXP AI"
-                    description="&lt;p&gt;Join 2,000+ developers building on DXP AI. Get your API key, access the sandbox environment, and start building today.&lt;/p&gt;"
                     primaryText="Get API Access"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="View Integrations"
-                    secondaryUrl="/content/my-dxp-site/integrations"
-                    metaText="Free sandbox access · Full API coverage · Developer community on Slack"/>
+                    secondaryUrl="/content/my-dxp-site/integrations"/>
             </section_4>
         </root>
     </jcr:content>

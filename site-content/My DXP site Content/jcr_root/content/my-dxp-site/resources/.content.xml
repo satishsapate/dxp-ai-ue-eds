@@ -2,10 +2,18 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="Resources"
         jcr:uuid="a7b8c9d0-e1f2-3456-0123-567890123456"
@@ -20,15 +28,15 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="page-hero"
+                    badgeText="Resources &amp; Learning"
+                    breadcrumbCurrent="Resources"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    description="&lt;p>Whitepapers, webinars, guides, and tools to help you evaluate, implement, and maximize your DXP AI investment.&lt;/p>"
+                    headingAccent="Transform."
+                    headingPrefix="Learn. Grow."
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
-                    name="Page Hero"
-                    breadcrumbUrl="/content/my-dxp-site/index"
-                    breadcrumbCurrent="Resources"
-                    badgeText="Resources &amp; Learning"
-                    headingPrefix="Learn. Grow."
-                    headingAccent="Transform."
-                    description="&lt;p&gt;Whitepapers, webinars, guides, and tools to help you evaluate, implement, and maximize your DXP AI investment.&lt;/p&gt;"/>
+                    name="Page Hero"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -37,11 +45,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="section-light"
+                    heading="Whitepapers &amp; Guides"
                     model="section-light"
                     modelFields="[heading@text,text@richtext]"
                     name="Section Light"
-                    heading="Whitepapers &amp; Guides"
-                    text="&lt;p&gt;In-depth research and practical guides from the DXP AI team.&lt;/p&gt;"/>
+                    text="&lt;p>In-depth research and practical guides from the DXP AI team.&lt;/p>"/>
                 <features
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
@@ -51,30 +59,30 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Download Report"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="State of Digital Experience 2025"
                         model="features-item"
                         name="Features Item"
-                        heading="State of Digital Experience 2025"
-                        text="&lt;p&gt;Our annual benchmark report surveying 500+ enterprise digital leaders across 12 industries. Covers AI adoption in DXP, personalization maturity, content operations benchmarks, and top digital experience priorities for 2025&#8211;2026.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; PDF Whitepaper, 42 pages&lt;/p&gt;"
-                        ctaText="Download Report"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>Our annual benchmark report surveying 500+ enterprise digital leaders across 12 industries. Covers AI adoption in DXP, personalization maturity, content operations benchmarks, and top digital experience priorities for 2025–2026.&lt;/p>&lt;p>&lt;strong>Format:&lt;/strong> PDF Whitepaper, 42 pages&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Download Guide"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="AI-First DXP Buyer's Guide"
                         model="features-item"
                         name="Features Item"
-                        heading="AI-First DXP Buyer&apos;s Guide"
-                        text="&lt;p&gt;A practical evaluation framework for digital experience platform selection. Covers 40 capability criteria, vendor comparison methodology, RFP template, and a scoring model you can adapt to your organization&apos;s specific requirements.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; PDF Guide + Excel Scorecard&lt;/p&gt;"
-                        ctaText="Download Guide"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>A practical evaluation framework for digital experience platform selection. Covers 40 capability criteria, vendor comparison methodology, RFP template, and a scoring model you can adapt to your organization's specific requirements.&lt;/p>&lt;p>&lt;strong>Format:&lt;/strong> PDF Guide + Excel Scorecard&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Download Tools"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="ROI Calculator &amp; Business Case Template"
                         model="features-item"
                         name="Features Item"
-                        heading="ROI Calculator &amp; Business Case Template"
-                        text="&lt;p&gt;Build a compelling business case for DXP AI with our interactive ROI calculator and executive presentation template. Covers cost savings, revenue impact, content production efficiency, and risk reduction &#8212; pre-filled with industry benchmarks.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Format:&lt;/strong&gt; Excel Calculator + PowerPoint Template&lt;/p&gt;"
-                        ctaText="Download Tools"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>Build a compelling business case for DXP AI with our interactive ROI calculator and executive presentation template. Covers cost savings, revenue impact, content production efficiency, and risk reduction — pre-filled with industry benchmarks.&lt;/p>&lt;p>&lt;strong>Format:&lt;/strong> Excel Calculator + PowerPoint Template&lt;/p>"/>
                 </features>
             </section_2>
             <section_3
@@ -84,11 +92,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="section-dark"
+                    heading="Webinars &amp; On-Demand Sessions"
                     model="section-dark"
                     modelFields="[heading@text,text@richtext]"
                     name="Section Dark"
-                    heading="Webinars &amp; On-Demand Sessions"
-                    text="&lt;p&gt;Learn from DXP AI platform experts and enterprise practitioners.&lt;/p&gt;"/>
+                    text="&lt;p>Learn from DXP AI platform experts and enterprise practitioners.&lt;/p>"/>
                 <features
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
@@ -98,30 +106,30 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Watch Now"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="Getting Started with ZensAI Personalization"
                         model="features-item"
                         name="Features Item"
-                        heading="Getting Started with ZensAI Personalization"
-                        text="&lt;p&gt;A practical walkthrough of DXP AI&apos;s personalization engine &#8212; from segment setup and behavioral profiling to real-time content targeting and A/B test configuration.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; 45 minutes | &lt;strong&gt;Available:&lt;/strong&gt; On-Demand&lt;/p&gt;"
-                        ctaText="Watch Now"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>A practical walkthrough of DXP AI's personalization engine — from segment setup and behavioral profiling to real-time content targeting and A/B test configuration.&lt;/p>&lt;p>&lt;strong>Duration:&lt;/strong> 45 minutes | &lt;strong>Available:&lt;/strong> On-Demand&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Watch Now"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="Migrating from AEM to DXP AI"
                         model="features-item"
                         name="Features Item"
-                        heading="Migrating from AEM to DXP AI"
-                        text="&lt;p&gt;A candid session with two enterprise customers who migrated from Adobe Experience Manager to DXP AI &#8212; covering their decision process, migration approach, timeline, and lessons learned.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; 60 minutes | &lt;strong&gt;Available:&lt;/strong&gt; On-Demand&lt;/p&gt;"
-                        ctaText="Watch Now"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>A candid session with two enterprise customers who migrated from Adobe Experience Manager to DXP AI — covering their decision process, migration approach, timeline, and lessons learned.&lt;/p>&lt;p>&lt;strong>Duration:&lt;/strong> 60 minutes | &lt;strong>Available:&lt;/strong> On-Demand&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Watch Now"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="Building an AI-First Content Strategy"
                         model="features-item"
                         name="Features Item"
-                        heading="Building an AI-First Content Strategy"
-                        text="&lt;p&gt;How to redesign your content strategy, team structure, and workflows around AI-assisted production, intelligent distribution, and continuous optimization &#8212; with real examples from DXP AI customers.&lt;/p&gt;&lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; 55 minutes | &lt;strong&gt;Available:&lt;/strong&gt; On-Demand&lt;/p&gt;"
-                        ctaText="Watch Now"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>How to redesign your content strategy, team structure, and workflows around AI-assisted production, intelligent distribution, and continuous optimization — with real examples from DXP AI customers.&lt;/p>&lt;p>&lt;strong>Duration:&lt;/strong> 55 minutes | &lt;strong>Available:&lt;/strong> On-Demand&lt;/p>"/>
                 </features>
             </section_3>
             <section_4
@@ -131,17 +139,17 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Tell us about your role, industry, and challenges — and we'll curate a resource pack specifically for your situation.&lt;/p>"
+                    heading="Want Resources Tailored to You?"
+                    metaText="Curated by our solutions team · Free · No obligation"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
                     overline="Personalized Resources"
-                    heading="Want Resources Tailored to You?"
-                    description="&lt;p&gt;Tell us about your role, industry, and challenges &#8212; and we&apos;ll curate a resource pack specifically for your situation.&lt;/p&gt;"
                     primaryText="Get My Resource Pack"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="Read the Blog"
-                    secondaryUrl="/content/my-dxp-site/blog"
-                    metaText="Curated by our solutions team · Free · No obligation"/>
+                    secondaryUrl="/content/my-dxp-site/blog"/>
             </section_4>
         </root>
     </jcr:content>

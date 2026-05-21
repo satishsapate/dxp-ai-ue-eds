@@ -2,10 +2,18 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-19T20:30:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
-        jcr:mixinTypes="[mix:referenceable]"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus2,mix:referenceable,mix:versionable]"
         jcr:primaryType="cq:PageContent"
         jcr:title="Solutions"
         jcr:uuid="d4e5f6a7-b8c9-0123-4567-89abcdef0123"
@@ -24,15 +32,15 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="page-hero"
+                    badgeText="Solutions"
+                    breadcrumbCurrent="Solutions"
+                    breadcrumbUrl="/content/my-dxp-site/index"
+                    description="&lt;p>Whether you're in marketing, IT, or running enterprise operations — DXP AI is built to solve your specific digital experience challenges.&lt;/p>"
+                    headingAccent="Every Team"
+                    headingPrefix="DXP AI for"
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
-                    name="Page Hero"
-                    breadcrumbUrl="/content/my-dxp-site/index"
-                    breadcrumbCurrent="Solutions"
-                    badgeText="Solutions"
-                    headingPrefix="DXP AI for"
-                    headingAccent="Every Team"
-                    description="&lt;p&gt;Whether you&apos;re in marketing, IT, or running enterprise operations &#8212; DXP AI is built to solve your specific digital experience challenges.&lt;/p&gt;"/>
+                    name="Page Hero"/>
             </section>
             <section_2
                 jcr:primaryType="nt:unstructured"
@@ -50,30 +58,30 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Learn More"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="For Marketing Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="For Marketing Teams"
-                        text="&lt;p&gt;Create campaigns, personalize content at scale, run A/B tests, and measure performance &#8212; without writing a single line of code.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Drag-and-drop page builder&lt;/li&gt;&lt;li&gt;Campaign &amp;amp; segmentation tools&lt;/li&gt;&lt;li&gt;Content performance analytics&lt;/li&gt;&lt;li&gt;AI-assisted copywriting&lt;/li&gt;&lt;li&gt;Multi-channel publishing&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="Learn More"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>Create campaigns, personalize content at scale, run A/B tests, and measure performance — without writing a single line of code.&lt;/p>&lt;ul>&lt;li>Drag-and-drop page builder&lt;/li>&lt;li>Campaign &amp;amp; segmentation tools&lt;/li>&lt;li>Content performance analytics&lt;/li>&lt;li>AI-assisted copywriting&lt;/li>&lt;li>Multi-channel publishing&lt;/li>&lt;/ul>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Learn More"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="For Business Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="For Business Teams"
-                        text="&lt;p&gt;Enable self-service portals, improve customer journeys, and integrate AI assistants that resolve issues before they escalate.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Customer &amp;amp; partner portals&lt;/li&gt;&lt;li&gt;Self-service workflows&lt;/li&gt;&lt;li&gt;AI chatbot integration&lt;/li&gt;&lt;li&gt;Journey orchestration&lt;/li&gt;&lt;li&gt;360&#176; customer view&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="Learn More"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>Enable self-service portals, improve customer journeys, and integrate AI assistants that resolve issues before they escalate.&lt;/p>&lt;ul>&lt;li>Customer &amp;amp; partner portals&lt;/li>&lt;li>Self-service workflows&lt;/li>&lt;li>AI chatbot integration&lt;/li>&lt;li>Journey orchestration&lt;/li>&lt;li>360° customer view&lt;/li>&lt;/ul>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        ctaText="Learn More"
+                        ctaUrl="/content/my-dxp-site/contact"
+                        heading="For IT &amp; Dev Teams"
                         model="who-uses-item"
                         name="Who Uses Item"
-                        heading="For IT &amp; Dev Teams"
-                        text="&lt;p&gt;Deploy headless or hybrid, connect to your existing stack, and scale globally with enterprise-grade security and 99.9% uptime.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Headless CMS &amp;amp; composable APIs&lt;/li&gt;&lt;li&gt;50+ enterprise integrations&lt;/li&gt;&lt;li&gt;SOC 2, GDPR, ISO 27001 compliant&lt;/li&gt;&lt;li&gt;Cloud-native scalability&lt;/li&gt;&lt;li&gt;Developer-friendly SDKs&lt;/li&gt;&lt;/ul&gt;"
-                        ctaText="Learn More"
-                        ctaUrl="/content/my-dxp-site/contact"/>
+                        text="&lt;p>Deploy headless or hybrid, connect to your existing stack, and scale globally with enterprise-grade security and 99.9% uptime.&lt;/p>&lt;ul>&lt;li>Headless CMS &amp;amp; composable APIs&lt;/li>&lt;li>50+ enterprise integrations&lt;/li>&lt;li>SOC 2, GDPR, ISO 27001 compliant&lt;/li>&lt;li>Cloud-native scalability&lt;/li>&lt;li>Developer-friendly SDKs&lt;/li>&lt;/ul>"/>
                 </who_uses>
             </section_2>
             <section_3
@@ -92,24 +100,24 @@
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Enterprise Content Operations"
                         model="features-item"
                         name="Features Item"
-                        heading="Enterprise Content Operations"
-                        text="&lt;p&gt;Scale content production across global teams with centralized governance, multi-language support, and AI-assisted authoring workflows that reduce time-to-publish by 60%.&lt;/p&gt;"/>
+                        text="&lt;p>Scale content production across global teams with centralized governance, multi-language support, and AI-assisted authoring workflows that reduce time-to-publish by 60%.&lt;/p>"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Customer Experience Transformation"
                         model="features-item"
                         name="Features Item"
-                        heading="Customer Experience Transformation"
-                        text="&lt;p&gt;Transform fragmented customer touchpoints into unified, personalized journeys across web, mobile, portal, and email &#8212; driven by ZensAI behavioral intelligence.&lt;/p&gt;"/>
+                        text="&lt;p>Transform fragmented customer touchpoints into unified, personalized journeys across web, mobile, portal, and email — driven by ZensAI behavioral intelligence.&lt;/p>"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
+                        heading="Compliance &amp; Security at Scale"
                         model="features-item"
                         name="Features Item"
-                        heading="Compliance &amp; Security at Scale"
-                        text="&lt;p&gt;Meet the most demanding regulatory requirements: SOC 2 Type II, ISO 27001, GDPR, and HIPAA-ready architecture with role-based access, audit logging, and data residency controls.&lt;/p&gt;"/>
+                        text="&lt;p>Meet the most demanding regulatory requirements: SOC 2 Type II, ISO 27001, GDPR, and HIPAA-ready architecture with role-based access, audit logging, and data residency controls.&lt;/p>"/>
                 </features>
             </section_3>
             <section_4
@@ -123,11 +131,11 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="cta"
+                    description="&lt;p>Talk to a solutions specialist who understands your industry and your specific digital experience challenges.&lt;/p>"
+                    heading="Find Your DXP AI Solution"
                     model="cta"
                     modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
                     name="CTA"
-                    heading="Find Your DXP AI Solution"
-                    description="&lt;p&gt;Talk to a solutions specialist who understands your industry and your specific digital experience challenges.&lt;/p&gt;"
                     primaryText="Request a Demo"
                     primaryUrl="/content/my-dxp-site/contact"
                     secondaryText="View Pricing"

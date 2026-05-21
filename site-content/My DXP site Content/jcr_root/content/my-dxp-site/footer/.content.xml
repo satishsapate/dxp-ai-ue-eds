@@ -2,8 +2,15 @@
 <jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
     jcr:primaryType="cq:Page">
     <jcr:content
+        cq:isDelivered="{Boolean}false"
         cq:lastModified="{Date}2026-05-20T10:00:00.000Z"
         cq:lastModifiedBy="satish.sapate@zensar.com"
+        cq:lastReplicated="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicated_publish="{Date}2026-05-20T14:42:46.749Z"
+        cq:lastReplicatedBy="satish.sapate@zensar.com"
+        cq:lastReplicatedBy_publish="satish.sapate@zensar.com"
+        cq:lastReplicationAction="Activate"
+        cq:lastReplicationAction_publish="Activate"
         cq:template="/libs/core/franklin/templates/page"
         jcr:isCheckedOut="{Boolean}true"
         jcr:mixinTypes="[cq:ReplicationStatus2,mix:versionable]"
@@ -14,75 +21,61 @@
         <root
             jcr:primaryType="nt:unstructured"
             sling:resourceType="core/franklin/components/root/v1/root">
-
-            <!-- Section 0: Newsletter -->
             <section
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;h3&gt;Stay ahead with DXP AI insights&lt;/h3&gt;&lt;p&gt;Get the latest on AI-powered digital experiences, product updates, and industry trends.&lt;/p&gt;"/>
+                    text="&lt;h3>Stay ahead with DXP AI insights&lt;/h3>&lt;p>Get the latest on AI-powered digital experiences, product updates, and industry trends.&lt;/p>"/>
             </section>
-
-            <!-- Section 1: Brand + social links -->
             <section_0
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;p&gt;&lt;a href=&quot;/&quot;&gt;DXP AI&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Powered by ZensAI&lt;/p&gt;&lt;p&gt;The AI-first Digital Experience Platform that helps organisations create, manage, and deliver personalised experiences across every customer touchpoint.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#&quot; aria-label=&quot;LinkedIn&quot;&gt;in&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; aria-label=&quot;X (Twitter)&quot;&gt;&#x1D54F;&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; aria-label=&quot;YouTube&quot;&gt;&#9654;&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot; aria-label=&quot;GitHub&quot;&gt;&#9000;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;A &lt;em&gt;Zensar Technologies&lt;/em&gt; Product&lt;/p&gt;"/>
+                    text="&lt;p>&lt;a href=&quot;/&quot;>DXP AI&lt;/a>&lt;/p>&lt;p>Powered by ZensAI&lt;/p>&lt;p>The AI-first Digital Experience Platform that helps organisations create, manage, and deliver personalised experiences across every customer touchpoint.&lt;/p>&lt;ul>&lt;li>&lt;a href=&quot;#&quot; aria-label=&quot;LinkedIn&quot;>in&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;#&quot; aria-label=&quot;X (Twitter)&quot;>\ud835\udd4f&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;#&quot; aria-label=&quot;YouTube&quot;>▶&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;#&quot; aria-label=&quot;GitHub&quot;>⌨&lt;/a>&lt;/li>&lt;/ul>&lt;p>A &lt;em>Zensar Technologies&lt;/em> Product&lt;/p>"/>
             </section_0>
-
-            <!-- Section 2: Platform column -->
             <section_1
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;h4&gt;Platform&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/platform&quot;&gt;Platform Overview&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/ai-capabilities&quot;&gt;AI Capabilities&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/platform&quot;&gt;Content Management&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/platform&quot;&gt;Personalisation&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/integrations&quot;&gt;Integrations&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;"/>
+                    text="&lt;h4>Platform&lt;/h4>&lt;ul>&lt;li>&lt;a href=&quot;/platform&quot;>Platform Overview&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/ai-capabilities&quot;>AI Capabilities&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/platform&quot;>Content Management&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/platform&quot;>Personalisation&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/integrations&quot;>Integrations&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/security&quot;>Security&lt;/a>&lt;/li>&lt;/ul>"/>
             </section_1>
-
-            <!-- Section 3: Solutions column -->
             <section_2
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;h4&gt;Solutions&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/solutions&quot;&gt;For Marketing&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/solutions&quot;&gt;For IT Teams&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/solutions&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/why-dxp&quot;&gt;DXP vs CMS&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;"/>
+                    text="&lt;h4>Solutions&lt;/h4>&lt;ul>&lt;li>&lt;a href=&quot;/solutions&quot;>For Marketing&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/solutions&quot;>For IT Teams&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/solutions&quot;>Enterprise&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/why-dxp&quot;>DXP vs CMS&lt;/a>&lt;/li>&lt;/ul>"/>
             </section_2>
-
-            <!-- Section 4: Resources column -->
             <section_3
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;h4&gt;Resources&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/blog&quot;&gt;Blog &amp;amp; Articles&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/case-studies&quot;&gt;Case Studies&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/documentation&quot;&gt;Documentation&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/resources&quot;&gt;Whitepapers&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;"/>
+                    text="&lt;h4>Resources&lt;/h4>&lt;ul>&lt;li>&lt;a href=&quot;/blog&quot;>Blog &amp;amp; Articles&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/case-studies&quot;>Case Studies&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/documentation&quot;>Documentation&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/resources&quot;>Whitepapers&lt;/a>&lt;/li>&lt;/ul>"/>
             </section_3>
-
-            <!-- Section 5: Company column -->
             <section_4
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;h4&gt;Company&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;/about&quot;&gt;About DXP AI&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/pricing&quot;&gt;Pricing&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/contact&quot;&gt;Contact Us&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;/contact&quot;&gt;Request Demo&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;"/>
+                    text="&lt;h4>Company&lt;/h4>&lt;ul>&lt;li>&lt;a href=&quot;/about&quot;>About DXP AI&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/pricing&quot;>Pricing&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/contact&quot;>Contact Us&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;/contact&quot;>Request Demo&lt;/a>&lt;/li>&lt;/ul>"/>
             </section_4>
-
-            <!-- Section 6: Legal (copyright + legal links + certifications) -->
             <section_5
                 jcr:primaryType="nt:unstructured"
                 sling:resourceType="core/franklin/components/section/v1/section">
                 <text
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/text/v1/text"
-                    text="&lt;p&gt;&#169; 2025 DXP AI &amp;middot; Zensar Technologies Ltd.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;#&quot;&gt;Cookie Settings&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;ul&gt;&lt;li&gt;SOC 2&lt;/li&gt;&lt;li&gt;ISO 27001&lt;/li&gt;&lt;li&gt;GDPR&lt;/li&gt;&lt;li&gt;HIPAA Ready&lt;/li&gt;&lt;/ul&gt;"/>
+                    text="&lt;p>© 2025 DXP AI &amp;middot; Zensar Technologies Ltd.&lt;/p>&lt;ul>&lt;li>&lt;a href=&quot;#&quot;>Privacy Policy&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;#&quot;>Terms of Service&lt;/a>&lt;/li>&lt;li>&lt;a href=&quot;#&quot;>Cookie Settings&lt;/a>&lt;/li>&lt;/ul>&lt;ul>&lt;li>SOC 2&lt;/li>&lt;li>ISO 27001&lt;/li>&lt;li>GDPR&lt;/li>&lt;li>HIPAA Ready&lt;/li>&lt;/ul>"/>
             </section_5>
         </root>
     </jcr:content>
