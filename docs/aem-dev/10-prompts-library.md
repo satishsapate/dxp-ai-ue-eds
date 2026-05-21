@@ -22,6 +22,7 @@ to explore the codebase, keeping token usage low.
 | [P-08](#p-08--debug-block-not-loading) | Debug block not loading | Block shows empty or throws errors |
 | [P-09](#p-09--aem-content-package-for-block-data) | AEM content package | Create/update AEM content for a block |
 | [P-10](#p-10--responsive-layout-fix) | Responsive layout fix | Block looks wrong on mobile or tablet |
+| [P-11](#p-11--fix-lint-errors) | Fix lint errors | `npm run lint` reports errors |
 
 ---
 
@@ -127,11 +128,32 @@ FILES TO CREATE:
   blocks/[BLOCKNAME]/[BLOCKNAME].html  — UE authoring template with data-field attributes
   blocks/[BLOCKNAME]/_[BLOCKNAME].json — definitions, models, filters
 
-CONSTRAINTS:
-  - Max 4 cells per block/item row (xwalk/max-cells lint rule)
-  - Group multiple fields with richtext if more than 4 fields needed
+CONSTRAINTS — READ BEFORE WRITING ANY FILE:
+
+  CSS:
+  - CSS root selector MUST be .blockname (NOT .blockname-block — EDS adds the folder name as the class)
+  - Use rgb(x y z / a%) color notation, NOT rgba(x,y,z,a) (Stylelint enforces this)
+  - No deprecated properties: use clip-path:inset(50%) not clip:rect(0,0,0,0)
+  - @keyframes steps with multiple properties must be expanded to multi-line blocks
+  - No !important
+
+  JS:
+  - If block has a filter (parent+items), parent fields are ONE ROW PER FIELD (each row has 1 cell)
+    Read: rows[0].children[0] = field0, rows[1].children[0] = field1, etc.
+  - If block is flat (no filter), all fields are in ONE ROW as multiple cells
+    Read: cells = [...block.firstElementChild.children]
+  - Use moveInstrumentation(originalRow, newElement) when replacing EDS rows
+  - No nested ternaries (no-nested-ternary) — use if/else if
   - No console.log, no var, no frameworks
-  - Run npm run build:json after creating JSON
+
+  Model fields (_blockname.json):
+  - Max 4 fields per block row (xwalk/max-cells) — add .eslintrc.js override if more needed
+  - Fields ending in Text/Title/Type/Alt/MimeType are "collapsible" and need a base field
+    e.g., linkText needs link, imageAlt needs image
+    If no base: rename the field — ctaText→ctaBtn, badgeText→badge, sidebarTitle→sidebarHeading
+  - Don't quote valid identifier keys in .eslintrc.js overrides (cta: 8 not 'cta': 8)
+
+Run: npm run build:json && npm run lint
 
 Create all 4 files now.
 ```
@@ -257,15 +279,29 @@ FIELD TYPE REFERENCE:
   "boolean"     → toggle switch  (valueType:"boolean")
   "number"      → number input   (valueType:"number")
 
-XWALK CONSTRAINT: Max 4 fields per model (xwalk/max-cells rule).
-  If more than 4 fields needed, combine related text into a richtext field.
+XWALK CONSTRAINTS:
+  1. Max 4 fields per model row (xwalk/max-cells). Collapsible pairs (link+linkText) count as 1.
+     If more than 4 needed, either:
+     a) Add override in .eslintrc.js: 'xwalk/max-cells': ['error', { [MODEL_ID]: [N] }]
+     b) Consolidate related text into a single richtext field
+
+  2. Fields ending in Text/Title/Type/Alt/MimeType need a base field with the same prefix:
+     OK:   linkText  (link base exists)   imageAlt  (image base exists)
+     ERROR: ctaText   → rename to ctaBtn or ctaLabel
+     ERROR: badgeText → rename to badge
+     ERROR: sidebarTitle → rename to sidebarHeading
+     Rule: if no base field exists, drop the collapsible suffix
+
+  3. Don't quote valid identifier keys in .eslintrc.js (cta: 8 not 'cta': 8)
 
 TEMPLATE DEFAULTS: Update the "template" object in definitions[] to include
   default values for any new fields.
 
-After editing _[BLOCKNAME].json, run: npm run build:json
-Then verify component-models.json was updated correctly.
-Also update [BLOCKNAME].js cell mapping if field order changed.
+After editing _[BLOCKNAME].json:
+  1. Run: npm run build:json
+  2. Verify component-models.json was updated correctly
+  3. Update [BLOCKNAME].js cell mapping if field order changed
+  4. Run: npm run lint to check for orphan/max-cells errors
 ```
 
 ---
@@ -409,23 +445,34 @@ CHECK LIST — work through these in order:
 1. JS export: Does [BLOCKNAME].js export `export default function decorate(block)`?
    (named exports or missing default = block won't load)
 
-2. CSS class selector: Does [BLOCKNAME].css use `.blockname` prefix not `.blockname-block`?
-   EDS adds class = folder name, not block-[name].
+2. CSS class selector: Does [BLOCKNAME].css use `.blockname` NOT `.blockname-block`?
+   EDS class = folder name only. `.cta-block` never matches; `.cta` does.
 
-3. Cell count: Does the JS try to access cells[4]+ when model only has 4 fields?
-   (xwalk/max-cells allows max 4 per row)
+3. Row structure: Does the block have a `filter` in _[BLOCKNAME].json?
+   YES (parent + child items) → parent fields = ONE ROW PER FIELD, read rows[i].children[0]
+   NO (flat block)            → all fields = ONE ROW, multiple cells, read cells[i]
+   Symptom of mismatch: block shows first field only, rest blank.
 
-4. moveInstrumentation: Are EDS-generated rows being removed before appending new elements?
+4. Cell count: Does the JS try to access cells[4]+ when model only has 4 fields?
+   (xwalk/max-cells allows max 4 per row by default)
+
+5. moveInstrumentation: Are EDS-generated rows being removed before appending new elements?
    If `row.remove()` is missing, old divs stay in DOM causing duplication.
 
-5. richtext field: Is `cell.innerHTML` used (not `textContent`) for richtext fields?
+6. richtext field: Is `cell.innerHTML` used (not `textContent`) for richtext fields?
    textContent strips HTML tags from richtext.
 
-6. aem-content field: Does the JS use `cell.querySelector('a')?.href` for link fields?
+7. aem-content field: Does the JS use `cell.querySelector('a')?.href` for link fields?
    The cell contains an `<a>` tag, not plain text.
 
-7. Build check: After any _[BLOCKNAME].json change, was `npm run build:json` run?
+8. Build check: After any _[BLOCKNAME].json change, was `npm run build:json` run?
    Stale component-models.json can cause UE to send wrong field order.
+
+9. Lint check: Run `npm run lint` — common errors:
+   - xwalk/no-orphan-collapsible-fields: field name ending in Text/Title needs a base field
+   - xwalk/max-cells: block has >4 fields (add .eslintrc.js override)
+   - color-function-notation: use rgb(x y z / a%) not rgba(x,y,z,a)
+   - property-no-deprecated: use clip-path:inset(50%) not clip:rect(0,0,0,0)
 
 Diagnose the issue and provide the specific fix. Show the exact lines to change.
 ```
@@ -702,6 +749,72 @@ const text   = (cell) => cell?.textContent.trim() ?? '';
 const html   = (cell) => cell?.innerHTML ?? '';
 const link   = (cell) => cell?.querySelector('a') ?? null;
 const img    = (cell) => cell?.querySelector('img, picture') ?? null;
+```
+
+---
+
+---
+
+## P-11 — Fix Lint Errors
+
+**Use when:** `npm run lint` reports errors after creating or editing block files.
+
+```
+Fix all lint errors in the dxp-ai-ue-eds project.
+
+Run: npm run lint
+Paste the full output here: [PASTE OUTPUT]
+
+KNOWN LINT RULES AND FIXES:
+
+CSS ERRORS:
+  color-function-notation
+    CAUSE: rgba(x,y,z,a) old notation
+    FIX:   Run `npm run lint:css -- --fix` (auto-converts to rgb(x y z / a%))
+
+  property-no-deprecated (clip)
+    CAUSE: clip: rect(0,0,0,0)
+    FIX:   Replace with clip-path: inset(50%)
+
+  declaration-block-single-line-max-declarations
+    CAUSE: Multiple declarations on one line e.g. { opacity:1; transform:scale(1); }
+    FIX:   Expand each declaration to its own line
+
+  no-descending-specificity
+    CAUSE: Lower-specificity selector targeting the same element appears AFTER
+           a higher-specificity one
+    FIX:   Move the lower-specificity rule earlier in the file
+
+  declaration-block-no-duplicate-properties
+    FIX:   Run `npm run lint:css -- --fix` (auto-removes duplicates)
+
+JS ERRORS:
+  xwalk/no-orphan-collapsible-fields
+    CAUSE: Field name ends in Text/Title/Type/Alt/MimeType with no matching base field
+    FIX:   Rename: ctaText→ctaBtn, badgeText→badge, sidebarTitle→sidebarHeading
+           primaryText→primaryBtn, secondaryText→secondaryBtn, metaText→metaNote
+
+  xwalk/max-cells
+    CAUSE: Model has >4 fields
+    FIX:   Add override in .eslintrc.js:
+           'xwalk/max-cells': ['error', { [modelId]: [count] }]
+           Valid identifiers must NOT be quoted (cta: 8 not 'cta': 8)
+
+  no-nested-ternary
+    CAUSE: Ternary nested inside ternary: a ? b : c ? d : e
+    FIX:   Convert to: let x = e; if (a) x = b; else if (c) x = d;
+
+  quote-props (in .eslintrc.js or config objects)
+    CAUSE: Valid identifier keys unnecessarily quoted: 'cta': 8
+    FIX:   Remove quotes: cta: 8
+
+WORKFLOW:
+  1. npm run lint:css -- --fix    # auto-fix color notation and duplicates
+  2. npm run lint:css             # check remaining CSS errors (fix manually)
+  3. npm run lint:js              # check JS errors
+  4. Fix remaining errors manually using the guide above
+  5. npm run lint                 # confirm clean (0 errors)
+  6. npm run build:json           # if any _*.json files were changed
 ```
 
 ---

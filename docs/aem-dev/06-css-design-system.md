@@ -467,12 +467,16 @@ The dark theme provides strong contrast for the default text (`--text-color: #f0
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+  clip-path: inset(50%);   /* modern replacement for deprecated clip: rect() */
   white-space: nowrap;
+  border: 0;
 }
 ```
+
+> **Note:** `clip: rect(0, 0, 0, 0)` is deprecated. Stylelint (`property-no-deprecated`) will error on it. Always use `clip-path: inset(50%)` instead.
 
 ### Motion Reduction
 
@@ -484,6 +488,87 @@ Wrap transitions and animations in a motion-safe guard:
     transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
 }
+```
+
+---
+
+## CSS Lint Rules — Common Gotchas
+
+Stylelint is configured with `stylelint-config-standard`. These rules cause the most issues when writing block CSS:
+
+### 1. Color function notation (`color-function-notation`)
+**Error:** `Unexpected deprecated color-function-notation "legacy"`  
+**Cause:** Using `rgba(x, y, z, a)` old notation  
+**Fix:** Use `rgb(x y z / a%)` modern notation — or run `npm run lint:css -- --fix` to auto-convert
+
+```css
+/* wrong */
+background: rgba(255, 255, 255, 0.04);
+border-color: rgba(124, 58, 237, 0.18);
+
+/* correct */
+background: rgb(255 255 255 / 4%);
+border-color: rgb(124 58 237 / 18%);
+```
+
+### 2. Deprecated `clip` property (`property-no-deprecated`)
+**Error:** `Unexpected deprecated property "clip"`  
+**Fix:** Replace `clip: rect(0, 0, 0, 0)` with `clip-path: inset(50%)` in visually-hidden patterns.
+
+### 3. Single-line declaration blocks (`declaration-block-single-line-max-declarations`)
+**Error:** `Expected no more than 1 declaration`  
+**Cause:** Multiple CSS declarations on one line (commonly in `@keyframes`)  
+**Fix:** Expand to multi-line:
+
+```css
+/* wrong */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* correct */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+```
+
+### 4. Descending specificity (`no-descending-specificity`)
+**Error:** `Expected selector "X" to come before selector "Y"`  
+**Cause:** A lower-specificity selector targeting the same elements appears *after* a higher-specificity one  
+**Fix:** Reorder so lower-specificity rules come first:
+
+```css
+/* wrong — .menu a (0,2,1) comes after .nav-item > a:hover (0,2,2) */
+header .nav-item > a:hover { color: #fff; }
+...
+header .nav-mobile-menu a { color: rgb(255 255 255 / 80%); }
+
+/* correct — lower specificity first */
+header .nav-mobile-menu a { color: rgb(255 255 255 / 80%); }
+...
+header .nav-item > a:hover { color: #fff; }
+```
+
+### 5. Duplicate properties (`declaration-block-no-duplicate-properties`)
+**Error:** `Unexpected duplicate "background-clip"`  
+**Cause:** Writing vendor-prefix pattern with the standard property twice  
+**Fix:** `--fix` handles this automatically. If you need both prefixed and unprefixed, put `-webkit-` first.
+
+### Quick lint fix workflow
+```bash
+npm run lint:css -- --fix   # auto-fix color notation, duplicates (handles ~70% of issues)
+npm run lint:css            # see remaining manual fixes
+npm run lint                # full JS + CSS check
 ```
 
 ---

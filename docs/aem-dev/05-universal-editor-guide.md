@@ -455,6 +455,37 @@ This enables the "Edit" button in the Sidekick to open the page directly in Univ
 2. Check the field type is `"component": "reference"`
 3. Ensure the AEM instance serving the image allows cross-origin requests
 
+### Lint error: `xwalk/no-orphan-collapsible-fields`
+Field names ending in `Text`, `Title`, `Type`, `Alt`, or `MimeType` must have a base field with the same prefix in the same model:
+- `linkText` → OK if `link` (aem-content) also exists in the model
+- `imageAlt` → OK if `image` (reference) also exists in the model
+- `ctaText` → **ERROR** — no `cta` base field. Rename to `ctaBtn` or `ctaLabel`
+- `badgeText` → **ERROR** — rename to `badge`
+- `sidebarTitle` → **ERROR** — rename to `sidebarHeading`
+
+**Rule:** Only use the `*Text`/`*Title` suffix when the base field exists in the same model. Otherwise use a neutral suffix (`Btn`, `Label`, `Heading`, `Content`, `Note`) or drop the suffix entirely.
+
+### Lint error: `xwalk/max-cells`
+Each block model may have at most 4 field "groups". Collapsible pairs (e.g., `link` + `linkText`) count as 1 group. When a block genuinely needs more, add an override in `.eslintrc.js`:
+```javascript
+'xwalk/max-cells': ['error', {
+  myblock: 6,   // model id → allowed cell count
+}],
+```
+Do not add overrides indiscriminately — consider consolidating related fields into a single `richtext` field instead.
+
+### Block renders blank / wrong data (parent block with filter)
+Parent blocks that have a `filter` (allow child items) use **one row per field** in EDS, not one row with multiple cells. If your JS reads `cells[1]`, `cells[2]` from the first row, it will get `undefined` because each row has only 1 cell.
+
+Correct pattern for filter-based parent blocks:
+```javascript
+const rows = [...block.children];
+const overlineCell = rows[0]?.children[0];   // field 0
+const headingCell  = rows[1]?.children[0];   // field 1
+const descCell     = rows[2]?.children[0];   // field 2
+// item rows start at rows[3]
+```
+
 ## resourceType Reference
 
 | resourceType | Use Case |

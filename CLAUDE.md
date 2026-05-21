@@ -83,9 +83,68 @@ Even if a step seems obvious, call it out — the user may be context-switching 
 
 ### CSS
 - **Never hardcode colors or fonts** — always `var(--color-text)`, `var(--heading-font-family)`, etc.
-- **Always scope** block styles with `.blockname` prefix
+- **Always scope** block styles with `.blockname` prefix — **CRITICAL:** the EDS block element gets class `blockname` (the folder name), **NOT** `blockname-block`. The selector `.cta` is correct; `.cta-block` never matches anything.
 - **Mobile-first**, single breakpoint: `@media (width >= 900px)`
 - No `!important`
+- **Modern color syntax only** — use `rgb(x y z / a%)` not `rgba(x, y, z, a)`. Stylelint enforces this. Run `npm run lint:css -- --fix` to auto-convert.
+- **No deprecated properties** — `clip: rect(0,0,0,0)` is deprecated; use `clip-path: inset(50%)` for visually-hidden patterns.
+- **Keyframe declarations must be multi-line** — `@keyframes` steps with multiple properties must each be on their own line (Stylelint `declaration-block-single-line-max-declarations`).
+- **CSS selector order matters** — lower-specificity selectors targeting the same elements must come *before* higher-specificity ones (`no-descending-specificity`). If a mobile-menu `a` rule appears after a `.nav-item > a:hover` rule, move it earlier.
+
+### XWalk ESLint Rules (eslint-plugin-xwalk)
+
+These rules enforce the AEM content model constraints and catch real authoring bugs early.
+
+#### `xwalk/no-orphan-collapsible-fields`
+Fields whose name ends with `Text`, `Title`, `Type`, `Alt`, or `MimeType` are **collapsible** — they must have a corresponding base field with the same prefix. Without the base field, UE will have an orphan panel entry and lint will error.
+
+| Field name | Requires | Fix if no base field |
+|---|---|---|
+| `linkText` | `link` must also exist | OK — `link` is the `aem-content` base |
+| `imageAlt` | `image` must also exist | OK — `image` is the `reference` base |
+| `ctaText` | `cta` base field needed | Rename to `ctaBtn` or `ctaLabel` |
+| `primaryText` | `primary` base field needed | Rename to `primaryBtn` |
+| `badgeText` | `badge` base field needed | Rename to `badge` (drop `Text` suffix) |
+| `sidebarTitle` | `sidebar` base field needed | Rename to `sidebarHeading` |
+
+**Rule:** Only use the `*Text`/`*Title` suffix when the base field (`link`, `image`, etc.) is present in the same model. Otherwise drop the suffix or use a neutral suffix like `Btn`, `Label`, `Heading`, `Content`.
+
+#### `xwalk/max-cells`
+Each block row may have at most **4 cell groups**. Collapsible fields that have a base field collapse into 1 group with their base (they do not count separately). Fields without a collapsible suffix each count as 1.
+
+When a block genuinely needs more than 4 fields (e.g., a CTA with 8 fields), add an override to `.eslintrc.js`:
+
+```javascript
+'xwalk/max-cells': ['error', {
+  cta: 8,            // model id → allowed cell count
+  'carousel-item': 7,
+  hero: 7,
+}],
+```
+
+**Current overrides in `.eslintrc.js`:**
+- `carousel-item`: 7
+- `cta`: 8
+- `features-item`: 7
+- `hero`: 7
+- `page-hero`: 6
+- `pricing-plan`: 8
+- `richtext-block`: 8
+
+#### `no-nested-ternary` (airbnb-base)
+Convert nested ternaries to `if / else if` blocks. Lint will reject:
+```javascript
+const x = a ? 'a' : b ? 'b' : 'c'; // error
+```
+Use:
+```javascript
+let x = 'c';
+if (a) x = 'a';
+else if (b) x = 'b';
+```
+
+#### `quote-props` (airbnb-base)
+Do not wrap valid JS identifier property names in quotes in object literals (e.g., `.eslintrc.js` rule objects). `cta: 8` is correct; `'cta': 8` triggers an error.
 
 ### Component JSON (Build System)
 - **Edit** source files: `models/_*.json` and `blocks/*/_blockname.json`
@@ -430,19 +489,44 @@ export default function decorate(block) {
 ```
 
 ### EDS HTML Structure (what `decorate(block)` receives)
-When EDS renders content from AEM, each row of model fields becomes a `div > div` structure:
+
+**CRITICAL — Two different structures depending on block type:**
+
+#### Flat blocks (no `filter` in definition — `model` is set directly on the block)
+All fields arrive in **one row**, each as a separate cell:
 ```
-AEM fields: heading="Hello", text="World"
+AEM model: heading="Hello", text="World"
 
 EDS generates:
-<div class="myblock">     ← block (passed to decorate)
-  <div>                   ← row
-    <div>Hello</div>      ← cell 1 (heading field)
-    <div>World</div>      ← cell 2 (text field)
+<div class="myblock">     ← block
+  <div>                   ← single row
+    <div>Hello</div>      ← cell 0 (heading)
+    <div>World</div>      ← cell 1 (text)
   </div>
 </div>
 ```
-Access rows: `[...block.children]` — each row is a `div`, each cell is a nested `div`.
+Read: `const cells = [...block.firstElementChild.children]`  
+→ `cells[0]` = heading, `cells[1]` = text
+
+#### Parent blocks with child items (definition has `filter`, `model` is NOT on the block itself)
+The parent block fields arrive as **one row per field**, each with a single cell:
+```
+AEM model on carousel block: overline="Platform Pillars", heading="...", description="..."
+
+EDS generates:
+<div class="carousel">
+  <div><div>Platform Pillars</div></div>   ← row 0: overline (1 cell)
+  <div><div>Everything You Need</div></div> ← row 1: heading (1 cell)
+  <div><div>Seven powerful...</div></div>   ← row 2: description (1 cell)
+  ... child item rows follow ...
+</div>
+```
+Read: `const rows = [...block.children]`  
+→ `rows[0].children[0]` = overline, `rows[1].children[0]` = heading, `rows[2].children[0]` = description
+
+**Why the difference?** When a block has a `filter` (allowing child items), AEM stores parent fields and child items in the same JCR node tree. EDS serialises each parent field as its own `<div><div>value</div></div>` row so child items can be distinguished by row count. Flat blocks have no children so all fields fit in one row.
+
+**Rule:** Always read block content by **row index** (`rows[i].children[0]`), not by cells from the first row, unless you have verified the block is a flat (no-filter) model.
 
 ---
 
@@ -458,9 +542,10 @@ These blocks bypass the EDS row/cell data structure and render complete HTML dir
 ### Data-Driven Blocks (map EDS row/cell data from AEM)
 All other blocks receive AEM content as `div > div > div` structure and transform it:
 
-- **carousel:** cells[0]=category, [1]=title, [2]=richtext, [3]=ctaUrl, [4]=ctaText → `div.carousel__slide > article.carousel__card`
-- **cta:** cells[0]=overline, [1]=heading, [2]=description, [3]=primaryText, [4]=primaryUrl, [5]=secondaryText, [6]=secondaryUrl, [7]=metaText
-- **features / who-uses:** cells[0]=icon, [1]=title, [2]=description, [3]=link → `article.feature-card`
+- **carousel (parent):** rows[0]=overline, [1]=heading, [2]=description (one row per field, filter block)  
+  **carousel-item:** cells[0]=iconKey, [1]=iconVariant, [2]=category, [3]=title, [4]=text, [5]=ctaBtn, [6]=ctaUrl → `article.carousel__card`
+- **cta:** rows[0]=overline, [1]=heading, [2]=description, [3]=primaryBtn, [4]=primaryUrl, [5]=secondaryBtn, [6]=secondaryUrl, [7]=metaNote (one row per field, filter block)
+- **features / who-uses:** each item — cells[0]=icon, [1]=title, [2]=description, [3]=link → `article.feature-card`
 - **stats-band:** cells[0]=value, [1]=label → `.stat-item` with `.sv` / `.sl`
 - **articles:** first row = heading (single cell), subsequent rows = article data
 

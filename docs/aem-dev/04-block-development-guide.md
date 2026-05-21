@@ -260,7 +260,10 @@ This merges your `_myblock.json` into the three configuration files. After runni
 
 When EDS renders content authored in Universal Editor, blocks become HTML tables wrapped in divs. Understanding this structure is critical for writing the `decorate()` function.
 
-### Simple Block (one row, two cells)
+**There are two distinct structures** depending on whether the block has a `filter` (child items) or not.
+
+### Flat Block — no filter, `model` set directly on block
+All model fields arrive in **one row**, each as a separate cell:
 ```
 AEM Content:
   heading = "Hello World"
@@ -268,28 +271,57 @@ AEM Content:
 
 EDS generates:
 <div class="myblock">
-  <div>                        ← row
-    <div>Hello World</div>     ← cell 1 (heading)
-    <div>Some text</div>       ← cell 2 (description)
+  <div>                        ← single row
+    <div>Hello World</div>     ← cell 0 (heading field)
+    <div>Some text</div>       ← cell 1 (description field)
   </div>
 </div>
 ```
+**Read with:** `const cells = [...block.firstElementChild.children]`
+→ `cells[0]` = heading, `cells[1]` = description
 
-### Multi-row Block (e.g., Cards with items)
+### Parent Block with filter (child items)
+The **parent block fields** arrive as **one row per field** (each row has exactly 1 cell). Child item rows follow after, each with multiple cells.
+```
+AEM Content (carousel block with overline, heading, description fields):
+  overline = "Platform Pillars"
+  heading = "Everything You Need"
+  description = "Seven powerful capabilities..."
+  [carousel-item 1]: iconKey="cms", title="Content", ...
+  [carousel-item 2]: iconKey="ai",  title="ZensAI",  ...
+
+EDS generates:
+<div class="carousel">
+  <div><div>Platform Pillars</div></div>     ← row 0: overline  (1 cell)
+  <div><div>Everything You Need</div></div>  ← row 1: heading   (1 cell)
+  <div><div>Seven powerful...</div></div>    ← row 2: description (1 cell)
+  <div>                                      ← row 3: carousel-item 1
+    <div>cms</div>
+    <div>Content</div>
+    ...
+  </div>
+  ...
+</div>
+```
+**Read with:** `const rows = [...block.children]`
+→ `rows[0].children[0]` = overline, `rows[1].children[0]` = heading, etc.
+
+**Why the difference?** When a block has a `filter`, AEM stores parent fields and child items in the same JCR node tree. EDS serialises each parent field as its own `<div><div>value</div></div>` row. Flat blocks have no children so all fields fit in one row.
+
+**Common mistake:** Reading `cells[0]`, `cells[1]` etc. from the first row of a filter-based block — you'll only ever get `cells[0]` (one cell per row). Always check whether the block has a `filter` in its `_blockname.json` and use `rows[i].children[0]` accordingly.
+
+### Multi-row Block (child items — e.g., Cards)
+Child items each have multiple cells per row:
 ```
 AEM Content:
-  heading = "Our Cards"
   [card 1]: title = "Card A", text = "..."
   [card 2]: title = "Card B", text = "..."
 
 EDS generates:
 <div class="cards">
-  <div>
-    <div>Our Cards</div>      ← block header row
-  </div>
   <div>                      ← card 1 row
-    <div>Card A</div>
-    <div>...</div>
+    <div>Card A</div>        ← cell 0 (title)
+    <div>...</div>           ← cell 1 (text)
   </div>
   <div>                      ← card 2 row
     <div>Card B</div>
@@ -400,18 +432,51 @@ controlled without AEM content constraints.
 
 ## Linting Rules for Blocks
 
-### JavaScript (ESLint - airbnb-base)
-- Use `const` and `let`, never `var`
-- ES module imports must include `.js` extension
-- No unused variables
-- Prefer arrow functions
-- xwalk-specific rules from `eslint-plugin-xwalk`
+### JavaScript (ESLint - airbnb-base + eslint-plugin-xwalk)
+
+| Rule | What it catches | Fix |
+|---|---|---|
+| `no-var` | `var` declarations | Use `const` / `let` |
+| `no-console` | `console.log` in block code | Remove — use no logging in production blocks |
+| `import/extensions` | Missing `.js` in imports | `import x from './y.js'` |
+| `no-nested-ternary` | `a ? b : c ? d : e` | Convert to `if / else if` block |
+| `quote-props` | Quoted object keys that don't need quotes | `cta: 8` not `'cta': 8` in `.eslintrc.js` |
+| `xwalk/no-orphan-collapsible-fields` | Field name ending in `Text/Title/Type/Alt/MimeType` without matching base field | Rename: `ctaText`→`ctaBtn`, `badgeText`→`badge`, `sidebarTitle`→`sidebarHeading` |
+| `xwalk/max-cells` | More than 4 fields per block row | Add override in `.eslintrc.js` **or** consolidate fields into richtext |
+
+**`xwalk/no-orphan-collapsible-fields` — full explanation:**
+Fields ending in `Text`, `Title`, `Type`, `Alt`, `MimeType` must have a base field with the same prefix in the same model. E.g., `linkText` is fine if `link` (aem-content) also exists. But `ctaText` with no `cta` base field is an orphan — rename to `ctaBtn` or `ctaLabel`.
+
+**`xwalk/max-cells` — adding overrides:**
+```javascript
+// .eslintrc.js — current overrides for blocks with >4 fields
+'xwalk/max-cells': ['error', {
+  'carousel-item': 7,
+  cta: 8,
+  'features-item': 7,
+  hero: 7,
+  'page-hero': 6,
+  'pricing-plan': 8,
+  'richtext-block': 8,
+}],
+```
 
 ### CSS (Stylelint - standard)
-- Use CSS custom properties (no hardcoded colors)
-- Mobile-first responsive design
-- Block-scoped selectors only (prefix with `.blockname`)
-- No `!important`
+
+| Rule | What it catches | Fix |
+|---|---|---|
+| `color-function-notation` | `rgba(x,y,z,a)` old notation | Use `rgb(x y z / a%)` — run `npm run lint:css -- --fix` |
+| `property-no-deprecated` | `clip: rect(...)` | Use `clip-path: inset(50%)` |
+| `declaration-block-single-line-max-declarations` | Multiple declarations on one line in `@keyframes` or rule blocks | Expand to multi-line |
+| `no-descending-specificity` | Lower-specificity selector after higher-specificity one targeting same element | Move lower-specificity rule earlier in the file |
+| `declaration-block-no-duplicate-properties` | Same property twice (e.g., vendor-prefix pattern) | Keep only the standard property, or put prefixed version first |
+
+**Quick fix workflow:**
+```bash
+npm run lint:css -- --fix   # auto-fixes color notation + duplicate properties
+npm run lint:css            # check what remains (manual fix needed)
+npm run lint                # full check: JS + CSS
+```
 
 Run linting before committing:
 ```bash
@@ -435,11 +500,26 @@ npm run lint:fix   # auto-fix where possible
 
 ## CSS Naming Patterns (DXP AI blocks)
 
-Blocks use consistent CSS class naming conventions:
+### Block root selector — CRITICAL rule
+
+The EDS framework adds the **folder name** as the block's CSS class, **not** `blockname-block`. Always use `.blockname` as the root selector:
+
+```css
+/* CORRECT — matches the actual DOM class */
+.cta { ... }
+.page-hero { ... }
+.section-dark { ... }
+
+/* WRONG — .cta-block never matches anything in EDS */
+.cta-block { ... }
+.page-hero-block { ... }
+```
+
+### Naming conventions
 
 | Pattern | Class examples | Purpose |
 |---|---|---|
-| Block root | `.features`, `.carousel`, `.cta-block` | Block wrapper |
+| Block root | `.features`, `.carousel`, `.cta` | Block wrapper (= folder name) |
 | Section heading | `.section-heading` | Overline + h2 + p intro |
 | Overline | `.overline`, `.cta-overline`, `.rt-overline` | Uppercase label above heading |
 | Icon box | `.fc-icon`, `.card-icon`, `.nav-dd-icon` | Square icon container |
