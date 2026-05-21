@@ -1249,7 +1249,36 @@ Both accept `heading` (text) and `text` (richtext). The XML node names use under
 
 ---
 
-### Content package — two ZIPs, two install steps
+### ⛔ Content package — source first, ZIP second (NEVER edit the ZIP directly)
+
+> **This rule has been violated. The ZIP is a build output — NEVER the source of truth.**
+
+**The only source of truth for site content is the directory:**
+```
+site-content/My DXP site Content/jcr_root/content/my-dxp-site/
+```
+
+**The ZIP is always generated FROM that directory — it is never edited directly:**
+```
+site-content/My DXP site Content.zip   ← BUILD OUTPUT, regenerated every time
+```
+
+**Mandatory sequence for any content change:**
+
+```
+STEP 1 — Edit the .content.xml file(s) at the source path:
+          site-content/My DXP site Content/jcr_root/content/my-dxp-site/[page]/.content.xml
+
+STEP 2 — Commit the changed source file(s) to git
+
+STEP 3 — Rebuild the ZIP from the source directory (see script below)
+
+STEP 4 — Install the ZIP via AEM Package Manager at http://localhost:4502/crx/packmgr
+```
+
+If you skip Step 1 and try to "update the ZIP directly", the source files and the ZIP are out of sync — the next ZIP rebuild will overwrite your changes silently.
+
+---
 
 There are TWO separate AEM packages to install:
 
@@ -1259,21 +1288,23 @@ dxp-ai-ue-eds-component-models-1.0.0.zip
 ```
 Contains: `component-models.json`, `component-definition.json`, `component-filters.json`
 Installs to: `/conf/my-dxp-site/settings/dam/adminui-extension/`
+Rebuild: `npm run build:json` → then run `tools/create-aem-package.ps1`
 
 **2. Site content package** — the `My DXP site Content.zip`:
 ```
 site-content/My DXP site Content.zip
 ```
-Contains: all `.content.xml` files under `jcr_root/content/my-dxp-site/`
+Source directory: `site-content/My DXP site Content/` ← EDIT FILES HERE, never in the ZIP
 Installs to: `/content/my-dxp-site/`
+Rebuild: use the PowerShell script below after updating source files
 
-**Rebuild the content package ZIP** after changing any `.content.xml` file:
+**Rebuild `My DXP site Content.zip`** — run this after updating ANY `.content.xml` file:
 ```powershell
 powershell.exe -ExecutionPolicy Bypass -Command "
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
-\$sourceDir = 'C:\...\site-content\My DXP site Content'
-\$zipPath   = 'C:\...\site-content\My DXP site Content.zip'
+\$sourceDir = 'C:\Satish_Sapate_Data\AEM_Local\AEM_UE_EDS_Project\dxp-ai-ue-eds\site-content\My DXP site Content'
+\$zipPath   = 'C:\Satish_Sapate_Data\AEM_Local\AEM_UE_EDS_Project\dxp-ai-ue-eds\site-content\My DXP site Content.zip'
 if (Test-Path \$zipPath) { Remove-Item \$zipPath }
 \$utf8NoBom = New-Object System.Text.UTF8Encoding(\$false)
 \$zipStream = [System.IO.File]::Open(\$zipPath, [System.IO.FileMode]::Create)
@@ -1290,6 +1321,7 @@ Get-ChildItem -Path \$sourceDir -Recurse | ForEach-Object {
     }
 }
 \$archive.Dispose(); \$zipStream.Close()
+Write-Host 'Done: My DXP site Content.zip rebuilt'
 "
 ```
 
@@ -1310,6 +1342,7 @@ Get-ChildItem -Path \$sourceDir -Recurse | ForEach-Object {
 | `model="richtext"` | Wrong model ID for richtext block | Always `model="richtext-block"` |
 | XML hyphen in node name | `<section-dark>` — invalid XML | Use underscore: `<section_dark>`, keep hyphen only in `aueComponentId` |
 | Authoring all pages before testing one | Errors propagated across all 14 pages | Author 1 page → verify in AEM → then continue |
+| Editing the ZIP directly | Source files and ZIP out of sync; next ZIP rebuild silently discards changes | ALWAYS edit source files under `site-content/My DXP site Content/jcr_root/` first, then rebuild ZIP |
 
 ---
 
