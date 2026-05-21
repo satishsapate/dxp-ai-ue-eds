@@ -9,6 +9,7 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Carousel",
+              "model": "carousel",
               "filter": "carousel"
             }
           }
@@ -33,13 +34,75 @@
   ],
   "models": [
     {
-      "id": "carousel-item",
+      "id": "carousel",
       "fields": [
         {
           "component": "text",
           "valueType": "string",
+          "name": "overline",
+          "label": "Overline",
+          "value": "Platform Pillars"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "heading",
+          "label": "Heading",
+          "value": "Everything You Need to Deliver Exceptional Experiences"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "description",
+          "label": "Description",
+          "value": "Seven powerful capabilities that make DXP AI the most complete AI-first digital experience platform available."
+        }
+      ]
+    },
+    {
+      "id": "carousel-item",
+      "fields": [
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "iconKey",
+          "label": "Icon",
+          "options": [
+            { "name": "— None —",        "value": "" },
+            { "name": "Content / CMS",   "value": "cms" },
+            { "name": "Personalization", "value": "personalize" },
+            { "name": "Multi-Channel",   "value": "multichannel" },
+            { "name": "AI / ZensAI",     "value": "ai" },
+            { "name": "Integrations",    "value": "integrations" },
+            { "name": "Analytics",       "value": "analytics" },
+            { "name": "Platform",        "value": "platform" },
+            { "name": "Search",          "value": "search" },
+            { "name": "Security",        "value": "security" },
+            { "name": "Cloud",           "value": "cloud" },
+            { "name": "Star",            "value": "star" },
+            { "name": "Rocket",          "value": "rocket" },
+            { "name": "Chat / Engagement", "value": "chat" }
+          ]
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "iconVariant",
+          "label": "Colour (icon + badge)",
+          "options": [
+            { "name": "Purple — capability (default)", "value": "purple" },
+            { "name": "Cyan — feature",               "value": "cyan" },
+            { "name": "Blue — solution",               "value": "blue" },
+            { "name": "Violet",                        "value": "violet" },
+            { "name": "Orange",                        "value": "orange" },
+            { "name": "Green",                         "value": "green" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
           "name": "category",
-          "label": "Category"
+          "label": "Category Badge"
         },
         {
           "component": "text",
@@ -51,19 +114,20 @@
           "component": "richtext",
           "valueType": "string",
           "name": "text",
-          "label": "Content"
+          "label": "Description + Bullet Points"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "ctaText",
+          "label": "CTA Text",
+          "value": "Explore"
         },
         {
           "component": "aem-content",
           "valueType": "string",
           "name": "ctaUrl",
           "label": "CTA Link"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "ctaText",
-          "label": "CTA Text"
         }
       ]
     }
