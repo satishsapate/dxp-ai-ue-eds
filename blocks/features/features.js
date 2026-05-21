@@ -23,21 +23,25 @@ export default function decorate(block) {
 
   const fragment = document.createDocumentFragment();
 
-  // ── Row 0: block model fields ─────────────────────────────────
-  // Cells map in order to: [overline, heading, description]
+  // ── Row 0: block-level model fields [overline | heading | description] ────
+  // These are properties of the block node itself — NOT a separate child resource.
+  // Do NOT moveInstrumentation from the row to sectionHeading: the row carries the
+  // same data-aue-resource as the block element. Duplicating it on a child div
+  // confuses UE and causes editor-support.js to fall back to window.location.reload().
+  // The block element already owns the resource; only the cell-level data-aue-prop
+  // attrs need to move to their new visible elements.
   const headingRow = rows[0];
   const hCells = [...headingRow.children];
 
   const sectionHeading = document.createElement('div');
   sectionHeading.className = 'section-heading';
-  moveInstrumentation(headingRow, sectionHeading);
 
   const overlineText = hCells[0]?.textContent.trim();
   if (overlineText) {
     const span = document.createElement('span');
     span.className = 'overline';
     span.textContent = overlineText;
-    moveInstrumentation(hCells[0], span);
+    if (hCells[0]) moveInstrumentation(hCells[0], span);
     sectionHeading.append(span);
   }
 
@@ -45,7 +49,7 @@ export default function decorate(block) {
   if (headingText) {
     const h2 = document.createElement('h2');
     h2.textContent = headingText;
-    moveInstrumentation(hCells[1], h2);
+    if (hCells[1]) moveInstrumentation(hCells[1], h2);
     sectionHeading.append(h2);
   }
 
@@ -53,16 +57,15 @@ export default function decorate(block) {
   if (descHTML) {
     const p = document.createElement('p');
     p.innerHTML = descHTML;
-    moveInstrumentation(hCells[2], p);
+    if (hCells[2]) moveInstrumentation(hCells[2], p);
     sectionHeading.append(p);
   }
 
   headingRow.remove();
   fragment.append(sectionHeading);
 
-  // ── Rows 1+: feature-item rows ───────────────────────────────
-  // Cells map in order to:
-  //   [0] iconKey  [1] iconVariant  [2] tag  [3] title  [4] text  [5] linkText  [6] linkUrl
+  // ── Rows 1+: feature-item child rows ─────────────────────────────────────
+  // Cell order: [0]iconKey [1]iconVariant [2]tag [3]title [4]text [5]linkText [6]linkUrl
   const itemRows = rows.slice(1);
   if (itemRows.length > 0) {
     const grid = document.createElement('div');
@@ -70,8 +73,10 @@ export default function decorate(block) {
 
     itemRows.forEach((row) => {
       const cells = [...row.children];
+
+      // card carries the item's data-aue-resource + data-aue-model
       const card = document.createElement('article');
-      card.className = 'feature-card animate-on-scroll';
+      card.className = 'feature-card';
       moveInstrumentation(row, card);
 
       const iconKey = cells[0]?.textContent.trim() || '';
@@ -82,50 +87,59 @@ export default function decorate(block) {
       const linkText = cells[5]?.textContent.trim();
       const linkUrl = cells[6]?.querySelector('a')?.href || cells[6]?.textContent.trim();
 
-      // Icon box — fc-icon icon-box icon-box--lg icon-box--{variant}
+      // Icon box: carries data-aue-prop="iconKey"
       const svg = SVGS[iconKey];
       if (svg) {
         const iconBox = document.createElement('div');
         iconBox.className = `fc-icon icon-box icon-box--lg icon-box--${iconVariant}`;
         iconBox.setAttribute('aria-hidden', 'true');
         iconBox.innerHTML = svg;
-        moveInstrumentation(cells[0], iconBox);
+        if (cells[0]) moveInstrumentation(cells[0], iconBox);
         card.append(iconBox);
       }
 
-      // Tag / capability badge
+      // Hidden span carries data-aue-prop="iconVariant" so UE can edit the colour.
+      // Must be inside the component (card) so UE can walk up to data-aue-resource.
+      if (cells[1]) {
+        const variantEl = document.createElement('span');
+        variantEl.hidden = true;
+        moveInstrumentation(cells[1], variantEl);
+        card.append(variantEl);
+      }
+
+      // Tag / capability badge: carries data-aue-prop="tag"
       if (tagText) {
         const tagEl = document.createElement('span');
         tagEl.className = 'fc-tag';
         tagEl.textContent = tagText;
-        moveInstrumentation(cells[2], tagEl);
+        if (cells[2]) moveInstrumentation(cells[2], tagEl);
         card.append(tagEl);
       }
 
-      // Card heading
+      // Card heading: carries data-aue-prop="title"
       if (titleText) {
         const h3 = document.createElement('h3');
         h3.textContent = titleText;
-        moveInstrumentation(cells[3], h3);
+        if (cells[3]) moveInstrumentation(cells[3], h3);
         card.append(h3);
       }
 
-      // Card description (richtext — may include <p> and <ul> bullet list)
+      // Description richtext: carries data-aue-prop="text"
+      // May contain <p> + <ul> bullet list from richtext authoring.
       if (descContent) {
         const desc = document.createElement('div');
         desc.className = 'fc-desc';
         desc.innerHTML = descContent;
-        // Promote any <ul> inside richtext to standalone fc-list
         const ul = desc.querySelector('ul');
         if (ul) {
           ul.classList.add('fc-list');
           ul.setAttribute('role', 'list');
         }
-        moveInstrumentation(cells[4], desc);
+        if (cells[4]) moveInstrumentation(cells[4], desc);
         card.append(desc);
       }
 
-      // Learn-more link
+      // Learn-more link: carries data-aue-prop="linkUrl"
       if (linkUrl) {
         const link = document.createElement('a');
         link.className = 'fc-link';
@@ -135,8 +149,16 @@ export default function decorate(block) {
         arrow.setAttribute('aria-hidden', 'true');
         arrow.textContent = '→';
         link.append(arrow);
-        moveInstrumentation(cells[6] || cells[5], link);
+        if (cells[6]) moveInstrumentation(cells[6], link);
         card.append(link);
+      }
+
+      // linkText hidden span (prop only, no visible element needed when linkUrl is absent)
+      if (cells[5] && !linkUrl) {
+        const lt = document.createElement('span');
+        lt.hidden = true;
+        moveInstrumentation(cells[5], lt);
+        card.append(lt);
       }
 
       row.remove();
