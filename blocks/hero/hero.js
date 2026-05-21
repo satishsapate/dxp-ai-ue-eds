@@ -97,11 +97,16 @@ export default function decorate(block) {
     </div>
   `;
 
-  // Skip scroll-triggered animation inside UE's iframe to prevent accumulated
-  // observers and layout interference on re-decoration.
+  // Inside UE's iframe, min-height:100vh creates a feedback loop:
+  // UE expands the iframe to fit content → 100vh grows → hero grows →
+  // page becomes millions of pixels tall → UE overlays show at million-px coords.
+  // Fix: replace the vh constraint with a fixed height in editor context.
   let inEditor = false;
   try { inEditor = window.self !== window.top; } catch { inEditor = true; }
-  if (inEditor) return;
+  if (inEditor) {
+    block.style.minHeight = '700px';
+    return; // also skips IntersectionObserver
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
