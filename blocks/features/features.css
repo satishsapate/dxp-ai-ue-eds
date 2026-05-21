@@ -3,36 +3,38 @@
    ============================================================ */
 :root {
   --features-bg:           var(--c-off-white, #f0f2ff);
-  --features-card-bg:      #ffffff;
-  --features-card-border:  rgba(0, 0, 0, 0.07);
-  --features-card-hover:   rgba(124, 58, 237, 0.18);
+  --features-card-bg:      #fff;
+  --features-card-border:  rgb(0 0 0 / 7%);
+  --features-card-hover:   rgb(124 58 237 / 18%);
   --features-heading-clr:  var(--c-navy, #0d0e2a);
   --features-copy-clr:     #4a5568;
   --features-overline-clr: var(--c-purple, #7c3aed);
 }
 
-.features-section {
+.features {
   padding: 80px 0;
   background: var(--features-bg);
   position: relative;
 }
 
-.features-section::before {
+.features::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), rgba(6, 182, 212, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgb(124 58 237 / 30%), rgb(6 182 212 / 30%), transparent);
 }
 
 /* ── Section heading ─────────────────────────────────────────── */
-.features-section .section-heading {
+.features .section-heading {
   text-align: center;
   max-width: 720px;
   margin: 0 auto 48px;
 }
 
-.features-section .section-heading .overline {
+.features .section-heading .overline {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
@@ -42,14 +44,14 @@
   margin-bottom: 8px;
 }
 
-.features-section .section-heading h2 {
+.features .section-heading h2 {
   font-size: 2.25rem;
   font-weight: 800;
   color: var(--features-heading-clr);
   margin: 0 0 12px;
 }
 
-.features-section .section-heading p {
+.features .section-heading p {
   font-size: 1rem;
   color: var(--features-copy-clr);
   line-height: 1.7;
@@ -80,19 +82,24 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 4px 24px rgba(13, 14, 42, 0.06);
+  box-shadow: 0 4px 24px rgb(13 14 42 / 6%);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .features .feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(13, 14, 42, 0.12);
+  box-shadow: 0 12px 40px rgb(13 14 42 / 12%);
   border-color: var(--features-card-hover);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .features .feature-card { transition: none; }
-  .features .feature-card:hover { transform: none; }
+  .features .feature-card {
+    transition: none;
+  }
+
+  .features .feature-card:hover {
+    transform: none;
+  }
 }
 
 /* ── Icon box ────────────────────────────────────────────────── */
@@ -109,15 +116,41 @@
   height: 56px;
 }
 
-.features .icon-box svg { width: 24px; height: 24px; }
+.features .icon-box svg {
+  width: 24px;
+  height: 24px;
+}
 
 /* Icon box colour variants */
-.features .icon-box--purple { background: rgba(124, 58,  237, 0.12); color: #7c3aed; }
-.features .icon-box--cyan   { background: rgba(6,   182, 212, 0.12); color: #06b6d4; }
-.features .icon-box--blue   { background: rgba(37,  99,  235, 0.12); color: #2563eb; }
-.features .icon-box--violet { background: rgba(163, 85,  247, 0.12); color: #a78bfa; }
-.features .icon-box--orange { background: rgba(245, 158, 11,  0.12); color: #f59e0b; }
-.features .icon-box--green  { background: rgba(16,  185, 129, 0.12); color: #10b981; }
+.features .icon-box--purple {
+  background: rgb(124 58 237 / 12%);
+  color: #7c3aed;
+}
+
+.features .icon-box--cyan {
+  background: rgb(6 182 212 / 12%);
+  color: #06b6d4;
+}
+
+.features .icon-box--blue {
+  background: rgb(37 99 235 / 12%);
+  color: #2563eb;
+}
+
+.features .icon-box--violet {
+  background: rgb(163 85 247 / 12%);
+  color: #a78bfa;
+}
+
+.features .icon-box--orange {
+  background: rgb(245 158 11 / 12%);
+  color: #f59e0b;
+}
+
+.features .icon-box--green {
+  background: rgb(16 185 129 / 12%);
+  color: #10b981;
+}
 
 /* ── Tag / badge ─────────────────────────────────────────────── */
 .features .fc-tag {
@@ -128,7 +161,7 @@
   font-weight: 700;
   text-transform: uppercase;
   width: fit-content;
-  background: rgba(124, 58, 237, 0.10);
+  background: rgb(124 58 237 / 10%);
   color: var(--c-purple, #7c3aed);
 }
 

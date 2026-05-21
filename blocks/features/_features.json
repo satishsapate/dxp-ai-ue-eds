@@ -113,7 +113,20 @@
           "component": "richtext",
           "valueType": "string",
           "name": "text",
-          "label": "Description"
+          "label": "Description (supports bullet lists)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "linkText",
+          "label": "Link Text",
+          "value": "Learn more"
+        },
+        {
+          "component": "aem-content",
+          "valueType": "string",
+          "name": "linkUrl",
+          "label": "Link URL"
         }
       ]
     }

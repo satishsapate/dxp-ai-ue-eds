@@ -56,6 +56,22 @@ npm run validate             # Custom project validation
 
 ---
 
+## Communication Rules
+
+### Always surface manual steps
+At the end of every task, explicitly list any steps the user must perform manually — things Claude cannot do autonomously. Format them as a numbered checklist so nothing is missed. Common manual steps in this project include:
+
+- Installing the AEM package via `/crx/packmgr` after `create-aem-package.ps1` generates the ZIP
+- Running `aem up` / starting the local AEM instance if it is not already running
+- Logging into AEM Author (`http://localhost:4502`) to verify content or publish pages
+- Flushing the Dispatcher or CDN cache after deploying changes
+- Previewing/publishing pages via the Sidekick extension after content edits
+- Committing and pushing the built JSON files after `npm run build:json`
+
+Even if a step seems obvious, call it out — the user may be context-switching and will rely on this checklist.
+
+---
+
 ## Critical Rules
 
 ### JavaScript

@@ -61,7 +61,8 @@ export default function decorate(block) {
   fragment.append(sectionHeading);
 
   // ── Rows 1+: feature-item rows ───────────────────────────────
-  // Cells map in order to: [iconKey, iconVariant, tag, title, text]
+  // Cells map in order to:
+  //   [0] iconKey  [1] iconVariant  [2] tag  [3] title  [4] text  [5] linkText  [6] linkUrl
   const itemRows = rows.slice(1);
   if (itemRows.length > 0) {
     const grid = document.createElement('div');
@@ -73,11 +74,13 @@ export default function decorate(block) {
       card.className = 'feature-card animate-on-scroll';
       moveInstrumentation(row, card);
 
-      const iconKey     = cells[0]?.textContent.trim() || '';
+      const iconKey = cells[0]?.textContent.trim() || '';
       const iconVariant = (cells[1]?.textContent.trim() || 'purple').toLowerCase();
-      const tagText     = cells[2]?.textContent.trim();
-      const titleText   = cells[3]?.textContent.trim();
+      const tagText = cells[2]?.textContent.trim();
+      const titleText = cells[3]?.textContent.trim();
       const descContent = cells[4]?.innerHTML?.trim();
+      const linkText = cells[5]?.textContent.trim();
+      const linkUrl = cells[6]?.querySelector('a')?.href || cells[6]?.textContent.trim();
 
       // Icon box — fc-icon icon-box icon-box--lg icon-box--{variant}
       const svg = SVGS[iconKey];
@@ -107,13 +110,33 @@ export default function decorate(block) {
         card.append(h3);
       }
 
-      // Card description
+      // Card description (richtext — may include <p> and <ul> bullet list)
       if (descContent) {
         const desc = document.createElement('div');
         desc.className = 'fc-desc';
         desc.innerHTML = descContent;
+        // Promote any <ul> inside richtext to standalone fc-list
+        const ul = desc.querySelector('ul');
+        if (ul) {
+          ul.classList.add('fc-list');
+          ul.setAttribute('role', 'list');
+        }
         moveInstrumentation(cells[4], desc);
         card.append(desc);
+      }
+
+      // Learn-more link
+      if (linkUrl) {
+        const link = document.createElement('a');
+        link.className = 'fc-link';
+        link.href = linkUrl;
+        link.textContent = linkText || 'Learn more';
+        const arrow = document.createElement('span');
+        arrow.setAttribute('aria-hidden', 'true');
+        arrow.textContent = '→';
+        link.append(arrow);
+        moveInstrumentation(cells[6] || cells[5], link);
+        card.append(link);
       }
 
       row.remove();
