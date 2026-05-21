@@ -23,6 +23,7 @@ to explore the codebase, keeping token usage low.
 | [P-09](#p-09--aem-content-package-for-block-data) | AEM content package | Create/update AEM content for a block |
 | [P-10](#p-10--responsive-layout-fix) | Responsive layout fix | Block looks wrong on mobile or tablet |
 | [P-11](#p-11--fix-lint-errors) | Fix lint errors | `npm run lint` reports errors |
+| P-14 / P-15 / P-16 | **Content authoring** — `.content.xml` for one page, all pages, or single block update | See [11-content-authoring-prompts.md](./11-content-authoring-prompts.md) |
 
 ---
 
