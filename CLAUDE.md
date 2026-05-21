@@ -76,6 +76,28 @@ npm run validate             # Custom project validation
 - **Never edit** directly: `component-definition.json`, `component-models.json`, `component-filters.json`
 - **After any model change:** run `npm run build:json`
 
+### AEM Package Deployment — MANDATORY sequence
+Every time `tools/create-aem-package.ps1` is run to generate the ZIP, these steps MUST happen first in order:
+
+```bash
+# 1. Rebuild the three root-level JSON files from source
+npm run build:json
+
+# 2. Commit the updated JSON files so they are in sync with git
+git add component-definition.json component-filters.json component-models.json
+# (commit with other changed files)
+
+# 3. THEN generate the ZIP — it reads the root-level JSON files
+powershell.exe -ExecutionPolicy Bypass -File ".\tools\create-aem-package.ps1"
+```
+
+The ZIP (`dxp-ai-ue-eds-component-models-1.0.0.zip`) packages these three root-level files:
+- `component-definition.json`
+- `component-filters.json`
+- `component-models.json`
+
+If `npm run build:json` is skipped, the ZIP will contain stale JSON and UE will not pick up model changes after install.
+
 ---
 
 ## Design Tokens — `styles/styles.css` (actual values)
