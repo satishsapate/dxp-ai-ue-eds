@@ -1,13 +1,13 @@
-.section-generic-block {
+.section-generic {
   padding: 100px 0;
   background: #fff;
 }
 
-.section-generic-block .section-heading {
+.section-generic .section-heading {
   margin-bottom: 40px;
 }
 
-.section-generic-block .overline {
+.section-generic .overline {
   display: inline-block;
   margin-bottom: 16px;
   color: #7c3aed;
@@ -16,18 +16,18 @@
   font-weight: 700;
 }
 
-.section-generic-block h2 {
+.section-generic h2 {
   margin: 0;
   font-size: clamp(2rem, 2.5vw, 3rem);
 }
 
-.section-generic-block .cards-grid {
+.section-generic .cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 28px;
 }
 
-.section-generic-block .feature-card {
+.section-generic .feature-card {
   background: #fff;
   border: 1px solid rgb(148 163 184 / 16%);
   border-radius: 24px;
@@ -37,7 +37,7 @@
   gap: 18px;
 }
 
-.section-generic-block .fc-icon {
+.section-generic .fc-icon {
   width: 54px;
   height: 54px;
   display: inline-flex;
@@ -48,24 +48,24 @@
   font-size: 1.5rem;
 }
 
-.section-generic-block h3 {
+.section-generic h3 {
   margin: 0;
 }
 
-.section-generic-block p {
+.section-generic p {
   margin: 0;
   color: #475569;
   line-height: 1.75;
 }
 
 @media (width <= 1024px) {
-  .section-generic-block .cards-grid {
+  .section-generic .cards-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (width <= 640px) {
-  .section-generic-block .cards-grid {
+  .section-generic .cards-grid {
     grid-template-columns: 1fr;
   }
 }

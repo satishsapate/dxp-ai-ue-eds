@@ -187,13 +187,13 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "homeText",
+        "name": "homeLabel",
         "label": "Home Text"
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "currentText",
+        "name": "currentPage",
         "label": "Current Page"
       }
     ]
@@ -363,7 +363,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "ctaText",
+        "name": "ctaBtn",
         "label": "CTA Text",
         "value": "Explore"
       },
@@ -372,29 +372,6 @@
         "valueType": "string",
         "name": "ctaUrl",
         "label": "CTA Link"
-      }
-    ]
-  },
-  {
-    "id": "cms-compat-item",
-    "fields": [
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "icon",
-        "label": "Icon / Abbreviation"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "name",
-        "label": "Name"
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "description",
-        "label": "Description"
       }
     ]
   },
@@ -441,7 +418,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "primaryText",
+        "name": "primaryBtn",
         "label": "Primary Button Text"
       },
       {
@@ -453,7 +430,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "secondaryText",
+        "name": "secondaryBtn",
         "label": "Secondary Button Text"
       },
       {
@@ -465,7 +442,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "metaText",
+        "name": "metaNote",
         "label": "Meta / Note"
       }
     ]
@@ -619,7 +596,7 @@
       {
         "component": "aem-content",
         "valueType": "string",
-        "name": "linkUrl",
+        "name": "link",
         "label": "Link URL"
       }
     ]
@@ -659,7 +636,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "primaryCtaText",
+        "name": "primaryCtaLabel",
         "label": "Primary CTA Text",
         "value": "Request a Demo"
       },
@@ -672,7 +649,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "secondaryCtaText",
+        "name": "secondaryCtaLabel",
         "label": "Secondary CTA Text",
         "value": "Explore Platform"
       },
@@ -702,7 +679,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "badgeText",
+        "name": "badge",
         "label": "Badge Text"
       },
       {
@@ -761,7 +738,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "ctaText",
+        "name": "ctaBtn",
         "label": "Button Text"
       },
       {
@@ -808,13 +785,13 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "sidebarTitle",
+        "name": "sidebarHeading",
         "label": "Sidebar Title"
       },
       {
         "component": "richtext",
         "valueType": "string",
-        "name": "sidebarText",
+        "name": "sidebarContent",
         "label": "Sidebar Content"
       },
       {
@@ -826,7 +803,7 @@
       {
         "component": "text",
         "valueType": "string",
-        "name": "ctaText",
+        "name": "ctaBtn",
         "label": "Sidebar CTA Text"
       }
     ]

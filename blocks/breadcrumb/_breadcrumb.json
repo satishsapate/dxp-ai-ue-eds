@@ -29,13 +29,13 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "homeText",
+          "name": "homeLabel",
           "label": "Home Text"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "currentText",
+          "name": "currentPage",
           "label": "Current Page"
         }
       ]

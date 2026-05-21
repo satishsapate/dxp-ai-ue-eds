@@ -29,7 +29,7 @@ export default function decorate(block) {
   //   rows[0]: overline   (1 cell)
   //   rows[1]: heading    (1 cell)
   //   rows[2]: description (1 cell)
-  //   rows[3+]: feature-item child rows (7 cells each)
+  //   rows[3+]: feature-item child rows (7 cells each — last cell renamed link)
   //
   // Do NOT moveInstrumentation from a row element to sectionHeading — the rows
   // share the block's data-aue-resource. Only move cell-level data-aue-prop attrs.
@@ -137,7 +137,7 @@ export default function decorate(block) {
         card.append(desc);
       }
 
-      // Learn-more link: carries data-aue-prop="linkUrl"
+      // Learn-more link: carries data-aue-prop="link"
       if (linkUrl) {
         const link = document.createElement('a');
         link.className = 'fc-link';

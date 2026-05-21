@@ -35,7 +35,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "badgeText",
+          "name": "badge",
           "label": "Badge Text"
         },
         {

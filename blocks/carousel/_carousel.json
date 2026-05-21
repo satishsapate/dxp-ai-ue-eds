@@ -119,7 +119,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "ctaText",
+          "name": "ctaBtn",
           "label": "CTA Text",
           "value": "Explore"
         },

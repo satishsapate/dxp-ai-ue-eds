@@ -47,13 +47,13 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "sidebarTitle",
+          "name": "sidebarHeading",
           "label": "Sidebar Title"
         },
         {
           "component": "richtext",
           "valueType": "string",
-          "name": "sidebarText",
+          "name": "sidebarContent",
           "label": "Sidebar Content"
         },
         {
@@ -65,7 +65,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "ctaText",
+          "name": "ctaBtn",
           "label": "Sidebar CTA Text"
         }
       ]

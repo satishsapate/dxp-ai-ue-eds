@@ -1,7 +1,7 @@
 .stats-band {
   padding: 4rem 0;
   background: var(--c-white);
-  border-bottom: 1px solid rgba(124, 58, 237, 0.08);
+  border-bottom: 1px solid rgb(124 58 237 / 8%);
 }
 
 .stats-band .stats-band__grid {
@@ -19,7 +19,7 @@
 .stats-band .stat-divider {
   width: 1px;
   height: 60px;
-  background: rgba(124, 58, 237, 0.12);
+  background: rgb(124 58 237 / 12%);
   margin: 0 auto;
 }
 
@@ -29,7 +29,6 @@
   font-weight: 800;
   line-height: 1;
   background: linear-gradient(135deg, #7c3aed, #06b6d4);
-  -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

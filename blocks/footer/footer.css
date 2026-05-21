@@ -4,11 +4,11 @@
 
 footer {
   background: linear-gradient(180deg, var(--c-navy) 0%, #080917 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgb(255 255 255 / 6%);
   position: relative;
   overflow: hidden;
   font-size: var(--body-font-size-xs);
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
 }
 
 /* Top gradient accent line */
@@ -19,7 +19,7 @@ footer::before {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.5), rgba(6, 182, 212, 0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgb(124 58 237 / 50%), rgb(6 182 212 / 40%), transparent);
 }
 
 /* Ambient glow */
@@ -32,7 +32,7 @@ footer::after {
   width: 800px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgb(124 58 237 / 8%) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -61,15 +61,15 @@ footer::after {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border-width: 0;
 }
 
 /* ── Newsletter ────────────────────────────────────────────── */
 .footer-newsletter {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(6, 182, 212, 0.06));
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  background: linear-gradient(135deg, rgb(124 58 237 / 10%), rgb(6 182 212 / 6%));
+  border: 1px solid rgb(124 58 237 / 15%);
   border-radius: var(--radius-lg);
   padding: 40px 48px;
   margin-bottom: 60px;
@@ -96,7 +96,7 @@ footer::after {
 
 .footer-nl-text p {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
   max-width: 360px;
   margin: 0;
 }
@@ -119,8 +119,8 @@ footer::after {
   flex: 1;
   padding: 13px 18px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgb(255 255 255 / 10%);
+  background: rgb(255 255 255 / 6%);
   color: var(--c-white);
   font-size: 0.88rem;
   font-family: var(--body-font-family);
@@ -129,12 +129,12 @@ footer::after {
 }
 
 .footer-nl-form input::placeholder {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
 }
 
 .footer-nl-form input:focus {
-  border-color: rgba(124, 58, 237, 0.5);
-  background: rgba(255, 255, 255, 0.09);
+  border-color: rgb(124 58 237 / 50%);
+  background: rgb(255 255 255 / 9%);
 }
 
 .footer-nl-form button {
@@ -155,7 +155,7 @@ footer::after {
 
 .footer-nl-form button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 6px 20px rgb(124 58 237 / 40%);
 }
 
 /* ── Top grid: brand + 4 columns ───────────────────────────── */
@@ -186,7 +186,6 @@ footer::after {
   font-size: 1.15rem;
   font-weight: 800;
   background: linear-gradient(135deg, #a78bfa, #67e8f9);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1;
@@ -194,7 +193,7 @@ footer::after {
 
 .footer-brand-tagline {
   font-size: 0.62rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-top: 2px;
@@ -202,7 +201,7 @@ footer::after {
 
 .footer-brand > p {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
   line-height: 1.75;
   max-width: 300px;
   margin-bottom: 24px;
@@ -211,7 +210,7 @@ footer::after {
 
 .footer-zensar {
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
 }
 
 .footer-zensar span {
@@ -230,12 +229,12 @@ footer::after {
   width: 44px;
   height: 44px;
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 8%);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgb(255 255 255 / 50%);
   font-size: 0.85rem;
   font-style: normal;
   text-decoration: none;
@@ -243,8 +242,8 @@ footer::after {
 }
 
 .footer-social-icon:hover {
-  background: rgba(124, 58, 237, 0.2);
-  border-color: rgba(124, 58, 237, 0.4);
+  background: rgb(124 58 237 / 20%);
+  border-color: rgb(124 58 237 / 40%);
   color: var(--c-white);
 }
 
@@ -253,7 +252,7 @@ footer::after {
   font-family: var(--heading-font-family);
   font-size: 0.82rem;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-top: 0;
@@ -270,12 +269,12 @@ footer::after {
 }
 
 .footer-col li {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
 }
 
 .footer-col a:any-link {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -285,7 +284,7 @@ footer::after {
 }
 
 .footer-col a:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgb(255 255 255 / 90%);
 }
 
 .footer-badge-new {
@@ -293,7 +292,7 @@ footer::after {
   border-radius: 999px;
   font-size: 0.6rem;
   font-weight: 700;
-  background: rgba(124, 58, 237, 0.3);
+  background: rgb(124 58 237 / 30%);
   color: #c4b5fd;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -302,7 +301,7 @@ footer::after {
 /* ── Divider ───────────────────────────────────────────────── */
 .footer-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(255 255 255 / 6%);
 }
 
 /* ── Bottom bar ────────────────────────────────────────────── */
@@ -315,7 +314,7 @@ footer::after {
   flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .footer-bottom {
     flex-direction: column;
     text-align: center;
@@ -328,7 +327,7 @@ footer::after {
   gap: 6px;
   flex-wrap: wrap;
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgb(255 255 255 / 30%);
 }
 
 .footer-sep {
@@ -336,13 +335,13 @@ footer::after {
 }
 
 .footer-legal a:any-link {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgb(255 255 255 / 40%);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 .footer-legal a:hover {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(255 255 255 / 75%);
 }
 
 .footer-certifications {
@@ -357,8 +356,8 @@ footer::after {
   border-radius: 6px;
   font-size: 0.68rem;
   font-weight: 600;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgb(255 255 255 / 8%);
+  color: rgb(255 255 255 / 30%);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }

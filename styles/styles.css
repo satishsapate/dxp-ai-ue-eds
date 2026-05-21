@@ -24,7 +24,7 @@
   --c-purple:     #7c3aed;
   --c-violet:     #9333ea;
   --c-cyan:       #06b6d4;
-  --c-white:      #ffffff;
+  --c-white:      #fff;
   --c-off-white:  #f0f2ff;
   --c-mid-gray:   #6b7aab;
   --gradient-dxp: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #9333ea 100%);
@@ -55,9 +55,9 @@
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 28px;
-  --shadow-md: 0 4px 20px rgba(13, 14, 42, 0.4);
-  --shadow-lg: 0 12px 40px rgba(13, 14, 42, 0.5);
-  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.35);
+  --shadow-md: 0 4px 20px rgb(13 14 42 / 40%);
+  --shadow-lg: 0 12px 40px rgb(13 14 42 / 50%);
+  --shadow-glow: 0 0 40px rgb(124 58 237 / 35%);
 }
 
 /* ─── fallback fonts ─── */
@@ -150,8 +150,8 @@ code, pre {
 pre {
   padding: 16px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(124 58 237 / 15%);
   overflow-x: auto;
   white-space: pre;
   color: var(--c-off-white);
@@ -208,14 +208,14 @@ a.button:focus,
 button:hover,
 button:focus {
   background: linear-gradient(135deg, #6d28d9, #7c3aed);
-  box-shadow: 0 4px 20px rgba(124, 58, 237, 0.45);
+  box-shadow: 0 4px 20px rgb(124 58 237 / 45%);
   transform: translateY(-1px);
   cursor: pointer;
 }
 
 button:disabled,
 button:disabled:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(255 255 255 / 10%);
   cursor: unset;
   transform: none;
   box-shadow: none;
@@ -224,13 +224,13 @@ button:disabled:hover {
 a.button.secondary,
 button.secondary {
   background: transparent;
-  border: 1.5px solid rgba(124, 58, 237, 0.5);
+  border: 1.5px solid rgb(124 58 237 / 50%);
   color: var(--c-off-white);
 }
 
 a.button.secondary:hover,
 button.secondary:hover {
-  background: rgba(124, 58, 237, 0.1);
+  background: rgb(124 58 237 / 10%);
   border-color: var(--c-purple);
   box-shadow: none;
   transform: none;

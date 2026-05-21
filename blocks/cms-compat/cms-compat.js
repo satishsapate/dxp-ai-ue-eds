@@ -1,86 +1,159 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
 export default function decorate(block) {
-  const rows = [...block.children];
+  const isUE = window.self !== window.top;
 
-  if (rows.length === 0) return;
+  block.innerHTML = `
+    <div class="cms-compat__section-heading">
+      <span class="cms-compat__overline">Architecture Freedom</span>
+      <h2>Headful or Headless —<br>Your Architecture, Your Rules</h2>
+      <p>DXP AI is fully composable by design. It works as the intelligence and personalization layer regardless of how you choose to build and deliver experiences.</p>
+    </div>
 
-  // First row: optional heading/intro (single cell)
-  let headingRow = null;
-  const contentRows = [];
+    <div class="cms-compat__approach-grid">
+      <article class="cms-compat__approach-card cms-compat__approach-card--headless">
+        <div class="cms-compat__card-badge">
+          <span aria-hidden="true">⬡</span> Headless / API-First
+        </div>
+        <div class="cms-compat__card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M7 8l3 3-3 3"/>
+            <path d="M13 14h4"/>
+          </svg>
+        </div>
+        <h3>Headless / API-First Delivery</h3>
+        <p>Decouple your front-end from content and experience back-end. Power any modern framework — React, Next.js, Vue, mobile apps, or IoT — via ZensAI's GraphQL and REST APIs.</p>
+        <ul class="cms-compat__features" role="list">
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>GraphQL &amp; REST content delivery APIs</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>SDKs for React, Next.js, Vue, Angular</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Edge CDN with instant cache invalidation</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>AI-enriched API responses (personalization baked in)</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Preview API for any front-end framework</li>
+        </ul>
+      </article>
 
-  rows.forEach((row) => {
-    const cells = [...row.children];
-    if (cells.length === 1 && !contentRows.length) {
-      headingRow = row;
-    } else {
-      contentRows.push(row);
-    }
-  });
+      <article class="cms-compat__approach-card cms-compat__approach-card--headful">
+        <div class="cms-compat__card-badge">
+          <span aria-hidden="true">⬢</span> Headful / Full-Stack
+        </div>
+        <div class="cms-compat__card-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M9 21V9"/>
+          </svg>
+        </div>
+        <h3>Headful / Full-Stack Delivery</h3>
+        <p>Use DXP AI's built-in rendering engine to manage the full experience — from content authoring to page building to delivery — without a separate front-end application.</p>
+        <ul class="cms-compat__features" role="list">
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Drag-and-drop visual page builder</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Built-in multi-site &amp; multi-language support</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Server-side rendering &amp; static site generation</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>Live preview &amp; in-context editing</li>
+          <li><span class="cms-compat__check" aria-hidden="true">✓</span>One-click deployment to global CDN</li>
+        </ul>
+      </article>
+    </div>
 
-  const fragment = document.createDocumentFragment();
+    <div class="cms-compat__logos-heading">
+      <span class="cms-compat__overline">Works Alongside Your Existing Stack</span>
+      <h3>Integrates with Leading CMS &amp; DXP Platforms</h3>
+      <p>Already running AEM, Sitecore, or WordPress? DXP AI layers ZensAI intelligence on top of your existing CMS — no rip-and-replace required.</p>
+    </div>
 
-  if (headingRow) {
-    const heading = document.createElement('div');
-    heading.className = 'section-heading';
-    moveInstrumentation(headingRow, heading);
-    [...headingRow.children].forEach((cell) => heading.append(cell));
-    headingRow.remove();
-    fragment.append(heading);
-  }
+    <div class="cms-compat__logos-grid" role="list" aria-label="Compatible CMS and DXP platforms">
+      <div class="cms-compat__logo-card" role="listitem" title="Adobe Experience Manager">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--aem" aria-label="Adobe AEM icon">Ae</div>
+        <div class="cms-compat__logo-name">Adobe AEM</div>
+        <div class="cms-compat__logo-type">Enterprise CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Liferay DXP">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--liferay" aria-label="Liferay icon">Lf</div>
+        <div class="cms-compat__logo-name">Liferay DXP</div>
+        <div class="cms-compat__logo-type">Portal DXP</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Sitecore">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--sitecore" aria-label="Sitecore icon">Sc</div>
+        <div class="cms-compat__logo-name">Sitecore</div>
+        <div class="cms-compat__logo-type">Enterprise DXP</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Contentstack">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--contentstack" aria-label="Contentstack icon">Cs</div>
+        <div class="cms-compat__logo-name">Contentstack</div>
+        <div class="cms-compat__logo-type">Headless CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Contentful">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--contentful" aria-label="Contentful icon">Cf</div>
+        <div class="cms-compat__logo-name">Contentful</div>
+        <div class="cms-compat__logo-type">Headless CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Storyblok">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--storyblok" aria-label="Storyblok icon">Sb</div>
+        <div class="cms-compat__logo-name">Storyblok</div>
+        <div class="cms-compat__logo-type">Visual CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Drupal">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--drupal" aria-label="Drupal icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C8.1 0 4.4 1.6 1.7 4.3c-.4.4-.8.9-1.1 1.4 2.6-1.8 5.4-2.6 8.4-2.6 1.2 0 2.4.2 3.6.5C9.7 4 7.5 5 5.9 6.7 4.2 8.5 3.4 10.8 3.8 13c.3 1.7 1.2 3.2 2.6 4.3.3.2.6.4.9.5-.1-.3-.2-.6-.2-.9 0-1.4.6-2.7 1.6-3.7C9.8 12 11.2 11.1 12 10c.8 1.1 2.2 2 3.3 3.2 1 1 1.6 2.3 1.6 3.7 0 .3-.1.6-.2.9.3-.1.6-.3.9-.5 1.4-1.1 2.3-2.6 2.6-4.3.4-2.2-.4-4.5-2.1-6.3-1.6-1.7-3.8-2.7-6.7-3.1 1.2-.3 2.4-.5 3.6-.5 3 0 5.8.8 8.4 2.6-.3-.5-.7-1-1.1-1.4C19.6 1.6 15.9 0 12 0zm0 11.5c-.6.8-1.7 1.5-2.7 2.4-.7.7-1.1 1.6-1.1 2.6 0 2.1 1.7 3.8 3.8 3.8s3.8-1.7 3.8-3.8c0-1-.4-1.9-1.1-2.6-1-.9-2.1-1.6-2.7-2.4z"/></svg>
+        </div>
+        <div class="cms-compat__logo-name">Drupal</div>
+        <div class="cms-compat__logo-type">Open-Source CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="WordPress">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--wordpress" aria-label="WordPress icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.158 12.786l-2.698 7.84a8.444 8.444 0 0 0 5.032-.13 1.053 1.053 0 0 1-.08-.15l-2.254-7.56zM3.008 12a8.964 8.964 0 0 0 4.969 7.951l-4.207-11.53A8.935 8.935 0 0 0 3.008 12zm13.06-.546c0-.85-.306-1.44-.568-1.895-.35-.568-.678-1.048-.678-1.617 0-.634.481-1.224 1.159-1.224l.086.01A8.963 8.963 0 0 0 12 3.008a8.988 8.988 0 0 0-7.593 4.165l.477.015c.776 0 1.977-.094 1.977-.094.4-.023.447.563.047.61 0 0-.402.047-.85.07l2.703 8.036 1.624-4.87-1.155-3.166c-.4-.023-.779-.07-.779-.07-.4-.023-.353-.633.047-.61 0 0 1.224.094 1.953.094.777 0 1.978-.094 1.978-.094.4-.023.447.563.047.61 0 0-.402.047-.851.07l2.68 7.967.741-2.473c.32-.998.568-1.715.568-2.33zm1.562 3.244l-2.656 7.71a9.01 9.01 0 0 0 5.527-7.138 8.964 8.964 0 0 0-2.87-.572zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/></svg>
+        </div>
+        <div class="cms-compat__logo-name">WordPress</div>
+        <div class="cms-compat__logo-type">Web CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Webflow">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--webflow" aria-label="Webflow icon">Wf</div>
+        <div class="cms-compat__logo-name">Webflow</div>
+        <div class="cms-compat__logo-type">Visual Dev Platform</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Optimizely">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--optimizely" aria-label="Optimizely icon">Op</div>
+        <div class="cms-compat__logo-name">Optimizely</div>
+        <div class="cms-compat__logo-type">DXP / CMS</div>
+      </div>
+      <div class="cms-compat__logo-card" role="listitem" title="Strapi">
+        <div class="cms-compat__logo-icon cms-compat__logo-icon--strapi" aria-label="Strapi icon">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M29.5 0h-14A2.5 2.5 0 0 0 13 2.5v14a2.5 2.5 0 0 0 2.5 2.5h14A2.5 2.5 0 0 0 32 16.5v-14A2.5 2.5 0 0 0 29.5 0zM16.5 3h12v12h-12V3z"/><path d="M2.5 13H13v10.5A2.5 2.5 0 0 1 10.5 26H2.5A2.5 2.5 0 0 1 0 23.5v-8A2.5 2.5 0 0 1 2.5 13zM13 26h6.5A2.5 2.5 0 0 1 22 28.5v1a2.5 2.5 0 0 1-2.5 2.5H13V26z"/></svg>
+        </div>
+        <div class="cms-compat__logo-name">Strapi</div>
+        <div class="cms-compat__logo-type">Open-Source CMS</div>
+      </div>
+    </div>
 
-  // Two-column approach grid (first two content rows)
-  if (contentRows.length > 0) {
-    const grid = document.createElement('div');
-    grid.className = 'approach-grid';
+    <div class="cms-compat__more-pill-row">
+      <span class="cms-compat__more-pill">
+        <span aria-hidden="true">+</span> And 20+ more platforms supported
+      </span>
+    </div>
 
-    const approachRows = contentRows.splice(0, 2);
-    approachRows.forEach((row) => {
-      const cells = [...row.children];
-      const card = document.createElement('article');
-      card.className = 'approach-card';
-      moveInstrumentation(row, card);
-      cells.forEach((cell) => card.append(...cell.childNodes));
-      row.remove();
-      grid.append(card);
+    <p class="cms-compat__note">
+      <strong>No rip-and-replace.</strong> DXP AI's Integration Hub connects to your existing CMS as a complementary AI and personalization layer — or can fully replace legacy platforms on your own timeline. You choose the migration pace.
+    </p>
+  `;
+
+  if (!isUE) {
+    const cards = block.querySelectorAll('.cms-compat__approach-card');
+    cards.forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(28px)';
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, i * 140);
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.12 });
+      observer.observe(card);
     });
-
-    fragment.append(grid);
   }
-
-  // Remaining rows become the logos grid
-  if (contentRows.length > 0) {
-    const logosGrid = document.createElement('div');
-    logosGrid.className = 'cms-logos-grid';
-    logosGrid.setAttribute('role', 'list');
-
-    contentRows.forEach((row) => {
-      const cells = [...row.children];
-      const logoCard = document.createElement('div');
-      logoCard.className = 'cms-logo-card';
-      logoCard.setAttribute('role', 'listitem');
-      moveInstrumentation(row, logoCard);
-
-      if (cells[0]) {
-        const icon = document.createElement('div');
-        icon.className = 'clc-icon';
-        icon.textContent = cells[0].textContent.trim().slice(0, 2);
-        logoCard.append(icon);
-      }
-      if (cells[1]) {
-        const name = document.createElement('div');
-        name.className = 'clc-name';
-        name.textContent = cells[1].textContent.trim();
-        moveInstrumentation(cells[1], name);
-        logoCard.append(name);
-      }
-
-      row.remove();
-      logosGrid.append(logoCard);
-    });
-
-    fragment.append(logosGrid);
-  }
-
-  block.replaceChildren(fragment);
 }

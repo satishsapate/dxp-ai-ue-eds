@@ -24,7 +24,7 @@
 
 .who-uses .section-heading p {
   margin: 0 0 32px;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgb(255 255 255 / 65%);
   max-width: 660px;
 }
 
@@ -35,8 +35,8 @@
 }
 
 .who-uses .feature-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(124 58 237 / 18%);
   border-radius: 24px;
   padding: 32px;
   display: grid;
@@ -46,8 +46,8 @@
 
 .who-uses .feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 45px rgba(124, 58, 237, 0.2);
-  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 18px 45px rgb(124 58 237 / 20%);
+  border-color: rgb(124 58 237 / 35%);
 }
 
 .who-uses .fc-icon {
@@ -57,7 +57,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 18px;
-  background: rgba(124, 58, 237, 0.15);
+  background: rgb(124 58 237 / 15%);
   font-size: 1.4rem;
 }
 
@@ -68,7 +68,7 @@
 
 .who-uses .feature-card p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgb(255 255 255 / 65%);
   line-height: 1.7;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .who-uses .fc-list li {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgb(255 255 255 / 60%);
   font-size: 0.88rem;
   padding-left: 16px;
   position: relative;

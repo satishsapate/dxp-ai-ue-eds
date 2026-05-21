@@ -18,17 +18,16 @@ header .nav-wrapper {
   left: 0;
   right: 0;
   z-index: 300;
-  background: rgba(13, 14, 42, 0.88);
+  background: rgb(13 14 42 / 88%);
   backdrop-filter: blur(14px) saturate(1.6);
-  -webkit-backdrop-filter: blur(14px) saturate(1.6);
   transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
 header .nav-wrapper.scrolled {
-  background: rgba(13, 14, 42, 0.96);
+  background: rgb(13 14 42 / 96%);
   backdrop-filter: blur(24px) saturate(1.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgb(255 255 255 / 7%);
+  box-shadow: 0 4px 30px rgb(0 0 0 / 30%);
 }
 
 /* ── Inner flex row ────────────────────────────────────────── */
@@ -75,7 +74,6 @@ header .nav-logo-brand {
   font-size: 1.2rem;
   font-weight: 800;
   background: var(--gradient-dxp);
-  -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.01em;
@@ -117,7 +115,7 @@ header .nav-item > button.nav-drop-toggle {
   font-size: 0.9rem;
   font-weight: 500;
   font-family: var(--body-font-family);
-  color: rgba(255, 255, 255, 0.85);
+  color: rgb(255 255 255 / 85%);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -126,12 +124,27 @@ header .nav-item > button.nav-drop-toggle {
   white-space: nowrap;
 }
 
+header .nav-mobile-menu a {
+  padding: 12px 16px;
+  color: rgb(255 255 255 / 80%);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+header .nav-mobile-menu a:hover {
+  background: rgb(255 255 255 / 7%);
+  color: #fff;
+}
+
 header .nav-item > a:hover,
 header .nav-item.open > a,
 header .nav-item > button.nav-drop-toggle:hover,
 header .nav-item.open > button.nav-drop-toggle {
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgb(255 255 255 / 8%);
 }
 
 /* chevron icon */
@@ -154,13 +167,13 @@ header .nav-dropdown {
   transform: translateX(-50%) translateY(6px);
   min-width: 260px;
   background: var(--c-dark-blue);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgb(255 255 255 / 8%);
   border-radius: 14px;
   padding: 8px;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 45%);
   z-index: 400;
 }
 
@@ -180,8 +193,8 @@ header .nav-dropdown::before {
   width: 10px;
   height: 10px;
   background: var(--c-dark-blue);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgb(255 255 255 / 8%);
+  border-left: 1px solid rgb(255 255 255 / 8%);
 }
 
 /* dropdown items */
@@ -192,12 +205,12 @@ header .nav-dd-item {
   padding: 10px 12px;
   border-radius: 8px;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgb(255 255 255 / 75%);
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 header .nav-dd-item:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(255 255 255 / 6%);
   color: #fff;
 }
 
@@ -205,7 +218,7 @@ header .nav-dd-icon {
   width: 34px;
   height: 34px;
   border-radius: 8px;
-  background: rgba(124, 58, 237, 0.2);
+  background: rgb(124 58 237 / 20%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -222,7 +235,7 @@ header .nav-dd-title {
 
 header .nav-dd-desc {
   font-size: 0.76rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgb(255 255 255 / 45%);
   margin-top: 2px;
   line-height: 1.3;
 }
@@ -249,9 +262,9 @@ header .nav-btn-login {
   font-size: 0.88rem;
   font-weight: 500;
   font-family: var(--body-font-family);
-  color: rgba(255, 255, 255, 0.8);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgb(255 255 255 / 80%);
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(255 255 255 / 12%);
   text-decoration: none;
   transition: all 0.25s ease;
   white-space: nowrap;
@@ -259,8 +272,8 @@ header .nav-btn-login {
 
 header .nav-btn-login:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgb(255 255 255 / 10%);
+  border-color: rgb(255 255 255 / 30%);
   text-decoration: none;
 }
 
@@ -276,14 +289,14 @@ header .nav-btn-demo {
   color: #fff;
   border: none;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 16px rgb(124 58 237 / 40%);
   transition: all 0.25s ease;
   white-space: nowrap;
 }
 
 header .nav-btn-demo:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.55);
+  box-shadow: 0 6px 24px rgb(124 58 237 / 55%);
   text-decoration: none;
   color: #fff;
 }
@@ -315,7 +328,7 @@ header .nav-hamburger span {
   display: block;
   width: 24px;
   height: 2px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgb(255 255 255 / 85%);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -344,9 +357,9 @@ header .nav-mobile-menu {
   flex-direction: column;
   gap: 4px;
   padding: 16px 24px 24px;
-  background: rgba(13, 14, 42, 0.97);
+  background: rgb(13 14 42 / 97%);
   backdrop-filter: blur(20px);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgb(255 255 255 / 6%);
 }
 
 header .nav-mobile-menu.open {
@@ -359,24 +372,9 @@ header .nav-mobile-menu.open {
   }
 }
 
-header .nav-mobile-menu a {
-  padding: 12px 16px;
-  color: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-header .nav-mobile-menu a:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: #fff;
-}
-
 header .nav-mobile-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgb(255 255 255 / 7%);
   margin: 6px 0;
 }
 

@@ -54,12 +54,6 @@
     ]
   },
   {
-    "id": "cms-compat",
-    "components": [
-      "cms-compat-item"
-    ]
-  },
-  {
     "id": "columns",
     "components": [
       "column"

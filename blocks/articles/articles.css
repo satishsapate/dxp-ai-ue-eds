@@ -1,10 +1,10 @@
 :root {
   --articles-bg: transparent;
-  --articles-card-bg: rgba(255, 255, 255, 0.04);
-  --articles-border: rgba(124, 58, 237, 0.15);
+  --articles-card-bg: rgb(255 255 255 / 4%);
+  --articles-border: rgb(124 58 237 / 15%);
   --articles-heading: var(--c-off-white);
-  --articles-copy: rgba(255, 255, 255, 0.65);
-  --articles-muted: rgba(255, 255, 255, 0.45);
+  --articles-copy: rgb(255 255 255 / 65%);
+  --articles-muted: rgb(255 255 255 / 45%);
   --articles-accent: #7c3aed;
   --articles-radius: 22px;
 }
@@ -16,7 +16,7 @@
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   white-space: nowrap;
   border: 0;
 }
@@ -61,7 +61,7 @@
   gap: 8px;
   padding: 12px 20px;
   border-radius: 12px;
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  border: 1px solid rgb(124 58 237 / 25%);
   color: var(--articles-accent);
   font-weight: 600;
   text-decoration: none;
@@ -86,7 +86,7 @@
 
 .articles .article-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 20px 60px rgb(124 58 237 / 20%);
 }
 
 .articles .article-img-placeholder {
@@ -198,8 +198,8 @@
 .articles .articles-cta {
   margin-top: 48px;
   padding: 32px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(124, 58, 237, 0.18);
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(124 58 237 / 18%);
   border-radius: 24px;
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -226,8 +226,8 @@
   width: 100%;
   padding: 14px 16px;
   border-radius: 14px;
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgb(124 58 237 / 25%);
+  background: rgb(255 255 255 / 6%);
   color: #fff;
   font-size: 0.95rem;
   outline: none;
@@ -235,11 +235,11 @@
 }
 
 .articles .acta-form input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgb(255 255 255 / 35%);
 }
 
 .articles .acta-form input:focus {
-  border-color: rgba(124, 58, 237, 0.5);
+  border-color: rgb(124 58 237 / 50%);
 }
 
 .articles .acta-form button {

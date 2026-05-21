@@ -41,7 +41,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "primaryText",
+          "name": "primaryBtn",
           "label": "Primary Button Text"
         },
         {
@@ -53,7 +53,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "secondaryText",
+          "name": "secondaryBtn",
           "label": "Secondary Button Text"
         },
         {
@@ -65,7 +65,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "metaText",
+          "name": "metaNote",
           "label": "Meta / Note"
         }
       ]

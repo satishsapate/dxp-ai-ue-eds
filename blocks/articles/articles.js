@@ -37,8 +37,9 @@ function buildArticleCard(row, index, featured) {
   const readTime = cells[5]?.textContent.trim() || '5 min read';
   const date = cells[6]?.textContent.trim() || '';
 
-  const tagType = category.toLowerCase().includes('ai') ? 'ai'
-    : category.toLowerCase().includes('case') ? 'case' : 'platform';
+  let tagType = 'platform';
+  if (category.toLowerCase().includes('ai')) tagType = 'ai';
+  else if (category.toLowerCase().includes('case')) tagType = 'case';
   const tagColor = TAG_COLORS[tagType] || TAG_COLORS.default;
   const gradient = GRADIENTS[index % GRADIENTS.length];
   const initials = getInitials(author);

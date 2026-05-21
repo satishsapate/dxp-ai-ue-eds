@@ -1,15 +1,15 @@
-.richtext-block {
+.richtext {
   padding: 100px 0;
   background: transparent;
 }
 
-.richtext-block .richtext-layout {
+.richtext .richtext-layout {
   display: grid;
   grid-template-columns: 2.25fr 1fr;
   gap: 32px;
 }
 
-.richtext-block .rt-overline {
+.richtext .rt-overline {
   display: inline-block;
   margin-bottom: 18px;
   color: #7c3aed;
@@ -18,92 +18,92 @@
   letter-spacing: 0.16em;
 }
 
-.richtext-block .rt-heading {
+.richtext .rt-heading {
   font-size: clamp(2rem, 2.5vw, 2.7rem);
   margin: 0 0 24px;
   line-height: 1.05;
 }
 
-.richtext-block .accent {
+.richtext .accent {
   color: #7c3aed;
 }
 
-.richtext-block .rt-lead {
+.richtext .rt-lead {
   margin: 0 0 32px;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgb(255 255 255 / 72%);
   font-size: 1.05rem;
   line-height: 1.8;
 }
 
-.richtext-block .rt-body,
-.richtext-block .rt-body p,
-.richtext-block .rt-body ol,
-.richtext-block .rt-body ul,
-.richtext-block .rt-body blockquote {
-  color: rgba(255, 255, 255, 0.65);
+.richtext .rt-body,
+.richtext .rt-body p,
+.richtext .rt-body ol,
+.richtext .rt-body ul,
+.richtext .rt-body blockquote {
+  color: rgb(255 255 255 / 65%);
   line-height: 1.8;
 }
 
-.richtext-block .rt-body h3 {
+.richtext .rt-body h3 {
   margin-top: 1.75rem;
 }
 
-.richtext-block .rt-body ol,
-.richtext-block .rt-body ul {
+.richtext .rt-body ol,
+.richtext .rt-body ul {
   padding-left: 1.25rem;
   margin: 1rem 0;
 }
 
-.richtext-block .callout {
+.richtext .callout {
   border-radius: 18px;
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: rgb(124 58 237 / 10%);
+  border: 1px solid rgb(124 58 237 / 20%);
   padding: 24px;
   margin: 24px 0;
   display: flex;
   gap: 16px;
 }
 
-.richtext-block .callout-icon {
+.richtext .callout-icon {
   font-size: 1.25rem;
   color: #4338ca;
 }
 
-.richtext-block .sidebar-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(124, 58, 237, 0.15);
+.richtext .sidebar-card {
+  background: rgb(255 255 255 / 4%);
+  border: 1px solid rgb(124 58 237 / 15%);
   border-radius: 24px;
   padding: 24px;
   display: grid;
   gap: 16px;
 }
 
-.richtext-block .sidebar-card__title {
+.richtext .sidebar-card__title {
   font-weight: 700;
   color: var(--c-off-white);
 }
 
-.richtext-block .related-link {
+.richtext .related-link {
   display: block;
   padding: 18px;
   border-radius: 18px;
-  border: 1px solid rgba(124, 58, 237, 0.15);
+  border: 1px solid rgb(124 58 237 / 15%);
   text-decoration: none;
   color: var(--c-off-white);
 }
 
-.richtext-block .rl-title {
+.richtext .rl-title {
   font-weight: 700;
   margin-bottom: 6px;
 }
 
-.richtext-block .rl-meta {
-  color: rgba(255, 255, 255, 0.5);
+.richtext .rl-meta {
+  color: rgb(255 255 255 / 50%);
   font-size: 0.9rem;
 }
 
 @media (width <= 1024px) {
-  .richtext-block .richtext-layout {
+  .richtext .richtext-layout {
     grid-template-columns: 1fr;
   }
 }

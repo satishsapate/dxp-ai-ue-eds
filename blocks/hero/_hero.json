@@ -42,7 +42,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "primaryCtaText",
+          "name": "primaryCtaLabel",
           "label": "Primary CTA Text",
           "value": "Request a Demo"
         },
@@ -55,7 +55,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "secondaryCtaText",
+          "name": "secondaryCtaLabel",
           "label": "Secondary CTA Text",
           "value": "Explore Platform"
         },

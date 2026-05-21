@@ -68,7 +68,7 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "ctaText",
+          "name": "ctaBtn",
           "label": "Button Text"
         },
         {

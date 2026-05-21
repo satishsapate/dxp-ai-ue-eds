@@ -125,7 +125,7 @@
         {
           "component": "aem-content",
           "valueType": "string",
-          "name": "linkUrl",
+          "name": "link",
           "label": "Link URL"
         }
       ]

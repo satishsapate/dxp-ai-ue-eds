@@ -1,14 +1,14 @@
-.section-dark-block {
+.section-dark {
   background: #0f172a;
   color: #f8fafc;
   padding: 100px 0;
 }
 
-.section-dark-block .section-heading {
+.section-dark .section-heading {
   margin-bottom: 32px;
 }
 
-.section-dark-block .overline {
+.section-dark .overline {
   display: inline-block;
   margin-bottom: 12px;
   color: #7c3aed;
@@ -17,19 +17,19 @@
   font-weight: 700;
 }
 
-.section-dark-block h2 {
+.section-dark h2 {
   margin: 0;
   font-size: clamp(2rem, 2.5vw, 3rem);
 }
 
-.section-dark-block .timeline {
+.section-dark .timeline {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
   padding-left: 32px;
 }
 
-.section-dark-block .timeline::before {
+.section-dark .timeline::before {
   content: '';
   position: absolute;
   left: 8px;
@@ -39,16 +39,16 @@
   background: linear-gradient(to bottom, #7c3aed, #06b6d4, transparent);
 }
 
-.section-dark-block .timeline-item {
+.section-dark .timeline-item {
   position: relative;
   padding: 0 0 44px 32px;
 }
 
-.section-dark-block .timeline-item:last-child {
+.section-dark .timeline-item:last-child {
   padding-bottom: 0;
 }
 
-.section-dark-block .timeline-item::before {
+.section-dark .timeline-item::before {
   content: '';
   position: absolute;
   left: -24px;
@@ -60,7 +60,7 @@
   box-shadow: 0 0 0 4px rgb(124 58 237 / 15%);
 }
 
-.section-dark-block .ti-year {
+.section-dark .ti-year {
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
@@ -74,27 +74,27 @@
   border: 1px solid rgb(6 182 212 / 20%);
 }
 
-.section-dark-block h4 {
+.section-dark h4 {
   margin: 0 0 8px;
   color: #fff;
 }
 
-.section-dark-block p {
+.section-dark p {
   margin: 0;
   color: rgb(255 255 255 / 75%);
   line-height: 1.75;
 }
 
 @media (width <= 640px) {
-  .section-dark-block .timeline {
+  .section-dark .timeline {
     padding-left: 0;
   }
 
-  .section-dark-block .timeline-item {
+  .section-dark .timeline-item {
     padding-left: 0;
   }
 
-  .section-dark-block .timeline-item::before {
+  .section-dark .timeline-item::before {
     left: 0;
   }
 }
