@@ -97,6 +97,12 @@ export default function decorate(block) {
     </div>
   `;
 
+  // Skip scroll-triggered animation inside UE's iframe to prevent accumulated
+  // observers and layout interference on re-decoration.
+  let inEditor = false;
+  try { inEditor = window.self !== window.top; } catch { inEditor = true; }
+  if (inEditor) return;
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });

@@ -119,6 +119,13 @@ export default function decorate(block) {
 
   prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
   nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-  window.addEventListener('resize', updateCarousel);
+
+  // Skip resize listener in UE iframe — UE resizes the iframe when opening
+  // the properties panel, which would cause the carousel to recalculate and
+  // visually jump on every click.
+  let inEditor = false;
+  try { inEditor = window.self !== window.top; } catch { inEditor = true; }
+  if (!inEditor) window.addEventListener('resize', updateCarousel);
+
   updateCarousel();
 }
