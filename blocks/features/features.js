@@ -36,30 +36,25 @@ export default function decorate(block) {
   const sectionHeading = document.createElement('div');
   sectionHeading.className = 'section-heading';
 
-  const overlineText = hCells[0]?.textContent.trim();
-  if (overlineText) {
-    const span = document.createElement('span');
-    span.className = 'overline';
-    span.textContent = overlineText;
-    if (hCells[0]) moveInstrumentation(hCells[0], span);
-    sectionHeading.append(span);
-  }
+  // Always create elements for each block-level field so that UE shows
+  // inline-edit handles even when the properties have not been authored yet.
+  // Empty elements are hidden via :empty CSS rules and are invisible on the
+  // rendered EDS page, but remain selectable inside the UE iframe.
+  const span = document.createElement('span');
+  span.className = 'overline';
+  span.textContent = hCells[0]?.textContent.trim() || '';
+  if (hCells[0]) moveInstrumentation(hCells[0], span);
+  sectionHeading.append(span);
 
-  const headingText = hCells[1]?.textContent.trim();
-  if (headingText) {
-    const h2 = document.createElement('h2');
-    h2.textContent = headingText;
-    if (hCells[1]) moveInstrumentation(hCells[1], h2);
-    sectionHeading.append(h2);
-  }
+  const h2 = document.createElement('h2');
+  h2.textContent = hCells[1]?.textContent.trim() || '';
+  if (hCells[1]) moveInstrumentation(hCells[1], h2);
+  sectionHeading.append(h2);
 
-  const descHTML = hCells[2]?.innerHTML?.trim();
-  if (descHTML) {
-    const p = document.createElement('p');
-    p.innerHTML = descHTML;
-    if (hCells[2]) moveInstrumentation(hCells[2], p);
-    sectionHeading.append(p);
-  }
+  const p = document.createElement('p');
+  p.innerHTML = hCells[2]?.innerHTML?.trim() || '';
+  if (hCells[2]) moveInstrumentation(hCells[2], p);
+  sectionHeading.append(p);
 
   headingRow.remove();
   fragment.append(sectionHeading);

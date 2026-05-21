@@ -182,6 +182,15 @@
 
 .features .fc-desc p { margin: 0; }
 
+/* Hide heading elements that have no authored content yet.
+   Keeps the DOM present for UE inline-edit handles without
+   adding blank space to the rendered EDS page. */
+.features .section-heading .overline:empty,
+.features .section-heading h2:empty,
+.features .section-heading p:empty {
+  display: none;
+}
+
 /* ── Bullet list ─────────────────────────────────────────────── */
 .features .fc-list {
   list-style: none;
