@@ -588,6 +588,731 @@ All other blocks receive AEM content as `div > div > div` structure and transfor
 
 ---
 
+## ⛔ Content Authoring — JCR .content.xml (CRITICAL RULES)
+
+These rules were learned the hard way after repeated mistakes. Every rule below has caused real bugs. Never skip any of them.
+
+---
+
+### Pre-authoring mandatory checklist
+
+Before writing a single `.content.xml` file:
+
+- [ ] Read at least one **working** page first — use `index/.content.xml` as the reference template
+- [ ] Author ONE page first, verify it renders in AEM, THEN continue with remaining pages
+- [ ] Know the correct file path (see below) — the `/en/` path mistake was made twice
+
+---
+
+### File path — where `.content.xml` files live
+
+```
+CORRECT:   site-content/My DXP site Content/jcr_root/content/my-dxp-site/[page]/.content.xml
+WRONG:     site-content/My DXP site Content/jcr_root/content/my-dxp-site/en/[page]/.content.xml
+WRONG:     site-content/My DXP site Content/jcr_root/content/my-dxp-site/[page]/_jcr_content/.content.xml
+```
+
+- There is **no `/en/` segment** in the content path
+- `jcr:content` is **inline** in `[page]/.content.xml` — there is NO separate `_jcr_content/` subfolder
+- Working page content files are at: `index`, `platform`, `about`, `solutions`, `pricing`, `why-dxp`, `ai-capabilities`, `integrations`, `security`, `resources`, `blog`, `case-studies`, `contact`, `documentation`
+
+---
+
+### Page file skeleton — outer structure
+
+Every page uses this exact outer structure:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+          xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0"
+          xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:template="/libs/core/franklin/templates/page"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Page Title Here"
+        sling:resourceType="core/franklin/components/page/v1/page">
+        <root
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="core/franklin/components/root/v1/root">
+
+            <section
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <!-- blocks go here -->
+            </section>
+
+            <section_2
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/section/v1/section">
+                <!-- more blocks -->
+            </section_2>
+
+        </root>
+    </jcr:content>
+</jcr:root>
+```
+
+Key facts:
+- `jcr:primaryType="cq:Page"` on root element
+- `<jcr:content>` is a direct child of `<jcr:root>` — NOT a subfolder
+- All blocks live inside `<root>` → `<section_N>` wrappers
+- Sections are named `section`, `section_2`, `section_3`, etc. (first is just `section`)
+
+---
+
+### Root site `.content.xml` — page registration
+
+`site-content/My DXP site Content/jcr_root/content/my-dxp-site/.content.xml` registers all child pages. Every new page must be added as an empty child element:
+
+```xml
+<jcr:root ... jcr:primaryType="cq:Page">
+    <jcr:content ... jcr:title="My DXP Site" .../>
+    <footer/>
+    <index/>
+    <nav/>
+    <about/>
+    <pricing/>
+    <platform/>
+    <solutions/>
+    <contact/>
+    <ai-capabilities/>
+    <why-dxp/>
+    <security/>
+    <integrations/>
+    <blog/>
+    <case-studies/>
+    <resources/>
+    <documentation/>
+</jcr:root>
+```
+
+---
+
+### Three mandatory UE attributes on every block
+
+Without these three attributes on a block, the Universal Editor properties panel shows NOTHING:
+
+```xml
+<my_block
+    aueComponentId="block-name"
+    model="block-model-id"
+    modelFields="[field1@type,field2@type,...]"
+    name="Block Display Name"
+    ...field values.../>
+```
+
+| Attribute | Purpose | Example |
+|---|---|---|
+| `aueComponentId` | Tells UE which component this is | `"page-hero"` |
+| `model` | Links block to its model definition | `"page-hero"` |
+| `modelFields` | Lists all editable fields for UE panel | `"[heading@text,text@richtext]"` |
+| `name` | Display label in UE component tree | `"Page Hero"` |
+
+**Child items** (inside parent blocks with `filter`) need only `model` and `name` — NOT `aueComponentId` or `modelFields` (unless they have complex models like `features-item`).
+
+---
+
+### Section with highlight style
+
+For sections that need the highlight background, add UE attributes directly on the section:
+
+```xml
+<section_3
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/section/v1/section"
+    aueComponentId="section"
+    model="section"
+    modelFields="[name@text,style@multiselect]"
+    style="highlight">
+    <!-- blocks inside -->
+</section_3>
+```
+
+---
+
+### HTML escaping rules
+
+In XML attribute values, HTML content must be escaped:
+
+| Character | Escaped form |
+|---|---|
+| `<` | `&lt;` |
+| `>` | `&gt;` |
+| `&` | `&amp;` |
+| `"` inside attribute | `&quot;` |
+| `'` inside attribute | `&apos;` (or use `&apos;`) |
+
+Example — a `text` field containing HTML:
+```xml
+text="&lt;p>Some &lt;strong>bold&lt;/strong> text &amp; more.&lt;/p>"
+```
+
+Rich text with lists:
+```xml
+text="&lt;p>Intro paragraph.&lt;/p>&lt;ul>&lt;li>Item one&lt;/li>&lt;li>Item &amp;amp; two&lt;/li>&lt;/ul>"
+```
+
+Note: `&amp;amp;` means a literal `&amp;` in the HTML output. Use `&amp;amp;` to render `&amp;` on the page.
+
+---
+
+### Internal link format
+
+All internal links must use this format:
+
+```
+/content/my-dxp-site/[page]
+```
+
+| Page | Link value |
+|---|---|
+| Home | `/content/my-dxp-site/index` |
+| Platform | `/content/my-dxp-site/platform` |
+| Solutions | `/content/my-dxp-site/solutions` |
+| Pricing | `/content/my-dxp-site/pricing` |
+| Why DXP | `/content/my-dxp-site/why-dxp` |
+| AI Capabilities | `/content/my-dxp-site/ai-capabilities` |
+| Integrations | `/content/my-dxp-site/integrations` |
+| Security | `/content/my-dxp-site/security` |
+| Resources | `/content/my-dxp-site/resources` |
+| Blog | `/content/my-dxp-site/blog` |
+| Case Studies | `/content/my-dxp-site/case-studies` |
+| Contact | `/content/my-dxp-site/contact` |
+| Documentation | `/content/my-dxp-site/documentation` |
+| About | `/content/my-dxp-site/about` |
+
+**NEVER use:** `/content/sites/dxp-ai-ue-eds/en/[page]` — wrong path, not valid in this project.
+
+---
+
+### Block reference — exact field names and structure
+
+Use the index page (`site-content/My DXP site Content/jcr_root/content/my-dxp-site/index/.content.xml`) as the authoritative live reference. The patterns below match that file exactly.
+
+#### `hero` block (home page only — direct-render, data-driven fields)
+
+```xml
+<hero
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="hero"
+    eyebrow="Powered by ZensAI · Zensar Technologies"
+    heading="&lt;h1>Heading with &lt;em>emphasis&lt;/em>&lt;/h1>"
+    model="hero"
+    modelFields="[eyebrow@text,heading@richtext,subheading@richtext,primaryCtaText@text,primaryCtaUrl@aem-content,secondaryCtaText@text,secondaryCtaUrl@aem-content]"
+    name="Hero"
+    primaryCtaText="Request a DXP Demo"
+    primaryCtaUrl="/content/my-dxp-site/contact"
+    secondaryCtaText="Explore Platform"
+    secondaryCtaUrl="/content/my-dxp-site/platform"
+    subheading="&lt;p>Subheading paragraph text here.&lt;/p>"/>
+```
+
+Fields: `eyebrow` (text), `heading` (richtext — must contain `<h1>`), `subheading` (richtext), `primaryCtaText`, `primaryCtaUrl`, `secondaryCtaText`, `secondaryCtaUrl`.
+
+---
+
+#### `page-hero` block (used on all inner pages)
+
+```xml
+<page_hero
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="page-hero"
+    badgeText="Badge Label"
+    breadcrumbCurrent="Page Name"
+    breadcrumbUrl="/content/my-dxp-site/index"
+    description="&lt;p>Description paragraph.&lt;/p>"
+    headingAccent="Accent Part."
+    headingPrefix="Prefix Part."
+    model="page-hero"
+    modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
+    name="Page Hero"/>
+```
+
+Fields: `breadcrumbUrl` (aem-content), `breadcrumbCurrent` (text), `badgeText` (text), `headingPrefix` (text), `headingAccent` (text), `description` (richtext).
+
+---
+
+#### `stats-band` block (parent with items)
+
+```xml
+<stats_band
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="stats-band"
+    filter="stats-band"
+    name="Stats Band">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        label="Enterprise Clients Globally"
+        model="stats-item"
+        name="Stats Item"
+        value="500+"/>
+    <item_1 ... label="Platform Uptime SLA" value="99.9%" .../>
+</stats_band>
+```
+
+Note: `stats-band` has NO parent-level `model` or `modelFields` — only the items have `model="stats-item"`.
+Item fields: `value` (text), `label` (text).
+
+---
+
+#### `features` block (parent with items)
+
+Parent level:
+```xml
+<features
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="features"
+    description="Section description text."
+    filter="features"
+    heading="Section Heading"
+    model="features"
+    modelFields="[overline@text,heading@text,description@text]"
+    name="Features"
+    overline="Overline Text">
+```
+
+Item level (`model="features-item"`) — fields vary by page context:
+
+Minimal (most pages — just heading + text):
+```xml
+<item_0
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block/item"
+    heading="Feature Title"
+    model="features-item"
+    name="Features Item"
+    text="&lt;p>Description paragraph.&lt;/p>"/>
+```
+
+Full (with icon + link — used on index/platform):
+```xml
+<item_0
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block/item"
+    iconKey="cms"
+    iconVariant="purple"
+    linkText="Learn more"
+    model="features-item"
+    modelFields="[iconKey@select,iconVariant@select,tag@text,title@text,text@richtext,linkText@text,linkUrl@aem-content]"
+    name="Features Item"
+    tag="CMS"
+    text="&lt;p>Description.&lt;/p>"
+    title="Feature Title"/>
+```
+
+With CTA (used on resources page):
+```xml
+<item_0
+    ...
+    ctaText="Download Report"
+    ctaUrl="/content/my-dxp-site/contact"
+    heading="Feature Title"
+    model="features-item"
+    name="Features Item"
+    text="&lt;p>Description.&lt;/p>"/>
+```
+
+Valid `iconKey` values: `cms`, `personalize`, `multichannel`, `ai`, `integrations`, `analytics`, `security`
+Valid `iconVariant` values: `purple`, `green`, `blue`, `orange`, `violet`
+
+---
+
+#### `carousel` block (parent with items)
+
+Parent level:
+```xml
+<carousel
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="carousel"
+    description="Section description."
+    filter="carousel"
+    heading="Section Heading"
+    model="carousel"
+    modelFields="[overline@text,heading@text,description@text]"
+    name="Carousel"
+    overline="Overline Text">
+```
+
+Item level (`model="carousel-item"`):
+```xml
+<item_0
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block/item"
+    category="Content Management"
+    ctaText="Explore"
+    ctaUrl="/content/my-dxp-site/platform"
+    model="carousel-item"
+    name="Carousel Item"
+    text="&lt;p>Card description text.&lt;/p>"
+    title="Card Title"/>
+```
+
+With icons (optional):
+```xml
+<item_0
+    ...
+    iconKey="ai"
+    iconVariant="violet"
+    model="carousel-item"
+    modelFields="[iconKey@select,iconVariant@select,category@text,title@text,text@richtext,ctaText@text,ctaUrl@aem-content]"
+    .../>
+```
+
+---
+
+#### `cms-compat` block (parent with items)
+
+```xml
+<cms_compat
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="cms-compat"
+    filter="cms-compat"
+    name="CMS Compat">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        heading="Approach Title"
+        model="cms-compat-approach"
+        name="CMS Compat Approach"
+        text="&lt;p>Description.&lt;/p>&lt;ul>&lt;li>Point one&lt;/li>&lt;/ul>"/>
+</cms_compat>
+```
+
+Note: XML node name uses underscore (`cms_compat`) but `aueComponentId` uses hyphen (`cms-compat`). This applies to all hyphenated block names.
+
+---
+
+#### `who-uses` block (parent with items)
+
+```xml
+<who_uses
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="who-uses"
+    filter="who-uses"
+    name="Who Uses">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        ctaText="For Marketing"
+        ctaUrl="/content/my-dxp-site/solutions"
+        heading="Marketing Teams"
+        model="who-uses-item"
+        name="Who Uses Item"
+        text="&lt;p>Description.&lt;/p>&lt;ul>&lt;li>Feature&lt;/li>&lt;/ul>"/>
+</who_uses>
+```
+
+---
+
+#### `articles` block (no child items — parent only)
+
+```xml
+<articles
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="articles"
+    description="&lt;p>Section description.&lt;/p>"
+    heading="Latest from the DXP AI Blog"
+    model="articles"
+    modelFields="[heading@text,description@richtext]"
+    name="Articles"/>
+```
+
+Self-closing — no child items. The articles block fetches its content dynamically.
+
+For the blog page, articles block uses child items (`filter="articles"`, `model="article-item"`):
+```xml
+<articles
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="articles"
+    filter="articles"
+    name="Articles">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        category="AI &amp; Personalization"
+        ctaText="Read Article"
+        ctaUrl="/content/my-dxp-site/blog"
+        model="article-item"
+        name="Article Item"
+        text="&lt;p>Article excerpt.&lt;/p>"
+        title="Article Title"/>
+</articles>
+```
+
+---
+
+#### `richtext` block (model id = `richtext-block`)
+
+```xml
+<richtext
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="richtext"
+    ctaText="Button Label"
+    ctaUrl="/content/my-dxp-site/contact"
+    heading="Main Heading"
+    lead="Lead sentence — appears larger above body text."
+    model="richtext-block"
+    modelFields="[overline@text,heading@text,lead@text,text@richtext,sidebarTitle@text,sidebarText@richtext,ctaUrl@aem-content,ctaText@text]"
+    name="Richtext"
+    overline="Section Label"
+    sidebarText="&lt;p>Sidebar content here.&lt;/p>"
+    sidebarTitle="Sidebar Heading"
+    text="&lt;p>Body content with &lt;strong>bold&lt;/strong> and &lt;em>italic&lt;/em>.&lt;/p>&lt;h3>Sub heading&lt;/h3>&lt;p>More content.&lt;/p>"/>
+```
+
+Note: `model="richtext-block"` NOT `model="richtext"` — the model ID has `-block` suffix.
+Fields: `overline`, `heading`, `lead`, `text` (richtext), `sidebarTitle`, `sidebarText` (richtext), `ctaUrl` (aem-content), `ctaText`.
+
+---
+
+#### `cta` block
+
+```xml
+<cta
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="cta"
+    description="&lt;p>Supporting description text.&lt;/p>"
+    heading="CTA Heading"
+    metaText="Note below buttons — e.g. No credit card required"
+    model="cta"
+    modelFields="[overline@text,heading@text,description@richtext,primaryText@text,primaryUrl@aem-content,secondaryText@text,secondaryUrl@aem-content,metaText@text]"
+    name="CTA"
+    overline="Overline Label"
+    primaryText="Primary Button"
+    primaryUrl="/content/my-dxp-site/contact"
+    secondaryText="Secondary Button"
+    secondaryUrl="/content/my-dxp-site/pricing"/>
+```
+
+`overline`, `secondaryText`, `secondaryUrl`, and `metaText` are all optional. At minimum provide `heading`, `primaryText`, `primaryUrl`.
+
+---
+
+#### `team` block (parent with items)
+
+```xml
+<team
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="team"
+    filter="team"
+    name="Team">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        bio="Short bio text."
+        memberName="Full Name"
+        model="team-member"
+        name="Team Member"
+        role="Job Title, Company"/>
+</team>
+```
+
+Item fields: `memberName` (text), `role` (text), `bio` (text).
+
+---
+
+#### `timeline` block (parent with items)
+
+```xml
+<timeline
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="timeline"
+    filter="timeline"
+    name="Timeline">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        description="Description of this milestone."
+        heading="Milestone Title"
+        model="timeline-event"
+        name="Timeline Event"
+        year="1991"/>
+</timeline>
+```
+
+Item fields: `year` (text), `heading` (text), `description` (text).
+
+---
+
+#### `pricing` block (parent with items)
+
+```xml
+<pricing
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="pricing"
+    filter="pricing"
+    name="Pricing">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        ctaText="Start Free Trial"
+        ctaUrl="/content/my-dxp-site/contact"
+        description="Plan short description."
+        features="&lt;ul>&lt;li>Feature one&lt;/li>&lt;li>Feature two&lt;/li>&lt;/ul>"
+        model="pricing-plan"
+        name="Pricing Plan"
+        period="/month"
+        planName="Starter"
+        price="$2,499"/>
+</pricing>
+```
+
+Item fields: `planName`, `price`, `period`, `description`, `features` (richtext — list of features), `ctaText`, `ctaUrl`.
+Use `period="\0"` for plans with no period (e.g., custom/enterprise pricing).
+
+---
+
+#### `accordion` block (parent with items)
+
+```xml
+<accordion
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="accordion"
+    filter="accordion"
+    name="Accordion">
+    <item_0
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="core/franklin/components/block/v1/block/item"
+        answer="&lt;p>Full answer text here.&lt;/p>"
+        model="accordion-item"
+        name="Accordion Item"
+        question="Question text here?"/>
+</accordion>
+```
+
+Item fields: `question` (text), `answer` (richtext).
+
+---
+
+#### `section-light` and `section-dark` blocks
+
+These are visual divider/heading blocks used INSIDE a section alongside other blocks:
+
+```xml
+<section_light
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="section-light"
+    heading="Section Heading"
+    model="section-light"
+    modelFields="[heading@text,text@richtext]"
+    name="Section Light"
+    text="&lt;p>Optional supporting text.&lt;/p>"/>
+
+<section_dark
+    jcr:primaryType="nt:unstructured"
+    sling:resourceType="core/franklin/components/block/v1/block"
+    aueComponentId="section-dark"
+    heading="Section Heading"
+    model="section-dark"
+    modelFields="[heading@text,text@richtext]"
+    name="Section Dark"
+    text="&lt;p>Optional supporting text.&lt;/p>"/>
+```
+
+Both accept `heading` (text) and `text` (richtext). The XML node names use underscores (`section_light`, `section_dark`); `aueComponentId` uses hyphens (`section-light`, `section-dark`).
+
+---
+
+### XML node naming rules
+
+| Block name | XML node name | aueComponentId |
+|---|---|---|
+| `hero` | `<hero` | `hero` |
+| `page-hero` | `<page_hero` | `page-hero` |
+| `stats-band` | `<stats_band` | `stats-band` |
+| `cms-compat` | `<cms_compat` | `cms-compat` |
+| `who-uses` | `<who_uses` | `who-uses` |
+| `section-light` | `<section_light` | `section-light` |
+| `section-dark` | `<section_dark` | `section-dark` |
+| `page-hero` | `<page_hero` | `page-hero` |
+
+**Rule:** XML element names cannot contain hyphens — replace with underscore. `aueComponentId` always uses the hyphenated form.
+
+---
+
+### Content package — two ZIPs, two install steps
+
+There are TWO separate AEM packages to install:
+
+**1. Component models package** — generated by `create-aem-package.ps1`:
+```
+dxp-ai-ue-eds-component-models-1.0.0.zip
+```
+Contains: `component-models.json`, `component-definition.json`, `component-filters.json`
+Installs to: `/conf/my-dxp-site/settings/dam/adminui-extension/`
+
+**2. Site content package** — the `My DXP site Content.zip`:
+```
+site-content/My DXP site Content.zip
+```
+Contains: all `.content.xml` files under `jcr_root/content/my-dxp-site/`
+Installs to: `/content/my-dxp-site/`
+
+**Rebuild the content package ZIP** after changing any `.content.xml` file:
+```powershell
+powershell.exe -ExecutionPolicy Bypass -Command "
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+\$sourceDir = 'C:\...\site-content\My DXP site Content'
+\$zipPath   = 'C:\...\site-content\My DXP site Content.zip'
+if (Test-Path \$zipPath) { Remove-Item \$zipPath }
+\$utf8NoBom = New-Object System.Text.UTF8Encoding(\$false)
+\$zipStream = [System.IO.File]::Open(\$zipPath, [System.IO.FileMode]::Create)
+\$archive   = New-Object System.IO.Compression.ZipArchive(\$zipStream, [System.IO.Compression.ZipArchiveMode]::Create)
+Get-ChildItem -Path \$sourceDir -Recurse | ForEach-Object {
+    \$relativePath = \$_.FullName.Substring(\$sourceDir.Length + 1).Replace('\', '/')
+    if (\$_.PSIsContainer) { \$archive.CreateEntry(\$relativePath + '/') | Out-Null }
+    else {
+        \$entry  = \$archive.CreateEntry(\$relativePath, [System.IO.Compression.CompressionLevel]::Optimal)
+        \$stream = \$entry.Open()
+        \$bytes  = [System.IO.File]::ReadAllBytes(\$_.FullName)
+        \$stream.Write(\$bytes, 0, \$bytes.Length)
+        \$stream.Close()
+    }
+}
+\$archive.Dispose(); \$zipStream.Close()
+"
+```
+
+**Why System.IO.Compression and NOT Compress-Archive?** `Compress-Archive` produces backslash paths on Windows — AEM Package Manager fails with "Missing jcr_root". Always use `System.IO.Compression` directly.
+
+---
+
+### Common mistakes — NEVER repeat
+
+| Mistake | What happened | Rule |
+|---|---|---|
+| Wrong path `/en/[page]/` | Pages created at wrong JCR path, not reachable by AEM | File path is always `my-dxp-site/[page]/.content.xml` |
+| `_jcr_content/` subfolder | jcr:content was in a subfolder instead of inline | `<jcr:content>` is a direct child of `<jcr:root>`, never a folder |
+| No `model`/`aueComponentId` | UE properties panel showed nothing to edit | Every block needs all 3 UE attributes |
+| Single `text` richtext per item | All content stuffed in one richtext field with `<h3>`, `<p>`, etc. | Use separate XML attributes per field — `heading="..."` NOT `<h3>` in text |
+| Wrong link path | Links using `/content/sites/dxp-ai-ue-eds/en/[page]` | Always `/content/my-dxp-site/[page]` |
+| No section wrappers | Blocks placed directly inside `<root>`, not in `<section_N>` | Every block must live inside a `<section_N sling:resourceType="...section/v1/section">` |
+| `model="richtext"` | Wrong model ID for richtext block | Always `model="richtext-block"` |
+| XML hyphen in node name | `<section-dark>` — invalid XML | Use underscore: `<section_dark>`, keep hyphen only in `aueComponentId` |
+| Authoring all pages before testing one | Errors propagated across all 14 pages | Author 1 page → verify in AEM → then continue |
+
+---
+
 ## Full Documentation
 
 See [`docs/aem-dev/`](./docs/aem-dev/README.md) for:
