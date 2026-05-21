@@ -23,45 +23,48 @@ export default function decorate(block) {
 
   const fragment = document.createDocumentFragment();
 
-  // ── Row 0: block-level model fields [overline | heading | description] ────
-  // These are properties of the block node itself — NOT a separate child resource.
-  // Do NOT moveInstrumentation from the row to sectionHeading: the row carries the
-  // same data-aue-resource as the block element. Duplicating it on a child div
-  // confuses UE and causes editor-support.js to fall back to window.location.reload().
-  // The block element already owns the resource; only the cell-level data-aue-prop
-  // attrs need to move to their new visible elements.
-  const headingRow = rows[0];
-  const hCells = [...headingRow.children];
+  // ── Block-level model fields — one row per field ─────────────────────────
+  // AEM XWalk renders each block-level model field as its own row (one cell)
+  // when the block also has child items (filter). Row layout:
+  //   rows[0]: overline   (1 cell)
+  //   rows[1]: heading    (1 cell)
+  //   rows[2]: description (1 cell)
+  //   rows[3+]: feature-item child rows (7 cells each)
+  //
+  // Do NOT moveInstrumentation from a row element to sectionHeading — the rows
+  // share the block's data-aue-resource. Only move cell-level data-aue-prop attrs.
+  const MODEL_ROWS = 3;
 
   const sectionHeading = document.createElement('div');
   sectionHeading.className = 'section-heading';
 
-  // Always create elements for each block-level field so that UE shows
-  // inline-edit handles even when the properties have not been authored yet.
-  // Empty elements are hidden via :empty CSS rules and are invisible on the
-  // rendered EDS page, but remain selectable inside the UE iframe.
+  // Always create all three elements so UE shows inline-edit handles even when
+  // the properties are empty. Empty elements are hidden via CSS :empty rules.
+  const overlineCell = rows[0]?.children[0];
   const span = document.createElement('span');
   span.className = 'overline';
-  span.textContent = hCells[0]?.textContent.trim() || '';
-  if (hCells[0]) moveInstrumentation(hCells[0], span);
+  span.textContent = overlineCell?.textContent.trim() || '';
+  if (overlineCell) moveInstrumentation(overlineCell, span);
   sectionHeading.append(span);
 
+  const headingCell = rows[1]?.children[0];
   const h2 = document.createElement('h2');
-  h2.textContent = hCells[1]?.textContent.trim() || '';
-  if (hCells[1]) moveInstrumentation(hCells[1], h2);
+  h2.textContent = headingCell?.textContent.trim() || '';
+  if (headingCell) moveInstrumentation(headingCell, h2);
   sectionHeading.append(h2);
 
+  const descCell = rows[2]?.children[0];
   const p = document.createElement('p');
-  p.innerHTML = hCells[2]?.innerHTML?.trim() || '';
-  if (hCells[2]) moveInstrumentation(hCells[2], p);
+  p.innerHTML = descCell?.innerHTML?.trim() || '';
+  if (descCell) moveInstrumentation(descCell, p);
   sectionHeading.append(p);
 
-  headingRow.remove();
+  rows.slice(0, MODEL_ROWS).forEach((r) => r.remove());
   fragment.append(sectionHeading);
 
-  // ── Rows 1+: feature-item child rows ─────────────────────────────────────
+  // ── Rows MODEL_ROWS+: feature-item child rows ─────────────────────────────
   // Cell order: [0]iconKey [1]iconVariant [2]tag [3]title [4]text [5]linkText [6]linkUrl
-  const itemRows = rows.slice(1);
+  const itemRows = rows.slice(MODEL_ROWS);
   if (itemRows.length > 0) {
     const grid = document.createElement('div');
     grid.className = 'cards-grid';
