@@ -2,7 +2,8 @@
    Applied by section-light.js to the parent .section div so the
    light background covers full viewport width and includes sibling
    blocks (e.g. features cards) in the same section.             */
-.section--light {
+.section--light,
+.section.section--light {
   background: var(--c-off-white);
 }
 

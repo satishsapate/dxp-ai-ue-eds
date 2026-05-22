@@ -70,8 +70,7 @@
                 sling:resourceType="core/franklin/components/section/v1/section"
                 aueComponentId="section"
                 model="section"
-                modelFields="[name@text,style@multiselect]"
-                style="highlight">
+                modelFields="[name@text,style@multiselect]">
                 <section_light
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
