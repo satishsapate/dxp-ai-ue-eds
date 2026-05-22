@@ -31,7 +31,7 @@ export default function decorate(block) {
 
   if (eventRows.length > 0) {
     const timeline = document.createElement('div');
-    timeline.className = 'timeline';
+    timeline.className = 'timeline-inner';
 
     eventRows.forEach((row) => {
       const cells = [...row.children];

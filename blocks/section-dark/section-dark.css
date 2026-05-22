@@ -1,100 +1,53 @@
+/* ── Section-level dark background ───────────────────────────────
+   Applied by section-dark.js to the parent .section div so the
+   dark gradient covers the full viewport width and includes any
+   sibling blocks (e.g. timeline) in the same section.           */
+.section--dark {
+  background: linear-gradient(135deg, #0d0e2a 0%, #1a1b4b 40%, #2d1b69 100%);
+  color: var(--c-off-white);
+}
+
+/* ── section-dark block — heading area ──────────────────────────── */
 .section-dark {
-  background: #0f172a;
-  color: #f8fafc;
-  padding: 100px 0;
+  padding: 80px 0 48px;
 }
 
 .section-dark .section-heading {
-  margin-bottom: 32px;
-}
-
-.section-dark .overline {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #7c3aed;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .section-dark h2 {
+  color: #fff;
   margin: 0;
   font-size: clamp(2rem, 2.5vw, 3rem);
 }
 
-.section-dark .timeline {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  padding-left: 32px;
+.section-dark .section-dark-text {
+  text-align: center;
+  color: rgb(255 255 255 / 65%);
+  margin-top: 16px;
+  line-height: 1.7;
 }
 
-.section-dark .timeline::before {
-  content: '';
-  position: absolute;
-  left: 8px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, #7c3aed, #06b6d4, transparent);
+/* ── Timeline inside dark section ───────────────────────────────── */
+.section--dark .timeline {
+  background: transparent;
+  padding: 0 0 100px;
 }
 
-.section-dark .timeline-item {
-  position: relative;
-  padding: 0 0 44px 32px;
-}
-
-.section-dark .timeline-item:last-child {
-  padding-bottom: 0;
-}
-
-.section-dark .timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -24px;
-  top: 6px;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #7c3aed, #06b6d4);
-  box-shadow: 0 0 0 4px rgb(124 58 237 / 15%);
-}
-
-.section-dark .ti-year {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #67e8f9;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: rgb(6 182 212 / 12%);
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-  border: 1px solid rgb(6 182 212 / 20%);
-}
-
-.section-dark h4 {
-  margin: 0 0 8px;
+.section--dark .timeline h4 {
   color: #fff;
 }
 
-.section-dark p {
-  margin: 0;
+.section--dark .timeline p {
   color: rgb(255 255 255 / 75%);
-  line-height: 1.75;
 }
 
-@media (width <= 640px) {
-  .section-dark .timeline {
-    padding-left: 0;
-  }
+.section--dark .timeline .ti-year {
+  color: #67e8f9;
+}
 
-  .section-dark .timeline-item {
-    padding-left: 0;
-  }
-
-  .section-dark .timeline-item::before {
-    left: 0;
-  }
+.section--dark .timeline .timeline-inner::before {
+  background: linear-gradient(to bottom, var(--c-purple), var(--c-cyan), transparent);
 }

@@ -1,6 +1,10 @@
+/* ── Section-level white background ─────────────────────────── */
+.section--team {
+  background: #fff;
+}
+
 .team {
   padding: 100px 0;
-  background: #fff;
 }
 
 .team .section-heading {
@@ -10,7 +14,7 @@
 .team .overline {
   display: inline-block;
   margin-bottom: 16px;
-  color: #7c3aed;
+  color: var(--c-purple);
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-weight: 700;
@@ -18,6 +22,7 @@
 
 .team h2 {
   margin: 0;
+  color: var(--c-navy);
   font-size: clamp(2rem, 2.5vw, 3rem);
 }
 
@@ -34,7 +39,7 @@
   border: 1px solid rgb(124 58 237 / 8%);
   display: flex;
   flex-direction: column;
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team .team-card:hover {
@@ -48,32 +53,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+}
+
+.team .team-initials {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--heading-font-family);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  border: 3px solid rgb(255 255 255 / 20%);
 }
 
 .team .team-card__body {
   padding: 20px;
   display: grid;
-  gap: 12px;
+  gap: 6px;
 }
 
 .team .team-card__name {
-  font-family: var(--font-display, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-family: var(--heading-font-family);
   font-size: 1.05rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--c-navy);
 }
 
 .team .team-card__role {
   font-size: 0.82rem;
-  color: #7c3aed;
+  color: var(--c-purple);
   font-weight: 600;
 }
 
 .team .team-card__bio {
-  font-size: 0.9rem;
-  color: #475569;
-  line-height: 1.7;
+  font-size: 0.82rem;
+  color: var(--c-mid-gray);
+  line-height: 1.6;
+  margin-top: 4px;
 }
 
 @media (width <= 1024px) {

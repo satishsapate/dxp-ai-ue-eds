@@ -93,29 +93,34 @@
                     jcr:primaryType="nt:unstructured"
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="features"
+                    description=""
                     filter="features"
-                    name="Features">
+                    heading=""
+                    model="features"
+                    modelFields="[overline@text,heading@text,description@text]"
+                    name="Features"
+                    overline="">
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        heading="Intelligence First"
                         model="features-item"
                         name="Features Item"
-                        text="&lt;p>We believe AI should be foundational, not optional. Every decision we make in product development starts with: How does intelligence make this better?&lt;/p>"/>
+                        text="&lt;p>We believe AI should be foundational, not optional. Every decision we make in product development starts with: How does intelligence make this better?&lt;/p>"
+                        title="Intelligence First"/>
                     <item_1
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        heading="Customer Obsessed"
                         model="features-item"
                         name="Features Item"
-                        text="&lt;p>We measure our success by the outcomes our customers achieve. Every feature, every support interaction, every roadmap decision is guided by real customer needs.&lt;/p>"/>
+                        text="&lt;p>We measure our success by the outcomes our customers achieve. Every feature, every support interaction, every roadmap decision is guided by real customer needs.&lt;/p>"
+                        title="Customer Obsessed"/>
                     <item_2
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
-                        heading="Open &amp; Transparent"
                         model="features-item"
                         name="Features Item"
-                        text="&lt;p>We publish our security posture, our pricing, our SLAs, and our roadmap. No vendor lock-in. No hidden fees. No surprises.&lt;/p>"/>
+                        text="&lt;p>We publish our security posture, our pricing, our SLAs, and our roadmap. No vendor lock-in. No hidden fees. No surprises.&lt;/p>"
+                        title="Open &amp; Transparent"/>
                 </features>
             </section_3>
             <section_4
