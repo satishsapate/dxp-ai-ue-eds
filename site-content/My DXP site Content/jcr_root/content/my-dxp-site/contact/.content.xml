@@ -36,7 +36,7 @@
                     breadcrumbCurrent="Contact"
                     breadcrumbUrl="/content/my-dxp-site/index"
                     description="&lt;p>Whether you're ready to start a trial, want a product demo, or just have questions — our team is here to help.&lt;/p>"
-                    headingAccent="Extraordinary Together"
+                    headingAccent="Remarkable Together"
                     headingPrefix="Let's Build Something"
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"

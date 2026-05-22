@@ -36,8 +36,8 @@
                     breadcrumbCurrent="Solutions"
                     breadcrumbUrl="/content/my-dxp-site/index"
                     description="&lt;p>Whether you're in marketing, IT, or running enterprise operations — DXP AI is built to solve your specific digital experience challenges.&lt;/p>"
-                    headingAccent="Every Team"
-                    headingPrefix="DXP AI for"
+                    headingAccent="Designed for Every Goal."
+                    headingPrefix="Built for Every Team."
                     model="page-hero"
                     modelFields="[breadcrumbUrl@aem-content,breadcrumbCurrent@text,badgeText@text,headingPrefix@text,headingAccent@text,description@richtext]"
                     name="Page Hero"/>
