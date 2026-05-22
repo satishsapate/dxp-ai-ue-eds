@@ -1,34 +1,17 @@
+/* ── Timeline block ──────────────────────────────────────────── */
+
+/* In EDS, .timeline IS the outer container (matching HTML kit's .timeline div).
+   Items are direct children — no .timeline-inner wrapper needed.              */
 .timeline {
   padding: 80px 0;
-}
-
-.timeline .section-heading {
-  margin-bottom: 32px;
-}
-
-.timeline .overline {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: var(--c-purple);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-weight: 700;
-}
-
-.timeline h2 {
-  margin: 0;
-  font-size: clamp(2rem, 2.5vw, 3rem);
-}
-
-/* ── Timeline track (inner container) ───────────────────────── */
-.timeline .timeline-inner {
   position: relative;
   padding-left: 32px;
   max-width: 700px;
   margin: 0 auto;
 }
 
-.timeline .timeline-inner::before {
+/* Vertical line — on the block element itself (matches HTML kit .timeline::before) */
+.timeline::before {
   content: '';
   position: absolute;
   left: 8px;
@@ -38,7 +21,7 @@
   background: linear-gradient(to bottom, var(--c-purple), var(--c-cyan), transparent);
 }
 
-/* ── Timeline items ──────────────────────────────────────────── */
+/* ── Timeline items — direct children of .timeline ───────────── */
 .timeline .timeline-item {
   position: relative;
   padding: 0 0 44px 32px;
@@ -90,7 +73,7 @@
 }
 
 @media (width <= 640px) {
-  .timeline .timeline-inner {
+  .timeline {
     padding-left: 0;
   }
 

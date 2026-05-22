@@ -814,6 +814,12 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "overline",
+        "label": "Overline"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "heading",
         "label": "Heading"
       },
@@ -848,6 +854,12 @@
       {
         "component": "text",
         "valueType": "string",
+        "name": "overline",
+        "label": "Overline"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
         "name": "heading",
         "label": "Heading"
       },
@@ -877,25 +889,29 @@
     ]
   },
   {
+    "id": "team",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "overline",
+        "label": "Overline"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Section Heading"
+      }
+    ]
+  },
+  {
     "id": "team-member",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Photo",
-        "multi": false
-      },
-      {
         "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Photo Alt Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "name",
+        "name": "memberName",
         "label": "Name"
       },
       {

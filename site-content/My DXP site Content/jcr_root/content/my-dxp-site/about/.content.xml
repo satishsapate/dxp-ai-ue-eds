@@ -81,9 +81,10 @@
                     aueComponentId="section-light"
                     heading="What We Stand For"
                     model="section-light"
-                    modelFields="[heading@text,text@richtext]"
+                    modelFields="[overline@text,heading@text,text@richtext]"
                     name="Section Light"
-                    text="&lt;p>Our values guide every product decision, partnership, and customer interaction.&lt;/p>"/>
+                    overline="Our Values"
+                    text=""/>
                 <features
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"
@@ -134,7 +135,11 @@
                     sling:resourceType="core/franklin/components/block/v1/block"
                     aueComponentId="team"
                     filter="team"
-                    name="Team">
+                    heading="Meet the Team Behind DXP AI"
+                    model="team"
+                    modelFields="[overline@text,heading@text]"
+                    name="Team"
+                    overline="Leadership">
                     <item_0
                         jcr:primaryType="nt:unstructured"
                         sling:resourceType="core/franklin/components/block/v1/block/item"
@@ -182,9 +187,10 @@
                     aueComponentId="section-dark"
                     heading="Key Milestones"
                     model="section-dark"
-                    modelFields="[heading@text,text@richtext]"
+                    modelFields="[overline@text,heading@text,text@richtext]"
                     name="Section Dark"
-                    text="&lt;p>Our journey from enterprise IT services to AI-first digital experience platform.&lt;/p>"/>
+                    overline="Our Journey"
+                    text=""/>
                 <timeline
                     jcr:created="{Date}2026-05-19T20:30:00.000Z"
                     jcr:createdBy="satish.sapate@zensar.com"

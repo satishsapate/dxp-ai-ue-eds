@@ -12,7 +12,7 @@ export default function decorate(block) {
   const layout = document.createElement('div');
   layout.className = 'richtext-layout';
 
-  // ── Main content column ────────────────────────────────────────────────────
+  // ── Main content column ───────────────────────────────────────
   const main = document.createElement('div');
   main.className = 'richtext-content';
 
@@ -50,13 +50,13 @@ export default function decorate(block) {
 
   layout.append(main);
 
-  // ── Sidebar column ─────────────────────────────────────────────────────────
+  // ── Sidebar column ────────────────────────────────────────────
   const sidebarTitle = cells[4]?.textContent.trim();
-  const sidebarContent = cells[5]?.innerHTML.trim();
+  const sidebarHtml = cells[5]?.innerHTML.trim();
   const ctaHref = cells[6]?.querySelector('a')?.href || cells[6]?.textContent.trim() || '#';
   const ctaLabel = cells[7]?.textContent.trim();
 
-  if (sidebarTitle || sidebarContent) {
+  if (sidebarTitle || sidebarHtml) {
     const sidebar = document.createElement('div');
     sidebar.className = 'richtext-sidebar';
 
@@ -71,11 +71,14 @@ export default function decorate(block) {
       card.append(title);
     }
 
-    if (sidebarContent) {
-      const text = document.createElement('div');
-      text.innerHTML = sidebarContent;
-      moveInstrumentation(cells[5], text);
-      card.append(text);
+    // Output sidebar richtext children directly (no extra div wrapper)
+    // HTML kit has <p> directly inside .sidebar-card--cta, not wrapped in div
+    if (sidebarHtml) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = sidebarHtml;
+      const firstChild = tmp.firstElementChild;
+      if (firstChild && cells[5]) moveInstrumentation(cells[5], firstChild);
+      while (tmp.firstChild) card.append(tmp.firstChild);
     }
 
     if (ctaLabel) {

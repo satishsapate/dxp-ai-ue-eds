@@ -15,13 +15,16 @@ export default function decorate(block) {
   // White background for the full parent section to match HTML kit.
   block.closest('.section')?.classList.add('section--team');
 
-  let headingRow = null;
+  // Parent model rows have 1 cell each (overline, heading).
+  // Member item rows have 3 cells (memberName, role, bio).
+  // Capture up to 2 single-cell rows as parent fields before member rows.
+  const parentRows = [];
   const memberRows = [];
 
   rows.forEach((row) => {
-    const cells = [...row.children];
-    if (cells.length === 1 && !memberRows.length) {
-      headingRow = row;
+    const cellCount = row.children.length;
+    if (cellCount === 1 && parentRows.length < 2) {
+      parentRows.push(row);
     } else {
       memberRows.push(row);
     }
@@ -29,15 +32,36 @@ export default function decorate(block) {
 
   const fragment = document.createDocumentFragment();
 
-  if (headingRow) {
-    const heading = document.createElement('div');
-    heading.className = 'section-heading';
-    moveInstrumentation(headingRow, heading);
-    [...headingRow.children].forEach((cell) => heading.append(cell));
-    headingRow.remove();
-    fragment.append(heading);
+  // ── Section heading (overline + h2) ──────────────────────────
+  const overlineText = parentRows[0]?.children[0]?.textContent.trim() || '';
+  const headingText = parentRows[1]?.children[0]?.textContent.trim() || '';
+
+  if (overlineText || headingText) {
+    const headingDiv = document.createElement('div');
+    headingDiv.className = 'section-heading';
+
+    if (overlineText) {
+      const span = document.createElement('span');
+      span.className = 'overline';
+      span.textContent = overlineText;
+      if (parentRows[0]?.children[0]) moveInstrumentation(parentRows[0].children[0], span);
+      headingDiv.append(span);
+    }
+
+    if (headingText) {
+      const h2 = document.createElement('h2');
+      h2.textContent = headingText;
+      if (parentRows[1]?.children[0]) moveInstrumentation(parentRows[1].children[0], h2);
+      headingDiv.append(h2);
+    }
+
+    parentRows.forEach((r) => r.remove());
+    fragment.append(headingDiv);
+  } else {
+    parentRows.forEach((r) => r.remove());
   }
 
+  // ── Team grid ─────────────────────────────────────────────────
   if (memberRows.length > 0) {
     const grid = document.createElement('div');
     grid.className = 'team-grid';
@@ -49,11 +73,11 @@ export default function decorate(block) {
       const roleText = cells[1]?.textContent.trim() || '';
       const bioText = cells[2]?.textContent.trim() || '';
 
-      const card = document.createElement('article');
+      const card = document.createElement('div');
       card.className = 'team-card';
       moveInstrumentation(row, card);
 
-      // Avatar — initials generated from the name; colour cycled by card index.
+      // Avatar — initials generated from name; colour cycled by card index
       const [c1, c2] = AVATAR_GRADIENTS[grid.children.length % AVATAR_GRADIENTS.length];
       const parts = nameText.split(' ').filter(Boolean);
       const initials = parts.length >= 2

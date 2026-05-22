@@ -1,7 +1,7 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  // Flat block — all fields in a single row as separate cells.
+  // Flat block — all 6 fields arrive in a single row as separate cells.
   // modelFields: [breadcrumbUrl@aem-content, breadcrumbCurrent@text, badgeText@text,
   //               headingPrefix@text, headingAccent@text, description@richtext]
   const rows = [...block.children];
@@ -9,13 +9,16 @@ export default function decorate(block) {
 
   const cells = [...rows[0].children];
 
-  // ── Breadcrumb nav ────────────────────────────────────────────
+  // ── Decorative orb (matches HTML kit visual) ──────────────────
+  const orb = document.createElement('div');
+  orb.className = 'orb orb--1';
+
+  // ── Breadcrumb ────────────────────────────────────────────────
   const breadcrumbHref = cells[0]?.querySelector('a')?.href || '/';
   const breadcrumbCurrent = cells[1]?.textContent.trim() || '';
 
-  const nav = document.createElement('nav');
-  nav.className = 'breadcrumb';
-  nav.setAttribute('aria-label', 'Breadcrumb navigation');
+  const breadcrumb = document.createElement('div');
+  breadcrumb.className = 'breadcrumb';
 
   const homeLink = document.createElement('a');
   homeLink.href = breadcrumbHref;
@@ -32,18 +35,17 @@ export default function decorate(block) {
   current.textContent = breadcrumbCurrent;
   moveInstrumentation(cells[1], current);
 
-  nav.append(homeLink, sep, current);
-  block.prepend(nav);
+  breadcrumb.append(homeLink, sep, current);
 
-  // ── Main content ─────────────────────────────────────────────
+  // ── Main content ──────────────────────────────────────────────
   const content = document.createElement('div');
   content.className = 'page-hero__content';
 
-  // Badge
+  // Badge — cyan variant to match HTML kit
   const badgeText = cells[2]?.textContent.trim();
   if (badgeText) {
     const badge = document.createElement('div');
-    badge.className = 'badge';
+    badge.className = 'badge badge--cyan';
     badge.textContent = badgeText;
     moveInstrumentation(cells[2], badge);
     content.append(badge);
@@ -67,16 +69,20 @@ export default function decorate(block) {
     content.append(h1);
   }
 
-  // Description
+  // Description — output <p> directly (not wrapped in div.page-hero__desc)
+  // cells[5] contains richtext HTML, typically <p>text</p>
   const descHtml = cells[5]?.innerHTML.trim();
   if (descHtml) {
-    const desc = document.createElement('div');
-    desc.className = 'page-hero__desc';
-    desc.innerHTML = descHtml;
-    moveInstrumentation(cells[5], desc);
-    content.append(desc);
+    const p = document.createElement('p');
+    // Extract inner content from the wrapping <p> to avoid p-in-p nesting
+    const tmp = document.createElement('div');
+    tmp.innerHTML = descHtml;
+    const firstBlock = tmp.firstElementChild;
+    p.innerHTML = firstBlock ? firstBlock.innerHTML : tmp.innerHTML;
+    moveInstrumentation(cells[5], p);
+    content.append(p);
   }
 
   rows[0].remove();
-  block.append(content);
+  block.replaceChildren(orb, breadcrumb, content);
 }

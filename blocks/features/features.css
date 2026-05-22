@@ -65,6 +65,9 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.features .cards-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.features .cards-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
 @media (width <= 1024px) {
   .features .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -173,6 +176,16 @@
   color: var(--features-heading-clr);
 }
 
+/* Description — direct <p> inside card (HTML kit pattern, no fc-desc wrapper) */
+.features .feature-card > p {
+  color: var(--features-copy-clr);
+  line-height: 1.7;
+  font-size: 0.95rem;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* fc-desc kept for backward compatibility with pages that use icon+tag layout */
 .features .fc-desc {
   color: var(--features-copy-clr);
   line-height: 1.7;

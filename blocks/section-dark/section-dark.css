@@ -17,7 +17,19 @@
   margin-bottom: 0;
 }
 
-.section-dark h2 {
+/* Light modifier: ensures heading text is white/visible on dark bg */
+.section--dark .overline {
+  display: inline-block;
+  color: #67e8f9;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.section-dark h2,
+.section-dark .section-heading--light h2 {
   color: #fff;
   margin: 0;
   font-size: clamp(2rem, 2.5vw, 3rem);
@@ -48,6 +60,7 @@
   color: #67e8f9;
 }
 
-.section--dark .timeline .timeline-inner::before {
+/* Override the vertical line gradient for dark sections */
+.section--dark .timeline::before {
   background: linear-gradient(to bottom, var(--c-purple), var(--c-cyan), transparent);
 }

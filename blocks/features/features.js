@@ -23,56 +23,61 @@ export default function decorate(block) {
 
   const fragment = document.createDocumentFragment();
 
-  // ── Block-level model fields — one row per field ─────────────────────────
-  // AEM XWalk renders each block-level model field as its own row (one cell)
+  // ── Block-level model fields — one row per field ──────────────
+  // AEM XWalk renders each block-level model field as its own row (1 cell)
   // when the block also has child items (filter). Row layout:
   //   rows[0]: overline   (1 cell)
   //   rows[1]: heading    (1 cell)
   //   rows[2]: description (1 cell)
-  //   rows[3+]: feature-item child rows (7 cells each — last cell renamed link)
-  //
-  // Do NOT moveInstrumentation from a row element to sectionHeading — the rows
-  // share the block's data-aue-resource. Only move cell-level data-aue-prop attrs.
+  //   rows[3+]: feature-item child rows (up to 7 cells each)
   const MODEL_ROWS = 3;
 
-  const sectionHeading = document.createElement('div');
-  sectionHeading.className = 'section-heading';
-
-  // Always create all three elements so UE shows inline-edit handles even when
-  // the properties are empty. Empty elements are hidden via CSS :empty rules.
   const overlineCell = rows[0]?.children[0];
-  const span = document.createElement('span');
-  span.className = 'overline';
-  span.textContent = overlineCell?.textContent.trim() || '';
-  if (overlineCell) moveInstrumentation(overlineCell, span);
-  sectionHeading.append(span);
-
   const headingCell = rows[1]?.children[0];
-  const h2 = document.createElement('h2');
-  h2.textContent = headingCell?.textContent.trim() || '';
-  if (headingCell) moveInstrumentation(headingCell, h2);
-  sectionHeading.append(h2);
-
   const descCell = rows[2]?.children[0];
-  const p = document.createElement('p');
-  p.innerHTML = descCell?.innerHTML?.trim() || '';
-  if (descCell) moveInstrumentation(descCell, p);
-  sectionHeading.append(p);
+
+  // Only render section-heading when at least one field has content.
+  // This prevents empty whitespace when section-light already provides the heading.
+  const hasHeadingContent = [overlineCell, headingCell, descCell].some(
+    (cell) => cell?.textContent.trim(),
+  );
+
+  if (hasHeadingContent) {
+    const sectionHeading = document.createElement('div');
+    sectionHeading.className = 'section-heading';
+
+    const span = document.createElement('span');
+    span.className = 'overline';
+    span.textContent = overlineCell?.textContent.trim() || '';
+    if (overlineCell) moveInstrumentation(overlineCell, span);
+    sectionHeading.append(span);
+
+    const h2 = document.createElement('h2');
+    h2.textContent = headingCell?.textContent.trim() || '';
+    if (headingCell) moveInstrumentation(headingCell, h2);
+    sectionHeading.append(h2);
+
+    const p = document.createElement('p');
+    p.innerHTML = descCell?.innerHTML?.trim() || '';
+    if (descCell) moveInstrumentation(descCell, p);
+    sectionHeading.append(p);
+
+    fragment.append(sectionHeading);
+  }
 
   rows.slice(0, MODEL_ROWS).forEach((r) => r.remove());
-  fragment.append(sectionHeading);
 
-  // ── Rows MODEL_ROWS+: feature-item child rows ─────────────────────────────
+  // ── Feature-item child rows ───────────────────────────────────
   // Cell order: [0]iconKey [1]iconVariant [2]tag [3]title [4]text [5]linkText [6]linkUrl
   const itemRows = rows.slice(MODEL_ROWS);
   if (itemRows.length > 0) {
     const grid = document.createElement('div');
-    grid.className = 'cards-grid';
+    // Add count-based modifier class (cards-grid--3, cards-grid--2, etc.)
+    grid.className = `cards-grid cards-grid--${itemRows.length}`;
 
     itemRows.forEach((row) => {
       const cells = [...row.children];
 
-      // card carries the item's data-aue-resource + data-aue-model
       const card = document.createElement('article');
       card.className = 'feature-card';
       moveInstrumentation(row, card);
@@ -85,7 +90,7 @@ export default function decorate(block) {
       const linkText = cells[5]?.textContent.trim();
       const linkUrl = cells[6]?.querySelector('a')?.href || cells[6]?.textContent.trim();
 
-      // Icon box: carries data-aue-prop="iconKey"
+      // Icon box — SVG from dictionary
       const svg = SVGS[iconKey];
       if (svg) {
         const iconBox = document.createElement('div');
@@ -96,8 +101,7 @@ export default function decorate(block) {
         card.append(iconBox);
       }
 
-      // Hidden span carries data-aue-prop="iconVariant" so UE can edit the colour.
-      // Must be inside the component (card) so UE can walk up to data-aue-resource.
+      // Hidden span preserves iconVariant prop for UE
       if (cells[1]) {
         const variantEl = document.createElement('span');
         variantEl.hidden = true;
@@ -105,7 +109,7 @@ export default function decorate(block) {
         card.append(variantEl);
       }
 
-      // Tag / capability badge: carries data-aue-prop="tag"
+      // Tag / capability badge
       if (tagText) {
         const tagEl = document.createElement('span');
         tagEl.className = 'fc-tag';
@@ -114,7 +118,7 @@ export default function decorate(block) {
         card.append(tagEl);
       }
 
-      // Card heading: carries data-aue-prop="title"
+      // Card heading
       if (titleText) {
         const h3 = document.createElement('h3');
         h3.textContent = titleText;
@@ -122,22 +126,21 @@ export default function decorate(block) {
         card.append(h3);
       }
 
-      // Description richtext: carries data-aue-prop="text"
-      // May contain <p> + <ul> bullet list from richtext authoring.
+      // Description — output content directly (no fc-desc wrapper) to match HTML kit
+      // This gives <article.feature-card> > <p> directly, as in the HTML kit
       if (descContent) {
-        const desc = document.createElement('div');
-        desc.className = 'fc-desc';
-        desc.innerHTML = descContent;
-        const ul = desc.querySelector('ul');
-        if (ul) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = descContent;
+        tmp.querySelectorAll('ul').forEach((ul) => {
           ul.classList.add('fc-list');
           ul.setAttribute('role', 'list');
-        }
-        if (cells[4]) moveInstrumentation(cells[4], desc);
-        card.append(desc);
+        });
+        const firstChild = tmp.firstElementChild;
+        if (firstChild && cells[4]) moveInstrumentation(cells[4], firstChild);
+        while (tmp.firstChild) card.append(tmp.firstChild);
       }
 
-      // Learn-more link: carries data-aue-prop="link"
+      // Learn-more link
       if (linkUrl) {
         const link = document.createElement('a');
         link.className = 'fc-link';
@@ -151,7 +154,6 @@ export default function decorate(block) {
         card.append(link);
       }
 
-      // linkText hidden span (prop only, no visible element needed when linkUrl is absent)
       if (cells[5] && !linkUrl) {
         const lt = document.createElement('span');
         lt.hidden = true;
